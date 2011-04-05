@@ -7,16 +7,32 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<div id="toolbox_container">
-	--
-</div>
+  <div id="toolbox_container">  
+    <button><p class="toolbox_buttons">Delete</p></button>
+    <button><p class="toolbox_buttons">Invite</p></button>
+    <div ID="toolbox_text">
+      <div ID="text_box_area">
+        <h2>Name</h2></base>
+          </div>
+            INFO            
+      </div>
+  </div>
 
 <div id="content">
 	<%= yield %>
 </div>
 
 <div id="menu_bar">
-	--
+	<ul>
+    <li><a href="#"><button><p class="menu_list">Meny</p></button></a></li>
+    <li><a href="#"><button><p class="menu_list">Exit</p></button></a></li>
+    <li><a href="#"><button><p class="menu_list">Logg Out</p></button></a></li> 
+	</ul>
 </div>
+<div id="create_new_board_button">
+  <li><a href="#"><button><p class="menu_list"><%= link_to 'New Board', new_board_path %></p></button></a></li>
+</div>
+
+
 </body>
 </html>
