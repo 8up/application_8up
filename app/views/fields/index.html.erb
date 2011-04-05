@@ -1,0 +1,33 @@
+<h1>Listing fields</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Color</th>
+    <th>Position x</th>
+    <th>Position y</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @fields.each do |field| %>
+  <tr>
+    <td><%= field.name %></td>
+    <td><%= field.color %></td>
+    <td><%= field.position_x %></td>
+    <td><%= field.position_y %></td>
+    <td><%= field.width %></td>
+    <td><%= field.height %></td>
+    <td><%= link_to 'Show', field %></td>
+    <td><%= link_to 'Edit', edit_field_path(field) %></td>
+    <td><%= link_to 'Destroy', field, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Field', new_field_path %>

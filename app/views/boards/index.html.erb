@@ -1,19 +1,8 @@
-<h1>Listing boards</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-  </tr>
-
-<% @boards.each do |board| %>
-  <tr>
-    <td><%= board.name %></td>
-    <td><%= link_to 'Show', board %></td>
-  </tr>
+<ul id="boards_container">
+<% @boards.each_with_index do |board, index| %>
+<li class="hotness<%= board.hotness %>">
+  <%= link_to board.name, board %>
+</li>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Board', new_board_path %>
+</ul>

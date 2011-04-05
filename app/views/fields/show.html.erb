@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @field.name %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @field.color %>
+</p>
+
+<p>
+  <b>Position x:</b>
+  <%= @field.position_x %>
+</p>
+
+<p>
+  <b>Position y:</b>
+  <%= @field.position_y %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @field.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @field.height %>
+</p>
+
+<% @field.notes.each do |note| %>
+  <h2><%= note.header %></h2>
+<% end %>
+
+<%= link_to 'Edit', edit_field_path(@field) %> |
+<%= link_to 'Back', fields_path %>
