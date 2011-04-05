@@ -1,22 +1,4 @@
-<!-- <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @board.name %>
-</p>
-
-<p>
-  <b>Owner:</b>
-  <%= @board.owner_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
-
--->
-
-<%= @board.fields.each do |field|%>
+<% @board.fields.each do |field|%>
 <div class="field" style="position:absolute; top:<%= field.position_x %>px; left:<%= field.position_y %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
 --
 </div>
