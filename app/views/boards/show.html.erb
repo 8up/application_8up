@@ -1,4 +1,4 @@
-<% if @board.fields %>
+
   <% @board.fields.each do |field|%>
     <div class="field" style="position:absolute; top:<%= field.position_x %>px; left:<%= field.position_y %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
       <% if field.notes %>
@@ -11,4 +11,3 @@
    </div>
  
   <% end %>
-<% end %>
