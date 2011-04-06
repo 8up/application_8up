@@ -20,15 +20,13 @@ display: inline;
 }
 
 #toolbox_container {
+float:left;
 position:absolute;
-left:-3px;
-background-color: #ccc;
-width:200px; 
-height:540px;
-position: absolute;
-border-style:dashed;
+height: 100%;
+
 }
 #content {
+  float:left;
 margin-left: 220px;}
 
 #text_box_area {
@@ -75,11 +73,33 @@ border:solid;
   background-color: green;
 }
 
-#toolbox_text {
-position:absolute;
+#toolbox_area_1 {
+float:left;
 background-color: blue;
-height:200px;
-width:180px;
-left:10px;
-top:330px; 
+height:100%;
+width:200px; 
+}
+#toolbox_area_2 {
+  float:left;
+background-color: grey;
+height:100%;
+width:15px; 
+}
+#toolbox_text_container {
+position:absolute; 
+top:50%;
+left:20px;
+width:150px;
+height:250px;
+background-color:white;
+border-style:solid;
+}
+#toolbox_text_1 {
+background-color:white;
+height:20;
+border-style:solid;
+}
+#toolbox_text_2 {
+background-color:white;
+height:100;
 }
