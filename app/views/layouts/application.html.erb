@@ -3,19 +3,27 @@
 <head>
   <title>Application8up</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="toolbox_container">  
-    <button><p class="toolbox_buttons">Delete</p></button>
-    <button><p class="toolbox_buttons">Invite</p></button>
-    <div ID="toolbox_text">
-      <div ID="text_box_area">
-        <h2>Name</h2></base>
-          </div>
-            INFO            
+  <div id="toolbox_container">
+    <div ID="toolbox_area_1">
+      <button><p class="toolbox_buttons">Delete</p></button>
+      <button><p class="toolbox_buttons">Invite</p></button>
+      
+      <div ID="toolbox_text_container">
+        <div ID="toolbox_text_1">
+          <h3>Name</h3>
+        </div>
+        <div Id="toolbox_text_2">
+          info
+        </div>
       </div>
+      
+    </div>
+    <div ID="toolbox_area_2">
+    </div>
   </div>
 
 <div id="content">
