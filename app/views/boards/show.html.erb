@@ -1,9 +1,9 @@
 
   <% @board.fields.each do |field|%>
-    <div class="field" style="position:absolute; top:<%= field.position_x %>px; left:<%= field.position_y %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
+    <div class="field" style=" top:<%= field.position_x %>px; left:<%= field.position_y %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
       <% if field.notes %>
       <% field.notes.each do |note|%>
-         <div class="note" style="position:absolute; top:<%= note.position_x %>px; left:<%= note.position_y %>px;">
+         <div class="note" style=" top:<%= note.position_x %>px; left:<%= note.position_y %>px;">
 	     <h1> <%= note.header %> </h1>       
          </div>
       <% end %>
