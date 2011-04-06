@@ -2,7 +2,7 @@ $(document).ready(function(){
 				  
 				  
 				  $( "div.note" ).dblclick(function(){
-										$( "#in_foucs_image" ).show();
+										$( "#in_focus_image" ).show();
 										$( "#black_background" ).show();
 										
 										});
