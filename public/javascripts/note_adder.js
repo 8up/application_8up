@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	$("div.note").dblclick(function(e) {e.stopPropagation()});
 	$("div.field").dblclick(function(e){
 		if (e.target != this) {
 		    return true;
@@ -7,9 +6,13 @@ $(document).ready(function(){
 		create_note(e);
 	    });
 	function create_note(e) {
-	    
-	    $(".field").append(
-			       "<div class='note' style='position:absolute; top:" + e.pageY +";left:" + e.pageX +  ";'>Foo</div>"
-			       )
-		}
+	    var header = "Foo";
+	    $(e.target).append(
+			    "<div class='note' style='position:absolute; top:" + 
+			    e.pageY +"px"+
+			    ";left:" + 
+			    e.pageX + "px"+  
+			    ";'>Foo</div>"
+			    );
+	}
     });
