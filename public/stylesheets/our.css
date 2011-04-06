@@ -77,7 +77,8 @@ border:solid;
 float:left;
 background-color: blue;
 height:100%;
-width:200px; 
+width:200px;
+display: none; 
 }
 #toolbox_area_2 {
   float:left;
