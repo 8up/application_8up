@@ -1,4 +1,6 @@
 Application8up::Application.routes.draw do
+  resources :contents
+
   resources :fields
 
   resources :notes do

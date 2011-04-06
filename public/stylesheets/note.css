@@ -4,3 +4,26 @@ div.note {
     padding: 5px;
     background-color:#f4e476;
 }
+
+		.background{
+			display: none;
+			position: fixed;
+			top: 0%;
+			left: 0%;
+			width: 100%;
+			height: 100%;
+			background-color: black;
+			z-index: 0;
+			opacity:.80;
+
+		}
+		.window {
+			display: none;
+			position: absolute;
+			top: 25%;
+			left: 25%;
+			width: 50%;
+			height: 80%;
+			z-index: 1;
+			overflow: auto;
+		}
