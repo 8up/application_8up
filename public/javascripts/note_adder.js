@@ -7,12 +7,16 @@ $(document).ready(function(){
 	    });
 	function create_note(e) {
 	    var header = "Foo";
-	    $(e.target).append(
-			    "<div class='note' style='position:absolute; top:" + 
-			    e.pageY +"px"+
-			    ";left:" + 
-			    e.pageX + "px"+  
-			    ";'>Foo</div>"
-			    );
+	    var note = $('<div></div>');
+	    note.addClass('note');
+	    note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
+	    note.html("Foo");
+	    note.dblclick(function(){
+		    note_box();
+	    });
+	    // note.mousedown(function(e) {
+	    // 	    dragnote(e);
+	    //		});
+	    $(e.target).append(note);
 	}
     });
