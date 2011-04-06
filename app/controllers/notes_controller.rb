@@ -75,9 +75,18 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     @note.destroy
 
-  respond_to do |format|
-    format.html { redirect_to(notes_url) }
-    format.xml  { head :ok }
+    respond_to do |format|
+      format.html { redirect_to(notes_url) }
+      format.xml  { head :ok }
     end
   end
+  
+  def content
+    @note = Note.find(params[:id])
+    
+    respond_to do |format|
+      format.xml  { render :xml => @note } 
+    end
+  end
+  
 end
