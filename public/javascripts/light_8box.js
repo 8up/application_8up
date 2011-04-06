@@ -1,7 +1,7 @@
 $(document).ready(function(){
 				  
 				  
-				  $( "#note" ).dblclick(function(){
+				  $( "div.note" ).dblclick(function(){
 										$( "#in_foucs_image" ).show();
 										$( "#black_background" ).show();
 										
