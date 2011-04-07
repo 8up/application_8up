@@ -87,7 +87,7 @@ class NotesController < ApplicationController
     @note.move_to_trash
     
     respond_to do |format|
-      render :json => { :status: 'ok'}
+      render :json => { :status => 'ok'}
     end
 
   end
@@ -98,7 +98,7 @@ class NotesController < ApplicationController
     @note.move_to_trash
     
     respond_to do |format|
-      render :json => { :status: 'ok'}
+      render :json => { :status=>'ok'}
     end
   end
 
