@@ -10,7 +10,9 @@ Application8up::Application.routes.draw do
   resources :users
 
 resources :boards do
-  resources :notes
+  resources :notes do
+    get 'content'
+  end
   resources :fields
 end
 
