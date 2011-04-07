@@ -1,7 +1,7 @@
 #menu_bar {
   position: fixed;
   top: 0px;
-  right: 0px;
+  right: 10px;
 }
 
 #create_new_board_button {
