@@ -1,4 +1,5 @@
-note_box = function(id){
+note_box = function(e){
+    var id = $(e.target).attr('id').split('_').pop()
     $( "#in_focus_image" ).show();
     $( "#black_background" ).show();
     $.ajax({ 
@@ -10,8 +11,8 @@ note_box = function(id){
     }});
 };
 $(document).ready(function(){
-	$( "div.note" ).dblclick(function(){
-		note_box();
+	$( "div.note" ).dblclick(function(e){
+		note_box(e);
 	    });
 				  
 	$( "#black_background" ).click(function(){
