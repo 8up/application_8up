@@ -1,12 +1,12 @@
 #menu_bar {
-  position: absolute;
+  position: fixed;
   top: 0px;
   right: 0px;
 }
 
 #create_new_board_button {
 list-style: none;
-position: absolute;
+position: fixed;
 bottom: 0px;
 right: 0px;
 }
