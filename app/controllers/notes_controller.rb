@@ -75,15 +75,33 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.xml
   def destroy
-    @note = Note.find(params[:id])
-    @note.destroy
+    # @note = Note.find(params[:id])
+    # @note.destroy
 
+    # respond_to do |format|
+    #   format.html { redirect_to(notes_url) }
+    #   format.xml  { head :ok }
+    # end
+    
+    @note = Note.find(params[:id])
+    @note.move_to_trash
+    
     respond_to do |format|
-      format.html { redirect_to(notes_url) }
-      format.xml  { head :ok }
+      render :json => { :status: 'ok'}
     end
+
   end
   
+  # DELETE /notes/1
+  def trash
+    @note = Note.find(params[:id])
+    @note.move_to_trash
+    
+    respond_to do |format|
+      render :json => { :status: 'ok'}
+    end
+  end
+
   def content
     @note = Note.find(params[:note_id])
     @board = Board.find(params[:board_id])

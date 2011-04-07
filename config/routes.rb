@@ -6,7 +6,7 @@ Application8up::Application.routes.draw do
   resources :notes do
     get 'content'
   end
-
+  
   resources :users
 
 resources :boards do
