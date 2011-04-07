@@ -24,7 +24,7 @@ $(document).ready(function(){
 			    note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
 			    header.html(data.note.header);
 			    
-			    attach_handlers(note);
+			    attach_handlers(note, data);
 			    note.append(header);
 			    $(e.target).append(note);
 				    
