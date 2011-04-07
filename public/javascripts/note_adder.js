@@ -23,15 +23,9 @@ $(document).ready(function(){
 			    note.addClass('note');
 			    note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
 			    header.html(data.note.header);
-			   
+			    
+			    attach_handlers(note);
 			    note.append(header);
-
-			    note.dblclick(function(){
-					    note_box(data.note.id);
-				});
-			    // note.mousedown(function(e) {
-			    // 	    dragnote(e);
-			    //		});
 			    $(e.target).append(note);
 				    
 			}
