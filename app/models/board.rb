@@ -18,6 +18,14 @@ class Board < ActiveRecord::Base
       field.width = field.height = 900
       fields << field
     end
+  
+  end
+    
+    def empty_trashcan
+      t.each do |note|
+        note.destroy
+    end      
+
   end
 
-end
+  end

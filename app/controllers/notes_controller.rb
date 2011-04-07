@@ -80,4 +80,13 @@ class NotesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def content
+    @note = Note.find(params[:id])
+    
+    respond_to do |format|
+      format.xml  { render :xml => @note } 
+    end
+  end
+  
 end
