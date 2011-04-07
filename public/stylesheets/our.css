@@ -1,8 +1,13 @@
 #menu_bar {
   position: fixed;
-  top: 0px;
+  top: -10px;
   right: 10px;
 }
+
+#menu_bar li a:hover {
+text-decoration: none;
+}
+
 
 #create_new_board_button {
 list-style: none;
