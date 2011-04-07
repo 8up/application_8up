@@ -12,6 +12,7 @@ class Note < ActiveRecord::Base
   
   def after_initialize
     self.trashcan = false
+  end 
   
   def belongs_to_board board_id
     field.board.id == board_id
