@@ -19,13 +19,15 @@ $(document).ready(function(){
 			 success: function(data, textStatus, jqXHR) {
 			    var header = $('<h1></h1>');
 			    var note = $('<div></div>');
+			   
 			    note.addClass('note');
 			    note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
 			    header.html(data.note.header);
+			   
 			    note.append(header);
 
 			    note.dblclick(function(){
-					    note_box();
+					    note_box(data.note.id);
 				});
 			    // note.mousedown(function(e) {
 			    // 	    dragnote(e);

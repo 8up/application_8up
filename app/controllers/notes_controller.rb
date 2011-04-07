@@ -88,8 +88,8 @@ class NotesController < ApplicationController
     @note = Note.find(params[:note_id])
     @board = Board.find(params[:board_id])
     
-    if true
-      render :json => {:body => "not found"}, :status => 404
+    if not @note.belongs_to_board @board     
+		render :json => {:body => "foo not found"}, :status => 404
     else
       respond_to do |format|
         format.xml  { render :xml => @note } 

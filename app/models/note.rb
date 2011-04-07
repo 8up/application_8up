@@ -14,8 +14,8 @@ class Note < ActiveRecord::Base
     self.trashcan = false
   end 
   
-  def belongs_to_board board_id
-    field.board.id == board_id
+  def belongs_to_board board
+    field.board.id == board.id
   end
   
 end
