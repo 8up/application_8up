@@ -1,7 +1,7 @@
 
 <ul id="boards_container">
 <% @boards.each_with_index do |board, index| %>
-<li class="hotness<%= board.hotness %>">
+<li id="board_<%= board.id %>" class="hotness<%= board.hotness %> board_container">
   <%= link_to board.name, board %>
 </li>
 <% end %>
