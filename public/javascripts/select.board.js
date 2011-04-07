@@ -3,7 +3,7 @@ $(document).ready(function(){
       $(e.target).toggleClass("selected");
   });
   $(".toolbox_button_delete").click(function(){
-    $("#boards_container li.selected").remove()
+    $(".selected").remove()
   });
   $("div#toolbox_area_2").click(function(){
       $("div#toolbox_area_1").toggle();
