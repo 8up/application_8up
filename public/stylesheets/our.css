@@ -73,22 +73,22 @@ height: 100%;
 }
 
 #boards_container li.hotness0 {
-  background-color: yellow;
+  background-color: #FFFA40;
 }
 #boards_container li.hotness1 {
-  background-color: orange;
+  background-color: #FF8C00;
 }
 #boards_container li.hotness2 {
-  background-color: red;
+  background-color: #FF5600;
 }
 
 #boards_container li.hotness3 {
-  background-color: green;
+  background-color: #AFF53D;
 }
 
 #toolbox_area_1 {
 float:left;
-background-color: blue;
+background-color: #679FD2;
 height:100%;
 width:200px;
 display: none; 
