@@ -25,6 +25,11 @@ class FieldsController < ApplicationController
   # GET /fields/new.xml
   def new
     @field = Field.new
+    
+    if params[:board_id]
+      @field.board = Board.find(params[:board_id])
+    end
+    
 
     respond_to do |format|
       format.html # new.html.erb

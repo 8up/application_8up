@@ -85,11 +85,16 @@ class NotesController < ApplicationController
   end
   
   def content
-    @note = Note.find(params[:id])
+    @note = Note.find(params[:note_id])
+    @board = Board.find(params[:board_id])
     
-    respond_to do |format|
-      format.xml  { render :xml => @note } 
+    if true
+      render :json => {:body => "not found"}, :status => 404
+    else
+      respond_to do |format|
+        format.xml  { render :xml => @note } 
+        format.json { render :json => @note }
+      end
     end
   end
-  
 end

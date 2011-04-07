@@ -7,21 +7,30 @@
 #create_new_board_button {
 list-style: none;
 position: fixed;
+margin-right:15px;
 bottom: 0px;
 right: 0px;
 }
 
+#create_new_board_button li a{
+color:black;
+}
+
 #menu_bar ul {
-list-style: none;
+  list-style: none;
 }
 
 #menu_bar li {
-display: inline;
+  
+  display: inline;
+}
+#menu_bar li a{
+ color:black; 
 }
 
 #toolbox_container {
 float:left;
-position:absolute;
+position:fixed;
 height: 100%;
 }
 
@@ -79,6 +88,11 @@ height:100%;
 width:200px;
 display: none; 
 }
+
+#toolbox_area_1 a{
+color:black;
+}
+
 #toolbox_area_2 {
   float:left;
 background-color: grey;
