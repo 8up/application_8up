@@ -39,11 +39,14 @@ class NotesController < ApplicationController
 
   # POST /notes
   # POST /notes.xml
+  # Post /notes.json
   def create
     @note = Note.new(params[:note])
-
+    
     respond_to do |format|
       if @note.save
+        format.json { render :json =>  @note }
+
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
