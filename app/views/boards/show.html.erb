@@ -1,13 +1,11 @@
 
-  <% @board.fields.each do |field|%>
-    <div id="field_<%=field.id%>" class="field" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
-      <% if field.notes %>
-      <% field.notes.each do |note|%>
-         <div class="note" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px;">
-	     <h1> <%= note.header %> </h1>       
-         </div>
-      <% end %>
-      <% end %> 
-   </div>
- 
-  <% end %>
+<% @board.fields.each do |field|%>
+<div id="field_<%= field.id %>" class="field" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field.height %>px;">
+  <% field.notes.each do |note|%>
+  <div class="note" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px;">
+    <h1> <%= note.header %> </h1>       
+  </div>
+  <% end %> 
+</div>
+
+<% end %>
