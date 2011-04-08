@@ -45,6 +45,9 @@ class NotesController < ApplicationController
     
     respond_to do |format|
       if @note.save
+        field = Field.find(@note.field_id)
+        board = Board.find(field.board_id)
+        @note[:board_id] = board.id
         format.json { render :json =>  @note }
 
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
