@@ -97,7 +97,7 @@ height: 100%;
 opacity:0.4;
 }
 
-#panel_arrow:hover{
+#toolbox_area_2:hover #panel_arrow{
 opacity:1;
 }
 
