@@ -72,12 +72,19 @@ class BoardsController < ApplicationController
   # DELETE /boards/1
   # DELETE /boards/1.xml
   def destroy
-    @board = Board.find(params[:id])
-    @board.destroy
+    # @board = Board.find(params[:id])
+    # @board.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(boards_url) }
-      format.xml  { head :ok }
+    # respond_to do |format|
+    #   format.html { redirect_to(boards_url) }
+    #   format.xml  { head :ok }
+    # end
+    @board = Board.find(params[:id])
+    @board.move_to_trash
+    if @board.save
+      respond_to do |format|
+        format.json { render :json => {:status => 'ok'}}
+      end
     end
   end
 end

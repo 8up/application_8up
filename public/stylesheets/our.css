@@ -11,6 +11,13 @@ text-decoration: none;
 margin-top:0px;
 
 }
+#add_button_background{
+opacity:0.7;
+}
+
+#add_button_background:hover {
+opacity:1;
+}
 
 #create_new_board_button {
 list-style: none;
@@ -84,6 +91,13 @@ height: 100%;
 
 #boards_container li.hotness3 {
   background-color: #AFF53D;
+}
+#panel_arrow {
+opacity:0.7;
+}
+
+#panel_arrow:hover{
+opacity:1;
 }
 
 #toolbox_area_1 {
