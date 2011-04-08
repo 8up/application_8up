@@ -100,10 +100,20 @@ color:black;
 
 #toolbox_area_2 {
   float:left;
-background-color: grey;
 height:100%;
-width:15px; 
+width:80px; 
+background-image: url('/images/panel.png');
+ background-repeat: no-repeat;
 }
+
+#toolpic{
+
+position:absolute;
+top: 40%;
+left: 40%;
+
+}
+
 #toolbox_text_container {
 top:50%;
 left:20px;
