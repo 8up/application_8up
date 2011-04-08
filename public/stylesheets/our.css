@@ -103,6 +103,7 @@ color:black;
 height:100%;
 width:80px; 
 background-image: url('/images/panel.png');
+ background-repeat: no-repeat;
 }
 
 #toolpic{
