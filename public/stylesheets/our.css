@@ -101,18 +101,14 @@ color:black;
 #toolbox_area_2 {
   float:left;
 height:100%;
-width:80px; 
+width:45px; 
 background-image: url('/images/panel.png');
- background-repeat: no-repeat;
+ background-repeat: repeat-y;
 }
 
-#toolpic{
-
-position:absolute;
-top: 40%;
-left: 40%;
-
-}
+.active {
+background-image: url('/images/panel_button_right.png');
+} 
 
 #toolbox_text_container {
 top:50%;
