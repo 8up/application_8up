@@ -85,6 +85,13 @@ height: 100%;
 #boards_container li.hotness3 {
   background-color: #AFF53D;
 }
+#panel_arrow {
+opacity:0.7;
+}
+
+#panel_arrow:hover{
+opacity:1;
+}
 
 #toolbox_area_1 {
 float:left;
