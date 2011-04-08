@@ -12,7 +12,7 @@ margin-top:0px;
 
 }
 #add_button_background{
-opacity:0.7;
+opacity:0.4;
 }
 
 #add_button_background:hover {
@@ -93,7 +93,7 @@ height: 100%;
   background-color: #AFF53D;
 }
 #panel_arrow {
-opacity:0.7;
+opacity:0.4;
 }
 
 #panel_arrow:hover{
