@@ -21,9 +21,14 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <div ID="toolbox_area_2" style="margin-top:-8px; margin-left:-8px">
-	<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
-	top: 50%;" height="30px" width="30px" />
+	<img src="/images/panel_button_right.png" style="position: relative; left: 40%;
+=======
+    <div ID="toolbox_area_2">
+	<img src="/images/panel_button_right.png" id="panel_image" style="position: relative; left: 40%;
+>>>>>>> Slide update
+	top: 50%;" height="30px" width="30px" onclick= "MM_swapImage('','','images/'panel_button_left.png,1)" />
     </div>
     
   </div>
@@ -42,7 +47,6 @@
   <a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" width="150%" height="110%"></a>
 </div>
 			<div id="in_focus_image" class="window">
-				<h1><div id=note_header></div></h1>
 				<div id=note_body></div>
 			</div>
 			

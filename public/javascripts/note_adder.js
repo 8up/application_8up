@@ -21,6 +21,7 @@ $(document).ready(function(){
 			    var note = $('<div></div>');
 			    note.attr('id', 'note_' + data.note.id);
 			    note.addClass('note');
+			    note.data('board_id', 'board_' + data.note.board_id);
 			    note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
 			   
 			    header.html(data.note.header);
