@@ -6,11 +6,22 @@ class Board < ActiveRecord::Base
   
   def trashcan
     Note.find(:all, :conditions => ["field_id = ? and trashcan = ?", self.fields, true])
-
   end
 
+  def move_to_trash
+    self.in_trash = true
+    self.save
+  end
+
+  def recover_from_trash
+    self.in_trash = false
+    self.save
+  end
 
   def after_initialize
+    if self.in_trash == nil
+      self.in_trash = false
+    end
     if fields == []
       puts "foo"
       field = Field.new

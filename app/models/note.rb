@@ -11,7 +11,9 @@ class Note < ActiveRecord::Base
   end
   
   def after_initialize
-    self.trashcan = false
+    if self.trashcan == nil
+      self.trashcan = false
+    end
   end 
   
   def belongs_to_board board
