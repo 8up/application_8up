@@ -12,6 +12,15 @@ $(document).ready(function(){
 				     
 				     $.ajax({url : url_path, type: 'DELETE', method: 'POST'});
 			     } );
+	  $(".selected.board").map(function(index, domElement) 
+				  { 
+				      var board_id = $(domElement).attr('id').split('_').pop();
+				      var url_path =  "/boards/" + board_id;
+						 
+				     
+				      $.ajax({url : url_path, type: 'DELETE', method: 'POST'});
+				  } );
+
 	  $(".selected").remove();
 	  
 	

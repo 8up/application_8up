@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110406120116) do
+ActiveRecord::Schema.define(:version => 20110408080510) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "in_trash"
   end
 
   create_table "contents", :force => true do |t|
@@ -45,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20110406120116) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "trashcan"
     t.integer  "field_id"
+    t.boolean  "trashcan"
   end
 
   create_table "users", :force => true do |t|
