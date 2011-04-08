@@ -6,12 +6,11 @@
   <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
 </head>
-<body>
-  <div id="toolbox_container">
-    <div ID="toolbox_area_1">
-      <a href="">
-			<img src="/images/Papperskorg.png" /></a>
-      <button><p class="toolbox_buttons">Invite</p></button>
+<body>  
+  <div id="toolbox_container">    
+    <div ID="toolbox_area_1" style="margin-top:-8px; margin-left:-8px">
+      <a href="#"><p class="toolbox_button_delete">Delete</p></a>
+      <a href="#"><p class="toolbox_button_invite">Invite</p></a>
 
       <div ID="toolbox_text_container">
         <div ID="toolbox_text_1">
@@ -21,28 +20,27 @@
           info
         </div>
       </div>
-      
     </div>
-    <div ID="toolbox_area_2">
+    <div ID="toolbox_area_2" style="margin-top:-8px; margin-left:-8px">
     </div>
+    
   </div>
 
-<div id="content">
-	<%= yield %>
+<div id="content">    
+	<%= yield %>  
 </div>
-
 <div id="menu_bar">
 	<ul>
-    <li><a href="#"><button><p class="menu_list">Meny</p></button></a></li>
-    <li><a href="#"><button><p class="menu_list">Exit</p></button></a></li>
-    <li><a href="#"><button><p class="menu_list">Logg Out</p></button></a></li> 
+    <li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
+    <li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
+    <li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
 	</ul>
 </div>
-<div id="create_new_board_button">
-  <li><a href="#"><button><p class="menu_list"><%= link_to 'New Board', new_board_path %></p></button></a></li>
+<div id="create_new_board_button">  
+  <a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" width="150%" height="110%"></a>
 </div>
 			<div id="in_focus_image" class="window">
-			<img src="/images/nalle.jpg" alt="Nalle" />
+				<div id=note_body></div>
 			</div>
 			
 		<div id="black_background" class="background"</div>

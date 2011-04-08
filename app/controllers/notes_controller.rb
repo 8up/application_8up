@@ -39,11 +39,14 @@ class NotesController < ApplicationController
 
   # POST /notes
   # POST /notes.xml
+  # Post /notes.json
   def create
     @note = Note.new(params[:note])
-
+    
     respond_to do |format|
       if @note.save
+        format.json { render :json =>  @note }
+
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
@@ -72,21 +75,44 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   # DELETE /notes/1.xml
   def destroy
-    @note = Note.find(params[:id])
-    @note.destroy
+    # @note = Note.find(params[:id])
+    # @note.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(notes_url) }
-      format.xml  { head :ok }
-    end
-  end
-  
-  def content
+    # respond_to do |format|
+    #   format.html { redirect_to(notes_url) }
+    #   format.xml  { head :ok }
+    # end
+    
     @note = Note.find(params[:id])
+    @note.move_to_trash
     
     respond_to do |format|
-      format.xml  { render :xml => @note } 
+      render :json => { :status => 'ok'}
     end
+
   end
   
+  # DELETE /notes/1
+  def trash
+    @note = Note.find(params[:id])
+    @note.move_to_trash
+    
+    respond_to do |format|
+      render :json => { :status=>'ok'}
+    end
+  end
+
+  def content
+    @note = Note.find(params[:note_id])
+    @board = Board.find(params[:board_id])
+    
+    if not @note.belongs_to_board @board     
+		render :json => {:body => "foo not found"}, :status => 404
+    else
+      respond_to do |format|
+        format.xml  { render :xml => @note } 
+        format.json { render :json => @note }
+      end
+    end
+  end
 end
