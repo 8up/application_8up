@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+	<th>Note ID</th>
     <th>Header</th>
     <th>Body</th>
     <th>Position x</th>
@@ -14,6 +15,7 @@
 
 <% @notes.each do |note| %>
   <tr>
+	<td><%= note.id %></td>
     <td><%= note.header %></td>
     <td><%= note.body %></td>
     <td><%= note.position_x %></td>
