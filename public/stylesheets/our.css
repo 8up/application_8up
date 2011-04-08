@@ -11,6 +11,13 @@ text-decoration: none;
 margin-top:0px;
 
 }
+#add_button_background{
+opacity:0.7;
+}
+
+#add_button_background:hover {
+opacity:1;
+}
 
 #create_new_board_button {
 list-style: none;
