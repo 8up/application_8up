@@ -10,13 +10,13 @@ Application8up::Application.routes.draw do
   
   resources :boards do
     resources :notes do
+
       delete 'destroy'
       member do
         get 'content'
       end
     end
     resources :fields
- #boards/:board_id/notes/:note_id
   end
 
   # The priority is based upon order of creation:
