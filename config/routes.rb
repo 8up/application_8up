@@ -11,6 +11,7 @@ Application8up::Application.routes.draw do
 
 resources :boards do
   resources :notes do
+    delete 'destroy'
     get 'content'
   end
   resources :fields

@@ -88,9 +88,10 @@ class NotesController < ApplicationController
     
     @note = Note.find(params[:id])
     @note.move_to_trash
-    
-    respond_to do |format|
-      render :json => { :status => 'ok'}
+    if @note.save
+      respond_to do |format|
+        format.json { render :json => { :status => 'ok'} }
+      end
     end
 
   end
