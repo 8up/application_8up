@@ -23,4 +23,13 @@ $(document).ready(function(){
 												 $( "#in_focus_image" ).hide();
 												 $( "#black_background" ).hide();
 												 });
+												 
+					$(this).keydown(function(e) {
+												
+													keycode = e.which;
+													if(keycode == 27){ 
+											$( "#in_focus_image" ).hide();
+												 $( "#black_background" ).hide();
+											}
+				  });
 				  });
