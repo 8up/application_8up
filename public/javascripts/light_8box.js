@@ -4,20 +4,23 @@ note_box = function(e){
     $( "#in_focus_image" ).show();
     $( "#black_background" ).show();
     $.ajax({ 
-	url: '/boards/' + board_id + '/notes/' + id + '/content.json', 
-	type: 'GET',
-	success: function(data, textStatus, jqXHR){
-      var note_body = $('#note_body');
-      note_body.text(data.note.body);
-	    }});
+		   url: '/boards/' + board_id + '/notes/' + id + '/content.json', 
+		   type: 'GET',
+		   success: function(data, textStatus, jqXHR){
+		   var note_body = $('#note_body');
+		   note_body.text(data.note.body);
+		   
+		   var note_header = $('#note_header');
+		   note_header.text(data.note.header);
+		   }});
 };
 $(document).ready(function(){
-	$( "div.note" ).dblclick(function(e){
-		note_box(e);
-	    });
-	
-	$( "#black_background" ).click(function(){
-		$( "#in_focus_image" ).hide();
-		$( "#black_background" ).hide();
-	    });
-    });
+				  $( "div.note" ).dblclick(function(e){
+										   note_box(e);
+										   });
+				  
+				  $( "#black_background" ).click(function(){
+												 $( "#in_focus_image" ).hide();
+												 $( "#black_background" ).hide();
+												 });
+				  });
