@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
+    $('#red, #green, #yellow, #blue, #orange, #pink, #aqua, #plum, #DarkGoldenrod').click(function(e) {
     var x = e.target.id;
     
     $(".selected.note").each(function(index, domElement){

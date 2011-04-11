@@ -1,5 +1,5 @@
 function select(e, caller) {
-    if (e.target != caller) {
+    if (e.target !== caller) {
 	return true;
     };
     $(e.target).toggleClass("selected");
