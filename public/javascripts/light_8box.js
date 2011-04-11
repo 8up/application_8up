@@ -7,11 +7,11 @@ note_box = function(e){
 		   url: '/boards/' + board_id + '/notes/' + id + '/content.json', 
 		   type: 'GET',
 		   success: function(data, textStatus, jqXHR){
-		   var note_body = $('#note_body');
-		   note_body.text(data.note.body);
+		   	var note_body = $('#note_body');
+		   	note_body.text(data.note.body);
 		   
-		   var note_header = $('#note_header');
-		   note_header.text(data.note.header);
+		   	var note_header = $('#note_header');
+		   	note_header.text(data.note.header);
 		   }});
 };
 $(document).ready(function(){

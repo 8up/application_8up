@@ -3,7 +3,7 @@ Application8up::Application.routes.draw do
 
   resources :notes do
     get 'content'
-  end
+   end
   
   resources :users
   resources :contents
@@ -16,7 +16,6 @@ Application8up::Application.routes.draw do
       end
     end
     resources :fields
- #boards/:board_id/notes/:note_id
   end
 
   # The priority is based upon order of creation:

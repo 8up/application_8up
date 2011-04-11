@@ -23,17 +23,62 @@ $(document).ready(function () {
 		    return true;
 		}
 		create_note(e);
-	});
+  });
 
+	//Dubbelklick på en lapps header gör att man kan redigera den
+	$("div.note h1").dblclick(function(e) {
+		if (e.target != this) {
+		    return true;
+		}
+		edit_note_header(e.target);
+	    });
+      
 });
+
+function edit_note_header(header) {
+    var original_text = $(header).html();
+    var title_form = $("<form></form>");
+    var title_input = $("<input type='text' size='10'></input>");
+    //Titeln trimmas för tillfället 
+    title_input.val($.trim(original_text));
+    var note_id = $(header).closest("div.note").attr("id").split("_").pop();
+    var event_map = {"id" : note_id, "form_object":title_form};
+    
+    title_form.append(title_input);
+    $(header).replaceWith(title_form);
+    title_input.focus();
+    
+    title_input.blur(function(e) { $(this).closest("form").submit(); });
+
+    title_form.submit(event_map, function(e) { 
+	    var new_header_text = this.firstChild.value;
+	    var target_url = "/notes/" + event_map["id"] + ".json";
+	    $.ajax({url: target_url, 
+			type: "PUT", 
+			data: {id: event_map["id"], note : 
+			{header : new_header_text}}, 
+			success: function(data) {
+			
+			var header_text = data.note.header;
+			var header = $('<h1></h1>');
+			header.html(header_text);
+			header.dblclick(function(e) {
+				edit_note_header(e.target);
+				    });
+			event_map["form_object"].replaceWith(header);
+		    }
+		});
+	    return false; //ladda inte om sidan
+	});
+};
 
 function create_note(e) {
     var field_id = $(e.target).attr('id').split('_').pop();
     $.ajax({ url: '/notes', 
-		type: 'POST',
-    data: {
-		'note[header]': 'Test Head',
-		    'note[body]': 'Test body',
+		type: 'POST', 
+		data: {
+		'note[header]': 'New Header',
+		    'note[body]': 'New Body',
 		    'note[position_x]': e.pageX,
 		    'note[position_y]': e.pageY,
 		    'note[owner_id]':1,
@@ -51,10 +96,11 @@ function create_note(e) {
 		attach_handlers(note, data);
 		note.append(header);
 		$(e.target).append(note);
+		edit_note_header(header);
 				    
 	    }
 	});
-}
+};
 
 function attach_handlers(note, note_data) {
     note.dblclick(function (e){
@@ -62,6 +108,5 @@ function attach_handlers(note, note_data) {
 	});
     note.click(function (e) {
 	    select(e, this);
-    }); 
-
-}
+	}); 
+};
