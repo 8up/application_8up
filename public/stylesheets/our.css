@@ -115,7 +115,7 @@ color:black;
 #toolbox_area_2 {
   float:left;
 height:100%;
-width:45px; 
+width:39px; 
 background-image: url('/images/panel.png');
  background-repeat: repeat-y;
 }
