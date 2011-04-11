@@ -3,7 +3,7 @@ function select(e, caller) {
 	return true;
     };
     $(e.target).toggleClass("selected");
-    colour_change(e.target);
+    //colour_change(e.target);
 };
 
 $(document).ready(

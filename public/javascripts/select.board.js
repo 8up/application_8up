@@ -54,7 +54,7 @@ $(document).ready(function(){
 	$(".toolbox_button_delete").click(function(){
 		$(".selected.note").map(function(index, domElement) 
 		{ 
-			var note_id = $(domElement).attr('id').id8Up();
+			var note_id = $(domElement).id8Up();
 			var board_id = $(domElement).data('board_id').id8Up();
 			var url_path =  "/boards/" + board_id + "/notes/" + note_id;
 
