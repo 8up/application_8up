@@ -124,7 +124,6 @@ background-image: url('/images/panel.png');
 top:50%;
 left:20px;
 width:150px;
-height:250px;
 background-color:white;
 border-style:solid;
 }
@@ -135,7 +134,7 @@ border-style:solid;
 }
 #toolbox_text_2 {
 background-color:white;
-height:100;
+
 }
 .selected {
     -moz-box-shadow: 3px 3px 4px #000;
