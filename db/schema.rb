@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20110408080510) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "trashcan"
     t.integer  "field_id"
+    t.boolean  "trashcan"
   end
 
   create_table "users", :force => true do |t|
