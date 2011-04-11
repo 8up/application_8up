@@ -1,9 +1,9 @@
 function select(e, caller) {
-	if (e.target != caller) {
-		return true;
-	};
-	$(e.target).toggleClass("selected");
-	//colour_change(e.target);
+    if (e.target != caller) {
+	return true;
+    };
+    $(e.target).toggleClass("selected");
+    //colour_change(e.target);
 };
 
 $(document).ready(
