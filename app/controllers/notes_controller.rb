@@ -108,7 +108,7 @@ class NotesController < ApplicationController
   end
 
   def content
-    @note = Note.find(params[:note_id])
+    @note = Note.find(params[:id])
     @board = Board.find(params[:board_id])
     
     if not @note.belongs_to_board @board     
