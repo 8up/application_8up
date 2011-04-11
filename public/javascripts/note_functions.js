@@ -1,18 +1,37 @@
-$(document).ready(function(){
+$(document).ready(function () {
+    $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
+    var x = e.target.id;
+    
+    $(".selected.note").each(function(index, domElement){
+        var note_id = $(domElement).attr('id').split('_').pop();
+        var board_id = $(domElement).data('board_id').split('_').pop();
+				var url_path =  "/boards/" + board_id + "/notes/" + note_id;
+  
+        $.ajax({ url: url_path, 
+		    type: 'POST',
+        data: {_method:'PUT',
+		    'note[color]': x 	}        
+        },
+        success: function(data, textStatus, jqXHR){
+          $(domElement).css({'background': x});
+        }
+        );   
+    }); 
+  }
 	$("div.field").dblclick(function(e){
 		if (e.target != this) {
 		    return true;
 		}
 		create_note(e);
-	    });
+	});
 
-    });
+});
 
 function create_note(e) {
     var field_id = $(e.target).attr('id').split('_').pop();
     $.ajax({ url: '/notes', 
-		type: 'POST', 
-		data: {
+		type: 'POST',
+    data: {
 		'note[header]': 'Test Head',
 		    'note[body]': 'Test body',
 		    'note[position_x]': e.pageX,
@@ -38,10 +57,11 @@ function create_note(e) {
 }
 
 function attach_handlers(note, note_data) {
-    note.dblclick(function(e){
+    note.dblclick(function (e){
 	    note_box(e);
 	});
-    note.click(function(e) {
+    note.click(function (e) {
 	    select(e, this);
-	}); 
+    }); 
+
 }
