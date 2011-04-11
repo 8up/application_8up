@@ -30,6 +30,8 @@ GEM
     activesupport (3.0.3)
     arel (2.0.9)
     builder (2.1.2)
+    ckeditor (3.4.2.pre)
+      mime-types (>= 1.16)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
@@ -76,6 +78,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  ckeditor (= 3.4.2.pre)
   jquery-rails (>= 0.2.6)
   rails (= 3.0.3)
   sqlite3-ruby
