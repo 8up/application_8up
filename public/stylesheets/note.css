@@ -3,6 +3,8 @@ div.note {
     height: 100px;
     padding: 5px;
     background-color:#f4e476; 
+  word-wrap: break-word;
+  overflow:hidden;
 }
 
 		.background{
