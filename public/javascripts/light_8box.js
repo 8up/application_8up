@@ -16,6 +16,9 @@ note_box = function(e){
 };
 $(document).ready(function(){
 	$( "div.note" ).dblclick(function(e){
+		if (this != e.target) {
+		    return true;
+		}
 		note_box(e);
 	    });
 				  
