@@ -32,7 +32,7 @@ function edit_note_header(header) {
 
     title_form.submit(event_map, function(e) { 
 	    var new_header_text = this.firstChild.value;
-	    var target_url = "/notes/" + event_map["id"] + "/update.json";
+	    var target_url = "/notes/" + event_map["id"] + ".json";
 	    $.ajax({url: target_url, 
 			type: "PUT", 
 			data: {id: event_map["id"], note : 
