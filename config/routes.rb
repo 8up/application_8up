@@ -5,7 +5,8 @@ Application8up::Application.routes.draw do
 
   resources :notes do
     get 'content'
-  end
+    put 'update'
+   end
   
   resources :users
 
