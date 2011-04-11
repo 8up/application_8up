@@ -1,6 +1,4 @@
 Application8up::Application.routes.draw do
-  resources :contents
-
   resources :fields
 
   resources :notes do
@@ -8,14 +6,18 @@ Application8up::Application.routes.draw do
   end
   
   resources :users
+  resources :contents
+  
+  resources :boards do
+    resources :notes do
 
-resources :boards do
-  resources :notes do
-    delete 'destroy'
-    get 'content'
+      delete 'destroy'
+      member do
+        get 'content'
+      end
+    end
+    resources :fields
   end
-  resources :fields
-end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
