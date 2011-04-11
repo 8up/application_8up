@@ -1,5 +1,7 @@
 class Board < ActiveRecord::Base
   has_many :fields
+  after_initialize :create_field
+  
   def hotness
     rand(4)
   end    
@@ -10,7 +12,7 @@ class Board < ActiveRecord::Base
   end
 
 
-  def after_initialize
+  def create_field
     if fields == []
       puts "foo"
       field = Field.new
@@ -22,7 +24,7 @@ class Board < ActiveRecord::Base
   end
     
     def empty_trashcan
-      t.each do |note|
+      trashcan.each do |note|
         note.destroy
     end      
 
