@@ -30,7 +30,9 @@ $(document).ready(function () {
 		    return true;
 		}
 		edit_note_header(e.target);
-	    });
+	});
+  
+  $(".note").draggable();
       
 });
 
@@ -109,3 +111,4 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
+

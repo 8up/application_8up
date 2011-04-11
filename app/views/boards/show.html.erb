@@ -2,10 +2,41 @@
 <% @board.fields.each do |field|%>
 <div id="field_<%= field.id %>" class="field" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;">
   <% field.notes.each do |note|%>
-  <div id="note_<%= note.id %>" class="note" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px; background-color:<%= note.color %>"; data-board_id="board_<%= @board.id %>">
+  <div id="note_<%= note.id %>" class="note ui-widget-content" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px; background-color:<%= note.color %>"; data-board_id="board_<%= @board.id %>">
     <h1><%= note.header %></h1>       
   </div>
   <% end %> 
 </div>
 
 <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
