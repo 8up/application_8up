@@ -25,7 +25,7 @@ function create_note(e) {
 		note.attr('id', 'note_' + data.note.id);
 		note.addClass('note');
 		note.data('board_id', 'board_' + data.note.board_id);
-		note.css({'position': 'absolute', 'top' : e.pageY + 'px', 'left' : e.pageX + 'px'});
+		note.css({'position': 'absolute', 'top' :  (e.pageY -50) + 'px', 'left' : (e.pageX-50) + 'px'});
 			   
 		header.html(data.note.header);
 			    
