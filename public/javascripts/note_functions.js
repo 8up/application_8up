@@ -40,7 +40,7 @@ function edit_note_header(header) {
     var title_input = $("<input type='text' size='10'></input>");
     //Titeln trimmas för tillfället 
     title_input.val($.trim(original_text));
-    var note_id = $(header).closest("div.note").attr("id").split("_").pop();
+    var note_id = $(header).closest("div.note").id8Up();
     var event_map = {"id" : note_id, "form_object":title_form};
     
     title_form.append(title_input);
