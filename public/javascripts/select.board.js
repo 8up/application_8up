@@ -15,7 +15,7 @@ $(document).ready(function(){
     };
 
 		$(e.target).toggleClass("selected");
-		var id = $(e.target).attr('id').split('_').pop();
+		var id = $(e.target).id8Up();
 		var toolbox_board_name = $('#toolbox_header_name');
 		var toolbox_board_info_created = $('#toolbox_info_created');
     var toolbox_board_info_updated = $('#toolbox_info_updated');
@@ -54,8 +54,8 @@ $(document).ready(function(){
 	$(".toolbox_button_delete").click(function(){
 		$(".selected.note").map(function(index, domElement) 
 		{ 
-			var note_id = $(domElement).attr('id').id8Up();
-			var board_id = $(domElement).data('board_id').id8Up();
+			var note_id = $(domElement).id8Up();
+			var board_id = $(domElement).data('board_id').split('_').pop();
 			var url_path =  "/boards/" + board_id + "/notes/" + note_id;
 
 
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		} );
 		$(".selected.board_container").map(function(index, domElement) 
 		{ 
-			var board_id = $(domElement).attr('id').id8Up();
+			var board_id = $(domElement).id8Up();
 			var url_path =  "/boards/" + board_id;
 
 
