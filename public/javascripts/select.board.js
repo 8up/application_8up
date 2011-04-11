@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 		$(e.target).toggleClass("selected");
 		var id = $(e.target).attr('id').split('_').pop();
-		var toolbox_board_name = $('#toolbox_board_name');
+		var toolbox_board_name = $('#toolbox_header_name');
 		var toolbox_board_info_created = $('#toolbox_info_created');
     var toolbox_board_info_updated = $('#toolbox_info_updated');
     var toolbox_board_info_owner = $('#toolbox_info_owner');
