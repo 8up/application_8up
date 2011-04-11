@@ -6,9 +6,9 @@ $(document).ready(function(){
 				type: 'GET',
         success: function(data, textStatus, jqXHR){
 					toolbox_board_name.text(data.board.name);
-          toolbox_board_info_created.text(data.board.created_at);
-          toolbox_board_info_updated.text(data.board.updated_at);
-          toolbox_board_info_owner.text(data.board.owner_id);
+          toolbox_board_info_created.text("Created: " + data.board.created_at);
+          toolbox_board_info_updated.text("Updated: " + data.board.updated_at);
+          toolbox_board_info_owner.text("Owner: " + data.board.owner_id);
 
 				}		
       })
