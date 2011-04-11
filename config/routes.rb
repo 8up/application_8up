@@ -10,7 +10,6 @@ Application8up::Application.routes.draw do
   
   resources :boards do
     resources :notes do
-
       delete 'destroy'
       member do
         get 'content'
