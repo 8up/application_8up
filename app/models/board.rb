@@ -1,5 +1,7 @@
 class Board < ActiveRecord::Base
   has_many :fields
+  after_initialize :create_field
+  
   def hotness
     rand(4)
   end    
@@ -18,7 +20,8 @@ class Board < ActiveRecord::Base
     self.save
   end
 
-  def after_initialize
+
+  def create_field
     if self.in_trash == nil
       self.in_trash = false
     end
@@ -29,13 +32,12 @@ class Board < ActiveRecord::Base
       field.width = field.height = 900
       fields << field
     end
-  
   end
     
-    def empty_trashcan
-      t.each do |note|
-        note.destroy
-    end      
+  def empty_trashcan
+    trashcan.each do |note|
+      note.destroy
+  end      
 
   end
 
