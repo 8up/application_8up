@@ -3,6 +3,9 @@ div.note {
     height: 100px;
     padding: 5px;
     background-color:#f4e476; 
+     -moz-box-shadow: 4px 4px 4px #8e8e8e;
+    -webkit-box-shadow: 4px 4px 4px #8e8e8e;
+    box-shadow: 4px 4px 4px #8e8e8e;
 }
 
 		.background{
