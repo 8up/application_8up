@@ -10,14 +10,13 @@ $(document).ready(function () {
         $.ajax({ url: url_path, 
 		    type: 'POST',
         data: {_method:'PUT',
-		    'note[color]': x 	}        
-        },
+		    'note[color]': x 	},
         success: function(data, textStatus, jqXHR){
           $(domElement).css({'background': x});
-        }
-        );   
+            }});   
     }); 
-  }
+  });
+  
 	$("div.field").dblclick(function(e){
 		if (e.target != this) {
 		    return true;
