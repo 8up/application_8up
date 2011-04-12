@@ -121,11 +121,11 @@ background-image: url('/images/panel.png');
 }
 
 #toolbox_text_container {
-top:50%;
-left:20px;
+left:2%;
 width:150px;
 background-color:white;
 border-style:solid;
+position:absolute;
 }
 #toolbox_text_1 {
 background-color:white;
@@ -135,6 +135,11 @@ border-style:solid;
 #toolbox_text_2 {
 background-color:white;
 
+}
+#color_change_table{
+	position:absolute;
+	bottom: 5%;
+	left: 5%;
 }
 .selected {
     -moz-box-shadow: 3px 3px 4px #000;
