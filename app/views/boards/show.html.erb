@@ -1,6 +1,6 @@
 <div id="board_<%= @board.id %>" class="board_div">
   <% @board.fields.each do |field|%>
-  <div id="field_<%= field.id %>" class="field" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;">
+  <div id="field_<%= field.id %>" class="field ui-widget-content" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;">
 
     <% field.notes.each do |note|%>
     <div id="note_<%= note.id %>" class="note ui-widget-content" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px; background-color:<%= note.color %>"; data-board_id="board_<%= @board.id %>">
@@ -12,11 +12,7 @@
   </div>
   <% end %>
   
-  <% @board.get_corners.each_pair do |x,y_hash| %>
-  <% y_hash.each_pair do |y, field_array| %>
-  <div class="drag_queen" style="top: <%= y-10 %>px; left: <%= x-10 %>px" data-fields="<%= field_array%>"></div>
-  <% end %>
-  <% end %>
+
 
 </div>
 
