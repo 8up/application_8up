@@ -5,7 +5,11 @@ $(document).ready(function(){
 				url:'/boards/' + id + '.json', 
 				type: 'GET',
         success: function(data, textStatus, jqXHR){
-					toolbox_board_name.text(data.board.name);
+        if((data.board.name).length > 8) {
+					toolbox_board_name.text((data.board.name).substring(8,0) + "...");
+          } else {
+          toolbox_board_name.text(data.board.name);
+        }
           toolbox_board_info_created.text("Created: " + data.board.created_at);
           toolbox_board_info_updated.text("Updated: " + data.board.updated_at);
           toolbox_board_info_owner.text("Owner: " + data.board.owner_id);
@@ -39,8 +43,11 @@ $(document).ready(function(){
 			toolbox_board_name.text($(".selected").length + " boards  selected");
       
       toolbox_board_info_name.text($(".selected").each(function(){
+        if(($(this).text()).length > 13) {
+      toolbox_board_info_name.append(($(this).text()).substring(13,0) + "..." + "<br>")
+      } else {
       toolbox_board_info_name.append($(this).text() + "<br>")
-    
+    }
   }
 )
   )
