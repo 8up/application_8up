@@ -1,3 +1,13 @@
 div.field {
-	background: url('../images/field_bakgrund_tile.png');
+    /*background: url('../images/field_bakgrund_tile.png');*/
+    background-color: #DDD;
+    border-style: solid; 
+    border-width: 1px;
+    position: absolute;
+    z-index: -1;
+}
+
+div.board_div {
+    position:absolute;
+    left: 50px;
 }
