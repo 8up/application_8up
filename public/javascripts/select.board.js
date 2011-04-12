@@ -1,4 +1,19 @@
+function de_select_board(e, caller){
+	if(e.target != caller){
+		return true;
+	};
+	$(".selected").removeClass("selected");
+	$('#toolbox_header_name').text("Name");
+	$('#toolbox_info_created').text(" ");
+	$('#toolbox_info_updated').text(" ");
+	$('#toolbox_info_owner').text(" ");
+	$('#toolbox_info_name').text(" ");
+}
+
 $(document).ready(function(){
+	$("#boards_container").click(function(e){
+		de_select_board(e, this);
+	});
   $("#boards_container li").click(function(e){
     //Funktion för att hämta data via json.
     //Input, id på det markerade objectet.

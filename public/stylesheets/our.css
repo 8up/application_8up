@@ -52,8 +52,14 @@ height: 100%;
   float:left; 
 }
   
+#workspace{
+	position:absolute;
+	height:100%;
+	width:100%;
+}
 #boards_container { 
   list-style: none; 
+  height:100%;
 }  
 
 #boards_container li {
