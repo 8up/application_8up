@@ -14,7 +14,7 @@
   
   <% @board.get_corners.each_pair do |x,y_hash| %>
   <% y_hash.each_pair do |y, field_array| %>
-  <div class="drag_queens" style="background-color: blue;position:absolute; float:left; width: 20px; height: 20px; top: <%= y-10 %>px; left: <%= x-10 %>px" data-fields="<%= field_array%>"></div>
+  <div class="drag_queen" style="top: <%= y-10 %>px; left: <%= x-10 %>px" data-fields="<%= field_array%>"></div>
   <% end %>
   <% end %>
 
