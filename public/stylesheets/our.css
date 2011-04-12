@@ -41,6 +41,7 @@ height:50px;
 }
 
 #toolbox_container { 
+z-index:255;
 float:left; 
 position:fixed; 
 height: 100%; 
@@ -53,7 +54,7 @@ height: 100%;
 }
   
 #workspace{
-	position:absolute;
+	position:fixed;
 	height:100%;
 	width:100%;
 }
