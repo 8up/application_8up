@@ -121,11 +121,11 @@ background-image: url('/images/panel.png');
 }
 
 #toolbox_text_container {
-top:50%;
-left:20px;
+left:2%;
 width:150px;
 background-color:white;
 border-style:solid;
+position:absolute;
 }
 #toolbox_text_1 {
 background-color:white;
