@@ -29,7 +29,11 @@ $(document).ready(
 					url: '/boards/' + board_id + '/notes/' + id + '.json', 
 					type: 'GET',
 					success: function(data, textStatus, jqXHR){
-						toolbox_note_name.text(data.note.header);
+            if((data.note.header).length > 8){
+						    toolbox_note_name.text((data.note.header).substring(8,0) + "...");
+              } else {
+                toolbox_note_name.text(data.note.header);          
+              }
 						toolbox_note_info_created.text("Created: " + data.note.created_at);
 						toolbox_note_info_updated.text("Updated: " + data.note.updated_at);
 						toolbox_note_info_owner.text("Owner: " + data.note.owner_id);
@@ -54,8 +58,12 @@ $(document).ready(
 					toolbox_note_info_name.html('');
 					toolbox_note_name.text($(".selected").length + " notes  selected");
           //Loop-funktion för att hämta ut namnen på de markerade objekten.
-					toolbox_note_info_name.text($(".selected").each(function(){
-						toolbox_note_info_name.append($(this).text() + "<br>")
+          toolbox_note_info_name.text($(".selected").each(function(){
+            if(($(this).text().trim()).length > 13){
+              toolbox_note_info_name.append(($(this).text()).substring(13,0) + "..." + "<br>")
+            } else {
+						  toolbox_note_info_name.append($(this).text() + "<br>");
+            }
 
 					}
 				)
