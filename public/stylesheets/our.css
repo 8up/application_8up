@@ -53,12 +53,9 @@ height: 100%;
   float:left;
 }
   
-#workspace{
-	position:fixed;
-	height:100%;
-	width:100%;
-}
-#boards_container { 
+  
+#boards_container {
+  margin-left:31px;
   list-style: none; 
   height:100%;
 }  
@@ -148,6 +145,14 @@ background-color:white;
 	bottom: 5%;
 	left: 5%;
 }
+
+#workspace{
+	position:absolute;
+	height:100%;
+	width:100%;
+  left: -1px;
+}
+
 .selected {
     -moz-box-shadow: 3px 3px 4px #000;
     /* -webkit-box-shadow: 3px 3px 3px 4px #000;
