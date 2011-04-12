@@ -74,14 +74,19 @@ function edit_note_header(header) {
 };
 
 function create_note(e) {
+    var field = $(e.target);
     var field_id = $(e.target).attr('id').split('_').pop();
+    var posX, posY;
+    posX = e.pageX - field.offset().left;
+    posY = e.pageY - field.offset().top;
+    
     $.ajax({ url: '/notes', 
 		type: 'POST', 
 		data: {
 		'note[header]': 'New Header',
 		    'note[body]': 'New Body',
-		    'note[position_x]': e.pageX,
-		    'note[position_y]': e.pageY,
+		    'note[position_x]': posX,
+		    'note[position_y]': posY,
 		    'note[owner_id]':1,
 		    'note[field_id]': field_id}, 
 		success: function(data, textStatus, jqXHR) {
@@ -90,7 +95,7 @@ function create_note(e) {
 		note.attr('id', 'note_' + data.note.id);
 		note.addClass('note');
 		note.data('board_id', 'board_' + data.note.board_id);
-		note.css({'position': 'absolute', 'top' :  (e.pageY -50) + 'px', 'left' : (e.pageX-50) + 'px'});
+		note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
 			   
 		header.html(data.note.header);
 			    
