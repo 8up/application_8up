@@ -136,6 +136,11 @@ border-style:solid;
 background-color:white;
 
 }
+#color_change_table{
+	position:absolute;
+	bottom: 5%;
+	left: 5%;
+}
 .selected {
     -moz-box-shadow: 3px 3px 4px #000;
     /* -webkit-box-shadow: 3px 3px 3px 4px #000;
