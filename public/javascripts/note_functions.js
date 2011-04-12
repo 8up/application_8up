@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
-    var x = e.target.id;
+     var x = e.target.id;
     
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
@@ -103,12 +103,12 @@ function create_note(e) {
 		note.append(header);
 		$(e.target).append(note);
 		edit_note_header(header);
-				    
 	    }
-	});
+    });
 };
 
 function attach_handlers(note, note_data) {
+    note.draggable();
     note.dblclick(function (e){
 	    note_box(e);
 	});
@@ -116,4 +116,3 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
-
