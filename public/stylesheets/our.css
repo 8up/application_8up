@@ -58,6 +58,7 @@ height: 100%;
   margin-left:31px;
   list-style: none; 
   height:100%;
+  margin-top:0px;
 }  
 
 #boards_container li {
@@ -150,7 +151,8 @@ background-color:white;
 	position:absolute;
 	height:100%;
 	width:100%;
-  left: -1px;
+  left: 0px;
+  bottom: 0px;
 }
 
 .selected {
