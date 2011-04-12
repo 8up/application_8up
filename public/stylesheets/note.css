@@ -1,11 +1,17 @@
 div.note {
     width: 100px; 
     height: 100px;
-    padding: 5px;
+    padding: 10px;
+    padding-top: 20px;
     background-color:#f4e476; 
     word-wrap: break-word;
     overflow:hidden;
     box-shadow: 4px 4px 4px #8e8e8e;
+}
+
+div.note h1,form {
+    margin: 0px;
+    font-size: 20px;
 }
 
 .background{
