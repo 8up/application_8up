@@ -3,10 +3,7 @@ $(document).ready(function(){
     note_box(e);
   });
 
-  $( "#black_background" ).click(function(){
-    $( "#in_focus_image" ).hide();
-    $( "#black_background" ).hide();
-  });
+
 
   $(this).keydown(function(e) {
 
@@ -16,11 +13,8 @@ $(document).ready(function(){
       $( "#black_background" ).hide();
     }
   });
+ 
   
-  var myNicEditor = new nicEditor();
-  myNicEditor.setPanel('note_editor_panel');
-  myNicEditor.addInstance('note_header');
-  myNicEditor.addInstance('note_body');
 });
 
 
@@ -38,6 +32,32 @@ note_box = function(e){
 
       var note_header = $('#note_header');
       note_header.text(data.note.header);
+      
+      var controls = {
+        h1: { visible: false },
+        h2: { visible: false },
+        h3: { visible: false }
+      }
+      
+      $('#note_header').wysiwyg({
+        controls: controls,
+        iFrameClass: 'note_header_form',
+        css: '/stylesheets/editor_style.css'
+      });
+      
+      $('#note_body').wysiwyg({
+        controls: controls,
+        autoGrow: true,
+        maxHeight: 320,
+        css: '/stylesheets/editor_style.css'
+      });
+      
+      $( "#black_background" ).click(function(){
+        $( "#in_focus_image" ).hide();
+        $( "#black_background" ).hide();
+        $('#note_header').wysiwyg("save").wysiwyg("destroy");
+        $( "#black_background" ).unbind('click');
+      });
     }
   });
 };
