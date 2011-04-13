@@ -1,6 +1,9 @@
 $(document).ready(function(){  
     //Delete funktion för att ta bort/lägga boards i papperskorgen.
-    $(".toolbox_button_delete").click(function(){
+    $(".toolbox_button_delete").click(delete_selected);
+  });
+  
+function delete_selected(e){
       $(".selected.note").map(function(index, domElement)
       {
         var note_id = $(domElement).id8Up();
@@ -22,5 +25,4 @@ $(document).ready(function(){
       $(".selected").remove();
       $("#toolbox_container").trigger("update");
       
-    });
-  });
+    };
