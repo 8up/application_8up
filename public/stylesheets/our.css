@@ -1,3 +1,19 @@
+#split_horiz {
+opacity:0.5;
+}
+
+#split_horiz:hover {
+opacity:1;
+}
+
+#split_vert {
+opacity:0.5;
+}
+
+#split_vert:hover {
+opacity:1;
+}
+
 #menu_bar {
   position: fixed;
   top: -10px;
