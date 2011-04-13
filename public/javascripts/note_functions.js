@@ -69,6 +69,7 @@ function edit_note_header(header) {
 			event_map["form_object"].replaceWith(header);
 		    }
 		});
+		$("#toolbox_container").trigger("update");
 	    return false; //ladda inte om sidan
 	});
 };
@@ -94,6 +95,7 @@ function create_note(e) {
 		var note = $('<div></div>');
 		note.attr('id', 'note_' + data.note.id);
 		note.addClass('note');
+		note.addClass('selected');
 		note.data('board_id', 'board_' + data.note.board_id);
 		note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
 			   
@@ -103,6 +105,7 @@ function create_note(e) {
 		note.append(header);
 		$(e.target).append(note);
 		edit_note_header(header);
+		$("#toolbox_container").trigger("update");
 	    }
     });
 };

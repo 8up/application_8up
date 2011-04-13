@@ -100,7 +100,7 @@ $(".toolbox_button_delete").click(function(){
 		} );
 
 		$(".selected").remove();
-
+		$("#toolbox_container").trigger("update");
 
 	});
 });
