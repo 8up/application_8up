@@ -1,11 +1,11 @@
 $(document).ready(
   function(){
 	$("#split_horiz").click(function(){
-		//Här kan du lägga till din horiz-funktion Erik.
+		find_split(split_vertically = false);
 	});
 
 	$("#split_vert").click(function(){
-		//Här kan du lägga till din vert-funktion Erik.
+		find_split(split_vertically = true);
 	});
 	
     $("#toolbox_container").bind('update',function(){
