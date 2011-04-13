@@ -1,5 +1,13 @@
 $(document).ready(
   function(){
+	$("#split_horiz").click(function(){
+		//Här kan du lägga till din horiz-funktion Erik.
+	});
+
+	$("#split_vert").click(function(){
+		//Här kan du lägga till din vert-funktion Erik.
+	});
+	
     $("#toolbox_container").bind('update',function(){
       //Eftersom någon har ändrat
       //Variabler för olika textfält i toolbox.

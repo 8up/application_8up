@@ -1,8 +1,16 @@
-#split_buttons {
+#split_horiz {
 opacity:0.5;
 }
 
-#split_buttons:hover {
+#split_horiz:hover {
+opacity:1;
+}
+
+#split_vert {
+opacity:0.5;
+}
+
+#split_vert:hover {
 opacity:1;
 }
 
