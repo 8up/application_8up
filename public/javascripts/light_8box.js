@@ -15,21 +15,21 @@ note_box = function(e){
 		   }});
 };
 $(document).ready(function(){
-				  $( "div.note" ).dblclick(function(e){
-										   note_box(e);
-										   });
+	$( "div.note" ).dblclick(function(e){
+		note_box(e);
+	    });
 				  
-				  $( "#black_background" ).click(function(){
-												 $( "#in_focus_image" ).hide();
-												 $( "#black_background" ).hide();
-												 });
+	$( "#black_background" ).click(function(){
+		$( "#in_focus_image" ).hide();
+		$( "#black_background" ).hide();
+	    });
 												 
-					$(this).keydown(function(e) {
+	$(this).keydown(function(e) {
 												
-													keycode = e.which;
-													if(keycode == 27){ 
-											$( "#in_focus_image" ).hide();
-												 $( "#black_background" ).hide();
-											}
-				  });
-				  });
+		keycode = e.which;
+		if(keycode == 27){ 
+		    $( "#in_focus_image" ).hide();
+		    $( "#black_background" ).hide();
+		}
+	    });
+    });
