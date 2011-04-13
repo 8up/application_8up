@@ -34,12 +34,13 @@ div.note h1,form {
     width: 500px;
     height: 400px;
     z-index: 1;
-    overflow: auto;
+    overflow: hidden;
     background-image: url('/images/post_it_big.png');
-    -webkit-background-size: cover;
+    background-position: top left right bottom;
+   /* -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: cover; */
     background-repeat: no-repeat;
     padding-top: 20px;
     padding-right: 60px;
