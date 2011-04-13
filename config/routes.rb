@@ -7,6 +7,8 @@ Application8up::Application.routes.draw do
   
   resources :users
   resources :contents
+
+  
   
   resources :boards do
     resources :notes do
@@ -16,7 +18,11 @@ Application8up::Application.routes.draw do
       end
     end
     resources :fields
+    
+
   end
+  
+  match "/boards/:board_id/split_field/:field_id", :controller => "boards", :action => "split_field", :via => "post"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

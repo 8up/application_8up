@@ -3,13 +3,16 @@
 <table>
   <tr>
 	<th>Note ID</th>
+	<th>Owner</th>
+	<th>Field ID</th>
     <th>Header</th>
     <th>Body</th>
+	<th>Color</th>
 	<th>Created</th>
 	<th>Updated</th>
     <th>Position x</th>
     <th>Position y</th>
-    <th>Owner</th>
+	<th>Trashcan</th>
     <th></th>
     <th></th>
     <th></th>
@@ -18,13 +21,16 @@
 <% @notes.each do |note| %>
   <tr>
 	<td><%= note.id %></td>
+	<td><%= note.owner_id %></td>
+	<td><%= note.field_id %></td>
     <td><%= note.header %></td>
     <td><%= note.body %></td>
+	<td><%= note.color %></td>
 	<td><%= note.created_at %></td>
     <td><%= note.updated_at %></td>
     <td><%= note.position_x %></td>
     <td><%= note.position_y %></td>
-    <td><%= note.owner_id %></td>
+	<td><%= note.trashcan %></td>
     <td><%= link_to 'Show', note %></td>
     <td><%= link_to 'Edit', edit_note_path(note) %></td>
     <td><%= link_to 'Destroy', note, :confirm => 'Are you sure?', :method => :delete %></td>

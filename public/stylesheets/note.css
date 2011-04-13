@@ -2,7 +2,7 @@ div.note {
     width: 100px; 
     height: 100px;
     padding: 10px;
-    padding-top: 20px;
+    padding-top: 10px;
     background-color:#f4e476; 
     word-wrap: break-word;
     overflow:hidden;
@@ -12,7 +12,9 @@ div.note {
 
 div.note h1,form {
     margin: 0px;
-    font-size: 20px;
+    font-size: 18px;
+    font-family: Times New Roman;
+    text-align: center;
 }
 
 .background{
