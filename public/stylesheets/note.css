@@ -1,46 +1,51 @@
 div.note {
     width: 100px; 
     height: 100px;
-    padding: 5px;
+    padding: 10px;
+    padding-top: 10px;
     background-color:#f4e476; 
-    
-    -moz-box-shadow: 4px 4px 4px #8e8e8e;
-    -webkit-box-shadow: 4px 4px 4px #8e8e8e;
     word-wrap: break-word;
     overflow:hidden;
     box-shadow: 4px 4px 4px #8e8e8e;
-
+    z-index:125;
 }
 
-		.background{
-			display: none;
-			position: fixed;
-			top: 0%;
-			left: 0%;
-			width: 100%;
-			height: 100%;
-			background-color: black;
-			z-index: 0;
-			opacity:.80;
+div.note h1,form {
+    margin: 0px;
+    font-size: 18px;
+    font-family: Times New Roman;
+    text-align: center;
+}
 
-		}
-		.window {
-			display: none;
-			position: absolute;
-			top: 25%;
-			left: 25%;
-			width: 500px;
-			height: 400px;
-			z-index: 1;
-			overflow: auto;
-      background-image: url('/images/post_it_big.png');
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;
-      background-repeat: no-repeat;
-      padding-top: 20px;
-      padding-right: 60px;
-      padding-bottom: 100px;
-      padding-left: 60px;
-		}
+.background{
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 126;
+    opacity:.80;
+
+}
+.window {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 500px;
+    height: 400px;
+    z-index: 127;
+    overflow: auto;
+    background-image: url('/images/post_it_big.png');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 20px;
+    padding-right: 60px;
+    padding-bottom: 100px;
+    padding-left: 60px;
+}

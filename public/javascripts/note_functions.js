@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('#red, #green, #yellow, #blue, #orange, #pink, #aqua, #plum, #DarkGoldenrod').click(function(e) {
-    var x = e.target.id;
+    $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
+     var x = e.target.id;
     
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
@@ -30,7 +30,14 @@ $(document).ready(function () {
 		    return true;
 		}
 		edit_note_header(e.target);
-	    });
+	});
+  
+  $(".note").draggable(	{
+		stop: function(event, ui) {
+			//Få tag i note och note_data?
+			update_note($(this), $(this).data, ui)
+			}
+	});
       
 });
 
@@ -67,19 +74,25 @@ function edit_note_header(header) {
 			event_map["form_object"].replaceWith(header);
 		    }
 		});
+		$("#toolbox_container").trigger("update");
 	    return false; //ladda inte om sidan
 	});
 };
 
 function create_note(e) {
+    var field = $(e.target);
     var field_id = $(e.target).attr('id').split('_').pop();
+    var posX, posY;
+    posX = e.pageX - field.offset().left;
+    posY = e.pageY - field.offset().top;
+    
     $.ajax({ url: '/notes', 
 		type: 'POST', 
 		data: {
 		'note[header]': 'New Header',
 		    'note[body]': 'New Body',
-		    'note[position_x]': e.pageX,
-		    'note[position_y]': e.pageY,
+		    'note[position_x]': posX,
+		    'note[position_y]': posY,
 		    'note[owner_id]':1,
 		    'note[field_id]': field_id}, 
 		success: function(data, textStatus, jqXHR) {
@@ -87,8 +100,9 @@ function create_note(e) {
 		var note = $('<div></div>');
 		note.attr('id', 'note_' + data.note.id);
 		note.addClass('note');
+		note.addClass('selected');
 		note.data('board_id', 'board_' + data.note.board_id);
-		note.css({'position': 'absolute', 'top' :  (e.pageY -50) + 'px', 'left' : (e.pageX-50) + 'px'});
+		note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
 			   
 		header.html(data.note.header);
 			    
@@ -96,12 +110,33 @@ function create_note(e) {
 		note.append(header);
 		$(e.target).append(note);
 		edit_note_header(header);
-				    
+		$("#toolbox_container").trigger("update");
 	    }
-	});
+    });
 };
+//Uppdaterar endast positionen än så länge.
+function update_note(note, note_data, ui){
+	var note_data = {}
+	note_data["position_x"] = ui.position.left;
+	note_data["position_y"] = ui.position.top;
+	id = note.id8Up();
+	$.ajax({ url: '/notes/' + id, 
+	type: 'PUT', 
+	data: {
+		note:note_data
+	},
+		success: function(data, textStatus, jqXHR) {
+
+		}
+	});	
+}
 
 function attach_handlers(note, note_data) {
+    note.draggable({
+		stop: function(event, ui) {
+			update_note(note, note_data, ui)
+			}
+	});
     note.dblclick(function (e){
 	    note_box(e);
 	});

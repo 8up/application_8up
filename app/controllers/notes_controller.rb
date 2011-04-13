@@ -12,12 +12,14 @@ class NotesController < ApplicationController
 
   # GET /notes/1
   # GET /notes/1.xml
+  # GET /notes/1.json
   def show
     @note = Note.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @note }
+      format.json { render :json => @note }
     end
   end
 

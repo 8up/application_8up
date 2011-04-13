@@ -1,82 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Application8up</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all %>
-  <%= csrf_meta_tag %>
+	<title>Application8up</title>
+	<%= stylesheet_link_tag :all %>
+	<%= javascript_include_tag :all %>
+	<%= csrf_meta_tag %>
 </head>
 <body>  
-  <div id="toolbox_container">    
-    <div ID="toolbox_area_1" style="margin-top:-8px; margin-left:-8px">
-      <a href="#"><p class="toolbox_button_delete">Delete</p></a>
-      <a href="#"><p class="toolbox_button_invite">Invite</p></a>
+	<div id="toolbox_container">    
+		<div ID="toolbox_area_1" style="margin-top:-8px; margin-left:-8px">
+			<a href="#"><p class="toolbox_button_delete">Delete</p></a>
+			<a href="#"><p class="toolbox_button_invite">Invite</p></a>
 
-      <div ID="toolbox_text_container">
-        <div ID="toolbox_text_1">
-          <h3 id=toolbox_board_name>Name</h3>
-        </div>
-        <div Id="toolbox_text_2">
-          <div id=toolbox_info_name></div>
-          <div id=toolbox_info_created></div>
-          <div id=toolbox_info_updated></div>
-          <div id=toolbox_info_owner></div>
-        </div>
+			<div ID="toolbox_text_container">
+				<div ID="toolbox_text_1">
+					<h3 id=toolbox_header_name>Name</h3>
+				</div>
+				<div Id="toolbox_text_2">
+					<div id=toolbox_info_name></div>
+					<div id=toolbox_info_created></div>
+					<div id=toolbox_info_updated></div>
+					<div id=toolbox_info_owner></div>
+				</div>
       </div>
-      
-	<div><table cellpadding="10" cellspacing="9" align="middle">
-<tr>
-<th colspan="3">Choose Color:</th>
-</tr>
-<tr>
-<td bgcolor="green" id = 'green'></td>
-<td bgcolor="blue" id = 'blue'></td>
-<td bgcolor="yellow" id = 'yellow'></td>
-</tr>
-<tr>
-<td bgcolor="red" id = 'red'></td>
-<td bgcolor="orange" id = 'orange'></td>
-<td bgcolor="pink" id = 'pink'></td>
-</tr>
-<tr>
-<td bgcolor="DarkGoldenrod" id = 'DarkGoldenrod'></td>
-<td bgcolor="aqua" id = 'aqua'></td>
-<td bgcolor="plum" id = 'plum'></td>
+			<div ID="color_change_table">
+        <table id = "split_button_table">
+          <tr>
+            <th colspan="3">SPLIT</th>
+          </tr>
+          <tr>
+            <td><img src="/images/button_h.png" id = "split_vert" width="50px" height="50px"></td>
+            <td><img src="/images/button_v.png" id = "split_horiz" width="50px" height="50px"></td>
+          </tr>
+        </table>
+        <table cellpadding="10" cellspacing="6" align="middle">
+				<tr>
+					<th colspan="3">Choose Color:</th>
+				</tr>
+				<tr>
+					<td bgcolor="green" id = 'green'></td>
+					<td bgcolor="blue" id = 'blue'></td>
+					<td bgcolor="yellow" id = 'yellow'></td>
+				</tr>
+				<tr>
+					<td bgcolor="red" id = 'red'></td>
+					<td bgcolor="orange" id = 'orange'></td>
+					<td bgcolor="pink" id = 'pink'></td>
+				</tr>
 
 
-</table> 
 
-</div>      
-      
-    </div>
-  
-    <div ID="toolbox_area_2" style="margin-top:-8px; margin-left:-8px">
-	<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
-	top: 50%;" height="30px" width="30px" />
+			</table> 
+
+		</div>      
+
+	</div>
+
+	<div ID="toolbox_area_2" style="margin-top:-8px; margin-left:-8px">
+		<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
+		top: 50%;" height="30px" width="30px" />
+	</div>
+
+
 </div>
-
-
-  </div>
 
 <div id="content">    
 	<%= yield %>  
 </div>
 <div id="menu_bar">
 	<ul>
-    <li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
-    <li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
-    <li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
+		<li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
+		<li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
+		<li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
 	</ul>
 </div>
 <div id="create_new_board_button">  
-  <a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" id="add_button_background" width="150%" height="110%"></a>
+	<a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" id="add_button_background" width="150%" height="110%"></a>
 </div>
-			<div id="in_focus_image" class="window">
-				<h1><div id=note_header contenteditable=true></div></h1>
-				<div id=note_body contenteditable=true></div>
-			</div>
-			
-		<div id="black_background" class="background"</div>
+<div id="in_focus_image" class="window">
+	<h1><div id=note_header contenteditable=true></div></h1>
+	<div id=note_body contenteditable=true></div>
+</div>
+
+<div id="black_background" class="background"</div>
 
 </body>
 </html>

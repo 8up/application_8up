@@ -1,3 +1,19 @@
+#split_horiz {
+opacity:0.5;
+}
+
+#split_horiz:hover {
+opacity:1;
+}
+
+#split_vert {
+opacity:0.5;
+}
+
+#split_vert:hover {
+opacity:1;
+}
+
 #menu_bar {
   position: fixed;
   top: -10px;
@@ -41,19 +57,24 @@ height:50px;
 }
 
 #toolbox_container { 
+z-index:255;
 float:left; 
 position:fixed; 
 height: 100%; 
 }
 
 #content { 
-  margin-left:30px; 
+  margin-left:50px; 
   margin-right:30px; 
-  float:left; 
+  float:left;
 }
   
-#boards_container { 
+  
+#boards_container {
+  margin-left:31px;
   list-style: none; 
+  height:100%;
+  margin-top:0px;
 }  
 
 #boards_container li {
@@ -121,12 +142,11 @@ background-image: url('/images/panel.png');
 }
 
 #toolbox_text_container {
-top:50%;
-left:20px;
+left:2%;
 width:150px;
-height:250px;
 background-color:white;
 border-style:solid;
+position:absolute;
 }
 #toolbox_text_1 {
 background-color:white;
@@ -135,13 +155,27 @@ border-style:solid;
 }
 #toolbox_text_2 {
 background-color:white;
-height:100;
+
 }
-div.selected {
+#color_change_table{
+	position:absolute;
+	bottom: 5%;
+	left: 5%;
+}
+
+#workspace{
+	position:absolute;
+	height:100%;
+	width:100%;
+  left: 0px;
+  bottom: 0px;
+}
+
+.selected {
     -moz-box-shadow: 3px 3px 4px #000;
     /* -webkit-box-shadow: 3px 3px 3px 4px #000;
      */
-    box-shadow: 0px 0px 5px 3px #000;
+    box-shadow: 0px 0px 5px 3px #447;
     /* For IE 8 */
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
     /* For IE 5.5 - 7 */
