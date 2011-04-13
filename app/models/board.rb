@@ -43,6 +43,30 @@ class Board < ActiveRecord::Base
     return fields_map
   end
 
+  ## Tanken är att följande map kommer kunna tala om vilka grannar ett field har
+  ## {field_id => {:east => [field_ids], :north => [field_ids], :west => [], :south =>}}
+  def get_field_neighbours
+    neighbours_map = {}
+    self.fields.each do |field|
+      neighbours_map[field.id] = {:east => [], :west => [], 
+        :north => [], :south => []}
+      self.fields.each do |field_2|
+        # Hoppa över att jämföra oss med oss själva
+        if field == field_2
+          next
+        end
+        
+        direction = field.where_is_neighbour(field_2)
+        if direction
+          neighbours_map[field.id][direction] << field_2.id
+        end
+         
+      end
+    end
+    
+    return neighbours_map
+  end
+
   def create_field
     if self.in_trash == nil
       self.in_trash = false
