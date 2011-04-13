@@ -20,7 +20,7 @@ $(document).ready(
 							type: 'GET',
 							success: function(data, textStatus, jqXHR){
 								if((data.note.header).length > 8){
-									toolbox_note_name.text((data.note.header).substring(8,0) + "...");
+									toolbox_note_name.text((data.note.header).substring(7,0) + "...");
 								} else {
 									toolbox_note_name.text(data.note.header);          
 								}
@@ -49,8 +49,8 @@ $(document).ready(
 					toolbox_note_name.text($(".selected").length + " notes  selected");
 					//Loop-funktion för att hämta ut namnen på de markerade objekten.
 					toolbox_note_info_name.text($(".selected").each(function(){
-						if(($(this).text().trim()).length > 13){
-							toolbox_note_info_name.append(($(this).text()).substring(13,0) + "..." + "<br>")
+						if(($(this).text().trim()).length > 11){
+							toolbox_note_info_name.append(($(this).text().trim()).substring(10,0) + "..." + "<br>")
 						} else {
 							toolbox_note_info_name.append($(this).text() + "<br>");
 						}
