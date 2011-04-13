@@ -1,6 +1,5 @@
 $(document).ready(
   function(){
-    //Update mattafakka!
     $("#toolbox_container").bind('update',function(){
       //Eftersom någon har ändrat
       //Variabler för olika textfält i toolbox.
@@ -85,6 +84,6 @@ toolbox_info_updated.text(" ");
 toolbox_info_owner.text(" ");
 }
 
-	})
-		
-	});
+})
+
+});
