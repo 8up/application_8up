@@ -7,6 +7,7 @@ div.note {
     word-wrap: break-word;
     overflow:hidden;
     box-shadow: 4px 4px 4px #8e8e8e;
+    z-index:125;
 }
 
 div.note h1,form {
@@ -22,7 +23,7 @@ div.note h1,form {
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 0;
+    z-index: 126;
     opacity:.80;
 
 }
@@ -33,7 +34,7 @@ div.note h1,form {
     left: 25%;
     width: 500px;
     height: 400px;
-    z-index: 1;
+    z-index: 127;
     overflow: auto;
     background-image: url('/images/post_it_big.png');
     -webkit-background-size: cover;
