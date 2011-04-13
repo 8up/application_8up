@@ -89,4 +89,13 @@ class BoardsController < ApplicationController
       end
     end
   end
+
+  def split_field
+    @board = Board.find(params[:board_id])
+    @field = Field.find(params[:field_id])
+
+    respond_to do |format|
+      format.json { render :json => {:status => "ok"}}
+    end
+  end
 end
