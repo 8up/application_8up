@@ -127,7 +127,7 @@ class BoardsController < ApplicationController
 
       #Sätt attribut för det nya fältet efter horisontell split
       attributes[:height] = new_height
-      attributes[:width] = field.width
+      attributes[:width] = @field.width
       attributes[:position_x] = @field.position_x
       attributes[:position_y] = @field.position_y + new_height
       
@@ -142,8 +142,10 @@ class BoardsController < ApplicationController
     new_field =Field.create(attributes)
     new_field.notes = array_notes_to_add
 
-    respond_to do |format|
-      format.json { render :json => new_field }
+    if @field.save and new_field.save
+      respond_to do |format|
+        format.json { render :json => new_field }
+      end
     end
   end
 end
