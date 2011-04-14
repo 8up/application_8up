@@ -48,6 +48,8 @@ function find_split(split_vertically) {
 };
 
 function split_field_horizontally(e, field) {
+    var board_id =field.closest(".board_div").id8Up(); 
+    var field_id = field.id8Up();                         ;
     var new_height = field.height()/2;
     var new_field = field.clone();
     new_field.html(''); //radera innehållet i klonen
@@ -57,9 +59,15 @@ function split_field_horizontally(e, field) {
     field.height(new_height);
 
     field.after(new_field);
+    $.ajax({url: "/boards/" + board_id  + 
+		"/split_field/" +  field_id , type:"POST", 
+		data:{split_direction : "horizontical"} , success: function(data) {
+		new_field.attr("id", "field_" + data.field.id) } })
 }
 
 function split_field_vertically(e, field) {
+    var board_id =field.parent().id8Up(); 
+    var field_id = field.id8Up();
     var new_width = field.width()/2;
     var new_field = field.clone();
     new_field.html(''); //radera innehållet i klonen
@@ -69,4 +77,6 @@ function split_field_vertically(e, field) {
     field.width(new_width);
 
     field.after(new_field);
+    $.ajax({url: "/boards/" +  board_id  + "/split_field/" +  field_id , type:"POST", data:{split_direction : "vertical"}, success: function(data) {
+		new_field.attr("id", "field_" + data.field.id) }})
 };

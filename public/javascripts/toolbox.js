@@ -1,5 +1,13 @@
 $(document).ready(
   function(){
+	$("#split_horiz").click(function(){
+		find_split(split_vertically = false);
+	});
+
+	$("#split_vert").click(function(){
+		find_split(split_vertically = true);
+	});
+	
     $("#toolbox_container").bind('update',function(){
       //Eftersom någon har ändrat
       //Variabler för olika textfält i toolbox.

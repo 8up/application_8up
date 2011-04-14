@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
@@ -93,9 +94,58 @@ class BoardsController < ApplicationController
   def split_field
     @board = Board.find(params[:board_id])
     @field = Field.find(params[:field_id])
+    attributes = {};
+    array_notes_to_add = [];
+    attributes[:board_id] = @field.board_id
 
-    respond_to do |format|
-      format.json { render :json => {:status => "ok"}}
+    if params[:split_direction] == "vertical"
+      #Dela fältet vertikalt
+      new_width = @field.width/2
+      @field.width = new_width
+
+      #Sätt attribut för det nya fältet efter vertikal split
+      attributes[:width] = new_width
+      attributes[:height] = @field.height
+      attributes[:position_x] = @field.position_x + new_width
+      attributes[:position_y] = @field.position_y
+
+      @field.notes.each do |note|
+        pos_x = note.position_x
+        if pos_x >= new_width
+          note.position_x -= new_width ## måste subtrahera bredden 
+          #eftersom x-positionen är relativ till fieldets x-position
+          
+          array_notes_to_add << note
+        end
+      end
+
+      
+    else
+      #Dela fältet horisontellt
+      new_height = @field.height/2
+      @field.height = new_height
+
+      #Sätt attribut för det nya fältet efter horisontell split
+      attributes[:height] = new_height
+      attributes[:width] = @field.width
+      attributes[:position_x] = @field.position_x
+      attributes[:position_y] = @field.position_y + new_height
+      
+      @field.notes.each do |note|
+        pos_y = note.position_y
+        if pos_y >= new_height
+          note.position_y -= new_height
+          array_notes_to_add << note
+        end
+      end
+    end
+    new_field =Field.create(attributes)
+    new_field.notes = array_notes_to_add
+
+    if @field.save and new_field.save
+      respond_to do |format|
+        format.json { render :json => new_field }
+      end
     end
   end
 end
