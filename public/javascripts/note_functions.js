@@ -32,12 +32,7 @@ $(document).ready(function () {
 		edit_note_header(e.target);
 	});
   
-  $(".note").draggable(	{
-		stop: function(event, ui) {
-			//Få tag i note och note_data?
-			update_note($(this), $(this).data, ui)
-			}
-	});
+  $(".note").draggable();
       
 });
 
@@ -114,29 +109,9 @@ function create_note(e) {
 	    }
     });
 };
-//Uppdaterar endast positionen än så länge.
-function update_note(note, note_data, ui){
-	var note_data = {}
-	note_data["position_x"] = ui.position.left;
-	note_data["position_y"] = ui.position.top;
-	id = note.id8Up();
-	$.ajax({ url: '/notes/' + id, 
-	type: 'PUT', 
-	data: {
-		note:note_data
-	},
-		success: function(data, textStatus, jqXHR) {
-
-		}
-	});	
-}
 
 function attach_handlers(note, note_data) {
-    note.draggable({
-		stop: function(event, ui) {
-			update_note(note, note_data, ui)
-			}
-	});
+    note.draggable();
     note.dblclick(function (e){
 	    note_box(e);
 	});
