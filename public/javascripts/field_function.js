@@ -27,13 +27,14 @@ function update(event, ui, field_id){
 
 	var start_left = ui.draggable.data('startLeft');
 	var start_top = ui.draggable.data('startTop');
-	var	dest_left =	dest_field.position().left;
-	var dest_top = dest_field.position().top;
-	var src_left = src_field.position().left;
-	var src_top = src_field.position().top;
+	var	dest_left =	dest_field.offset().left;
+	var dest_top = dest_field.offset().top;
+	var src_left = src_field.offset().left;
+	var src_top = src_field.offset().top;
 	
 	note_data["position_x"] = (src_left + start_left) + diff_left - dest_left;
 	note_data["position_y"] = (src_top + start_top) + diff_top - dest_top;
+	
 	note_data["field_id"] = field_id;
  	id = ui.helper.context.id.split('_').pop();
 	$.ajax({ url: '/notes/' + id + '.json', 
