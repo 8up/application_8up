@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+	$(".field").resizable();
 	$(".field").droppable({
 		drop: function(event, ui){
 			update(event,ui, this.id.split('_').pop());
@@ -38,4 +38,11 @@ function update(event, ui, field_id){
 			update_note(data);
 		}
 	});	
+}
+
+// Nya fields kommer köra denna funktion för att atacha 
+//hanterare till events, lägg till dem här
+function attach_field_handlers(field) {
+    field.resizable();
+    
 }

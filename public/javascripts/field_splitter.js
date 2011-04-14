@@ -34,12 +34,22 @@ function do_split(e) {
 	new_field.offset({top: new_height}); //adderar positionen till det nya fältet
     }
 
-    field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
+   
 
+    field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
+    attach_field_handlers(new_field); //lägg till hanterare till det nya fältet
+    
     $.ajax({url: "/boards/" + board_id  + 
 		"/split_field/" +  field_id , type:"POST", 
-		data:{split_direction : direction} , success: function(data) {
-		new_field.attr("id", "field_" + data.field.id) } });
+		data:{split_direction : direction} , 
+		success: function(data) {
+		new_field.attr("id", "field_" + data.field.id) 
+		    // Här kommer vi måsta lägga in kod för att 
+		    // flytta notes från det gamla fältet till det nya
+		    } 
+	});
+
+    
 
     reset_split(); //återställ
 };
