@@ -5,7 +5,7 @@ $(document).ready(function () {
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
         var board_id = $(domElement).data('board_id').split('_').pop();
-				var url_path =  "/boards/" + board_id + "/notes/" + note_id;
+				var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
   
         $.ajax({ url: url_path, 
 		    type: 'POST',
