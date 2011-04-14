@@ -29,11 +29,11 @@ $(document).ready(
 			select(e, this);
 		});
 		
-		$("#boards_container").click(function(e){
+		$("#cont").click(function(e){
 			de_select(e, this);
 		});
 		
-		$("#boards_container li").click(function(e){
+		$("#cont div").click(function(e){
 			select(e,this);
 		});
 	}
