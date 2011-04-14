@@ -32,12 +32,7 @@ $(document).ready(function () {
 		edit_note_header(e.target);
 	});
   
-  $(".note").draggable(	{
-		stop: function(event, ui) {
-			//Få tag i note och note_data?
-			update_note($(this), $(this).data, ui)
-			}
-	});
+  $(".note").draggable();
       
 });
 
@@ -114,29 +109,16 @@ function create_note(e) {
 	    }
     });
 };
-//Uppdaterar endast positionen än så länge.
-function update_note(note, note_data, ui){
-	var note_data = {}
-	note_data["position_x"] = ui.position.left;
-	note_data["position_y"] = ui.position.top;
-	id = note.id8Up();
-	$.ajax({ url: '/notes/' + id, 
-	type: 'PUT', 
-	data: {
-		note:note_data
-	},
-		success: function(data, textStatus, jqXHR) {
-
-		}
-	});	
-}
 
 function attach_handlers(note, note_data) {
     note.draggable({
-		stop: function(event, ui) {
-			update_note(note, note_data, ui)
-			}
-	});
+		start: function(event, ui){
+			note.data('startPageX', event.pageX);
+			note.data('startPageY', event.pageY);
+			note.data('startLeft', note.position().left);
+			note.data('startTop', note.position().top);
+		}
+});
     note.dblclick(function (e){
 	    note_box(e);
 	});
@@ -144,3 +126,11 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
+
+function update_note(data){
+//	alert("hej");
+	var note_id = "note_" + data.note.id;
+	var field_id = "field_" + data.note.field_id;
+	var temp = $('#' + note_id).detach();
+	$('#' + field_id).append(temp);
+}
