@@ -14,10 +14,7 @@ $(document).ready(function () {
         success: function(data, textStatus, jqXHR){
           $(domElement).css({'background': x});
             }});   
-    });
-    
-   // $('#note_header').wysiwyg();
-     
+    }); 
   });
   
 	$("div.field").dblclick(function(e){

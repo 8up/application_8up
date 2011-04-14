@@ -40,28 +40,13 @@ div.note h1,form {
     overflow: auto;
     background-image: url('/images/post_it_big.png');
     background-position: top left right bottom;
-    -webkit-background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    background-size: 100% 100%; 
+   /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
     background-repeat: no-repeat;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-right: 60px;
     padding-bottom: 100px;
-    padding-left: 35px;
-}
-.window #note_header {
-  height: 80px;
-  width: 470px;
-  margin-left: 15px;
-}
-.note_header_form {
-  height: 80px;
-  width: 498px;
-  overflow: hidden;
-}
-.window #note_body {
-  height: 80px;
-  width: 450px;
-  margin-left: 15px;
+    padding-left: 60px;
 }
