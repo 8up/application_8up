@@ -111,7 +111,14 @@ function create_note(e) {
 };
 
 function attach_handlers(note, note_data) {
-    note.draggable();
+    note.draggable({
+		start: function(event, ui){
+			note.data('startPageX', event.pageX);
+			note.data('startPageY', event.pageY);
+			note.data('startLeft', note.position().left);
+			note.data('startTop', note.position().top);
+		}
+});
     note.dblclick(function (e){
 	    note_box(e);
 	});
@@ -119,3 +126,11 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
+
+function update_note(data){
+//	alert("hej");
+	var note_id = "note_" + data.note.id;
+	var field_id = "field_" + data.note.field_id;
+	var temp = $('#' + note_id).detach();
+	$('#' + field_id).append(temp);
+}
