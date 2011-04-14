@@ -188,4 +188,18 @@ class BoardsController < ApplicationController
     end
 
   end
+
+  def resize_field
+    @field = Field.find params[:field_id]
+    @board = Board.find params[:board_id]
+    
+    neighbours_map = @board.get_field_neighbours
+    
+    neighbours = neighbours_map[@field.id]
+    
+
+    respond_to do |format|
+        format.json { render :json => neighbours }
+    end
+  end
 end
