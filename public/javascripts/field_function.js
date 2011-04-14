@@ -25,3 +25,9 @@ function update(ui, field_id){
 		}
 	});	
 }
+
+// Nya fields kommer köra denna funktion för att atacha 
+//hanterare till events, lägg till dem här
+function attach_field_handlers(field) {
+
+}
