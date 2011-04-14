@@ -37,7 +37,7 @@ function do_split(e) {
    
 
     field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
-    attach_field_handlers(field); //lägg till hanterare till det nya fältet
+    attach_field_handlers(new_field); //lägg till hanterare till det nya fältet
     
     $.ajax({url: "/boards/" + board_id  + 
 		"/split_field/" +  field_id , type:"POST", 
