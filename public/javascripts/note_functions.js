@@ -5,7 +5,7 @@ $(document).ready(function () {
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
         var board_id = $(domElement).data('board_id').split('_').pop();
-				var url_path =  "/boards/" + board_id + "/notes/" + note_id;
+				var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
   
         $.ajax({ url: url_path, 
 		    type: 'POST',
@@ -32,11 +32,13 @@ $(document).ready(function () {
 		edit_note_header(e.target);
 	});
   
-  $(".note").draggable(	{
-		stop: function(event, ui) {
-			//Få tag i note och note_data?
-			update_note($(this), $(this).data, ui)
-			}
+  $(".note").draggable({
+		start: function(event, ui){
+			$(this).data('startPageX', event.pageX);
+			$(this).data('startPageY', event.pageY);
+			$(this).data('startLeft', $(this).position().left);
+			$(this).data('startTop', $(this).position().top);
+		}
 	});
       
 });
@@ -114,29 +116,16 @@ function create_note(e) {
 	    }
     });
 };
-//Uppdaterar endast positionen än så länge.
-function update_note(note, note_data, ui){
-	var note_data = {}
-	note_data["position_x"] = ui.position.left;
-	note_data["position_y"] = ui.position.top;
-	id = note.id8Up();
-	$.ajax({ url: '/notes/' + id, 
-	type: 'PUT', 
-	data: {
-		note:note_data
-	},
-		success: function(data, textStatus, jqXHR) {
-
-		}
-	});	
-}
 
 function attach_handlers(note, note_data) {
     note.draggable({
-		stop: function(event, ui) {
-			update_note(note, note_data, ui)
-			}
-	});
+		start: function(event, ui){
+			note.data('startPageX', event.pageX);
+			note.data('startPageY', event.pageY);
+			note.data('startLeft', note.position().left);
+			note.data('startTop', note.position().top);
+		}
+});
     note.dblclick(function (e){
 	    note_box(e);
 	});
@@ -144,3 +133,13 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
+
+function update_note(data){
+//	alert("hej");
+	var note_id = "note_" + data.note.id;
+	var field_id = "field_" + data.note.field_id;
+	var note = $('#' + note_id).detach();
+	$('#' + field_id).append(note);
+	note.css("left", data.note.position_x).css("top", data.note.position_y);
+	
+}

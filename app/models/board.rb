@@ -66,6 +66,13 @@ class Board < ActiveRecord::Base
     
     return neighbours_map
   end
+  
+  def get_neighbours(field_id)
+    all_fields_map = self.get_field_neighbours  
+    neighbours_map = all_fields_map[field_id]
+    return neighbours_map
+  end
+  
 
   def create_field
     if self.in_trash == nil

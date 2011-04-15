@@ -24,6 +24,11 @@ Application8up::Application.routes.draw do
   
   match "/boards/:board_id/split_field/:field_id", :controller => "boards", :action => "split_field", :via => "post"
 
+  match "/boards/:board_id/merge_fields/:field_id", :controller => "boards", :action => "merge_fields", :via => "post"
+
+  match "/boards/:board_id/resize_field/:field_id", :controller => "boards", :action => "resize_field", :via => "post"
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
