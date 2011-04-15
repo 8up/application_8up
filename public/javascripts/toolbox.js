@@ -1,12 +1,45 @@
 $(document).ready(
   function(){
+      //Atach a handler for when the user presses the split horizontaly button
 	$("#split_horiz").click(function(){
-		find_split(split_vertically = false);
-	});
+		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den horizontellt
+		if ($("#split_button_table").data("split_direction") == "none" || 
+		    $("#split_button_table").data("split_direction") == "vertical") 
+		    {
+			//Vi använder en klass för att styla knappen som nedtryckt
+			$("#split_horiz").addClass("depressed"); 
+			$("#split_button_table").data("split_direction", 
+						      "horizontal"); 
+			set_split();
+		    }
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_button_table").data("split_direction") 
+			 == "horizontal") {
+		    reset_split();
+		}
+		//Annars gör vi inget
+	    });
 
 	$("#split_vert").click(function(){
-		find_split(split_vertically = true);
-	});
+//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den horizontellt
+		if ($("#split_button_table").data("split_direction") == "none" || 
+		    $("#split_button_table").data("split_direction") == "horizontal") 
+		    {
+			//Vi använder en klass för att styla knappen som nedtryckt
+			$("#split_vert").addClass("depressed"); 
+			$("#split_button_table").data("split_direction", 
+						      "vertical"); 
+			set_split();
+		    }
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_button_table").data("split_direction") 
+			 == "vertical") {
+		    reset_split();
+		}
+		//Annars gör vi inget
+	    });
 	
     $("#toolbox_container").bind('update',function(){
       //Eftersom någon har ändrat

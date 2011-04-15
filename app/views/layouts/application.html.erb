@@ -8,7 +8,8 @@
 </head>
 <body>  
 	<div id="toolbox_container">    
-		<div ID="toolbox_area_1" style="margin-top:-8px; margin-left:-8px">
+		<div ID="toolbox_area_1">
+
 			<a href="#"><p class="toolbox_button_delete">Delete</p></a>
 			<a href="#"><p class="toolbox_button_invite">Invite</p></a>
 
@@ -56,7 +57,7 @@
 
 	</div>
 
-	<div ID="toolbox_area_2" style="margin-top:-8px; margin-left:-8px">
+	<div ID="toolbox_area_2">
 		<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
 		top: 50%;" height="30px" width="30px" />
 	</div>
@@ -77,12 +78,20 @@
 <div id="create_new_board_button">  
 	<a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" id="add_button_background" width="150%" height="110%"></a>
 </div>
-<div id="in_focus_image" class="window">
-	<h1><div id=note_header contenteditable=true></div></h1>
-	<div id=note_body contenteditable=true></div>
-</div>
 
-<div id="black_background" class="background"</div>
+<div id="window_wrapper">
+	
+	
+	<div id="in_focus_image" class="window" unselectable="on">
+		<div id="note_editor_panel_wrapper"><div id="note_editor_panel"></div></div>
+		<div id="note_body"></div>
+	</div>
+	
+</div>
+<div id="black_background" class="background"></div>
+
+
+
 
 </body>
 </html>
