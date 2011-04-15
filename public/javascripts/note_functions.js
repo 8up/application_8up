@@ -119,3 +119,11 @@ function attach_handlers(note, note_data) {
 	    select(e, this);
 	}); 
 };
+function update_note(data){
+  var field_id = ("#field_" + data.note.field_id);
+  var note_id = ("#note_" + data.note.id);
+  alert(field_id);
+  //$("note"+field_id).detach();
+  $("note_id").instertAfter("field_id");  
+
+};

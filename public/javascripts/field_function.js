@@ -15,13 +15,13 @@ function update(ui, field_id){
 	note_data["position_y"] = ui.offset.top;
 	note_data["field_id"] = field_id;
  	id = ui.helper.context.id.split('_').pop();
-	$.ajax({ url: '/notes/' + id, 
+	$.ajax({ url: '/notes/' + id + ".json", 
 	type: 'PUT', 
 	data: {
 		note:note_data
 	},
-		success: function(data, textStatus, jqXHR) {
-
+  success: function(data, textStatus, jqXHR) {
+    update_note(data);
 		}
 	});	
 }
