@@ -138,6 +138,54 @@ class Board < ActiveRecord::Base
     
     return new_field
   end
+
+  def merge_fields(field1, field2)
+    neighbours = get_neighbours(field1.id)
+    
+    if neighbours[:west].member? field2.id
+      field_to_enlarge = field2
+      field_to_delete = field1
+      direction = :horizontal
+    elsif neighbours[:north].member? field2.id
+      field_to_enlarge = field2
+      field_to_delete = field1
+      direction = :vertical
+    elsif neighbours[:east].member? field2.id
+      field_to_enlarge = field1
+      field_to_delete = field2
+      direction = :horizontal
+    elsif neighbours[:south].member? field2.id
+      field_to_enlarge = field1
+      field_to_delete = field2
+      direction = :vertical
+    else 
+      return nil
+    end
+    
+    new_height = field_to_enlarge.height + field_to_delete.height
+    new_width = field_to_enlarge.width + field_to_delete.width 
+
+    if direction == :horizontal
+        field_to_delete.notes.each do |note|
+          new_note_position = field_to_enlarge.width + note.position_x
+          note.position_x = new_note_position          
+          field_to_enlarge.notes << note
+        end
+        field_to_enlarge.width = new_width 
+    elsif direction == :vertical
+        field_to_delete.notes.each do |note|
+          new_note_position = field_to_enlarge.height + note.position_y
+          note.position_y = new_note_position           
+          field_to_enlarge.notes << note
+        end
+        field_to_enlarge.height = new_height        
+    end
+    
+    field_to_enlarge.save
+    field_to_delete.destroy
+
+    return field_to_enlarge
+  end
     
   def empty_trashcan
     trashcan.each do |note|

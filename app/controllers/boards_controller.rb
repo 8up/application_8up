@@ -106,40 +106,13 @@ class BoardsController < ApplicationController
 
   def merge_fields
     @board = Board.find(params[:board_id])
-    @field_to_enlarge = Field.find(params[:field_to_enlarge])
-    @field_to_delete = Field.find(params[:field_to_delete])
+    field_to_enlarge = Field.find(params[:field_to_enlarge])
+    field_to_delete = Field.find(params[:field_to_delete])
     
-    attributes = {};
-    
-    new_height = @field_to_enlarge.height + @field_to_delete.height
-    new_width = @field_to_enlarge.width + @field_to_delete.width 
-
-    if params[:merge_direction] == "width"
-        @field_to_delete.notes.each do |note|
-          new_note_position = @field_to_enlarge.width + note.position_x
-          note.position_x = new_note_position          
-          @field_to_enlarge.notes << note
-        end
-        @field_to_enlarge.width = new_width 
-    end
-
-    if params[:merge_direction] == "height"
-        @field_to_delete.notes.each do |note|
-          new_note_position = @field_to_enlarge.height + note.position_y
-          note.position_y = new_note_position           
-          @field_to_enlarge.notes << note
-        end
-        @field_to_enlarge.height = new_height        
-    end
-
-    attributes[:height] = new_height
-    attributes[:width] = new_width
-    @field_to_enlarge.update_attributes(attributes)
-    
-    Field.delete(params[:field_to_delete])
+    remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
 
     respond_to do |format|
-        format.json { render :json => @field_to_enlarge }
+      format.json { render :json => remaining_field }
     end
 
   end
