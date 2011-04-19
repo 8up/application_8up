@@ -186,6 +186,137 @@ class Board < ActiveRecord::Base
 
     return field_to_enlarge
   end
+
+  ## Ändra storlek på ett fält. Resize params är en hash-map med nycklarna
+  ## :direction och :delta. Delta är värdet baserat på vilken positionsförändring
+  ## en resize orsakar, dvs upp på skärmen ger ett negativt y-värde, 
+  ## nedåt ett positivt. Förändring åt vänster ger ett negativt x-värde, åt höger
+  ## ett positivt
+  def resize_field(field, resize_params)
+    resize_map = build_resize_map(field, resize_params)
+    delta = resize_params[:delta]
+    direction = resize_params[:direction]
+
+    ## ändra storlek på alla fält som är på samma sida som orginalfältet
+    for field_id in resize_map[:original_side] 
+      f = Field.find field_id
+      if direction ==  :north
+        ## ändra position_y samt heigh
+        f.height -= delta
+        f.position_y += delta
+      elsif direction == :south
+        f.height += delta
+      elsif direction == :east
+        f.width += delta
+      elsif direction == :west
+        f.width -= delta
+        f.position_x += delta
+      end
+      f.save
+    end
+
+    ## ändra storlek på de fält som är på motsatt sida om delnings-linjen som
+    ## orginalfältet
+    for field_id in resize_map[:other_side]
+      f = Field.find field_id
+      if direction ==  :north
+        f.height += delta
+      elsif direction == :south
+        f.position_y += delta
+        f.height -= delta
+      elsif direction == :east
+        f.position_x += delta
+        f.width -= delta
+      elsif direction == :west
+        f.width += delta
+      end
+      f.save
+    end
+    
+    self.save
+    self.fields.reload
+    return resize_map
+  end
+  
+  ## Bygger upp den hash-map som används för att ändra storlek på fält
+  def build_resize_map(field, resize_params)
+    require 'set'
+
+    neighbours_map = self.get_field_neighbours
+    
+    ## Direction är den rikting storleksförändringen sker åt i förhållande
+    ## till orginal-fältet
+    direction = resize_params[:direction]
+
+    ## reverse direction är den omvända riktingen för fält på andra sidan den 
+    ## delning som flyttas på
+    reverse_direction = nil
+    if direction ==  :north
+      reverse_direction = :south
+    elsif direction == :east
+      reverse_direction = :west
+    elsif direction == :south
+      reverse_direction = :north
+    elsif direction == :west
+      reverse_direction = :east
+    end
+
+    
+    ## Två maps som används i algoritmen, original side är den side vi börjar på,
+    ## dvs den sida som orginal-fältet är på
+    ## Other side är andra sidan
+    ## to_resize_map samlar på sig de fält som skall förstoras/förminskas
+    ## to_visit håller reda på vilka fält som skall undersökas en iteration
+    ## visited är en mängd med redan besökta fält
+    to_resize_map = {:original_side => Set.new, :other_side => Set.new}
+    to_visit = Set.new
+    visited = Set.new
+
+    ## Vi börjar initiera genom att gå igenom orginal-fältets grannar i 
+    ## Den riktning som skall resizeas och lägger in dem i to_visit-mängden
+    for other_field in neighbours_map[field.id][direction]
+      ## Lägg bara till de fält vi ännu inte undersökt
+      to_visit << other_field
+    end
+
+    visited << field.id
+    to_resize_map[:original_side] << field.id
+
+    ## Vi sätter variablerna som håller reda på vilken sida vi är på
+    current_side = :other_side
+    current_direction = reverse_direction
+    
+    while to_visit.length > 0
+      to_visit_on_other_side = Set.new
+
+      for current_field in to_visit
+        ## Vi kollar grannarna på motsatt sida om de redan undersökts,
+        ## annars läggs de till i den nya to_visit-mängden
+        for neighbour in neighbours_map[current_field][current_direction]
+          ## vi lägger bara till fältet om vi inte redan besökt det
+          if not visited.member? neighbour
+            to_visit_on_other_side << neighbour
+          end
+        end
+        
+        to_resize_map[current_side] << current_field
+        visited << current_field
+      end
+
+      ## uppdatera to_visit för nästa varv i loopen
+      to_visit = to_visit_on_other_side
+
+      ## byt riktning med ternary if-sats
+      current_direction = (current_direction == direction ? 
+                           reverse_direction : direction)
+      ## byt sida med ternary if
+      current_side = (current_side == :original_side ? 
+                      :other_side : :original_side)
+    end
+      
+    return to_resize_map
+  end
+    
     
   def empty_trashcan
     trashcan.each do |note|
