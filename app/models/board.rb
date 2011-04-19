@@ -194,8 +194,8 @@ class Board < ActiveRecord::Base
   ## ett positivt
   def resize_field(field, resize_params)
     resize_map = build_resize_map(field, resize_params)
-    delta = resize_params[:delta]
-    direction = resize_params[:direction]
+    delta = resize_params[:delta].to_i
+    direction = resize_params[:direction].to_sym
 
     ## ändra storlek på alla fält som är på samma sida som orginalfältet
     for field_id in resize_map[:original_side] 
@@ -246,7 +246,7 @@ class Board < ActiveRecord::Base
     
     ## Direction är den rikting storleksförändringen sker åt i förhållande
     ## till orginal-fältet
-    direction = resize_params[:direction]
+    direction = resize_params[:direction].to_sym
 
     ## reverse direction är den omvända riktingen för fält på andra sidan den 
     ## delning som flyttas på
