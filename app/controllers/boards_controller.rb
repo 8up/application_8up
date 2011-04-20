@@ -120,24 +120,12 @@ class BoardsController < ApplicationController
   def resize_field
     @field = Field.find params[:field_id]
     @board = Board.find params[:board_id]
-    delta = params[:delta]
+    resize_params = params[:resize_params]
 
-    neighbours_map = @board.get_field_neighbours
-    
-    neighbours = neighbours_map[@field.id]
-    
-    if params[:direction] == "north"
-      
-    elsif params[:direction] == "south"
-              
-    elsif params[:direction] == "west"
-                
-    elsif params[:direction] == "east"
-    
-    end
+    updated_fields = @board.resize_field(@field, resize_params)
 
     respond_to do |format|
-        format.json { render :json => neighbours }
+        format.json { render :json => updated_fields }
     end
   end
 end
