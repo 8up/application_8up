@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 class BoardsController < ApplicationController
+  #load_resource :find_by => :owner_id
+  #authorize_resource
+  
+  
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all
+    
+    @boards = Board.find(:all, :conditions => {:owner_id => current_user.id})
+    #authorize! :show, @boards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,12 +17,16 @@ class BoardsController < ApplicationController
     end
   end
 
+  
+  
   # GET /boards/1
   # GET /boards/1.xml
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
-
+    
+    #authorize! :show, @board
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
