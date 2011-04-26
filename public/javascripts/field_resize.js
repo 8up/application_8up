@@ -25,18 +25,22 @@ function field_resize_handle(event) {
     //helpern när användaren rör musen 
     $(document).mousemove( helper_resize = function(event) {
 	    if (direction == "north") {
-	
+		resize_helper.offset({"top" : event.pageY});
+		
+		resize_helper.height(srcField.offset().top + 
+				    srcField.height() - event.pageY);
 	    }
 	    else if (direction == "west") {
 		resize_helper.offset({"left" : event.pageX});
 		
-		resize_helper.width(srcField.offset().left + srcField.width() - event.pageX);
+		resize_helper.width(srcField.offset().left + 
+				    srcField.width() - event.pageX);
 	    }
 	    else if (direction == "east"){
 		resize_helper.width(event.pageX - srcField.offset().left);
 	    }
 	    else if (direction == "south") {
-
+		resize_helper.height(event.pageY - srcField.offset().top);
 	    }
 	    
 	
