@@ -1,4 +1,6 @@
 Application8up::Application.routes.draw do
+  devise_for :users
+
   resources :fields
 
   resources :notes do
