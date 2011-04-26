@@ -69,6 +69,12 @@ div.board_div {
     width: 10px;
 }
 
+.resizable8up-helper { 
+    border: 2px dotted #00F; 
+    z-index: 100;
+}
+
+
 .resizable8up-handle {
     position: absolute;
     border-style: solid;
