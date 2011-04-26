@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$(".field").resizable({
+	/*	$(".field").resizable({
 		handles: 'n, e, s, w',		
 		grid: 5,
 		helper: "ui-resizable-helper",
@@ -8,7 +8,10 @@ $(document).ready(function () {
 		    stop: function(event, ui) {
 		    field_resize_stop(event,ui);
 		}
-	    });
+		});*/
+
+	$(".field").resize8up();
+
 	$(".field").droppable({
 		drop: function(event, ui){
 			update(event,ui, this.id.split('_').pop());
@@ -53,7 +56,7 @@ function update(event, ui, field_id){
 // Nya fields kommer köra denna funktion för att attach:a 
 //hanterare till events, lägg till dem här
 function attach_field_handlers(field) {
-    field.resizable({
+    /*    field.resizable({
 	    handles: 'n, e, s, w',
 		grid: 5,
 		helper: "ui-resizable-helper",
@@ -61,6 +64,8 @@ function attach_field_handlers(field) {
 		stop: function(event, ui) {
 		field_resize_stop(event,ui);
 	    } });
+    */
+    field.resize8up();
 };
 
 // Denna funktion är något av ett fulhack för att få 
