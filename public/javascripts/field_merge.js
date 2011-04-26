@@ -1,8 +1,8 @@
 $(document).ready(function(){
-  $(".resizable8up-handle").Click(function(e){
+  $(".resizable8up-handle").click(function(e){
     
-  }
-}  
+      });
+    });
 
 
 function field_merge(field_1, field_2, merge_direction)
