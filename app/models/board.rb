@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 class Board < ActiveRecord::Base
+  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
   has_many :fields
   after_initialize :create_field
   
