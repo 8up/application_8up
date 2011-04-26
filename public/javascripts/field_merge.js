@@ -1,8 +1,17 @@
 $(document).ready(function(){
-  $(".resizable8up-handle").click(function(e){
-    
-      });
-    });
+  $(".resizable8up-handle").Click(function(e){
+    field_1 = resizeable8up-handle.parent;
+    field_2 =  
+    var merge_direction;  
+    if resizeable8up-handle == resizeable8up-n || resizeable8up-handle == resizeable8up-s {
+    merge_direction = vertical;
+    }
+    if resizeable8up-handle == resizeable8up-w || resizeable8up-handle == resizeable8up-e {
+    merge_direction = horizontal;
+    }
+    field_merge(field_1, field_2, merge_direction);
+  }
+}  
 
 
 function field_merge(field_1, field_2, merge_direction)
