@@ -41,17 +41,37 @@ function field_resize_handle(event) {
 	    }
 	    else if (direction == "south") {
 		resize_helper.height(event.pageY - srcField.offset().top);
-	    }
-	    
-	
+	    }	
 	});
 
     // En eventhandler som lyssnar på mouseup, dvs när användaren avslutar 
     // drag-rörelsen
     $(document).mouseup(function(event) {
+	    resize_field(resize_helper, direction);
 	    resize_helper.remove();
 	    $(document).unbind("mousemove",helper_resize);
+	    return true;
 	});
      
     return direction;
-}
+};
+
+// Utför själva resizen på fältet som skall förstoras
+function resize_field(resize_helper, direction) {
+    var srcField = resize_helper.data("srcField");
+    var delta = 0;
+    if (direction == "south") {
+	delta = resize_helper.height() - srcField.height();
+	alert(delta);
+    }
+    else if (direction == "north") {
+    
+    }
+    else if (direction == "west") {
+
+    }
+    else if (direction == "east") {
+    
+    }
+
+};
