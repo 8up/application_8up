@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
-     var x = e.target.id;
+    $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
+     var x = $(e.target).attr('bgcolor');
     
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
