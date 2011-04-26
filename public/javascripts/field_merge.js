@@ -1,14 +1,72 @@
 $(document).ready(function(){
   $(".resizable8up-handle").Click(function(e){
-    field_1 = resizeable8up-handle.parent;
-    field_2 =  
+    var field_1 = resizeable8up-handle.parent();
+    var field_1_neighbours = field_1.data("neighbours");
+    var field_1_neighbours_n = field_1_neighbours["north"];
+    var field_1_neighbours_s = field_1_neighbours["south"];
+    var field_1_neighbours_w = field_1_neighbours["west"];
+    var field_1_neighbours_e = field_1_neighbours["east"];  
+    
+
+
+    
+    field_2 =
+
+
     var merge_direction;  
-    if resizeable8up-handle == resizeable8up-n || resizeable8up-handle == resizeable8up-s {
-    merge_direction = vertical;
+    if resizeable8up-handle.hasClass("resizeable8up-n") || resizeable8up-handle.hasClass("resizeable8up-s") {
+      merge_direction = vertical;
+      if(resizeable8up-handle.hasClass("resizeable8up-n")){
+        if(field_1_neighbours_n.length == 1){
+          field_2 = "field_" + field_1_neighbours_n;
+        }
+        else if(field_1_neighbours_n.length > 1) {
+          
+        }
+        else if {    
+          
+        }
+      }
+      else if {
+        if(field_1_neighbours_s.length == 1) {
+          field_2 = "field_" + field_1_neighbours_s;
+        }
+        else if(field_1_neighbours_s.length > 1) {
+          
+        }
+        else if
+      }
+        
     }
-    if resizeable8up-handle == resizeable8up-w || resizeable8up-handle == resizeable8up-e {
-    merge_direction = horizontal;
+
+      
     }
+    if resizeable8up-handle.hasClass("resizeable8up-w") || resizeable8up-handle.hasClass("resizeable8up-e") {
+      merge_direction = horizontal;
+      if(resizeable8up-handle.hasClass("resizeable8up-w")) {
+        if(field_1_neighbours_w.length == 1){
+          field_2 = "field_" + field_1_neighbours_w;
+        }
+        else if(field_1_neighbours_w.length > 1) {
+          
+        }
+        else if {
+
+        }
+      }
+      else if {
+        if(field_1_neighbours_e.length == 1) {
+          field_2 = "field_" + field_1_neighbours_e;
+        }
+        else if(field_1_neighbours_e.length > 1) {
+        
+        }
+        else if {
+
+        }
+      }  
+    }
+    
     field_merge(field_1, field_2, merge_direction);
   }
 }  
