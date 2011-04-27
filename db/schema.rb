@@ -14,10 +14,17 @@ ActiveRecord::Schema.define(:version => 20110427072937) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
-    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "in_trash"
+  end
+
+  create_table "boards_permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "board_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "contents", :force => true do |t|

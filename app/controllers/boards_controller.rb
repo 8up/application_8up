@@ -7,9 +7,7 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    
-    @boards = Board.find(:all, :conditions => {:owner_id => current_user.id})
-    #authorize! :show, @boards
+    @boards = current_user.boards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,12 +23,12 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     
-    #authorize! :show, @board
+    authorize! :show, @board
     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board }
+      format.json  { render :json => @board.to_json(:methods => [:owner_name])  }
     end
   end
 
@@ -54,7 +52,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
-    @board.owner = current_user
+    @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|
       if @board.save
@@ -137,5 +135,19 @@ class BoardsController < ApplicationController
     respond_to do |format|
         format.json { render :json => updated_fields }
     end
+  end
+  
+  def invite
+    @user = User.find params[:user_id]
+    @board = Board.find params[:board_id]
+    
+    authorize! :invite, @board
+    if    @board.set_permission(@user,BoardsPermission::PP)
+      render :json => {:status => 'ok'}
+    else
+      render :json => {:status => 'Could not invite'}
+    end
+    
+    
   end
 end

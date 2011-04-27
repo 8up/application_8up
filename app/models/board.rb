@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 class Board < ActiveRecord::Base
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
+  has_many :boards_permissions
+  has_one :owner, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::OWNER }
+  has_many :participants, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::PP}
   has_many :fields
   after_initialize :create_field
   
@@ -20,6 +22,10 @@ class Board < ActiveRecord::Base
   def recover_from_trash
     self.in_trash = false
     self.save
+  end
+  
+  def owner_name
+    owner.name
   end
   
   ## Returnerar en hashmap av hashmaps där den yttre har x-koordinater som
@@ -324,6 +330,14 @@ class Board < ActiveRecord::Base
       note.destroy
     end      
 
+  end
+  
+  def set_permission(user, permission)
+    boards_permission = BoardsPermission.new
+    boards_permission.user = user
+    boards_permission.role = permission
+    boards_permission.board = self
+    boards_permission.save
   end
 
 end
