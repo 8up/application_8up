@@ -5,7 +5,7 @@ class SetUpBoardsPermissions < ActiveRecord::Migration
       if board.owner_id == nil
         board.destroy
       else
-        boards_permissions = BoardsPermissions.new
+        boards_permissions = BoardsPermission.new
         boards_permissions.user = User.find board.owner_id
         boards_permissions.role = "Owner"
         boards_permissions.board = board
