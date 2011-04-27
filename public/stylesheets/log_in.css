@@ -8,3 +8,9 @@
 h2{
 	font-size: 30px;
 }
+
+#user_list_container {
+  margin-top: 10px;
+  position:absolute;  
+
+}
