@@ -1,15 +1,4 @@
 $(document).ready(function () {
-	/*	$(".field").resizable({
-		handles: 'n, e, s, w',		
-		grid: 5,
-		helper: "ui-resizable-helper",
-		    start: function(event,ui) { 
-		    resize_direction(event,ui) },
-		    stop: function(event, ui) {
-		    field_resize_stop(event,ui);
-		}
-		});*/
-
 	$(".field").resize8up();
 
 	$(".field").droppable({
@@ -32,7 +21,7 @@ function update(event, ui, field_id){
 
 	var start_left = ui.draggable.data('startLeft');
 	var start_top = ui.draggable.data('startTop');
-	var	dest_left =	dest_field.offset().left;
+	var dest_left = dest_field.offset().left;
 	var dest_top = dest_field.offset().top;
 	var src_left = src_field.offset().left;
 	var src_top = src_field.offset().top;
@@ -56,15 +45,6 @@ function update(event, ui, field_id){
 // Nya fields kommer köra denna funktion för att attach:a 
 //hanterare till events, lägg till dem här
 function attach_field_handlers(field) {
-    /*    field.resizable({
-	    handles: 'n, e, s, w',
-		grid: 5,
-		helper: "ui-resizable-helper",
-		start: resize_direction,
-		stop: function(event, ui) {
-		field_resize_stop(event,ui);
-	    } });
-    */
     field.resize8up();
 };
 
@@ -87,6 +67,25 @@ function resize_direction(event,ui) {
     }
 };
 
+//returnerar den riktning som en handle-event har utförts på genom
+// att helt enkelt kolla handtagets klass
+function field_handle_direction(handle) {
+    var direction = null;
+    
+    if ($(handle).hasClass("resizable8up-n")) {
+	    direction = "north";
+	}
+    else if ($(handle).hasClass("resizable8up-s")) {
+	    direction = "south";
+	}
+    else if ($(handle).hasClass("resizable8up-e")) {
+	    direction = "east";
+	}
+    else if ($(handle).hasClass("resizable8up-w")) {
+	    direction = "west";
+	}
+    return direction;
+};
 
 function field_resize_stop(event, ui) {
     var field = ui.element;

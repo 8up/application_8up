@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 class BoardsController < ApplicationController
+  #load_resource :find_by => :owner_id
+  #authorize_resource
+  
+  
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all
+    
+    @boards = Board.find(:all, :conditions => {:owner_id => current_user.id})
+    #authorize! :show, @boards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,12 +17,16 @@ class BoardsController < ApplicationController
     end
   end
 
+  
+  
   # GET /boards/1
   # GET /boards/1.xml
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
-
+    
+    #authorize! :show, @board
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
@@ -44,6 +54,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
+    @board.owner = current_user
 
     respond_to do |format|
       if @board.save
@@ -120,9 +131,8 @@ class BoardsController < ApplicationController
   def resize_field
     @field = Field.find params[:field_id]
     @board = Board.find params[:board_id]
-    resize_params = params[:resize_params]
 
-    updated_fields = @board.resize_field(@field, resize_params)
+    updated_fields = @board.resize_field(@field, params)
 
     respond_to do |format|
         format.json { render :json => updated_fields }

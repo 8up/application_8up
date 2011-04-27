@@ -69,6 +69,15 @@ div.board_div {
     width: 10px;
 }
 
+.resizable8up-helper { 
+ /*   border: 2px dotted #00F; */
+    -moz-box-shadow: inset 0 0 5px #888;
+    -webkit-box-shadow: inset 0 0 5px#888;
+    box-shadow: inner 0 0 5px #888;
+    z-index: 100;
+}
+
+
 .resizable8up-handle {
     position: absolute;
     border-style: solid;
