@@ -31,6 +31,9 @@ Application8up::Application.routes.draw do
 
   match "/boards/:board_id/resize_field/:field_id", :controller => "boards", :action => "resize_field", :via => "post"
 
+  match "/settings", :controller => "settings", :action => "index"
+
+
   root :to => "boards#index"
 
 end

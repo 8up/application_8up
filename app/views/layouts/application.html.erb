@@ -7,7 +7,7 @@
 	<%= csrf_meta_tag %>
 </head>
 <body>  
-	<div id="toolbox_container">    
+  <div id="toolbox_container"  <%= show_toolbox %>>    
 		<div ID="toolbox_area_1">
 
 			<a href="#"><p class="toolbox_button_delete">Delete</p></a>
@@ -83,8 +83,9 @@
 <div id="menu_bar">
 	<ul>
 		<li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
-		<li><a href="#" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
+		<li><a href="/settings" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
 		<li><a href="/users/sign_out" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
+    
 	</ul>
 </div>
 <div id="create_new_board_button">  
