@@ -9,7 +9,7 @@ $("#toolbox_button_users").click(function(){
               user_list.text(" ");
               var text;
               for(var i = 0; i < data.length; i++){
-               user_list.append(data[i].user.email + "<br>");
+               user_list.append(data[i].user.name + "<br>");
             }
 
             }
