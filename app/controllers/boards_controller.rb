@@ -54,6 +54,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
+    @board.owner = current_user
 
     respond_to do |format|
       if @board.save
