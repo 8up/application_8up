@@ -21,7 +21,7 @@ function update(event, ui, field_id){
 
 	var start_left = ui.draggable.data('startLeft');
 	var start_top = ui.draggable.data('startTop');
-	var	dest_left =	dest_field.offset().left;
+	var dest_left = dest_field.offset().left;
 	var dest_top = dest_field.offset().top;
 	var src_left = src_field.offset().left;
 	var src_top = src_field.offset().top;

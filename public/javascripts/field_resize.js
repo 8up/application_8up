@@ -10,7 +10,6 @@ function field_resize_handle(event) {
     var srcField = $(event.target).closest(".field");
     var resize_helper = srcField.clone();
     resize_helper.removeClass();
-    resize_helper.data("srcField", srcField);
     resize_helper.removeAttr("id"); 
     resize_helper.css("position","absolute");
     resize_helper.html('');
@@ -47,7 +46,7 @@ function field_resize_handle(event) {
     // En eventhandler som lyssnar på mouseup, dvs när användaren avslutar 
     // drag-rörelsen
     $(document).mouseup(function(event) {
-	    resize_field(resize_helper, direction);
+	    resize_field(resize_helper, srcField, direction);
 	    resize_helper.remove();
 	    $(document).unbind("mousemove",helper_resize);
 	    return true;
@@ -56,22 +55,25 @@ function field_resize_handle(event) {
     return direction;
 };
 
-// Utför själva resizen på fältet som skall förstoras
-function resize_field(resize_helper, direction) {
-    var srcField = resize_helper.data("srcField");
+// Utför själva resizen på fältet som skall ändras
+function resize_field(resize_helper, srcField, direction) {
     var delta = 0;
     if (direction == "south") {
 	delta = resize_helper.height() - srcField.height();
-	alert(delta);
+	srcField.height(srcField.height() + delta);
     }
     else if (direction == "north") {
+	delta = resize_helper.offset().top - srcField.offset().top;
+	srcField.height(srcField.height() - delta);
+	srcField.offset({top:delta});
     
     }
     else if (direction == "west") {
 
     }
     else if (direction == "east") {
-    
+	delta = resize_helper.width() - srcField.width();
+	srcField.width(srcField.width() + delta);
     }
 
 };
