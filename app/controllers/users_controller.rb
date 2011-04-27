@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      format.json  {render :json => @users.to_json(:only => [:name, :id, :email])}
     end
   end
 

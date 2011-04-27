@@ -29,6 +29,7 @@ Application8up::Application.routes.draw do
   match "/boards/:board_id/merge_fields/:field_id", :controller => "boards", :action => "merge_fields", :via => "post"
 
   match "/boards/:board_id/resize_field/:field_id", :controller => "boards", :action => "resize_field", :via => "post"
+  match "/boards/:board_id/invite/:user_id", :controller => "boards", :action => 'invite'#, :via => 'post'
 
   root :to => "boards#index"
 

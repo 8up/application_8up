@@ -25,7 +25,10 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     
-    can :manage, Board, :owner_id => user.id
+    can :manage, Board, :owner =>  user
+    can :manage, Board  do |board|
+      board.participants.exists? user
+    end
     
   end
 end
