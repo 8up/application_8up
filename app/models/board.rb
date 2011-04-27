@@ -24,6 +24,10 @@ class Board < ActiveRecord::Base
     self.save
   end
   
+  def owner_name
+    owner.name
+  end
+  
   ## Returnerar en hashmap av hashmaps där den yttre har x-koordinater som
   ## nycklar och den inre y-koordinater. Den inres värden är arrayer med
   ## de fält-id:n som koordinaten delar, ex: fields_map[x][y] -> [field_id]
