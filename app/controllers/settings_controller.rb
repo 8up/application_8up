@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
-  @hide_toolbox = true
+  
   
   def index
-    
+  @hide_toolbox = true  
   end
 end
