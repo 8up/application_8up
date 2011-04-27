@@ -32,7 +32,7 @@ function add_panel() {
   noteNiceEditor = new nicEditor({onSave : function(content, id, instance){
     var note_id = $( "#window_wrapper" ).data('note_id');
     var board_id = $('.board_div').id8Up();
-    var url_path =  board_id + "/notes/" + note_id + '.json';
+    var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
     $('#note_body').blur();
     $.ajax({ url: url_path, 
       type: 'POST',
@@ -85,6 +85,8 @@ function add_panel() {
         note_body.html(data.note.body);
         note_body.parent().css('background-color', data.note.color);
         $( "#window_wrapper" ).show().data('note_id', id);
+        $('#in_focus_image').show();
+        $( "#invite_window" ).hide();
         $( "#black_background" ).show();
       }
     });
