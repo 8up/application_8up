@@ -85,7 +85,7 @@ $(document).ready(
             }
             toolbox_info_created.text("Created: " + data.board.created_at);
             toolbox_info_updated.text("Updated: " + data.board.updated_at);
-            toolbox_info_owner.text("Owner: " + data.board.owner_id);
+            toolbox_info_owner.text("Owner: " + data.board.owner_name);
             
           }
         }
