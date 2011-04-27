@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
   
   def get_online_users
-    @users = User.where(["last_request_at > ?", 5.minutes.ago]).all
+    @users = User.where(["last_request_at > ?", 2.seconds.ago]).all
     render :json => @users.to_json(:only => [:email, :name])
   end
 end
