@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	//$(".resizable8up-handle").mousedown(field_resize_handle);
+	$(".resizable8up-handle").mousedown(field_resize_handle);
     });
 
 function field_resize_handle(event) {
