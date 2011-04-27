@@ -1,9 +1,16 @@
 $(document).ready(function()
 {
+  $(".resizable8up-handle").mouseenter(function(e)
+  {
+  
+  });
+  $(".resizable8up-handle").mouseleave(function(e)
+  {
+  
+  });
+
   $(".resizable8up-handle").click(function(e)
   {
-    alert("hej");
-    alert("hej2");
     var resizable8up_handle = $(e.target);
     var field_1 = resizable8up_handle.parent();
     var field_1_neighbours = field_1.data("neighbours");
@@ -15,18 +22,19 @@ $(document).ready(function()
     var merge_direction;
   
     if (resizable8up_handle.hasClass("resizable8up-n") || resizable8up_handle.hasClass("resizable8up-s")) 
-    {
-      alert("vert");
-      
+    {      
       if(resizable8up_handle.hasClass("resizable8up-n"))
       {
-        alert("testvert");
         if(field_1_neighbours_n.length == 1)
         {
           field_2 = $(("#field_" + field_1_neighbours_n[0]));
+          if(field_2.data("neighbours")["south"].length != 1)
+          {
+            alert("Kan inte merga dessa fält");
+          }
           merge_direction = "north";
         }
-        else if(field_1_neighbours_n.length > 1) 
+        else if(field_1_neighbours_n.length != 1) 
         {
           alert("Kan inte merga dessa fält!");
         }
@@ -36,11 +44,14 @@ $(document).ready(function()
       {
         if(field_1_neighbours_s.length == 1) 
         {
-          alert("testvert");
           field_2 = $(("#field_" + field_1_neighbours_s[0]));
+          if(field_2.data("neighbours")["north"].length != 1)
+          {
+            alert("Kan inte merga dessa fält");
+          }
           merge_direction = "south";
         }
-        else if(field_1_neighbours_s.length > 1) 
+        else if(field_1_neighbours_s.length != 1) 
         {
           alert("Kan inte merga dessa fält!");
         }
@@ -49,18 +60,19 @@ $(document).ready(function()
         
     }
     else if (resizable8up_handle.hasClass("resizable8up-w") || resizable8up_handle.hasClass("resizable8up-e")) 
-    {
-      alert("horiz");
-      
+    {      
       if(resizable8up_handle.hasClass("resizable8up-w")) 
       {
         if(field_1_neighbours_w.length == 1)
         {
-          alert("testhoriz");
           field_2 = $(("#field_" + field_1_neighbours_w[0]));
+          if(field_2.data("neighbours")["east"].length != 1)
+          {
+            alert("Kan inte merga dessa fält");
+          }
           merge_direction = "west";
         }
-        else if(field_1_neighbours_w.length > 1) 
+        else if(field_1_neighbours_w.length != 1) 
         {
           alert("Kan inte merga dessa fält!");
         }
@@ -70,18 +82,20 @@ $(document).ready(function()
       {
         if(field_1_neighbours_e.length == 1) 
         {
-          alert("testhoriz");
           field_2 = $(("#field_" + field_1_neighbours_e[0]));
+          if(field_2.data("neighbours")["west"].length != 1)
+          {
+            alert("Kan inte merga dessa fält");
+          }
           merge_direction = "east";
         }
-        else if(field_1_neighbours_e.length > 1) 
+        else if(field_1_neighbours_e.length != 1) 
         {
         alert("Kan inte merga dessa fält!");
         }
     
       }  
     }
-    alert("fieldmerge");
     field_merge(field_1, field_2, merge_direction);
   });
 }); 
