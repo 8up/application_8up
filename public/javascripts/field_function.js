@@ -121,6 +121,7 @@ function field_resize_stop(event, ui) {
 	// Om det inte finns några grannar åt det håll jag vill 
 	// resiza är det en ytterkant och då måste jag säga åt 
 	// alla som delar kanten att också resizas
+	
     }
 
 };
