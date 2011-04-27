@@ -23,6 +23,7 @@ Application8up::Application.routes.draw do
     
 
   end
+  match "/online_users", :controller => "users", :action => "get_online_users"
   
   match "/boards/:board_id/split_field/:field_id", :controller => "boards", :action => "split_field", :via => "post"
 

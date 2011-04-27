@@ -33,8 +33,5 @@
 	$(this).append(handler_e);
 	$(this).append(handler_w);
 	$(this).append(handler_s);
-	
-	$("resizeable8up-handle").mousedown();
-
     }
 })(jQuery);
