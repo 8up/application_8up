@@ -3,6 +3,9 @@ $(document).ready(function() {
     });
 
 function field_resize_handle(event) {
+    if (event.target != this) {
+	return true;
+    }
     //Ta reda på åt vilket håll resize:en är på väg.
     var direction = field_handle_direction(event.target);
     
@@ -136,8 +139,20 @@ function resize_field(resize_helper, srcField, direction) {
     
     $.ajax({url: "/boards/" + board_id + "/resize_field/" + field_id,
 		type:"POST",
-		data: {"direction": direction, "delta":delta} });
+		data: {"direction": direction, "delta":delta}, success: update_fields });
     
+};
+
+//Uppdaterar fälten efter vi fått svar från servern efter resize
+function update_fields(response_data) {
+    var original_side = response_data["original_side"]; 
+    var other_side = response_data["other_side"]; 
+    for (var i = 0; i < original_side.length;i++) {
+    
+    }
+    for (var i = 0; i < other_side.length;i++) {
+    
+    }
 };
 
 function get_resize_map(field, direction) {
