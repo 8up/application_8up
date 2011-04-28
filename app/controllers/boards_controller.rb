@@ -28,7 +28,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board }
+      format.json  { render :json => @board.to_json(:methods => [:owner_name])  }
     end
   end
 
@@ -130,8 +130,9 @@ class BoardsController < ApplicationController
     @field = Field.find params[:field_id]
     @board = Board.find params[:board_id]
 
-    updated_fields = @board.resize_field(@field, params)
-
+    @board.resize_field(@field, params)
+    updated_fields = @board.get_field_neighbours
+    
     respond_to do |format|
         format.json { render :json => updated_fields }
     end

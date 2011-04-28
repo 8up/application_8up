@@ -10,65 +10,6 @@ div.field {
     
 }
 
-.ui-resizable-helper { border: 2px dotted #00F; }
-
-div.drag_queen {
-    position: absolute;
-    background-color: blue;
-    width: 20px;
-    height: 20px;
-}
-
-div.board_div {
-    position:absolute;
-    left: 50px;
-}
-
-.ui-resizable-handle {
-    position: absolute;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #BBB;
-    z-index: 5;
-}
-
-.ui-resizable-n { cursor: n-resize;}
-.ui-resizable-s { cursor: s-resize;}
-.ui-resizable-e { cursor: e-resize;}
-.ui-resizable-w { cursor: w-resize;}
-
-.ui-resizable-n {
-    border-style: none none solid none;
-    border-width: 1px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 10px;
-}
-
-.ui-resizable-s {
-    border-style: solid none none none;
-    border-width: 1px;
-    width: 100%;
-    height: 5px;
-    bottom: 10px;
-}
-
-.ui-resizable-e {
-    border-style: none none none solid;
-    border-width: 1px;
-    height: 100%;
-    width: 10px;
-    right: 0px;
-}
-
-.ui-resizable-w {
-    border-style: none solid none none; 
-    border-width: 1px;
-    height: 100%;
-    width: 10px;
-}
-
 .resizable8up-helper { 
  /*   border: 2px dotted #00F; */
     -moz-box-shadow: inset 0 0 5px #888;
@@ -84,6 +25,7 @@ div.board_div {
     border-width: 1px;
     border-color: #BBB;
     z-index: 5;
+    border-width: 1px;
 }
 
 .resizable8up-n { cursor: n-resize;}
@@ -91,34 +33,35 @@ div.board_div {
 .resizable8up-e { cursor: e-resize;}
 .resizable8up-w { cursor: w-resize;}
 
+.resizable8up-n, .resizable8up-s { height: 10px; width: 100%;}
+.resizable8up-e, .resizable8up-w { top: 10px; bottom: 10px; width: 10px }
+
+
 .resizable8up-n {
     border-style: none none solid none;
-    border-width: 1px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    height: 10px;
+    top: 0px;
 }
 
 .resizable8up-s {
     border-style: solid none none none;
-    border-width: 1px;
-    width: 100%;
-    height: 5px;
-    bottom: 10px;
+    bottom: 0px;
 }
 
 .resizable8up-e {
     border-style: none none none solid;
-    border-width: 1px;
-    height: 100%;
-    width: 10px;
     right: 0px;
 }
 
 .resizable8up-w {
     border-style: none solid none none; 
-    border-width: 1px;
-    height: 100%;
-    width: 10px;
+    left: 0px;
 }
+
+.resizable8up-corner {
+    height: 10px; width: 10px; position: absolute;
+}
+
+.resizable8up-nw { top: 0px; left: 0px; }
+.resizable8up-sw { bottom: 0px; left: 0px; }
+.resizable8up-ne { bottom: 0px; left: 0px; }
+.resizable8up-se { bottom: 0px; left: 0px; }

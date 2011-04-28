@@ -34,8 +34,6 @@ function do_split(e) {
 	new_field.offset({top: new_height}); //adderar positionen till det nya fältet
     }
 
-   
-
     field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
     attach_field_handlers(new_field); //lägg till hanterare till det nya fältet
     

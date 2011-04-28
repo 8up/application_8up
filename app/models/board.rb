@@ -24,6 +24,10 @@ class Board < ActiveRecord::Base
     self.save
   end
   
+  def owner_name
+    owner.name
+  end
+  
   ## Returnerar en hashmap av hashmaps där den yttre har x-koordinater som
   ## nycklar och den inre y-koordinater. Den inres värden är arrayer med
   ## de fält-id:n som koordinaten delar, ex: fields_map[x][y] -> [field_id]
@@ -200,8 +204,10 @@ class Board < ActiveRecord::Base
     delta = resize_params[:delta].to_i
     direction = resize_params[:direction].to_sym
 
+    
     ## ändra storlek på alla fält som är på samma sida som orginalfältet
-    for field_id in resize_map[:original_side] 
+    for field_id in resize_map[:original_side]
+    
       f = Field.find field_id
       if direction ==  :north
         ## ändra position_y samt heigh
@@ -221,6 +227,7 @@ class Board < ActiveRecord::Base
     ## ändra storlek på de fält som är på motsatt sida om delnings-linjen som
     ## orginalfältet
     for field_id in resize_map[:other_side]
+    
       f = Field.find field_id
       if direction ==  :north
         f.height += delta
@@ -238,7 +245,8 @@ class Board < ActiveRecord::Base
     
     self.save
     self.fields.reload
-    return resize_map
+
+   return resize_map
   end
   
   ## Bygger upp den hash-map som används för att ändra storlek på fält
