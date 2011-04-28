@@ -119,9 +119,10 @@ class BoardsController < ApplicationController
     field_to_delete = Field.find(params[:field_to_delete])
     
     remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
+    updated_fields = @board.get_field_neighbours
 
     respond_to do |format|
-      format.json { render :json => remaining_field }
+      format.json { render :json => updated_fields }
     end
 
   end
@@ -134,7 +135,7 @@ class BoardsController < ApplicationController
     updated_fields = @board.get_field_neighbours
     
     respond_to do |format|
-        format.json { render :json => updated_fields }
+      format.json { render :json => updated_fields }
     end
   end
   
