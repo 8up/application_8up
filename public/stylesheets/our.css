@@ -64,8 +64,10 @@ height: 100%;
 }
 
 #split_button_table .depressed {
-    border-style: solid;
-    border-width: 1px;
+opacity:1;
+    -moz-box-shadow: inset 0 0 18px ##3366cc;
+    -webkit-box-shadow: inset 0 0 18px #3366cc;
+    box-shadow: inset 0 0 18px #3366cc;
 }
 
 #content { 
