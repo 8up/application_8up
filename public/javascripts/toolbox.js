@@ -128,3 +128,21 @@ toolbox_info_owner.text(" ");
 })
 
 });
+
+function whiteboard_context(context_area) {
+
+};
+
+function note_selected_context(context_area) {
+
+};
+
+function start_page_context(context_area) {
+
+};
+
+// Context area är ett jquery-wrappat element där context-beroende data skall
+// läggas till
+function board_selected_context(context_area) {
+
+};
