@@ -20,7 +20,7 @@ $(document).ready(function()
     }
     else if(resizable8up_handle.hasClass("resizable8up-s"))
     {
-      var s_offset_top = resizable8up_handle.height() - hover_div.height()/2;
+      var s_offset_top = resizable8up_handle.height() - hover_div.height();
       var s_offset_left = resizable8up_handle.width()/2 - hover_div.width()/2;
       hover_div.offset({top: s_offset_top}); 
       hover_div.offset({left: s_offset_left});
@@ -150,33 +150,54 @@ function field_merge(field_1, field_2, merge_direction)
   if (merge_direction == "north")
     {
     field_2.height(new_height);
+    field_1.children(".note").each(function() 
+    {
+      $(this).position({top: $(this).parent.height() + $(this).position().top});  
+    });
+    field_1.children('.note').appendTo(field_2);
     field_1.remove();
+    
       $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "vertical"} , success: function(data) {}})
+		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "vertical"} , success: update_fields})
     }
   if (merge_direction == "west")
     {
     field_2.width(new_width);
+    field_1.children('.note').each(function() 
+    {
+      $(this).position({left: $(this).parent.height() + $this.position().top});
+    });    
+    field_1.children('.note').appendTo(field_2);
     field_1.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: function(data) {}})
+		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
     }
   if (merge_direction == "south")
     {
     field_1.height(new_height);
+    field_2.children('.note').each(function() 
+    {
+      $(this).position({top: $(this).parent.height() + $(this).position().top});
+    });    
+    field_2.children('.note').appendTo(field_1);
     field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: function(data) {}})
+		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: update_fields})
     }
   if (merge_direction == "east")
     {
     field_1.width(new_width);
+    field_2.children('.note').each(function() 
+    {
+      $(this).position({left: $(this).parent.height() + $(this).position().top});  
+    });    
+    field_2.children('.note').appendTo(field_1);
     field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: function(data) {}})
+		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: update_fields })
     }
 }
