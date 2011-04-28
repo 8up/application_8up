@@ -5,15 +5,15 @@
 	<%= stylesheet_link_tag :all %>
 	<%= javascript_include_tag :all %>
 	<%= csrf_meta_tag %>
-  <link rel="shortcut icon" href="images/g8a.png" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/g8a.png" type="image/x-icon" />
 </head>
 <body>  
-  <div id="toolbox_container"  <%= show_toolbox %>>    
+	<div id="toolbox_container"  <%= show_toolbox %>>    
 		<div ID="toolbox_area_1">
 
 			<a href="#"><p class="toolbox_button_delete">Delete</p></a>
 			<a href="#"><p class="toolbox_button_invite">Invite</p></a>
-			
+
 			<div ID="toolbox_text_container">
 				<div ID="toolbox_text_1">
 					<h3 id=toolbox_header_name>Name</h3>
@@ -24,90 +24,93 @@
 					<div id=toolbox_info_updated></div>
 					<div id=toolbox_info_owner></div>
 				</div>
-        <div id="user_list_container">
-          Online users:
-        <div id="online_user_list"></div>
-      </div>
-      </div>
-      
-      
-      
+				<div id="user_list_container">
+					Online users:
+					<div id="online_user_list"></div>
+				</div>
+
+			</div>
+			<div id="context_area">
+				
+			</div>
+
+
 			<div ID="color_change_table">
-        <table id = "split_button_table">
-          <tr>
-            <th colspan="3">SPLIT</th>
-          </tr>
-          <tr>
-            <td><img src="/images/button_h.png" id = "split_vert" width="50px" height="50px"></td>
-            <td><img src="/images/button_v.png" id = "split_horiz" width="50px" height="50px"></td>
-          </tr>
-        </table>
-        <table cellpadding="10" cellspacing="9" align="middle">
-				<tr>
-					<th colspan="3">Choose Color:</th>
-				</tr>
-				<tr>
-					<td bgcolor="green" id = 'green'></td>
-					<td bgcolor="blue" id = 'blue'></td>
-					<td bgcolor="yellow" id = 'yellow'></td>
-				</tr>
-				<tr>
-					<td bgcolor="red" id = 'red'></td>
-					<td bgcolor="orange" id = 'orange'></td>
-					<td bgcolor="pink" id = 'pink'></td>
-				</tr>
-          <tr>
-					<td bgcolor="#f4e476" id = 'original'></td>
-					<td bgcolor="crimson" id = 'crimson'></td>
-					<td bgcolor="fuchsia" id = 'fuchsia'></td>
-				</tr>
+				<table id = "split_button_table">
+					<tr>
+						<th colspan="3">SPLIT</th>
+					</tr>
+					<tr>
+						<td><img src="/images/button_h.png" id = "split_vert" width="50px" height="50px"></td>
+						<td><img src="/images/button_v.png" id = "split_horiz" width="50px" height="50px"></td>
+					</tr>
+				</table>
+				<table cellpadding="10" cellspacing="9" align="middle">
+					<tr>
+						<th colspan="3">Choose Color:</th>
+					</tr>
+					<tr>
+						<td bgcolor="green" id = 'green'></td>
+						<td bgcolor="blue" id = 'blue'></td>
+						<td bgcolor="yellow" id = 'yellow'></td>
+					</tr>
+					<tr>
+						<td bgcolor="red" id = 'red'></td>
+						<td bgcolor="orange" id = 'orange'></td>
+						<td bgcolor="pink" id = 'pink'></td>
+					</tr>
+					<tr>
+						<td bgcolor="#f4e476" id = 'original'></td>
+						<td bgcolor="crimson" id = 'crimson'></td>
+						<td bgcolor="fuchsia" id = 'fuchsia'></td>
+					</tr>
 
 
 
-			</table> 
+				</table> 
 
-		</div>      
+			</div>      
+
+		</div>
+
+		<div ID="toolbox_area_2">
+			<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
+			top: 50%;" height="30px" width="30px" />
+		</div>
+
 
 	</div>
 
-	<div ID="toolbox_area_2">
-		<img src="/images/panel_button_right.png" id="panel_arrow" style="position: relative; left: 14%;
-		top: 50%;" height="30px" width="30px" />
+	<div id="content">    
+		<%= yield %>  
+	</div>
+	<div id="menu_bar">
+		<ul>
+			<li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
+			<li><a href="/settings" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
+			<li><a href="/users/sign_out" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
+
+		</ul>
+	</div>
+	<div id="create_new_board_button" <%= show_addbutton %>>  
+		<a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" id="add_button_background" width="150%" height="110%"></a>
 	</div>
 
+	<div id="window_wrapper">
+		<div id="invite_window" class="invite_win">
+			<input type="text" id="invite_input" width = "100%"></input>
+			<a href="#"><p class="invite_submit" align = "right">Invite</p></a>
+			<a href="#"><p class="cancel" align = "right">Cancel</p></a>
 
-</div>
+		</div>
 
-<div id="content">    
-	<%= yield %>  
-</div>
-<div id="menu_bar">
-	<ul>
-		<li><a href="/boards/" style="background: transparent; font-family:arial; font-size:17px;">Menu</a></li>
-		<li><a href="/settings" style="background: transparent; font-family:arial; font-size:17px;">Settings</a></li>
-		<li><a href="/users/sign_out" style="background: transparent; font-family:arial; font-size:17px;">Log Out</a></li> 
-    
-	</ul>
-</div>
-<div id="create_new_board_button" <%= show_addbutton %>>  
-	<a href="/boards/new" style="background: transparent"><img src="/images/add_button.png" id="add_button_background" width="150%" height="110%"></a>
-</div>
-
-<div id="window_wrapper">
-	<div id="invite_window" class="invite_win">
-		<input type="text" id="invite_input" width = "100%"></input>
-		<a href="#"><p class="invite_submit" align = "right">Invite</p></a>
-		<a href="#"><p class="cancel" align = "right">Cancel</p></a>
+		<div id="in_focus_image" class="window" unselectable="on">
+			<div id="note_editor_panel_wrapper"><div id="note_editor_panel"></div></div>
+			<div id="note_body"></div>
+		</div>
 
 	</div>
-	
-	<div id="in_focus_image" class="window" unselectable="on">
-		<div id="note_editor_panel_wrapper"><div id="note_editor_panel"></div></div>
-		<div id="note_body"></div>
-	</div>
-	
-</div>
-<div id="black_background" class="background"></div>
+	<div id="black_background" class="background"></div>
 
 <!--<p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>-->
