@@ -145,13 +145,10 @@ function resize_field(resize_helper, srcField, direction) {
 
 //Uppdaterar fälten efter vi fått svar från servern efter resize
 function update_fields(response_data) {
-    var original_side = response_data["original_side"]; 
-    var other_side = response_data["other_side"]; 
-    for (var i = 0; i < original_side.length;i++) {
-    
-    }
-    for (var i = 0; i < other_side.length;i++) {
-    
+    //response data är ett json-objekt med field-id som attribut 
+    //och nya neighbour-maps som värden
+    for (var field_id in response_data) {
+	$(("#field_" + field_id)).data('neighbours', response_data[field_id]);
     }
 };
 

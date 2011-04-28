@@ -130,8 +130,9 @@ class BoardsController < ApplicationController
     @field = Field.find params[:field_id]
     @board = Board.find params[:board_id]
 
-    updated_fields = @board.resize_field(@field, params)
-
+    @board.resize_field(@field, params)
+    updated_fields = @board.get_field_neighbours
+    
     respond_to do |format|
         format.json { render :json => updated_fields }
     end
