@@ -153,7 +153,9 @@ function field_merge(field_1, field_2, merge_direction)
       var field_2_height = field_2.height();
       var note_position_top = $(element).position().top;
       var update = field_2_height + note_position_top;
-      $(element).offset({top: update});  
+      var element_offset = $(element).offset();
+      element_offset.top = update;
+      $("element").offset(element_offset);  
     });
     field_2.height(new_height);
     field_1.children('.note').appendTo(field_2);
@@ -169,7 +171,9 @@ function field_merge(field_1, field_2, merge_direction)
       var field_2_width = field_2.width();
       var note_position_left = $(element).position().left;
       var update = field_2_width + note_position_left;
-      $(element).offset({left: update});
+      var element_offset = $(element).offset();
+      element_offset.left = update;
+      $("element").offset(element_offset);
     });
     field_2.width(new_width);
     field_1.children('.note').appendTo(field_2);
@@ -185,7 +189,9 @@ function field_merge(field_1, field_2, merge_direction)
         var field_1_height = field_1.height();
         var note_position_top = $(element).position().top;
         var update = field_1_height + note_position_top;
-        $(element).offset({top: update});
+        var element_offset = $(element).offset();
+        element_offset.top = update;
+        $("element").offset(element_offset);
       });
         field_1.height(new_height);
       field_2.children('.note').appendTo(field_1);
@@ -198,10 +204,12 @@ function field_merge(field_1, field_2, merge_direction)
     {
       field_2.children('.note').each(function(index, element) 
       {
-        var field_1_height = field_1.height();
-        var note_position_top = $(element).position().top;
-        var update = field_1_height + note_position_top;
-        $(element).offset({left: update});  
+        var field_1_width = field_1.width();
+        var note_position_left = $(element).position().left;
+        var update = field_1_height + note_position_left;
+        var element_offset = $(element).offset();
+        element_offset.left = update;
+        $("element").offset(element_offset);  
       });
       field_1.width(new_width);
     field_2.children('.note').appendTo(field_1);
