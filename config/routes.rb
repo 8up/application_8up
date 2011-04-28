@@ -34,6 +34,8 @@ Application8up::Application.routes.draw do
 
   match "/settings", :controller => "settings", :action => "index"
 
+  match "/users/edit", :controller => "users", :action => "index"
+  
   match "/settings/change_password/", :controller => "settings", :action => "change_password"
   match "/settings/edit_password/", :controller => "settings", :action => "edit_password"
   match "/settings/change_avatar/", :controller => "settings", :action => "change_avatar"
