@@ -44,13 +44,17 @@ $(document).ready(function()
  
  $(".resizable8up-handle").mouseleave(function(e)
   {
-    $(".hover").remove();
+    
+    $(this).children(".hover").fadeOut(5000, function () {
+    $(this).remove();
+    });
   });  
 }); 
 
 
 function click_merge(e)
 {
+  alert("test");
   var resizable8up_handle = $(e.target).parent();
   var field_1 = resizable8up_handle.parent();
   var field_1_neighbours = field_1.data("neighbours");
