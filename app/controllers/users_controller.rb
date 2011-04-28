@@ -3,11 +3,14 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.all
+    json = ActiveRecord::Base.include_root_in_json
+    ActiveRecord::Base.include_root_in_json = false
 
     respond_to do |format|
       format.html # index.html.erb
       format.json  {render :json => @users.to_json(:only => [:name, :id, :email])}
     end
+    ActiveRecord::Base.include_root_in_json = true
   end
 
   # GET /users/1

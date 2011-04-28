@@ -10,6 +10,10 @@
 //Behöver kanske inte vara ett plugin men jag ville prova
 (function($){
     jQuery.fn.resize8up = function(){
+	// Kolla att vi inte redan lagt till handlers
+	if ($(this).children('.resizable8up-handle').length != 0) {
+	    return true;
+	}
 
 	var handler_s = $('<div></div>');
 	handler_s.addClass("resizable8up-handle");
