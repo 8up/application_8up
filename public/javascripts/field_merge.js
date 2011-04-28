@@ -174,9 +174,9 @@ function field_merge(field_1, field_2, merge_direction)
     field_2.width(new_width);
     field_1.children('.note').appendTo(field_2);
     field_1.remove();
-   // $.ajax({url: "/boards/" + board_id  + 
-		//"/merge_fields/" +  field_id , type:"POST", 
-	//	data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
+    $.ajax({url: "/boards/" + board_id  + 
+		"/merge_fields/" +  field_id , type:"POST", 
+		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
     }
   if (merge_direction == "south")
     {
