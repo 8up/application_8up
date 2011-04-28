@@ -1,5 +1,5 @@
 $(document).ready(function () {  
-setInterval(update_online_list, 1000);
+setInterval(update_online_list, 10000);
 
 function update_online_list(){
   var user_list = $("#online_user_list");
