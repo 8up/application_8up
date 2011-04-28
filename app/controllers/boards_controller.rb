@@ -137,17 +137,26 @@ class BoardsController < ApplicationController
     end
   end
   
-  def invite
-    @user = User.find params[:user_id]
+  def invite  
+    @user = User.find_by_email params[:email]
     @board = Board.find params[:board_id]
     
-    authorize! :invite, @board
-    if    @board.set_permission(@user,BoardsPermission::PP)
-      render :json => {:status => 'ok'}
+    if(@board.nil?)
+      render :json => {:status => '404'}, :status => 404
+    elsif(@user.nil?)
+      render :json => {:status => 'error', :message => 'Could not find user'}
+    elsif(@board.participants.exists?(@user))
+      render :json => {:status => 'error', :message => 'Already invited'}
+    elsif( @board.owner == @user)
+      render :json => {:status => 'error', :message => 'You fucking own this board!'}
     else
-      render :json => {:status => 'Could not invite'}
+      authorize! :invite, @board
+      if    @board.set_permission(@user,BoardsPermission::PP)
+        render :json => {:status => 'ok', :message => ''}
+      else
+        render :json => {:status => 'error', :message => 'Could not invite user'}
+      end
     end
-    
     
   end
 end
