@@ -59,11 +59,23 @@ $(document).ready(function(){
 function whiteboard_context(context_area) {
 
 	update_info_box();
+	if ($('.selected').length > 0) {
+		note_selected_context(context_area);
+	}
+	//Add split options
+//	var split_buttons = $('<div></div>');
+
+//	context_area.append(split_buttons):
+
 
 };
 
 function note_selected_context(context_area) {
 
+//	var color_chooser = $('<div></div>');
+//	color_chooser.attr('id','color_chooser');
+
+//	context_area.append(color_chooser);
 };
 
 function start_page_context(context_area) {
