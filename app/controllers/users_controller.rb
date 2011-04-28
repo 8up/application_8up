@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users }
+      format.json  {render :json => @users.to_json(:only => [:name, :id, :email])}
     end
   end
 
@@ -79,5 +79,10 @@ class UsersController < ApplicationController
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
+  end
+  
+  def get_online_users
+    @users = User.where(["last_request_at > ?", 2.seconds.ago]).all
+    render :json => @users.to_json(:only => [:email, :name])
   end
 end

@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    $('#red, #green, #yellow, #blue, #orange, #pink').click(function(e) {
-     var x = e.target.id;
+    $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
+     var x = $(e.target).attr('bgcolor');
     
     $(".selected.note").each(function(index, domElement){
         var note_id = $(domElement).attr('id').split('_').pop();
         var board_id = $(domElement).data('board_id').split('_').pop();
-				var url_path =  "/boards/" + board_id + "/notes/" + note_id;
+				var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
   
         $.ajax({ url: url_path, 
 		    type: 'POST',
@@ -32,7 +32,14 @@ $(document).ready(function () {
 		edit_note_header(e.target);
 	});
   
-  $(".note").draggable();
+  $(".note").draggable({
+		start: function(event, ui){
+			$(this).data('startPageX', event.pageX);
+			$(this).data('startPageY', event.pageY);
+			$(this).data('startLeft', $(this).position().left);
+			$(this).data('startTop', $(this).position().top);
+		}
+	});
       
 });
 
@@ -131,6 +138,8 @@ function update_note(data){
 //	alert("hej");
 	var note_id = "note_" + data.note.id;
 	var field_id = "field_" + data.note.field_id;
-	var temp = $('#' + note_id).detach();
-	$('#' + field_id).append(temp);
+	var note = $('#' + note_id).detach();
+	$('#' + field_id).append(note);
+	note.css("left", data.note.position_x).css("top", data.note.position_y);
+	
 }

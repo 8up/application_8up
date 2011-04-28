@@ -9,11 +9,11 @@ function de_select(e, caller){
 };
 
 function select(e, caller) {
-	if (e.target != caller) {
+/*	if (e.target != caller) {
 		return true;
-	};
+    };*/
 	//Skapar eller tar bort klassen selected från objektet.
-	$(e.target).toggleClass("selected");
+	$(caller).toggleClass("selected");
 	$("#toolbox_container").trigger("update");
 	
 };
@@ -29,12 +29,12 @@ $(document).ready(
 			select(e, this);
 		});
 		
-		$("#boards_container").click(function(e){
+		$("#cont").click(function(e){
 			de_select(e, this);
 		});
 		
-		$("#boards_container li").click(function(e){
-			select(e,this);
+		$("#cont div").click(function(e){
+			select(e,$(this).closest("div"));
 		});
 	}
 );

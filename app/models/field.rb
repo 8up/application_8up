@@ -25,34 +25,34 @@ class Field < ActiveRecord::Base
     
     ## Om du är min granne norrut
     if my[:top] == your[:bottom]
-      if my[:left] < your[:left] and my[:right] > your[:left] or
-          my[:left] < your[:right] and my[:right] > your[:right] or
-          my[:left] >= your[:left] and my[:right] <= your[:right]
+      if (my[:left] < your[:left] and my[:right] > your[:left]) or
+          (my[:left] < your[:right] and my[:right] > your[:right]) or
+          (my[:left] >= your[:left] and my[:right] <= your[:right])
         return :north
       end
     end
     ## Om du är min granne söderut
     if my[:bottom] == your[:top]
-      if my[:left] < your[:left] and my[:right] > your[:left] or
-          my[:left] < your[:right] and my[:right] > your[:right] or
-          my[:left] >= your[:left] and my[:right] <= your[:right]
+      if (my[:left] < your[:left] and my[:right] > your[:left]) or
+          (my[:left] < your[:right] and my[:right] > your[:right]) or
+          (my[:left] >= your[:left] and my[:right] <= your[:right])
         return :south
       end
     end
     # Om du är min granne västerut
     if my[:left] == your[:right]
-      if my[:top] < your[:bottom] and my[:bottom] > your[:bottom] or
-          my[:top] < your[:top] and my[:bottom] > your[:top] or
-          my[:top] >= your[:top] and my[:bottom] <= your[:bottom]
+      if (my[:top] < your[:bottom] and my[:bottom] > your[:bottom]) or
+          (my[:top] < your[:top] and my[:bottom] > your[:top]) or
+          (my[:top] >= your[:top] and my[:bottom] <= your[:bottom])
         return :west
       end
     end    
 
     # Om du är min granne österut
     if my[:right] == your[:left]
-      if my[:top] < your[:bottom] and my[:bottom] > your[:bottom] or
-          my[:top] < your[:top] and my[:bottom] > your[:top] or
-          my[:top] >= your[:top] and my[:bottom] <= your[:bottom]
+      if (my[:top] < your[:bottom] and my[:bottom] > your[:bottom]) or
+          (my[:top] < your[:top] and my[:bottom] > your[:top]) or
+          (my[:top] >= your[:top] and my[:bottom] <= your[:bottom])
         return :east
       end
     end    

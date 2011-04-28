@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 class BoardsController < ApplicationController
+  #load_resource :find_by => :owner_id
+  #authorize_resource
+  
+  
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all
+    @boards = current_user.boards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,16 +15,20 @@ class BoardsController < ApplicationController
     end
   end
 
+  
+  
   # GET /boards/1
   # GET /boards/1.xml
   # GET /boards/1.json
   def show
     @board = Board.find(params[:id])
-
+    
+    authorize! :show, @board
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board }
+      format.json  { render :json => @board.to_json(:methods => [:owner_name])  }
     end
   end
 
@@ -44,6 +52,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
+    @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|
       if @board.save
@@ -94,53 +103,8 @@ class BoardsController < ApplicationController
   def split_field
     @board = Board.find(params[:board_id])
     @field = Field.find(params[:field_id])
-    attributes = {};
-    array_notes_to_add = [];
-    attributes[:board_id] = @field.board_id
-
-    if params[:split_direction] == "vertical"
-      #Dela fältet vertikalt
-      new_width = @field.width/2
-      @field.width = new_width
-
-      #Sätt attribut för det nya fältet efter vertikal split
-      attributes[:width] = new_width
-      attributes[:height] = @field.height
-      attributes[:position_x] = @field.position_x + new_width
-      attributes[:position_y] = @field.position_y
-
-      @field.notes.each do |note|
-        pos_x = note.position_x
-        if pos_x >= new_width
-          note.position_x -= new_width ## måste subtrahera bredden 
-          #eftersom x-positionen är relativ till fieldets x-position
-          
-          array_notes_to_add << note
-        end
-      end
-
-      
-    else
-      #Dela fältet horisontellt
-      new_height = @field.height/2
-      @field.height = new_height
-
-      #Sätt attribut för det nya fältet efter horisontell split
-      attributes[:height] = new_height
-      attributes[:width] = @field.width
-      attributes[:position_x] = @field.position_x
-      attributes[:position_y] = @field.position_y + new_height
-      
-      @field.notes.each do |note|
-        pos_y = note.position_y
-        if pos_y >= new_height
-          note.position_y -= new_height
-          array_notes_to_add << note
-        end
-      end
-    end
-    new_field =Field.create(attributes)
-    new_field.notes = array_notes_to_add
+    
+    new_field = @board.split_field(@field, params[:split_direction])
 
     if @field.save and new_field.save
       respond_to do |format|
@@ -151,41 +115,39 @@ class BoardsController < ApplicationController
 
   def merge_fields
     @board = Board.find(params[:board_id])
-    @field_to_enlarge = Field.find(params[:field_to_enlarge])
-    @field_to_delete = Field.find(params[:field_to_delete])
+    field_to_enlarge = Field.find(params[:field_to_enlarge])
+    field_to_delete = Field.find(params[:field_to_delete])
     
-    attributes = {};
-    
-    new_height = @field_to_enlarge.height + @field_to_delete.height
-    new_width = @field_to_enlarge.width + @field_to_delete.width 
-
-    if params[:merge_direction] == "width"
-        @field_to_delete.notes.each do |note|
-          new_note_position = @field_to_enlarge.width + note.position_x
-          note.position_x = new_note_position          
-          @field_to_enlarge.notes << note
-        end
-        @field_to_enlarge.width = new_width 
-    end
-
-    if params[:merge_direction] == "height"
-        @field_to_delete.notes.each do |note|
-          new_note_position = @field_to_enlarge.height + note.position_y
-          note.position_y = new_note_position           
-          @field_to_enlarge.notes << note
-        end
-        @field_to_enlarge.height = new_height        
-    end
-
-    attributes[:height] = new_height
-    attributes[:width] = new_width
-    @field_to_enlarge.update_attributes(attributes)
-    
-    Field.delete(params[:field_to_delete])
+    remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
 
     respond_to do |format|
-        format.json { render :json => @field_to_enlarge }
+      format.json { render :json => remaining_field }
     end
 
+  end
+
+  def resize_field
+    @field = Field.find params[:field_id]
+    @board = Board.find params[:board_id]
+
+    updated_fields = @board.resize_field(@field, params)
+
+    respond_to do |format|
+        format.json { render :json => updated_fields }
+    end
+  end
+  
+  def invite
+    @user = User.find params[:user_id]
+    @board = Board.find params[:board_id]
+    
+    authorize! :invite, @board
+    if    @board.set_permission(@user,BoardsPermission::PP)
+      render :json => {:status => 'ok'}
+    else
+      render :json => {:status => 'Could not invite'}
+    end
+    
+    
   end
 end
