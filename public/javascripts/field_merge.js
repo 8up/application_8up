@@ -56,7 +56,6 @@ $(document).ready(function()
 
 function click_merge(e)
 {
-  alert("test");
   var resizable8up_handle = $(e.target).parent();
   var field_1 = resizable8up_handle.parent();
   var field_1_neighbours = field_1.data("neighbours");
@@ -148,52 +147,63 @@ function field_merge(field_1, field_2, merge_direction)
   var new_width = field_1.width() + field_2.width();
     
   if (merge_direction == "north")
+  {
+    field_1.children(".note").each(function(index, element) 
     {
-    field_2.height(new_height);
-    field_1.children(".note").each(function() 
-    {
-      $(this).position({top: $(this).parent.height() + $(this).position().top});  
+      var field_2_height = field_2.height();
+      var note_position_top = $(element).position().top;
+      var update = field_2_height + note_position_top;
+      $(element).offset({top: update});  
     });
+    field_2.height(new_height);
     field_1.children('.note').appendTo(field_2);
     field_1.remove();
-    
-      $.ajax({url: "/boards/" + board_id  + 
+    $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
 		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "vertical"} , success: update_fields})
     }
   if (merge_direction == "west")
     {
-    field_2.width(new_width);
-    field_1.children('.note').each(function() 
+    field_1.children('.note').each(function(index, element) 
     {
-      $(this).position({left: $(this).parent.height() + $this.position().top});
-    });    
+      var field_2_width = field_2.width();
+      var note_position_left = $(element).position().left;
+      var update = field_2_width + note_position_left;
+      $(element).offset({left: update});
+    });
+    field_2.width(new_width);
     field_1.children('.note').appendTo(field_2);
     field_1.remove();
-    $.ajax({url: "/boards/" + board_id  + 
-		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
+   // $.ajax({url: "/boards/" + board_id  + 
+		//"/merge_fields/" +  field_id , type:"POST", 
+	//	data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
     }
   if (merge_direction == "south")
     {
-    field_1.height(new_height);
-    field_2.children('.note').each(function() 
-    {
-      $(this).position({top: $(this).parent.height() + $(this).position().top});
-    });    
-    field_2.children('.note').appendTo(field_1);
-    field_2.remove();
-    $.ajax({url: "/boards/" + board_id  + 
-		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: update_fields})
+      field_2.children('.note').each(function(index, element) 
+      {
+        var field_1_height = field_1.height();
+        var note_position_top = $(element).position().top;
+        var update = field_1_height + note_position_top;
+        $(element).offset({top: update});
+      });
+        field_1.height(new_height);
+      field_2.children('.note').appendTo(field_1);
+      field_2.remove();
+      $.ajax({url: "/boards/" + board_id  + 
+		  "/merge_fields/" +  field_id , type:"POST", 
+		  data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: update_fields})
     }
   if (merge_direction == "east")
     {
-    field_1.width(new_width);
-    field_2.children('.note').each(function() 
-    {
-      $(this).position({left: $(this).parent.height() + $(this).position().top});  
-    });    
+      field_2.children('.note').each(function(index, element) 
+      {
+        var field_1_height = field_1.height();
+        var note_position_top = $(element).position().top;
+        var update = field_1_height + note_position_top;
+        $(element).offset({left: update});  
+      });
+      field_1.width(new_width);
     field_2.children('.note').appendTo(field_1);
     field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
