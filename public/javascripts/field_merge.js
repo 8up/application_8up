@@ -150,6 +150,7 @@ function field_merge(field_1, field_2, merge_direction)
   if (merge_direction == "north")
     {
     field_2.height(new_height);
+    field_1.remove();
       $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
 		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "vertical"} , success: function(data) {}})
@@ -157,13 +158,15 @@ function field_merge(field_1, field_2, merge_direction)
   if (merge_direction == "west")
     {
     field_2.width(new_width);
+    field_1.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
 		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: function(data) {}})
     }
   if (merge_direction == "south")
     {
-    field_1.height(new_height);  
+    field_1.height(new_height);
+    field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
 		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: function(data) {}})
@@ -171,6 +174,7 @@ function field_merge(field_1, field_2, merge_direction)
   if (merge_direction == "east")
     {
     field_1.width(new_width);
+    field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
 		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: function(data) {}})
