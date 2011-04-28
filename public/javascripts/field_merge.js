@@ -6,29 +6,29 @@ $(document).ready(function()
     var hover_div = $('<div></div>');
     if(resizable8up_handle.hasClass("resizable8up-n"))
     {
-      var n_offset_top = resizable8up_handle.offset().top;
-      var n_offset_left = resizable8up_handle.offset().left + resizable8up_handle.width()/2;
+      var n_offset_top = 0;
+      var n_offset_left = resizable8up_handle.width()/2;
       hover_div.offset({top: n_offset_top});
       hover_div.offset({left: n_offset_left});
     }
     else if(resizable8up_handle.hasClass("resizable8up-s"))
     {
-      var s_offset_top = resizable8up_handle.offset().top + resizable8up_handle.height();
-      var s_offset_left = resizable8up_handle.offset().left + resizable8up_handle.width()/2;
+      var s_offset_top = resizable8up_handle.height();
+      var s_offset_left = resizable8up_handle.width()/2;
       hover_div.offset({top: s_offset_top}); 
       hover_div.offset({left: s_offset_left});
     }
     else if(resizable8up_handle.hasClass("resizable8up-w"))
     { 
-      var w_offset_top = resizable8up_handle.offset().top + resizable8up_handle.height()/2;
-      var w_offset_left = resizable8up_handle.offset().left;
+      var w_offset_top = resizable8up_handle.height()/2;
+      var w_offset_left = 0;
       hover_div.offset({top: w_offset_top});
       hover_div.offset({left: w_offset_left});
     }
     else if(resizable8up_handle.hasClass("resizable8up-e"))
     {
-      var e_offset_top = resizable8up_handle.offset().top + resizable8up_handle.height()/2;
-      var e_offset_left = resizable8up_handle.offset().left + resizable8up_handle.width();
+      var e_offset_top = resizable8up_handle.height()/2;
+      var e_offset_left = resizable8up_handle.width();
       hover_div.offset({top: e_offset_top});
       hover_div.offset({left: e_offset_left});
     }
@@ -37,14 +37,14 @@ $(document).ready(function()
     hover_div.width(50);
     hover_div.css('z-index','270');
     hover_div.css('position','absolute');
-    resizable8up_handle.parent().prepend(hover_div);
+    hover_div.css('background-color','black');
+    resizable8up_handle.prepend(hover_div);
     hover_div.click(click_merge);
   });
  
  $(".resizable8up-handle").mouseleave(function(e)
   {
-    var resizable8up_handle = $(e.target);
-    //resizable8up_handle.remove(hover);
+    $(".hover").remove();
   });  
 }); 
 
