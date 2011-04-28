@@ -36,6 +36,7 @@ Application8up::Application.routes.draw do
 
   match "/settings/change_password/", :controller => "settings", :action => "change_password"
   match "/settings/edit_password/", :controller => "settings", :action => "edit_password"
+  match "/settings/change_avatar/", :controller => "settings", :action => "change_avatar"
 
   root :to => "boards#index"
 

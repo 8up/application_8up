@@ -10,6 +10,10 @@ end
 
   end
 
+  def change_avatar
+
+  end
+
   def change_password
 
   @user = current_user 
