@@ -47,7 +47,7 @@ $(document).ready(function()
  $(".resizable8up-handle").mouseleave(function(e)
   {
     
-    $(this).children(".hover").fadeOut(5000, function () {
+    $(this).children(".hover").fadeOut(500, function () {
     $(this).remove();
     });
   });  
@@ -155,10 +155,11 @@ function field_merge(field_1, field_2, merge_direction)
       var update = field_2_height + note_position_top;
       var element_offset = $(element).offset();
       element_offset.top = update;
-      $("element").offset(element_offset);  
+      field_2.append(element);
+      $(element).offset(element_offset);  
     });
     field_2.height(new_height);
-    field_1.children('.note').appendTo(field_2);
+    //field_1.children('.note').appendTo(field_2);
     field_1.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
@@ -173,10 +174,11 @@ function field_merge(field_1, field_2, merge_direction)
       var update = field_2_width + note_position_left;
       var element_offset = $(element).offset();
       element_offset.left = update;
-      $("element").offset(element_offset);
+      field_2.append(element);
+      $(element).offset(element_offset);
     });
     field_2.width(new_width);
-    field_1.children('.note').appendTo(field_2);
+    //field_1.children('.note').appendTo(field_2);
     field_1.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
@@ -191,10 +193,11 @@ function field_merge(field_1, field_2, merge_direction)
         var update = field_1_height + note_position_top;
         var element_offset = $(element).offset();
         element_offset.top = update;
-        $("element").offset(element_offset);
+        field_1.append(element);
+        $(element).offset(element_offset);
       });
         field_1.height(new_height);
-      field_2.children('.note').appendTo(field_1);
+      //field_2.children('.note').appendTo(field_1);
       field_2.remove();
       $.ajax({url: "/boards/" + board_id  + 
 		  "/merge_fields/" +  field_id , type:"POST", 
@@ -209,10 +212,11 @@ function field_merge(field_1, field_2, merge_direction)
         var update = field_1_height + note_position_left;
         var element_offset = $(element).offset();
         element_offset.left = update;
-        $("element").offset(element_offset);  
+        field_1.append(element);
+        $(element).offset(element_offset);  
       });
       field_1.width(new_width);
-    field_2.children('.note').appendTo(field_1);
+    //field_2.children('.note').appendTo(field_1);
     field_2.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
