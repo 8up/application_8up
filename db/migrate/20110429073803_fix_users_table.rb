@@ -1,20 +1,25 @@
-class DeviseCreateUsers < ActiveRecord::Migration
+class FixUsersTable < ActiveRecord::Migration
   def self.up
-    alter_table(:users) do |t|
+    drop_table :users
+    create_table(:users) do |t|
       t.database_authenticatable :null => false
       t.recoverable
       t.rememberable
       t.trackable
-	  t.confirmable
+	    t.confirmable
 
       # t.encryptable
       # t.confirmable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
-
+      t.string :name
+      #t.string :email
 
       t.timestamps
     end
+    
+    
+    add_column :users, :last_request_at, :datetime
 
     add_index :users, :email,                :unique => true
     add_index :users, :reset_password_token, :unique => true
@@ -24,8 +29,5 @@ class DeviseCreateUsers < ActiveRecord::Migration
   end
 
   def self.down
-    alter_table (:users) do |t|
-		
-	end
   end
 end

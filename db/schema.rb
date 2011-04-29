@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427072937) do
+ActiveRecord::Schema.define(:version => 20110429073803) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -59,11 +59,7 @@ ActiveRecord::Schema.define(:version => 20110427072937) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
     t.string   "email",                                 :default => "", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "lastname"
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -76,6 +72,9 @@ ActiveRecord::Schema.define(:version => 20110427072937) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.datetime "last_request_at"
   end
 
