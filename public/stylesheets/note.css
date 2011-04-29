@@ -5,7 +5,7 @@ div.note {
     padding-top: 10px;
     background-color:#f4e476; 
     word-wrap: break-word;
-    overflow:hidden;
+    /*overflow:hidden;*/
     box-shadow: 4px 4px 4px #8e8e8e;
     z-index:125;
 }

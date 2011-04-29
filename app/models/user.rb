@@ -9,5 +9,5 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   has_many :notes, :foreign_key => :owner_id
   has_many :boards, :foreign_key => :owner_id
-
+  has_many :placed_avatars
 end
