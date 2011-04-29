@@ -29,17 +29,20 @@ $(document).ready(function () {
 				var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
         if(has_avatar){
             avatar_holder.children("[name|=my_avatar]").remove();
-          }
+          };  
         $.ajax({ url: url_path, 
 		    type: 'POST',
         data: {_method:'PUT',
-		    'add_avatar': !has_avatar 	},
+		    'avatar_action': has_avatar ? "remove" : "add" 	},
         success: function(data, textStatus, jqXHR){
           if(has_avatar){
             avatar_holder.children("[name|=my_avatar]").remove();
           }
           else{
+            var has_avatar_check = avatar_holder.children("[name|=my_avatar]").length > 0;
+            if (!has_avatar_check){
             var new_avatar = $('<img name="my_avatar" src="/images/avatar/' + data.note.avatar + '" width="50%">');
+          }
             avatar_holder.append(new_avatar);
             
           }
