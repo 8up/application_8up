@@ -64,8 +64,10 @@ height: 100%;
 }
 
 #split_button_table .depressed {
-    border-style: solid;
-    border-width: 1px;
+opacity:1;
+    -moz-box-shadow: inset 0 0 18px ##3366cc;
+    -webkit-box-shadow: inset 0 0 18px #3366cc;
+    box-shadow: inset 0 0 18px #3366cc;
 }
 
 #content { 
@@ -179,16 +181,4 @@ background-color:white;
 	width:100%;
   left: 0px;
   bottom: 0px;
-}
-
-.selected {
-    -moz-box-shadow: 3px 3px 4px #000;
-    /* -webkit-box-shadow: 3px 3px 3px 4px #000;
-     */
-    box-shadow: 0px 0px 5px 3px #447;
-    /* For IE 8 */
-    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
-    /* For IE 5.5 - 7 */
-    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
-    
 }

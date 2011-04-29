@@ -12,5 +12,9 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   has_many :notes, :foreign_key => :owner_id
+<<<<<<< HEAD
+  has_many :boards, :foreign_key => :owner_id
   has_many :placed_avatars
+=======
+>>>>>>> 8f962190d9eb623c3b0862c73ca5d3cc92053f5a
 end

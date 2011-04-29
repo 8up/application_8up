@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 class Board < ActiveRecord::Base
-  belongs_to :owner, :class_name => 'User', :foreign_key => 'owner_id'
+  has_many :boards_permissions
+  has_one :owner, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::OWNER }
+  has_many :participants, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::PP}
   has_many :fields
   after_initialize :create_field
   
@@ -20,6 +22,10 @@ class Board < ActiveRecord::Base
   def recover_from_trash
     self.in_trash = false
     self.save
+  end
+  
+  def owner_name
+    owner.name
   end
   
   ## Returnerar en hashmap av hashmaps där den yttre har x-koordinater som
@@ -198,8 +204,10 @@ class Board < ActiveRecord::Base
     delta = resize_params[:delta].to_i
     direction = resize_params[:direction].to_sym
 
+    
     ## ändra storlek på alla fält som är på samma sida som orginalfältet
-    for field_id in resize_map[:original_side] 
+    for field_id in resize_map[:original_side]
+    
       f = Field.find field_id
       if direction ==  :north
         ## ändra position_y samt heigh
@@ -219,6 +227,7 @@ class Board < ActiveRecord::Base
     ## ändra storlek på de fält som är på motsatt sida om delnings-linjen som
     ## orginalfältet
     for field_id in resize_map[:other_side]
+    
       f = Field.find field_id
       if direction ==  :north
         f.height += delta
@@ -236,7 +245,8 @@ class Board < ActiveRecord::Base
     
     self.save
     self.fields.reload
-    return resize_map
+
+   return resize_map
   end
   
   ## Bygger upp den hash-map som används för att ändra storlek på fält
@@ -324,6 +334,14 @@ class Board < ActiveRecord::Base
       note.destroy
     end      
 
+  end
+  
+  def set_permission(user, permission)
+    boards_permission = BoardsPermission.new
+    boards_permission.user = user
+    boards_permission.role = permission
+    boards_permission.board = self
+    boards_permission.save
   end
 
 end

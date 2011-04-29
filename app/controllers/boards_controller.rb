@@ -7,9 +7,7 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    
-    @boards = Board.find(:all, :conditions => {:owner_id => current_user.id})
-    #authorize! :show, @boards
+    @boards = current_user.boards
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,12 +23,12 @@ class BoardsController < ApplicationController
   def show
     @board = Board.find(params[:id])
     
-    #authorize! :show, @board
+    authorize! :show, @board
     
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board }
+      format.json  { render :json => @board.to_json(:methods => [:owner_name])  }
     end
   end
 
@@ -54,7 +52,7 @@ class BoardsController < ApplicationController
   # POST /boards.xml
   def create
     @board = Board.new(params[:board])
-    @board.owner = current_user
+    @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|
       if @board.save
@@ -121,9 +119,10 @@ class BoardsController < ApplicationController
     field_to_delete = Field.find(params[:field_to_delete])
     
     remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
+    updated_fields = @board.get_field_neighbours
 
     respond_to do |format|
-      format.json { render :json => remaining_field }
+      format.json { render :json => updated_fields }
     end
 
   end
@@ -132,10 +131,34 @@ class BoardsController < ApplicationController
     @field = Field.find params[:field_id]
     @board = Board.find params[:board_id]
 
-    updated_fields = @board.resize_field(@field, params)
-
+    @board.resize_field(@field, params)
+    updated_fields = @board.get_field_neighbours
+    
     respond_to do |format|
-        format.json { render :json => updated_fields }
+      format.json { render :json => updated_fields }
     end
+  end
+  
+  def invite  
+    @user = User.find_by_email params[:email]
+    @board = Board.find params[:board_id]
+    
+    if(@board.nil?)
+      render :json => {:status => '404'}, :status => 404
+    elsif(@user.nil?)
+      render :json => {:status => 'error', :message => 'Could not find user'}
+    elsif(@board.participants.exists?(@user))
+      render :json => {:status => 'error', :message => 'Already invited'}
+    elsif( @board.owner == @user)
+      render :json => {:status => 'error', :message => 'You fucking own this board!'}
+    else
+      authorize! :invite, @board
+      if    @board.set_permission(@user,BoardsPermission::PP)
+        render :json => {:status => 'ok', :message => ''}
+      else
+        render :json => {:status => 'error', :message => 'Could not invite user'}
+      end
+    end
+    
   end
 end

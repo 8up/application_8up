@@ -30,6 +30,15 @@ Application8up::Application.routes.draw do
   match "/boards/:board_id/merge_fields/:field_id", :controller => "boards", :action => "merge_fields", :via => "post"
 
   match "/boards/:board_id/resize_field/:field_id", :controller => "boards", :action => "resize_field", :via => "post"
+  match "/boards/:board_id/invite/", :controller => "boards", :action => 'invite'#, :via => 'post'
+
+  match "/settings", :controller => "settings", :action => "index"
+
+  match "/users/edit", :controller => "users", :action => "index"
+  
+  match "/settings/change_password/", :controller => "settings", :action => "change_password"
+  match "/settings/edit_password/", :controller => "settings", :action => "edit_password"
+  match "/settings/change_avatar/", :controller => "settings", :action => "change_avatar"
 
   root :to => "boards#index"
 

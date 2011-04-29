@@ -68,6 +68,25 @@ div.note h1,form {
     /*z-index: 127;*/
 }
 
+
+.invite_win {
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    height: 50px;
+    background-color:#f44576; 
+    border: 3px solid black;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 20px;
+  }
+
+
 #note_editor_panel_wrapper {
   position: fixed;  
   top: 0;

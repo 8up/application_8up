@@ -1,9 +1,10 @@
 $(document).ready(function () {  
+setInterval(update_online_list, 10000);
 
-$("#toolbox_button_users").click(function(){
+function update_online_list(){
   var user_list = $("#online_user_list");
    $.ajax({
-            url: 'online_users.json',
+            url: '/online_users.json',
             type: 'GET',
             success: function(data, textStatus, jqXHR){
               user_list.text(" ");
@@ -14,5 +15,5 @@ $("#toolbox_button_users").click(function(){
 
             }
           });
-        }); 
+        };
         });

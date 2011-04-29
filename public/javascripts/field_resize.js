@@ -3,6 +3,9 @@ $(document).ready(function() {
     });
 
 function field_resize_handle(event) {
+    if (event.target != this) {
+	return true;
+    }
     //Ta reda på åt vilket håll resize:en är på väg.
     var direction = field_handle_direction(event.target);
     
@@ -61,33 +64,165 @@ function resize_field(resize_helper, srcField, direction) {
     var delta = 0;
     var field_id = srcField.id8Up();
     var board_id = $(srcField.parent()).id8Up();
-   
+    var resize_map = get_resize_map(srcField, direction);   
 
     if (direction == "south") {
 	delta = resize_helper.height() - srcField.height();
-	srcField.height(srcField.height() + delta);
-	
+	//Ändra storlek på alla på samma sida som det fält som förändrades
+	for (var i=0; i < resize_map["original_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["original_side"][i]));
+	    current_field.height(current_field.height() + delta);
+	}
+	//Ändra storlek på fälten på andra sidan
+	for (var i=0; i < resize_map["other_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["other_side"][i]));
+	    current_field.height(current_field.height() - delta);
+	    current_field.offset({top: current_field.offset().top +delta});
+	}
+
     }
     else if (direction == "north") {
 	delta = Math.round(resize_helper.offset().top - srcField.offset().top);
-	var src_height_str = srcField[0].style.height;
-	var alpha_index = src_height_str.search("[A-z]"); 
-	var src_height = 1 * src_height_str.substring(0, alpha_index);
-	var new_height = src_height - delta;
-	var new_top = srcField.offset().top + delta;
-	srcField[0].style.height = new_height + "px";
-	srcField.offset({top: new_top});
+
+	//Ändra storlek på alla på samma sida som det fält som förändrades
+	for (var i=0; i < resize_map["original_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["original_side"][i]));
+	   
+	    var new_top = current_field.offset().top + delta;
+	    current_field.offset({top: new_top});
+	    current_field.height(current_field.height() - delta);
+
+	}
+	//Ändra storlek på fälten på andra sidan
+	for (var i=0; i < resize_map["other_side"].length; i++) {
+	      var current_field = $(("#field_" + resize_map["other_side"][i]));
+	      current_field.height(current_field.height() + delta);
+	}
+
     }
     else if (direction == "west") {
 	delta = Math.round(resize_helper.offset().left - srcField.offset().left);
-	
+
+	//Ändra storlek på alla på samma sida som det fält som förändrades
+	for (var i=0; i < resize_map["original_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["original_side"][i]));
+
+	    var new_width = current_field.offset().left + delta;
+	    current_field.offset({left: new_width});
+	    current_field.width(current_field.width() - delta);
+	}
+	//Ändra storlek på fälten på andra sidan
+	for (var i=0; i < resize_map["other_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["other_side"][i]));
+	    
+	    var new_width = current_field.offset().left + delta;
+	    current_field.width(current_field.width() + delta);
+	}
     }
     else if (direction == "east") {
-	delta = resize_helper.width() - srcField.width();
-	srcField.width(srcField.width() + delta);
+	delta = Math.round(resize_helper.width() - srcField.width());
+
+	//Ändra storlek på alla på samma sida som det fält som förändrades
+	for (var i=0; i < resize_map["original_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["original_side"][i]));
+	    var new_width = current_field.width() + delta;
+	    current_field.width(new_width);
+	}
+	//Ändra storlek på fälten på andra sidan
+	for (var i=0; i < resize_map["other_side"].length; i++) {
+	    var current_field = $(("#field_" + resize_map["other_side"][i]));
+	    var new_width = current_field.offset().left + delta;
+	    current_field.offset({left: new_width});
+	    current_field.width(current_field.width() - delta);
+	}
     }
     
     $.ajax({url: "/boards/" + board_id + "/resize_field/" + field_id,
 		type:"POST",
-		data: {"direction": direction, "delta":delta} });
+		data: {"direction": direction, "delta":delta}, success: update_fields });
+    
+};
+
+//Uppdaterar fälten efter vi fått svar från servern efter resize
+function update_fields(response_data) {
+    //response data är ett json-objekt med field-id som attribut 
+    //och nya neighbour-maps som värden
+    for (var field_id in response_data) {
+	$(("#field_" + field_id)).data('neighbours', response_data[field_id]);
+    }
+};
+
+function get_resize_map(field, direction) {
+    var field_id = field.id8Up();
+    var reverse_direction = null;
+    
+    if (direction ==  "north") {
+	reverse_direction = "south";
+    }
+    else if (direction == "east") {
+	reverse_direction = "west"                                   
+    }                
+    else if (direction == "south") {
+	reverse_direction = "north";
+    }
+    else if (direction == "west") {
+	reverse_direction = "east";
+    }
+
+    //Vi använder objekt för att representera mängder, fult men det fungerar
+    var resize_map = {"other_side" : [], "original_side" : []};
+
+    var to_visit = {};
+    var visited = {};
+    var neighbours = field.data("neighbours")[direction];
+    //börja med att lägga till först elementet och alla dess grannar 
+    //i den riktning vi skall resiza
+    visited[field_id] = field_id;
+    to_visit[field_id] = field_id;
+    resize_map["original_side"].push(field_id);
+    for (var i = 0; i < neighbours.length; i++) {
+	to_visit[neighbours[i]] = neighbours[i];
+    }
+    var current_side = "other_side"; 
+    var done = false;
+    var current_direction = reverse_direction;
+    while (!done) {
+	for (current_field_id in to_visit) {
+		// Om fältet redan behandlats lägger vi det i visited
+		if (current_field_id in visited) {
+		    continue;
+		};
+
+		var current_field = $(("#field_" + current_field_id));
+		neighbours = current_field.data('neighbours')[current_direction];
+	
+		// Kolla alla grannar till det nuvarande fältet
+		for (var i=0; i < neighbours.length; i++) {
+		    //om den nuvarande grannen redan finns i 
+		    //to_visit skall den inte läggas till
+		    if (!(neighbours[i] in to_visit)) {
+			to_visit[neighbours[i]] = neighbours[i];
+		    }
+		}
+		
+		resize_map[current_side].push(current_field_id);
+		visited[current_field_id] = current_field_id;
+	    }
+	
+	current_side = current_side == "other_side" ? 
+	    "original_side" : "other_side";
+	current_direction = current_direction == direction ? 
+	    reverse_direction : direction;
+	//Kolla om vi är färdiga. Om alla element i to_visit 
+	//också finns i visited är vi färdiga
+	done = true;
+	for (prop in to_visit) {
+		if (!(prop in visited)) {
+		    done = false;
+		    break;
+		} 
+	    }
+    }
+
+    return resize_map;
 };
