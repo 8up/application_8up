@@ -66,6 +66,15 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
 
+    if  params[:add_avatar]
+      avatar_connection = PlacedAvatar.create({:user_id => current_user().id, :note_id => @note.id})      
+    else
+      PlacedAvatar.where({:note_id => @note.id, :user_id => current_user().id}).destroy  
+    end
+    
+    avatar_filename = current_user().avatar;
+    @note[:avatar] = avatar_filename
+    
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
