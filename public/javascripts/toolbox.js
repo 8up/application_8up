@@ -85,7 +85,6 @@ function whiteboard_context(context_area) {
 	split_vert.addClass('split_button');
 	split_buttons.append(split_horiz);
 	split_buttons.append(split_vert);
-        
 
 	split_horiz.click(gui_split_horizontally);
 	split_vert.click(gui_split_vertically);
