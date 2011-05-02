@@ -95,7 +95,7 @@ class Board < ActiveRecord::Base
   end
 
   def split_field(field, direction)
-      attributes = {};
+    attributes = {};
     array_notes_to_add = [];
     attributes[:board_id] = self.id
 
@@ -140,7 +140,7 @@ class Board < ActiveRecord::Base
         end
       end
     end
-    new_field =Field.create(attributes)
+    new_field = Field.create(attributes)
     new_field.notes = array_notes_to_add
     
     return new_field

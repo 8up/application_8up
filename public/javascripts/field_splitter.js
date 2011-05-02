@@ -39,12 +39,14 @@ function do_split(e) {
     
     $.ajax({url: "/boards/" + board_id  + 
 		"/split_field/" +  field_id , type:"POST", 
-		data:{split_direction : direction} , 
+		data:{
+		split_direction : direction} , 
 		success: function(data) {
-		new_field.attr("id", "field_" + data.field.id) 
+		new_field.attr("id", "field_" + data.new_field.field.id); 
 		    // Här kommer vi måsta lägga in kod för att 
 		    // flytta notes från det gamla fältet till det nya
-		    } 
+		update_fields(data);
+	    } 
 	});
 
     

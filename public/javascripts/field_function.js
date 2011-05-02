@@ -9,6 +9,17 @@ $(document).ready(function () {
 	});
 
 });
+//Uppdaterar fältens grannar efter vi fått svar från servern efter resize
+function update_fields(response_data) {
+    //response data är ett json-objekt med field-id som attribut 
+    //och nya neighbour-maps som värden
+    var neighbours_map = response_data["neighbours_map"];
+    for (var field_id in neighbours_map) {
+	var field = $(("#field_" + field_id));
+	var neighbours = neighbours_map[field_id];
+	field.data('neighbours', neighbours);
+    }
+};
 
 // Nya fields kommer köra denna funktion för att attach:a 
 //hanterare till events, lägg till dem här
