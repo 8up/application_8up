@@ -6,8 +6,9 @@ $(document).ready(function () {
     $('#in_focus_image').hide();
   });
  $("input#invite_input").autocomplete({
-    source: "/users.json",
-    minLength: 1    
+    minLength: 0,
+    max: 2,
+    source: "/users.json"
   });
     
   $('.invite_submit').click(function(){
