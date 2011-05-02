@@ -86,6 +86,11 @@ $(document).ready(function () {
 
 function edit_note_header(header) {
   var header = $(header);
+  header.keydown(function(e){
+    if(e.keyCode == 46){
+      e.stopPropagation();
+    }
+  })
   
   var editor = nicEditors.findEditor($(header).attr('id'));
   if( editor == null){
