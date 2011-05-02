@@ -68,22 +68,30 @@ function gui_split_horizontally(event) {
 
 function whiteboard_context(context_area) {
     update_info_box();
-    var split_buttons = $('<div></div>');
+    if ($("#split_buttons_container").length == 0) {
+	var split_buttons = $('<div></div>');
    
-   
-    split_buttons.attr('id','split_buttons_container');
-    var split_horiz = $('<div></div>');
-    var split_vert = $('<div></div>');
-    split_horiz.attr('id','split_horiz');
-    split_vert.attr('id', 'split_vert');
-    split_horiz.addClass('split_button');
-    split_vert.addClass('split_button');
-    split_buttons.append(split_horiz);
-    split_buttons.append(split_vert);
+	split_buttons.attr('id','split_buttons_container');
+	split_buttons.data("split_direction", "none");
+	var split_horiz = $('<img/>');
+	var split_vert = $('<img/>');
+	split_horiz.attr('id','split_horiz');
+	split_vert.attr('id', 'split_vert');
+
+	split_vert.attr('src','/images/button_v.png');
+	split_horiz.attr('src','/images/button_h.png');
+
+	split_horiz.addClass('split_button');
+	split_vert.addClass('split_button');
+	split_buttons.append(split_horiz);
+	split_buttons.append(split_vert);
         
-    split_horiz.click(gui_split_horizontally);
-    split_vert.click(gui_split_vertically);
-    context_area.append(split_buttons);
+
+	split_horiz.click(gui_split_horizontally);
+	split_vert.click(gui_split_vertically);
+
+	context_area.append(split_buttons);
+    }
     // Om någon note är markerad kör vi funktionen note_selected_context
     if ($('.selected').length > 0) {
 	note_selected_context(context_area);
@@ -92,8 +100,6 @@ function whiteboard_context(context_area) {
 	//Ta bort color-choosern från context_area
 	context_area.children("#color_chooser").remove();
     }
-
-    
     
     // Add split options
 };
