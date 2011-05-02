@@ -133,12 +133,12 @@ function create_note(e) {
     $.ajax({ url: '/notes', 
 		type: 'POST', 
 		data: {
-		'note[header]': 'New Header',
-		    'note[body]': 'New Body',
-		    'note[position_x]': posX,
-		    'note[position_y]': posY,
-		    'note[owner_id]':1,
-		    'note[field_id]': field_id}, 
+		  'note[header]': '',
+		  'note[body]': '',
+		  'note[position_x]': posX,
+		  'note[position_y]': posY,
+		  'note[field_id]': field_id
+		}, 
 		success: function(data, textStatus, jqXHR) {
 		var header = $('<div id="temp_note_1" class="note_header"></div>');
 		var note = $('<div></div>');
