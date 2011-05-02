@@ -37,7 +37,7 @@
 }
 #toolbox_area_1 {
     float:left;
-    background-color: #679FD2;
+    background-color: #F8C996;
     height:100%;
     width:200px;
     display: none; 
@@ -75,3 +75,15 @@
 #toolbox_text_2 {
     background-color:white;
 }
+#title2 {
+width:180px;
+height:30px;
+margin-left:10px;
+margin-top:10px;
+
+}
+
+.toolbox_button_delete{
+font:15px Segoe UI;
+}
+
