@@ -21,11 +21,14 @@ div.note.selected {
     
 }
 
-div.note h1,form {
+div.note div.note_header,form {
     margin: 0px;
     font-size: 18px;
     font-family: Times New Roman;
     text-align: center;
+}
+div.note div.note_header:focus{
+  outline: 0;
 }
 
 .background{
