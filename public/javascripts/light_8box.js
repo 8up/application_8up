@@ -1,8 +1,4 @@
 $(document).ready(function(){
-  $( "div.note" ).dblclick(function(e){
-    if(e.target === this)
-    note_box(e);
-  });
 
   $("#window_wrapper").click(function(e){
     if(e.target == this)
