@@ -94,21 +94,22 @@ class Board < ActiveRecord::Base
     end
   end
 
-  def split_field(field, direction)
+  def split_field(field, direction, split_position)
     attributes = {};
     array_notes_to_add = [];
     attributes[:board_id] = self.id
 
     if direction == "vertical"
       #Dela fältet vertikalt
-      new_width = field.width/2
-      field.width = new_width
+      new_width = split_position
 
       #Sätt attribut för det nya fältet efter vertikal split
-      attributes[:width] = new_width
+      attributes[:width] = field.width - split_position 
       attributes[:height] = field.height
       attributes[:position_x] = field.position_x + new_width
       attributes[:position_y] = field.position_y
+
+      field.width = new_width
 
       field.notes.each do |note|
         pos_x = note.position_x
@@ -123,15 +124,16 @@ class Board < ActiveRecord::Base
       
     else
       #Dela fältet horisontellt
-      new_height = field.height/2
-      field.height = new_height
-
+      new_height = split_position
+      
       #Sätt attribut för det nya fältet efter horisontell split
-      attributes[:height] = new_height
+      attributes[:height] = field.height - new_height
       attributes[:width] = field.width
       attributes[:position_x] = field.position_x
       attributes[:position_y] = field.position_y + new_height
-      
+
+      field.height = new_height
+ 
       field.notes.each do |note|
         pos_y = note.position_y
         if pos_y >= new_height

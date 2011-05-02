@@ -94,8 +94,19 @@ function board_selected_context(context_area) {
 
 };
 
+function reset_info_box(){
+	
+	$('#toolbox_header_name').text("Name");
+	$('#toolbox_info_created').text("");
+	$('#toolbox_info_updated').text("");
+	$('#toolbox_info_owner').text("");
+	$('#toolbox_info_name').text("");
+
+};
+
 //Funktion för att hämta information via json om objektet.
 function update_info_box(){
+	
 	var toolbox_name = $('#toolbox_header_name');
 	var toolbox_info_created = $('#toolbox_info_created');
 	var toolbox_info_updated = $('#toolbox_info_updated');
