@@ -2,7 +2,7 @@ $(document).ready(function () {
 	//börja med att köra funktionen en gång
 	update_online_list();
 	// Kör den sen med jämt intervall
-	setInterval(update_online_list, 1000);
+	setInterval(update_online_list, 100000);
 
     });
 

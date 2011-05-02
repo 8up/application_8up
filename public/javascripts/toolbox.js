@@ -45,41 +45,54 @@ $(document).ready(function(){
 	});
 
 	$("#toolbox_container").bind('update',function(){
-
 		var context_area = $('#context_area');
 		var pathname = window.location.pathname;
 		var array = pathname.split("/");
+
+		// Ta bort alla tomma element ur arrayen
+		array = array.filter(function(element) { return element != "";});
+
 		var lastElement = array.pop();
 		if(lastElement == "boards"){
-			start_page_context(context_area);
+		    start_page_context(context_area);
 		}else{
-			whiteboard_context(context_area);
-
+		    whiteboard_context(context_area);
 		}
-
-	});
+	    });
 
 });
 function whiteboard_context(context_area) {
-
-	update_info_box();
-	if ($('.selected').length > 0) {
-		note_selected_context(context_area);
-	}
-	//Add split options
-//	var split_buttons = $('<div></div>');
-
-//	context_area.append(split_buttons):
-
-
+    update_info_box();
+    if ($('.selected').length > 0) {
+	note_selected_context(context_area);
+    }
+    else {
+	//Ta bort color-choosern från context_area
+	context_area.children("#color_chooser").remove();
+    }
+    // Add split options
+    // var split_buttons = $('<div></div>');
+    // context_area.append(split_buttons):
 };
 
 function note_selected_context(context_area) {
+    if (context_area.children("#color_chooser").length == 0) {
+	var color_chooser = $('<ul></ul>');
+	var colors = ["green", "blue", "yellow", 
+		      "red", "orange", "pink", 
+		      "#f4e476", "crimson","fuchsia"];
 
-//	var color_chooser = $('<div></div>');
-//	color_chooser.attr('id','color_chooser');
+	for (var i=0; i < colors.length; i++) {
+	    var color = $('<li></li>');
+	    color.addClass("palette_color");
+	    color.css('background-color', colors[i]);
+	    color_chooser.append(color);
+	}
 
-//	context_area.append(color_chooser);
+	color_chooser.attr('id','color_chooser');
+
+	context_area.append(color_chooser);
+    }
 };
 
 function start_page_context(context_area) {
