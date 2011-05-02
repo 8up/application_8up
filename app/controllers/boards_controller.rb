@@ -28,7 +28,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board.to_json(:methods => [:owner_name])  }
+      format.json  { render :json => @board.to_json(:methods => [:owner_name]) }
     end
   end
 
@@ -104,11 +104,19 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:board_id])
     @field = Field.find(params[:field_id])
     
-    new_field = @board.split_field(@field, params[:split_direction])
+    new_field = @board.split_field(@field, params[:split_direction], 
+                                   params[:split_position].to_i)
+    
+    update_success = @field.save and new_field.save
 
-    if @field.save and new_field.save
+    @board.reload
+
+    updated_fields = @board.get_field_neighbours
+    data = {:neighbours_map => updated_fields, :new_field => new_field}
+
+    if update_success
       respond_to do |format|
-        format.json { render :json => new_field }
+        format.json { render :json => data}
       end
     end
   end
@@ -120,9 +128,9 @@ class BoardsController < ApplicationController
     
     remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
     updated_fields = @board.get_field_neighbours
-
+    data = {:neighbours_map => updated_fields}
     respond_to do |format|
-      format.json { render :json => updated_fields }
+      format.json { render :json => data }
     end
 
   end
@@ -133,9 +141,10 @@ class BoardsController < ApplicationController
 
     @board.resize_field(@field, params)
     updated_fields = @board.get_field_neighbours
-    
+
+    data = {:neighbours_map => updated_fields}
     respond_to do |format|
-      format.json { render :json => updated_fields }
+      format.json { render :json => data }
     end
   end
   

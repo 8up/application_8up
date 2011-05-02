@@ -6,11 +6,13 @@ $(document).ready(function(){
 		if ($("#split_button_table").data("split_direction") == "none" || 
 		$("#split_button_table").data("split_direction") == "vertical") 
 		{
-			//Vi använder en klass för att styla knappen som nedtryckt
-			$("#split_horiz").addClass("depressed"); 
-			$("#split_button_table").data("split_direction", 
-			"horizontal"); 
-			set_split();
+		    reset_split();
+		    $("split_vert").removeClass("depressed");
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_horiz").addClass("depressed"); 
+		    $("#split_button_table").data("split_direction", 
+						  "horizontal"); 
+		    set_split();
 		}
 		//Om vi redan inlett det ångrar ett till klick
 		else if ($("#split_button_table").data("split_direction") 
@@ -26,11 +28,13 @@ $(document).ready(function(){
 		if ($("#split_button_table").data("split_direction") == "none" || 
 		$("#split_button_table").data("split_direction") == "horizontal") 
 		{
-			//Vi använder en klass för att styla knappen som nedtryckt
-			$("#split_vert").addClass("depressed"); 
-			$("#split_button_table").data("split_direction", 
-			"vertical"); 
-			set_split();
+		    
+		    reset_split();
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_vert").addClass("depressed"); 
+		    $("#split_button_table").data("split_direction", 
+						  "vertical"); 
+		    set_split();
 		}
 		//Om vi redan inlett det ångrar ett till klick
 		else if ($("#split_button_table").data("split_direction") 
