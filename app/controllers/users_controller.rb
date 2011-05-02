@@ -1,14 +1,20 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
-  def index
+
+def index
     @users = User.all
     json = ActiveRecord::Base.include_root_in_json
     ActiveRecord::Base.include_root_in_json = false
 
+ 
+  if params.has_key? :term
+    @users = User.find(:all, :conditions=>"email like'%"+params[:term].downcase+"%'")
+  end
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json  {render :json => @users.to_json(:only => [:name, :id, :email])}
+      format.json  {render :json => @users.to_json(:only => [:email])}
     end
     ActiveRecord::Base.include_root_in_json = true
   end
