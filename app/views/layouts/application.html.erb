@@ -6,6 +6,18 @@
     <%= render 'layouts/javascripts'%>
     <%= csrf_meta_tag %>
 	<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+  
+<style type="text/css">
+img
+{
+position:absolute;
+right:0px;
+top:0px;
+z-index:1;
+}
+</style>
+  
+
   </head>
   <body>  
     <div id="toolbox_container"  <%= show_toolbox %>>    
@@ -69,7 +81,7 @@
 
 	<div id="content">    
 		<%= yield %>  
-    </div>
+  </div>
     <div id="menu_bar">
       <ul>
 	<li><a href="/boards/">Menu</a></li>
