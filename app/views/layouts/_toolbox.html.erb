@@ -1,43 +1,43 @@
-<div id="toolbox_container"  <%= show_toolbox %>>    
+<div id="toolbox_container"  <%= show_toolbox %>>
   <div ID="toolbox_area_1">
-
-    <a href="#"><p class="toolbox_button_delete">Delete</p></a>
-    <a href="#"><p class="toolbox_button_invite">Invite</p></a>
-
+    <img src="/images/title2.png" id="title2"/>
+    <div class="toolbox_button_delete">Delete</div>
+    <div class="toolbox_button_invite">Invite</div>
+    
     <div ID="toolbox_text_container">
       <div ID="toolbox_text_1">
-	<h3 id="toolbox_header_name">Name</h3>
+        <h3 id="toolbox_header_name">Name</h3>
       </div>
       <div Id="toolbox_text_2">
-	<div id="toolbox_info_name"></div>
-	<div id="toolbox_info_created"></div>
-	<div id="toolbox_info_updated"></div>
-	<div id="toolbox_info_owner"></div>
+        <div id="toolbox_info_name"></div>
+        <div id="toolbox_info_created"></div>
+        <div id="toolbox_info_updated"></div>
+        <div id="toolbox_info_owner"></div>
       </div>
-      <div id="user_list_container">
-	Online users:
-	<div id="online_user_list"></div>
-      </div>
-
     </div>
+    <div id="user_list_container">
+      Online users:
+      <div id="online_user_list"></div>
+    </div>
+    
     <div id="context_area">
       
     </div>
-
+    
     <div id="online_user_list" ></div>
-   
+    
     
     <div id="avatar">
       <p>Avatar</p>
       <img src="/images/avatar/<%= current_user().avatar %>"/>
-    </div> 
+    </div>
     
-
+    
   </div>
-
+  
   <div ID="toolbox_area_2">
     <img src="/images/panel_button_right.png" id="panel_arrow"/>
   </div>
-
-
+  
+  
 </div>
