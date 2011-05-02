@@ -114,6 +114,7 @@ function note_selected_context(context_area) {
 	    var color = $('<li></li>');
 	    color.addClass("palette_color");
 	    color.css('background-color', colors[i]);
+	    color.click(color_palette_handler);
 	    color_chooser.append(color);
 	}
 
