@@ -104,7 +104,8 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:board_id])
     @field = Field.find(params[:field_id])
     
-    new_field = @board.split_field(@field, params[:split_direction])
+    new_field = @board.split_field(@field, params[:split_direction], 
+                                   params[:split_position].to_i)
     
     update_success = @field.save and new_field.save
 
