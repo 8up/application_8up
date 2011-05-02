@@ -137,13 +137,15 @@ function update_info_box(){
 				type: 'GET',
 				success: function(data, textStatus, jqXHR){
 					if((data.note.header).length > 8){
-						toolbox_name.text((data.note.header).substring(7,0) + "...");
+						toolbox_name.text(
+							($(e).text().trim()).substring(7,0) + "..."
+						);
 					} else {
 						toolbox_name.text(data.note.header);
 					}
 					toolbox_info_created.text("Created: " + data.note.created_at);
 					toolbox_info_updated.text("Updated: " + data.note.updated_at);
-					toolbox_info_owner.text("Owner: " + data.note.owner_id);
+				//	toolbox_info_owner.text("Owner: " + data.note.owner_id);
 
 				}
 			})

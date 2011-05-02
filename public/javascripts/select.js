@@ -13,7 +13,7 @@ function select(e, caller) {
 		return true;
     };*/
 	//Skapar eller tar bort klassen selected från objektet.
-	$(caller).addClass("selected");
+	$(caller).addClass("selected").trigger('select');
 	$("#toolbox_container").trigger("update");
 };
 
@@ -23,10 +23,15 @@ $(document).ready(
 			de_select(e, this);
 		});
 
-		$('.note').click(function(e) 
+		$('.note').live('click', function(e) 
 		{
 			select(e, this);
 		});
+		
+		$( ".note" ).live('dblclick', function(e){
+      //if(e.target === this)
+      note_box(e);
+    });
 		
 		$("#workspace").click(function(e){
 			de_select(e, this);
