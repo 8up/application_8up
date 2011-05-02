@@ -14,3 +14,17 @@ h2{
   position:absolute;  
 
 }
+
+#logo {
+position:fixed;
+bottom:0%;
+
+}
+#log_title{
+position:absolute;
+top:0%;
+text-align:right;
+right:0;
+width:30%;
+height:10%;
+}
