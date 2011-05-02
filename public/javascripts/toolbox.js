@@ -1,49 +1,4 @@
 $(document).ready(function(){
-	//Atach a handler for when the user presses the split horizontaly button
-	$("#split_horiz").click(function(){
-		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
-		//sätter vi den horizontellt
-		if ($("#split_button_table").data("split_direction") == "none" || 
-		$("#split_button_table").data("split_direction") == "vertical") 
-		{
-		    reset_split();
-		    $("split_vert").removeClass("depressed");
-		    //Vi använder en klass för att styla knappen som nedtryckt
-		    $("#split_horiz").addClass("depressed"); 
-		    $("#split_button_table").data("split_direction", 
-						  "horizontal"); 
-		    set_split();
-		}
-		//Om vi redan inlett det ångrar ett till klick
-		else if ($("#split_button_table").data("split_direction") 
-		== "horizontal") {
-			reset_split();
-		}
-		//Annars gör vi inget
-	});
-
-	$("#split_vert").click(function(){
-		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
-		//sätter vi den horizontellt
-		if ($("#split_button_table").data("split_direction") == "none" || 
-		$("#split_button_table").data("split_direction") == "horizontal") 
-		{
-		    
-		    reset_split();
-		    //Vi använder en klass för att styla knappen som nedtryckt
-		    $("#split_vert").addClass("depressed"); 
-		    $("#split_button_table").data("split_direction", 
-						  "vertical"); 
-		    set_split();
-		}
-		//Om vi redan inlett det ångrar ett till klick
-		else if ($("#split_button_table").data("split_direction") 
-		== "vertical") {
-			reset_split();
-		}
-		//Annars gör vi inget
-	});
-
 	$("#toolbox_container").bind('update',function(){
 		var context_area = $('#context_area');
 		var pathname = window.location.pathname;
@@ -53,16 +8,83 @@ $(document).ready(function(){
 		array = array.filter(function(element) { return element != "";});
 
 		var lastElement = array.pop();
-		if(lastElement == "boards"){
-		    start_page_context(context_area);
-		}else{
+		//Om sista elementet inte är ett NaN, så är det ett nummer, och 
+		// vi antar att vi är i ett whiteboard
+		if (!isNaN(lastElement)) {
 		    whiteboard_context(context_area);
 		}
+		else {
+		    start_page_context(context_area);
+		}
 	    });
-
+	$('#toolbox_container').trigger('update');
 });
+
+function gui_split_vertically(event) {
+		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den vertikalt
+		if ($("#split_buttons_container").data("split_direction") == "none" || 
+		$("#split_buttons_container").data("split_direction") == "horizontal") 
+		{
+		    
+		    reset_split();
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_vert").addClass("depressed"); 
+		    $("#split_buttons_container").data("split_direction", 
+						  "vertical"); 
+		    set_split();
+		}
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_buttons_container").data("split_direction") 
+		== "vertical") {
+			reset_split();
+		}
+		//Annars gör vi inget
+};
+
+function gui_split_horizontally(event) {
+
+		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den horizontellt
+		if ($("#split_buttons_container").data("split_direction") == "none" || 
+		$("#split_buttons_container").data("split_direction") == "vertical") 
+		{
+		    reset_split();
+		    $("split_vert").removeClass("depressed");
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_horiz").addClass("depressed"); 
+		    $("#split_buttons_container").data("split_direction", 
+						  "horizontal"); 
+		    set_split();
+		}
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_buttons_container").data("split_direction") 
+		== "horizontal") {
+			reset_split();
+		}
+		//Annars gör vi inget
+
+}
+
 function whiteboard_context(context_area) {
     update_info_box();
+    var split_buttons = $('<div></div>');
+   
+   
+    split_buttons.attr('id','split_buttons_container');
+    var split_horiz = $('<div></div>');
+    var split_vert = $('<div></div>');
+    split_horiz.attr('id','split_horiz');
+    split_vert.attr('id', 'split_vert');
+    split_horiz.addClass('split_button');
+    split_vert.addClass('split_button');
+    split_buttons.append(split_horiz);
+    split_buttons.append(split_vert);
+        
+    split_horiz.click(gui_split_horizontally);
+    split_vert.click(gui_split_vertically);
+    context_area.append(split_buttons);
+    // Om någon note är markerad kör vi funktionen note_selected_context
     if ($('.selected').length > 0) {
 	note_selected_context(context_area);
     }
@@ -70,9 +92,10 @@ function whiteboard_context(context_area) {
 	//Ta bort color-choosern från context_area
 	context_area.children("#color_chooser").remove();
     }
+
+    
+    
     // Add split options
-    // var split_buttons = $('<div></div>');
-    // context_area.append(split_buttons):
 };
 
 function note_selected_context(context_area) {
