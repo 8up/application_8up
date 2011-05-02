@@ -5,7 +5,20 @@
     <%= stylesheet_link_tag :all %>
     <%= render 'layouts/javascripts'%>
     <%= csrf_meta_tag %>
-	<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+	<!--<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" /> -->
+        <img src="/images/title2.png" id="title2" >
+  
+<style type="text/css">
+img
+{
+position:absolute;
+right:0px;
+top:0px;
+z-index:1;
+}
+</style>
+  
+
   </head>
   <body>  
     <%= render 'layouts/toolbox' %>
