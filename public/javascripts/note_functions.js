@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    var myNicEditor = new nicEditor();
+    window.noteEditor = myNicEditor;
+    //noteEditor.setPanel('content');
+  
     $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
      var x = $(e.target).attr('bgcolor');
     
@@ -62,7 +66,7 @@ $(document).ready(function () {
   });
 
 	//Dubbelklick på en lapps header gör att man kan redigera den
-	$("div.note h1").dblclick(function(e) {
+	$("div.note div.note_header").click(function(e) {
 		if (e.target != this) {
 		    return true;
 		}
@@ -75,47 +79,48 @@ $(document).ready(function () {
 			$(this).data('startPageY', event.pageY);
 			$(this).data('startLeft', $(this).position().left);
 			$(this).data('startTop', $(this).position().top);
-		}
+		},
 	});
       
 });
 
 function edit_note_header(header) {
-    var original_text = $(header).html();
-    var title_form = $("<form></form>");
-    var title_input = $("<input type='text' size='10'></input>");
-    //Titeln trimmas för tillfället 
-    title_input.val($.trim(original_text));
-    var note_id = $(header).closest("div.note").id8Up();
-    var event_map = {"id" : note_id, "form_object":title_form};
-    
-    title_form.append(title_input);
-    $(header).replaceWith(title_form);
-    title_input.focus();
-    
-    title_input.blur(function(e) { $(this).closest("form").submit(); });
+  var header = $(header);
+  header.keydown(function(e){
+    if(e.keyCode == 46){
+      e.stopPropagation();
+    }
+  })
+  
+  var editor = nicEditors.findEditor($(header).attr('id'));
+  if( editor == null){
+    noteEditor.addInstance($(header).attr('id'));
+    editor = nicEditors.findEditor($(header).attr('id'));
+  }
+  var note_id = $(header).closest("div.note").id8Up();
+  
+  header.focus();
+  header.parent().draggable('disable');
+  var target_url = "/notes/" + note_id + ".json";
+  
+  header.parent().bind('deselect', function(e){
+    $.ajax({url: target_url, 
+      type: "PUT", 
+      data: {'id': note_id, 
+             'note' : {'header' : editor.getContent()}
+            }, 
+      success: function(data) {
 
-    title_form.submit(event_map, function(e) { 
-	    var new_header_text = this.firstChild.value;
-	    var target_url = "/notes/" + event_map["id"] + ".json";
-	    $.ajax({url: target_url, 
-			type: "PUT", 
-			data: {id: event_map["id"], note : 
-			{header : new_header_text}}, 
-			success: function(data) {
-			
-			var header_text = data.note.header;
-			var header = $('<h1></h1>');
-			header.html(header_text);
-			header.dblclick(function(e) {
-				edit_note_header(e.target);
-				    });
-			event_map["form_object"].replaceWith(header);
-		    }
-		});
-		$("#toolbox_container").trigger("update");
-	    return false; //ladda inte om sidan
-	});
+        var header_text = data.note.header;
+        header.html(header_text);
+        header.parent().dblclick(function(e) {
+          edit_note_header(e.target);
+        });
+      }
+    });
+    $("#toolbox_container").trigger("update");
+    header.parent().draggable('enable');
+  });
 };
 
 function create_note(e) {
@@ -135,7 +140,7 @@ function create_note(e) {
 		    'note[owner_id]':1,
 		    'note[field_id]': field_id}, 
 		success: function(data, textStatus, jqXHR) {
-		var header = $('<h1></h1>');
+		var header = $('<div id="temp_note_1" class="note_header"></div>');
 		var note = $('<div></div>');
 		note.attr('id', 'note_' + data.note.id);
 		note.addClass('note');

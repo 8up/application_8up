@@ -6,7 +6,9 @@ $(document).ready(function () {
     $('#in_focus_image').hide();
   });
  $("input#invite_input").autocomplete({
-    source: ["tjellden@kth.se", "apa@apa.com"]});
+    source: "/users.json",
+    minLength: 1    
+  });
     
   $('.invite_submit').click(function(){
     var board_id = $('.board_div').id8Up();

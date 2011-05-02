@@ -40,6 +40,8 @@ Application8up::Application.routes.draw do
   match "/settings/edit_password/", :controller => "settings", :action => "edit_password"
   match "/settings/change_avatar/", :controller => "settings", :action => "change_avatar"
 
+  #match "/users.json", :controller => "users", :action => "index"
+
   root :to => "boards#index"
 
 end

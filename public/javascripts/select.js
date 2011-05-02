@@ -3,7 +3,7 @@ function de_select(e, caller){
 		return true;
 	};
 	//Skapar eller tar bort klassen selected från objektet.
-	$(".selected").removeClass("selected");
+	$(".selected").removeClass("selected").trigger('deselect');
 	$("#toolbox_container").trigger("update");
 	
 };
@@ -13,9 +13,8 @@ function select(e, caller) {
 		return true;
     };*/
 	//Skapar eller tar bort klassen selected från objektet.
-	$(caller).toggleClass("selected");
+	$(caller).addClass("selected");
 	$("#toolbox_container").trigger("update");
-	
 };
 
 $(document).ready(
