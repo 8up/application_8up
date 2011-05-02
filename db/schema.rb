@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110429073803) do
+ActiveRecord::Schema.define(:version => 20110429131040) do
 
   create_table "boards", :force => true do |t|
     t.string   "name"
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(:version => 20110429073803) do
     t.string   "color"
   end
 
+  create_table "placed_avatars", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "note_id"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
@@ -76,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20110429073803) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "last_request_at"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
