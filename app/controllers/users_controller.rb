@@ -7,14 +7,17 @@ def index
     json = ActiveRecord::Base.include_root_in_json
     ActiveRecord::Base.include_root_in_json = false
 
- 
-  if params.has_key? :term
-    @users = User.find(:all, :conditions=>"email like'%"+params[:term].downcase+"%'")
-  end
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json  {render :json => @users.to_json(:only => [:email])}
+      format.json  {
+        if params.has_key? :term
+    @users = User.find(:all, :conditions=>"email like'%"+params[:term].downcase+"%'")
+      user_emails = []
+      @users.each do |user| user_emails << user.email end
+        render :json => user_emails.to_json  
+      else
+        render :json => @users.to_json(:only => [:email])
+    end }
     end
     ActiveRecord::Base.include_root_in_json = true
   end
