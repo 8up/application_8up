@@ -1,7 +1,6 @@
 $(document).ready(function () {
   var myNicEditor = new nicEditor();
   window.noteEditor = myNicEditor;
-  //noteEditor.setPanel('content');
 
   $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
     var x = $(e.target).attr('bgcolor');
