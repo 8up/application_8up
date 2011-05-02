@@ -9,7 +9,7 @@
         <img <% if placed_avatar.user.id == current_user().id %> <%= "name='my_avatar'" %> <% end %> src="/images/avatar/<%= placed_avatar.user.avatar %>" width="50%">
       <% end %>
       </div>
-      <h1><%= note.header %></h1>       
+      <div id="note_header_<%= note.id %>" class="note_header"><%= note.header.html_safe %></div>       
     </div>
 
 
