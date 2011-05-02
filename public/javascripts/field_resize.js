@@ -143,14 +143,6 @@ function resize_field(resize_helper, srcField, direction) {
     
 };
 
-//Uppdaterar fälten efter vi fått svar från servern efter resize
-function update_fields(response_data) {
-    //response data är ett json-objekt med field-id som attribut 
-    //och nya neighbour-maps som värden
-    for (var field_id in response_data) {
-	$(("#field_" + field_id)).data('neighbours', response_data[field_id]);
-    }
-};
 
 function get_resize_map(field, direction) {
     var field_id = field.id8Up();

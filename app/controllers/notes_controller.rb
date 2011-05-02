@@ -65,7 +65,20 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
-
+    
+    if params.has_key? :avatar_action
+      if  params[:avatar_action] == "remove"
+        PlacedAvatar.where({:user_id => current_user().id, :note_id => @note.id}).destroy    
+      elsif params[:avatar_action] == "add"
+        if PlacedAvatar.where({:user_id => current_user().id, :note_id => @note.id}).length == 0
+          avatar_connection = PlacedAvatar.create(:user_id => current_user().id, :note_id => @note.id)
+        end
+      end
+    
+      avatar_filename = current_user().avatar;
+      @note[:avatar] = avatar_filename
+    end    
+    
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }

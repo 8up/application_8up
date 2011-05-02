@@ -1,6 +1,7 @@
 class Note < ActiveRecord::Base
   belongs_to :field
   has_one :content
+  has_many :placed_avatars
   
   def move_to_trash
     self.trashcan = true

@@ -1,0 +1,2 @@
+module PlacedAvatarsHelper
+end
