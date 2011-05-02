@@ -8,65 +8,7 @@
 	<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
   </head>
   <body>  
-    <div id="toolbox_container"  <%= show_toolbox %>>    
-      <div ID="toolbox_area_1">
-
-	<a href="#"><p class="toolbox_button_delete">Delete</p></a>
-	<a href="#"><p class="toolbox_button_invite">Invite</p></a>
-	<!--  <button><p id = "toolbox_button_users">Users</p></button>-->
-
-	<div ID="toolbox_text_container">
-	  <div ID="toolbox_text_1">
-	    <h3 id=toolbox_header_name>Name</h3>
-	  </div>
-	  <div Id="toolbox_text_2">
-	    <div id=toolbox_info_name></div>
-	    <div id=toolbox_info_created></div>
-	    <div id=toolbox_info_updated></div>
-	    <div id=toolbox_info_owner></div>
-	  </div>
-	  <div id="user_list_container">
-	    Online users:
-	    <div id="online_user_list"></div>
-	  </div>
-
-	</div>
-	<div id="context_area">
-	  
-	</div>
-
-	<div id="online_user_list"></div>
-	<div>
-          <p>Avatar</p>
-          <div id="avatar">
-	    <img src="/images/avatar/<%= current_user().avatar %>" />
-	  </div> 
-	</div>
-
-	<table id = "split_button_table">
-	  <tr>
-	    <th colspan="3">SPLIT</th>
-	  </tr>
-	  <tr>
-	    <td>
-	      <img src="/images/button_h.png" id = "split_vert" class="split_button"/>
-	    </td>
-	    <td>
-	      <img src="/images/button_v.png" id = "split_horiz" class="split_button"/>
-	    </td>
-	  </tr>
-	</table>
-
-
-      </div>
-      
-      <div ID="toolbox_area_2">
-	<img src="/images/panel_button_right.png" id="panel_arrow" />
-      </div>
-
-
-    </div>
-
+    <%= render 'layouts/toolbox' %>
 	<div id="content">    
 		<%= yield %>  
     </div>
