@@ -28,7 +28,7 @@ $(document).ready(
 			select(e, this);
 		});
 		
-		$("#cont").click(function(e){
+		$("#workspace").click(function(e){
 			de_select(e, this);
 		});
 		
