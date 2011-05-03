@@ -139,10 +139,10 @@ function board_selected_context(context_area) {
 };
 
 function reset_info_box(){
-	$('#toolbox_info_created').text("");
-	$('#toolbox_info_updated').text("");
-	$('#toolbox_info_owner').text("");
-	$('#toolbox_info_name').text("");
+    $('#toolbox_info_name').text("Nothing selected");
+    $('#toolbox_info_created').text("");
+    $('#toolbox_info_updated').text("");
+    $('#toolbox_info_owner').text("");  
 };
 
 function update_info_box_notes() {
@@ -244,6 +244,8 @@ function update_info_box(names, created, updated, owner){
     var toolbox_info_updated = $('#toolbox_info_updated');
     var toolbox_info_owner = $('#toolbox_info_owner');
     var toolbox_info_name = $('#toolbox_info_name');
+
+    $('#toolbox_info_name').empty();
 
     if (names != "" && names != null) {
 	for (var i = 0; i < names.length; i++) {

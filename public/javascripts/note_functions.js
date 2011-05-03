@@ -39,7 +39,16 @@ $(document).ready(function () {
         })
       });
 
-
+	$('.toolbox_button_create_note').click(function(e){
+		var f;
+	  $("div.field").click(f = function(e){
+        if (e.target != this) {
+          return true;
+        }
+        create_note(e);
+		$("div.field").unbind('click', f);
+      });
+	});
 
       $("div.field").live('dblclick', function(e){
         if (e.target != this) {
@@ -56,18 +65,7 @@ $(document).ready(function () {
         edit_note_header(e.target);
       });
 
-      $('.note').bind('select',function(e){
-
-      })
-
-      $(".note").draggable({
-        start: function(event, ui){
-          $(this).data('startPageX', event.pageX);
-          $(this).data('startPageY', event.pageY);
-          $(this).data('startLeft', $(this).position().left);
-          $(this).data('startTop', $(this).position().top);
-        },
-      });
+      $(".note").draggable();
 
     });
     
@@ -157,7 +155,8 @@ $(document).ready(function () {
       'note[body]': '--!--',
       'note[position_x]': posX,
       'note[position_y]': posY,
-      'note[field_id]': field_id
+      'note[field_id]': field_id,
+      'note[color]': '#f4e476'
     }, 
     success: function(data, textStatus, jqXHR) {
       var header_id = "note_header_" + data.note.id;
