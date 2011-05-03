@@ -1,5 +1,4 @@
 div.board_container.selected {
-
 -moz-box-shadow: 3px 3px 4px #000;
     /* -webkit-box-shadow: 3px 3px 3px 4px #000;
      */
@@ -8,8 +7,8 @@ div.board_container.selected {
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
     /* For IE 5.5 - 7 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
-
 }
+
 
 div.board_container{
     background-color:#f4e476; 
@@ -17,4 +16,18 @@ div.board_container{
     overflow:hidden;
     box-shadow: 4px 4px 4px #8e8e8e;
     z-index:0;
+}
+div.board_container table{
+color:black;
+opacity:0.5;
+
+}
+
+div.board_container.selected table{
+opacity:1;
+}
+
+div.board_container table tbody tr td a{
+color:black;
+
 }
