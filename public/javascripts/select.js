@@ -1,12 +1,15 @@
-function de_select(e, caller){
-	if(e.target != caller){
+function de_select_all(e, caller){
+  if(e.target != caller){
 		return true;
 	};
 	//Skapar eller tar bort klassen selected från objektet.
 	$(".selected").removeClass("selected").trigger('deselect');
 	$("#toolbox_container").trigger("update");
-	
 };
+function de_select_element(element){
+  $(element).removeClass("selected").trigger('deselect');
+  $("#toolbox_container").trigger("update");
+}
 
 function select(e, caller) {
 /*	if (e.target != caller) {
@@ -20,12 +23,18 @@ function select(e, caller) {
 $(document).ready(
 	function(){
 		$('.field').live('click',function(e){
-			de_select(e, this);
+			de_select_all(e, this);
 		});
 
-		$('.note').live('click', function(e) 
+    var notes = $('.note');
+		notes.live('click', function(e) 
 		{
-			select(e, this);
+		  if(!e.metaKey && !e.ctrlKey){
+		    notes.each(function(index, element){
+  		    de_select_element(element);
+  	    });
+	    }
+		  select(e, this);
 		});
 		
 		$( ".note" ).live('dblclick', function(e){
@@ -34,7 +43,7 @@ $(document).ready(
     });
 		
 		$("#workspace").click(function(e){
-			de_select(e, this);
+			de_select_all(e, this);
 		});
 		
 		$("#cont div").click(function(e){
