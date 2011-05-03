@@ -1,4 +1,15 @@
 $(document).ready(function(){
+	$('.toolbox_button_invite').click(function(){
+	show_invite();
+  });
+	$('.toolbox_button_edit').click(function(){
+	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
+
+  });
+	$('.toolbox_button_add').click(function(){
+	window.location = '/boards/new'
+
+  });
 	$("#toolbox_container").bind('update',function(){
 		var context_area = $('#context_area');
 		var pathname = window.location.pathname;
