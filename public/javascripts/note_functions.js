@@ -2,25 +2,6 @@ $(document).ready(function () {
   var myNicEditor = new nicEditor();
   window.noteEditor = myNicEditor;
 
-/*  $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
-    var x = $(e.target).attr('bgcolor');
-
-    $(".selected.note").each(function(index, domElement){
-      var note_id = $(domElement).attr('id').split('_').pop();
-      var board_id = $(domElement).data('board_id').split('_').pop();
-      var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
-
-      $.ajax({ url: url_path, 
-        type: 'POST',
-        data: {_method:'PUT',
-        'note[color]': x 	},
-        success: function(data, textStatus, jqXHR){
-          $(domElement).css({'background': x});
-          }});   
-        });
-      });
-*/
-
 
       $('#avatar').click(function(e) {
         var x = $(e.target).attr('src');
@@ -133,10 +114,14 @@ $(document).ready(function () {
       var target_url = "/notes/" + note_id + ".json";
 
       header.parent().bind('deselect', function(e){
+        var content = editor.getContent()
+        if($(content).text().length == 0){  
+          content = 'Empty header'
+        }
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 
-          'note' : {'header' : editor.getContent()}
+          'note' : {'header' : content}
         }, 
         success: function(data) {
 
@@ -169,7 +154,9 @@ $(document).ready(function () {
       'note[field_id]': field_id
     }, 
     success: function(data, textStatus, jqXHR) {
-      var header = $('<div id="temp_note_1" class="note_header"></div>');
+      var header_id = "note_header_" + data.note.id;
+      var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
+      var header = $(header_html);
       var note = $('<div></div>');
       note.attr('id', 'note_' + data.note.id);
       note.addClass('note');
