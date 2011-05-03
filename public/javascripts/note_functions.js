@@ -155,7 +155,8 @@ $(document).ready(function () {
       'note[body]': '--!--',
       'note[position_x]': posX,
       'note[position_y]': posY,
-      'note[field_id]': field_id
+      'note[field_id]': field_id,
+      'note[color]': '#f4e476'
     }, 
     success: function(data, textStatus, jqXHR) {
       var header_id = "note_header_" + data.note.id;
