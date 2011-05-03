@@ -67,7 +67,9 @@ function gui_split_horizontally(event) {
 }
 
 function whiteboard_context(context_area) {
-    update_info_box();
+    //date_info_box();
+
+    // Denn if-sats lägger till en split-div om ingen redan finns
     if ($("#split_buttons_container").length == 0) {
 	var split_buttons = $('<div></div>');
    
@@ -104,6 +106,8 @@ function whiteboard_context(context_area) {
 };
 
 function note_selected_context(context_area) {
+    update_info_box_notes();
+
     if (context_area.children("#color_chooser").length == 0) {
 	var color_chooser = $('<ul></ul>');
 	var colors = ["green", "blue", "yellow", 
@@ -125,20 +129,23 @@ function note_selected_context(context_area) {
 };
 
 function start_page_context(context_area) {
-
-	update_info_box();
-
+    if ($('.board_container.selected').length > 0) {
+	board_selected_context(context_area);
+    }
+    else {
+	reset_info_box();
+    }
+    
 };
 
 // Context area är ett jquery-wrappat element där context-beroende data skall
 // läggas till
 function board_selected_context(context_area) {
-
+      update_info_box_board();
 };
 
 function reset_info_box(){
-	
-	$('#toolbox_header_name').text("Name");
+	$('#toolbox_header_name').text("");
 	$('#toolbox_info_created').text("");
 	$('#toolbox_info_updated').text("");
 	$('#toolbox_info_owner').text("");
@@ -146,82 +153,127 @@ function reset_info_box(){
 
 };
 
-//Funktion för att hämta information via json om objektet.
-function update_info_box(){
+function update_info_box_notes() {
+    var selected_items = $(".note.selected"); 
+    if (selected_items.length == 0) {
+	return false;
+    }
+    else if (selected_items.length == 1) {
+	var selected = $(selected_items[0]);
+	var id = selected.id8Up();
+	var board_id = selected.data('board_id').split('_').pop();
+	var url = '/boards/' + board_id + '/notes/' + id + '.json'
+
+	$.ajax({url: url, type: 'GET',
+		success: function(data, textStatus, jqXHR){
+		    var name = [];
+		    if((data.note.header).length > 11){
+			//trimma namnet om det är för långt
+			var trimmed_name = data.note.header.trim(); 
+			name.push(trimmed_name.substring(7,0) + "...");
+		    } 
+		    else {
+			name.push(data.note.header);
+		    }
+		    update_info_box(name, data.note.created_at, data.note.updated_at, 
+				    null, null);
+		}
+	    });	
+    }
+    else {
+	var info_text = [];
+	info_text.push($('<h1>' + selected_items.length + ' notes selected:</h1>'));
+	//Loop-funktion för att hämta ut namnen på de markerade objekten.
+	selected_items.each(function(){
+		if(($(this).text().trim()).length > 11){
+		    var trimmed_name = $(this).text().trim();
+		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    info_text.push(abbriviated_name);
+		    info_text.push('<br/>');
+		} 
+		else {
+		    info_text.push($(this).text().trim());
+		    info_text.push('<br/>');
+		}	
+	    });
 	
+	update_info_box(info_text, null, null, null, null);
+    }
+};
+
+//Funktion för att uppdatera info-boxen om notes är markerade
+function update_info_box_board() {
+    var selected_items = $(".board_container.selected"); 
+    if (selected_items.length == 0) {
+	return false;
+    }
+    else if (selected_items.length == 1) {
+	var selected = $(selected_items[0]);
+	var board_id = selected.id8Up();
+	var url = '/boards/' + board_id + '.json'
+	$.ajax({url: url, type: 'GET',
+		success: function(data, textStatus, jqXHR){
+		    var name = [];
+		    if((data.board.name).length > 8){
+			//trimma namnet om det är för långt
+			var trimmed_name = data.board.name.trim(); 
+			name.push(trimmed_name.substring(7,0) + "...");
+		    } 
+		    else {
+			name.push(data.board.name);
+		    }
+		    update_info_box(name, data.board.created_at, data.board.updated_at, 
+				    data.board.owner_name, null);
+		}
+	    });	
+    }
+    else {
+	var info_text = [];
+	info_text.push($('<h1>' + selected_items.length + ' boards selected:</h1>'));
+	//Loop-funktion för att hämta ut namnen på de markerade objekten.
+	selected_items.each(function(){
+		if(($(this).text().trim()).length > 11){
+		    var trimmed_name = $(this).text().trim();
+		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    info_text.push(abbriviated_name);
+		    info_text.push('<br/>');
+		} 
+		else {
+		    info_text.push($(this).text().trim());
+		    info_text.push('<br/>');
+		}	
+	    });
+	
+	update_info_box(info_text, null, null, null, null);
+    }
+}
+
+
+//Funktion för att hämta information via json om objektet.
+function update_info_box(names, created, updated, owner, info_text){
+    reset_info_box();
 	var toolbox_name = $('#toolbox_header_name');
 	var toolbox_info_created = $('#toolbox_info_created');
 	var toolbox_info_updated = $('#toolbox_info_updated');
 	var toolbox_info_owner = $('#toolbox_info_owner');
 	var toolbox_info_name = $('#toolbox_info_name');
 
-	if($(".selected").length==1){
-		var e = $(".selected:eq(0)");
-
-		if($(e).hasClass("note")) {
-			id = e.id8Up();
-			var board_id = e.data('board_id').split('_').pop();
-			$.ajax({
-				url: '/boards/' + board_id + '/notes/' + id + '.json',
-				type: 'GET',
-				success: function(data, textStatus, jqXHR){
-					if((data.note.header).length > 8){
-						toolbox_name.text(
-							($(e).text().trim()).substring(7,0) + "..."
-						);
-					} else {
-						toolbox_name.text(data.note.header);
-					}
-					toolbox_info_created.text("Created: " + data.note.created_at);
-					toolbox_info_updated.text("Updated: " + data.note.updated_at);
-				//	toolbox_info_owner.text("Owner: " + data.note.owner_id);
-
-				}
-			})
-		} else {
-			id = $(e).id8Up();
-			$.ajax({
-				url:'/boards/' + id + '.json',
-				type: 'GET',
-				success: function(data, textStatus, jqXHR){
-					//If-sats för att begränsa antalet utskrivna tecken, pga platsbrist i toolbox.
-					if((data.board.name).length > 8) {
-						toolbox_name.text((data.board.name).substring(8,0) + "...");
-					} else {
-						toolbox_name.text(data.board.name);
-					}
-					toolbox_info_created.text("Created: " + data.board.created_at);
-					toolbox_info_updated.text("Updated: " + data.board.updated_at);
-					toolbox_info_owner.text("Owner: " + data.board.owner_name);
-
-				}
-			})
-		}
-	}	
-	else if($(".selected").length==0){
-		toolbox_name.text("Name");
-		toolbox_info_created.text(" ");
-		toolbox_info_updated.text(" ");
-		toolbox_info_owner.text(" ");
-		toolbox_info_name.text(" ");
-
+	if (names != "" && names != null) {
+	    toolbox_name.empty();
+	    for (var i = 0; i < names.length; i++) {
+		toolbox_name.append(names[i]);
+	    }
 	}
-	else{
-		toolbox_info_name.html('');
-		toolbox_name.text($(".selected").length + " notes  selected");
-		//Loop-funktion för att hämta ut namnen på de markerade objekten.
-		toolbox_info_name.text($(".selected").each(
-			function(){
-				if(($(this).text().trim()).length > 11){
-					toolbox_info_name.append(($(this).text().trim()).substring(10,0) + "..." + "<br>")
-				} else {
-					toolbox_info_name.append($(this).text() + "<br>");
-				}
-
-			}
-		));
-		toolbox_info_created.text(" ");
-		toolbox_info_updated.text(" ");			
-		toolbox_info_owner.text(" ");
+	if (created != "" && created != null) {
+	    toolbox_info_created.text(created);
+	}
+	if (updated != "" && update != null) {
+	    toolbox_info_updated.text(updated);
+	}
+	if (owner != "" && owner != null) {
+	    toolbox_info_owner.text(owner);
+	}
+	if (info_text != "" && info_text != null) {
+	    toolbox_info_name.text(info_text);
 	}
 };
