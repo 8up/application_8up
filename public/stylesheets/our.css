@@ -106,3 +106,23 @@ opacity:1;
   margin-left:70px; 
   margin-right:30px;   
 }
+#choose_avatar div{
+  width: 1130px;
+  height:232px;
+  clear: both;
+  margin: 30px auto ;
+}
+#choose_avatar ul {
+  list-style: none;
+  clear: both;
+}
+
+#choose_avatar li {
+  padding: 10px 0px 10px 0px;
+  display: block;
+  border: 1px;
+  border-style: solid;
+  border-color: #CC0;
+  float: left;
+  margin-left: 2px;
+}
