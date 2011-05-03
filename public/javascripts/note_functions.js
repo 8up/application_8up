@@ -2,7 +2,7 @@ $(document).ready(function () {
   var myNicEditor = new nicEditor();
   window.noteEditor = myNicEditor;
 
-  $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
+/*  $('#red, #green, #yellow, #blue, #orange, #pink, #original, #crimson, #fuchsia').click(function(e) {
     var x = $(e.target).attr('bgcolor');
 
     $(".selected.note").each(function(index, domElement){
@@ -19,6 +19,7 @@ $(document).ready(function () {
           }});   
         });
       });
+*/
 
 
       $('#avatar').click(function(e) {
@@ -88,6 +89,29 @@ $(document).ready(function () {
       });
 
     });
+    
+    
+    function color_palette_handler(e) {
+    		var x = $(e.target).css('background-color');
+
+    		$(".selected.note").each(function(index, domElement){
+    			var note_id = $(domElement).attr('id').split('_').pop();
+    			var board_id = $(domElement).data('board_id').split('_').pop();
+    			var url_path =  "/boards/" + board_id + "/notes/" + 
+    			    note_id + '.json';
+    			var old_color = $(domElement).css('background-color');
+    			$(domElement).css('background-color', x);
+    			$.ajax({ url: url_path, 
+    				    type: 'POST',
+    				    data: {_method:'PUT',
+    					'note[color]': x 	},
+    				    error: function(){
+    				    // Om vi får error sätter vi tillbaka gamla färgen
+    				    $(domElement).css('background-color', old_color);
+
+    				}});   
+    		    });
+    };
 
     function edit_note_header(header) {
       var header = $(header);
