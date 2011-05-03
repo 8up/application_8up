@@ -46,7 +46,7 @@ $(document).ready(
 			de_select_all(e, this);
 		});
 		
-		$("#cont div").click(function(e){
+		$(".board_container").click(function(e){
 			select(e,$(this).closest("div"));
 		});
 	}
