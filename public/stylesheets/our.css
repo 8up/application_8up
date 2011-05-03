@@ -2,16 +2,21 @@
   position: fixed;
   top: 0px;
   right: 10px;
-  z-index: 100000000;
-  background: #FFFFFF;
+  z-index: 125;
+  background: transparent;
 }
-#menu_bar li {
+#menu_bar li a{
     background: transparent; 
     font-family:arial; 
     font-size:17px;
+    color:#a74d0c;
+    font-weight:bold;
 }
 #menu_bar li a:hover {
 text-decoration: none;
+background:transparent;
+color:#ff7817;
+font-weight:bold;
 }
 #panel_button {
 margin-top:0px;
@@ -44,10 +49,6 @@ opacity:1;
   
   display: inline;
 }
-#menu_bar li a{
- color:black; 
-}
-
   
 #cont { 
   margin-left:50px; 
