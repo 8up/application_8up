@@ -1,48 +1,19 @@
 $(document).ready(function(){
-	//Atach a handler for when the user presses the split horizontaly button
-	$("#split_horiz").click(function(){
-		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
-		//sätter vi den horizontellt
-		if ($("#split_button_table").data("split_direction") == "none" || 
-		$("#split_button_table").data("split_direction") == "vertical") 
-		{
-		    reset_split();
-		    $("split_vert").removeClass("depressed");
-		    //Vi använder en klass för att styla knappen som nedtryckt
-		    $("#split_horiz").addClass("depressed"); 
-		    $("#split_button_table").data("split_direction", 
-						  "horizontal"); 
-		    set_split();
-		}
-		//Om vi redan inlett det ångrar ett till klick
-		else if ($("#split_button_table").data("split_direction") 
-		== "horizontal") {
-			reset_split();
-		}
-		//Annars gör vi inget
-	});
+	$('#split_horiz').click(gui_split_horizontally);
+	$('#split_vert').click(gui_split_vertically);
+    
+	$('.toolbox_button_invite').click(function(){
+	show_invite();
+  });
+	$('.toolbox_button_edit').click(function(){
+	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
 
-	$("#split_vert").click(function(){
-		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
-		//sätter vi den horizontellt
-		if ($("#split_button_table").data("split_direction") == "none" || 
-		$("#split_button_table").data("split_direction") == "horizontal") 
-		{
-		    
-		    reset_split();
-		    //Vi använder en klass för att styla knappen som nedtryckt
-		    $("#split_vert").addClass("depressed"); 
-		    $("#split_button_table").data("split_direction", 
-						  "vertical"); 
-		    set_split();
-		}
-		//Om vi redan inlett det ångrar ett till klick
-		else if ($("#split_button_table").data("split_direction") 
-		== "vertical") {
-			reset_split();
-		}
-		//Annars gör vi inget
-	});
+  });
+	$('.toolbox_button_add').click(function(){
+	window.location = '/boards/new'
+
+  });
+	$('.palette_color').click(color_palette_handler);
 
 	$("#toolbox_container").bind('update',function(){
 		var context_area = $('#context_area');
@@ -53,144 +24,240 @@ $(document).ready(function(){
 		array = array.filter(function(element) { return element != "";});
 
 		var lastElement = array.pop();
-		if(lastElement == "boards"){
-		    start_page_context(context_area);
-		}else{
+		//Om sista elementet inte är ett NaN, så är det ett nummer, och 
+		// vi antar att vi är i ett whiteboard
+		if (!isNaN(lastElement)) {
 		    whiteboard_context(context_area);
 		}
+		else {
+		    start_page_context(context_area);
+		}
 	    });
-
+	$('#toolbox_container').trigger('update');
 });
+
+function gui_split_vertically(event) {
+		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den vertikalt
+		if ($("#split_buttons_container").data("split_direction") == "none" || 
+		$("#split_buttons_container").data("split_direction") == "horizontal") 
+		{
+		    
+		    reset_split();
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_vert").addClass("depressed"); 
+		    $("#split_buttons_container").data("split_direction", 
+						  "vertical"); 
+		    set_split();
+		}
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_buttons_container").data("split_direction") 
+		== "vertical") {
+			reset_split();
+		}
+		//Annars gör vi inget
+};
+
+function gui_split_horizontally(event) {
+
+		//Om vi inte redan satt flaggan, eller den är åt andra hållet,
+		//sätter vi den horizontellt
+		if ($("#split_buttons_container").data("split_direction") == "none" || 
+		$("#split_buttons_container").data("split_direction") == "vertical") 
+		{
+		    reset_split();
+		    $("split_vert").removeClass("depressed");
+		    //Vi använder en klass för att styla knappen som nedtryckt
+		    $("#split_horiz").addClass("depressed"); 
+		    $("#split_buttons_container").data("split_direction", 
+						  "horizontal"); 
+		    set_split();
+		}
+		//Om vi redan inlett det ångrar ett till klick
+		else if ($("#split_buttons_container").data("split_direction") 
+		== "horizontal") {
+			reset_split();
+		}
+		//Annars gör vi inget
+
+}
+
 function whiteboard_context(context_area) {
-    update_info_box();
+    // Visa verktyg specifikt för board-vyn
+    $("#board_view").show();
+    $('#boards_overview').hide();
+    
+    // Om någon note är markerad kör vi funktionen note_selected_context
     if ($('.selected').length > 0) {
+	$("#notes_selected").show();
 	note_selected_context(context_area);
     }
     else {
 	//Ta bort color-choosern från context_area
-	context_area.children("#color_chooser").remove();
+	$("#notes_selected").hide();
+	reset_info_box();
     }
-    // Add split options
-    // var split_buttons = $('<div></div>');
-    // context_area.append(split_buttons):
 };
 
 function note_selected_context(context_area) {
-    if (context_area.children("#color_chooser").length == 0) {
-	var color_chooser = $('<ul></ul>');
+    update_info_box_notes();
+
+
+    // nedan skall bara kalla show eller hide på rätt element i toolboxen
+    if ($("#color_chooser").children('li').length == 0) {
+	var color_chooser = $('#color_chooser');
 	var colors = ["green", "blue", "yellow", 
 		      "red", "orange", "pink", 
 		      "#f4e476", "crimson","fuchsia"];
-
 	for (var i=0; i < colors.length; i++) {
 	    var color = $('<li></li>');
 	    color.addClass("palette_color");
 	    color.css('background-color', colors[i]);
+	   
 	    color_chooser.append(color);
 	}
-
-	color_chooser.attr('id','color_chooser');
-
-	context_area.append(color_chooser);
     }
 };
 
 function start_page_context(context_area) {
-
-	update_info_box();
-
+    $('#board_view').hide();;
+    $('#boards_overview').show();;
+    if ($('.board_container.selected').length > 0) {
+	$('#boards_selected').show();
+	board_selected_context(context_area);
+    }
+    else {
+	$('#boards_selected').hide();
+	reset_info_box();
+    }
 };
 
 // Context area är ett jquery-wrappat element där context-beroende data skall
 // läggas till
 function board_selected_context(context_area) {
-
+      update_info_box_board();
 };
 
 function reset_info_box(){
-	
-	$('#toolbox_header_name').text("Name");
 	$('#toolbox_info_created').text("");
 	$('#toolbox_info_updated').text("");
 	$('#toolbox_info_owner').text("");
 	$('#toolbox_info_name').text("");
-
 };
 
-//Funktion för att hämta information via json om objektet.
-function update_info_box(){
-	
-	var toolbox_name = $('#toolbox_header_name');
-	var toolbox_info_created = $('#toolbox_info_created');
-	var toolbox_info_updated = $('#toolbox_info_updated');
-	var toolbox_info_owner = $('#toolbox_info_owner');
-	var toolbox_info_name = $('#toolbox_info_name');
+function update_info_box_notes() {
+    var selected_items = $(".note.selected"); 
+    if (selected_items.length == 0) {
+	return false;
+    }
+    else if (selected_items.length == 1) {
+	var selected = $(selected_items[0]);
+	var id = selected.id8Up();
+	var board_id = selected.data('board_id').split('_').pop();
+	var url = '/boards/' + board_id + '/notes/' + id + '.json'
 
-	if($(".selected").length==1){
-		var e = $(".selected:eq(0)");
-
-		if($(e).hasClass("note")) {
-			id = e.id8Up();
-			var board_id = e.data('board_id').split('_').pop();
-			$.ajax({
-				url: '/boards/' + board_id + '/notes/' + id + '.json',
-				type: 'GET',
-				success: function(data, textStatus, jqXHR){
-					if((data.note.header).length > 8){
-						toolbox_name.text((data.note.header).substring(7,0) + "...");
-					} else {
-						toolbox_name.text(data.note.header);
-					}
-					toolbox_info_created.text("Created: " + data.note.created_at);
-					toolbox_info_updated.text("Updated: " + data.note.updated_at);
-					toolbox_info_owner.text("Owner: " + data.note.owner_id);
-
-				}
-			})
-		} else {
-			id = $(e).id8Up();
-			$.ajax({
-				url:'/boards/' + id + '.json',
-				type: 'GET',
-				success: function(data, textStatus, jqXHR){
-					//If-sats för att begränsa antalet utskrivna tecken, pga platsbrist i toolbox.
-					if((data.board.name).length > 8) {
-						toolbox_name.text((data.board.name).substring(8,0) + "...");
-					} else {
-						toolbox_name.text(data.board.name);
-					}
-					toolbox_info_created.text("Created: " + data.board.created_at);
-					toolbox_info_updated.text("Updated: " + data.board.updated_at);
-					toolbox_info_owner.text("Owner: " + data.board.owner_name);
-
-				}
-			})
+	$.ajax({url: url, type: 'GET',
+		success: function(data, textStatus, jqXHR){
+		    var name = [];
+		    if((data.note.header).length > 11){
+			//trimma namnet om det är för långt
+			var trimmed_name = data.note.header.trim(); 
+			name.push(trimmed_name.substring(7,0) + "...");
+		    } 
+		    else {
+			name.push(data.note.header);
+		    }
+		    update_info_box(name, data.note.created_at, data.note.updated_at, 
+				    null);
 		}
-	}	
-	else if($(".selected").length==0){
-		toolbox_name.text("Name");
-		toolbox_info_created.text(" ");
-		toolbox_info_updated.text(" ");
-		toolbox_info_owner.text(" ");
-		toolbox_info_name.text(" ");
+	    });	
+    }
+    else {
+	var info_text = [];
+	info_text.push( $(selected_items).length + ' notes selected:');
+	//Loop-funktion för att hämta ut namnen på de markerade objekten.
+	selected_items.each(function(){
+		if(($(this).text().trim()).length > 11){
+		    var trimmed_name = $(this).text().trim();
+		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    info_text.push(abbriviated_name);
+		} 
+		else {
+		    info_text.push($(this).text().trim());
+		}	
+	    });
+	
+	update_info_box(info_text, null, null, null);
+    }
+};
 
-	}
-	else{
-		toolbox_info_name.html('');
-		toolbox_name.text($(".selected").length + " notes  selected");
-		//Loop-funktion för att hämta ut namnen på de markerade objekten.
-		toolbox_info_name.text($(".selected").each(
-			function(){
-				if(($(this).text().trim()).length > 11){
-					toolbox_info_name.append(($(this).text().trim()).substring(10,0) + "..." + "<br>")
-				} else {
-					toolbox_info_name.append($(this).text() + "<br>");
-				}
+//Funktion för att uppdatera info-boxen om notes är markerade
+function update_info_box_board() {
+    var selected_items = $(".board_container.selected"); 
+    if (selected_items.length == 0) {
+	return false;
+    }
+    else if (selected_items.length == 1) {
+	var selected = $(selected_items[0]);
+	var board_id = selected.id8Up();
+	var url = '/boards/' + board_id + '.json'
+	$.ajax({url: url, type: 'GET',
+		success: function(data, textStatus, jqXHR){
+		    var name = [];
+		    if((data.board.name).length > 8){
+			//trimma namnet om det är för långt
+			var trimmed_name = data.board.name.trim(); 
+			name.push(trimmed_name.substring(7,0) + "...");
+		    } 
+		    else {
+			name.push(data.board.name);
+		    }
+		    update_info_box(name, data.board.created_at, data.board.updated_at, 
+				    data.board.owner_name);
+		}
+	    });	
+    }
+    else {
+	var info_text = [];
+	info_text.push($(selected_items).length + ' boards selected:');
+	//Loop-funktion för att hämta ut namnen på de markerade objekten.
+	selected_items.each(function(){
+		if(($(this).text().trim()).length > 11){
+		    var trimmed_name = $(this).text().trim();
+		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    info_text.push(abbriviated_name);
+		} 
+		else {
+		    info_text.push($(this).text().trim());
+		}	
+	    });
+	
+	update_info_box(info_text, null, null, null);
+    }
+}
 
-			}
-		));
-		toolbox_info_created.text(" ");
-		toolbox_info_updated.text(" ");			
-		toolbox_info_owner.text(" ");
+
+//Funktion för att hämta information via json om objektet.
+function update_info_box(names, created, updated, owner){
+    reset_info_box();
+    var toolbox_info_created = $('#toolbox_info_created');
+    var toolbox_info_updated = $('#toolbox_info_updated');
+    var toolbox_info_owner = $('#toolbox_info_owner');
+    var toolbox_info_name = $('#toolbox_info_name');
+
+    if (names != "" && names != null) {
+	for (var i = 0; i < names.length; i++) {
+	    toolbox_info_name.append(names[i]);
+	    toolbox_info_name.append('<br/>');
 	}
+    }
+    if (created != "" && created != null) {
+	toolbox_info_created.text(created);
+    }
+    if (updated != "" && update != null) {
+	toolbox_info_updated.text(updated);
+    }
+    if (owner != "" && owner != null) {
+	toolbox_info_owner.text(owner);
+    }
 };

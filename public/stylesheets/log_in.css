@@ -9,9 +9,13 @@ h2{
 	font-size: 30px;
 }
 
+h1{
+	font-size: 31px;
+}
+
 #user_list_container {
   margin-top: 10px;
-  position:absolute;  
+/*  position:absolute; */  
 
 }
 

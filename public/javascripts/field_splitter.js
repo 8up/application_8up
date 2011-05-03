@@ -1,14 +1,6 @@
-$(document).ready(function() {
-	//börja med att stätta split_Set till false på split-tabellen 
-	//flaggan används för att avgöra om vi redan 
-	//initierat split-funktionen så att vi inte bindar split till fälten mer än en gång
-	$("#split_button_table").data("split_set", "none"); 
-	$("#split_button_table").data("split_direction", "none"); 
-    });
-
 function do_split(e) {
     var field = $(this)
-    var direction = $("#split_button_table").data("split_direction");
+    var direction = $("#split_buttons_container").data("split_direction");
     
 
     //Om direction varken är vertical eller horizontal gör vi inget
@@ -62,8 +54,8 @@ function do_split(e) {
 //Remove the split-handler from all fields
 function reset_split() {
     $(".field").unbind("click",do_split);
-    $("#split_button_table #split_vert,#split_horiz").removeClass("depressed");
-    $("#split_button_table").data("split_direction", "none");
+    $("#split_buttons_container #split_vert,#split_horiz").removeClass("depressed");
+    $("#split_buttons_container").data("split_direction", "none");
 };
 
 //Set the split-handler for all fields

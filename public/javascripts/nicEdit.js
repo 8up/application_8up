@@ -478,7 +478,10 @@ var nicEditorInstance = bkClass.extend({
 	getRng : function() {
 		var s = this.getSel();
 		if(!s) { return null; }
-		return (s.rangeCount > 0) ? s.getRangeAt(0) : s.createRange();
+		if(s.createRange)
+		  return (s.rangeCount > 0) ? s.getRangeAt(0) : s.createRange();
+		else
+		  return (s.rangeCount > 0) ? s.getRangeAt(0) : window.getSelection();
 	},
 	
 	selRng : function(rng,s) {
@@ -506,7 +509,10 @@ var nicEditorInstance = bkClass.extend({
 			}
 			return $BK(contain);
 		} else {
-			return $BK((this.getSel().type == "Control") ? r.item(0) : r.parentElement());
+	    if(r.parentElement)
+			  return $BK((this.getSel().type == "Control") ? r.item(0) : r.parentElement());
+			else
+			  return $BK((r.focusNode) ? r.focusNode : null);
 		}
 	},
 	
