@@ -1,10 +1,5 @@
 $(document).ready(function () {
   
-  $('.toolbox_button_invite').click(function(){
-    $("#window_wrapper").show();
-    $( "#invite_window" ).show();
-    $('#in_focus_image').hide();
-  });
  $("input#invite_input").autocomplete({
     minLength: 0,
     max: 2,
@@ -38,5 +33,11 @@ $(document).ready(function () {
      
    })
 })
+
+function show_invite(){
+    $("#window_wrapper").show();
+    $( "#invite_window" ).show();
+    $('#in_focus_image').hide();	
+};
 
 
