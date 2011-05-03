@@ -13,6 +13,8 @@ $(document).ready(function(){
 	window.location = '/boards/new'
 
   });
+	$('.palette_color').click(color_palette_handler);
+
 	$("#toolbox_container").bind('update',function(){
 		var context_area = $('#context_area');
 		var pathname = window.location.pathname;
@@ -107,12 +109,11 @@ function note_selected_context(context_area) {
 	var colors = ["green", "blue", "yellow", 
 		      "red", "orange", "pink", 
 		      "#f4e476", "crimson","fuchsia"];
-
 	for (var i=0; i < colors.length; i++) {
 	    var color = $('<li></li>');
 	    color.addClass("palette_color");
 	    color.css('background-color', colors[i]);
-	    color.click(color_palette_handler);
+	   
 	    color_chooser.append(color);
 	}
     }

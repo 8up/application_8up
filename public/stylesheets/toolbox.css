@@ -92,6 +92,7 @@ div#toolbox_text_container {
 
 #color_chooser {
     display: block;
+    list-style-type: none;
 }
 
 #avatar {
