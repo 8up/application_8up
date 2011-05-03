@@ -56,18 +56,7 @@ $(document).ready(function () {
         edit_note_header(e.target);
       });
 
-      $('.note').bind('select',function(e){
-
-      })
-
-      $(".note").draggable({
-        start: function(event, ui){
-          $(this).data('startPageX', event.pageX);
-          $(this).data('startPageY', event.pageY);
-          $(this).data('startLeft', $(this).position().left);
-          $(this).data('startTop', $(this).position().top);
-        },
-      });
+      $(".note").draggable();
 
     });
     
