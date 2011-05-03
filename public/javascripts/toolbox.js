@@ -99,6 +99,7 @@ function whiteboard_context(context_area) {
     }
     else {
 	//Ta bort color-choosern från context_area
+	reset_info_box();
 	context_area.children("#color_chooser").remove();
     }
     
