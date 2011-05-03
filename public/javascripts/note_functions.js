@@ -41,7 +41,7 @@ $(document).ready(function () {
 
 
 
-      $("div.field").dblclick(function(e){
+      $("div.field").live('dblclick', function(e){
         if (e.target != this) {
           return true;
         }
