@@ -28,9 +28,11 @@ $(document).ready(function(){
 		// vi antar att vi är i ett whiteboard
 		if (!isNaN(lastElement)) {
 		    whiteboard_context(context_area);
+		    window.page_context = 'whiteboard'
 		}
 		else {
 		    start_page_context(context_area);
+		    window.page_context = 'start_page'
 		}
 	    });
 	$('#toolbox_container').trigger('update');
