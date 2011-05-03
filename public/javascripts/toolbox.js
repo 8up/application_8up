@@ -86,17 +86,17 @@ function gui_split_horizontally(event) {
 
 function whiteboard_context(context_area) {
     // Visa verktyg specifikt för board-vyn
-    $("#board_view").show();
+    $(".board_view").show();
     $('#boards_overview').hide();
     
     // Om någon note är markerad kör vi funktionen note_selected_context
     if ($('.selected').length > 0) {
-	$("#notes_selected").show();
+	$(".notes_selected").show();
 	note_selected_context(context_area);
     }
     else {
 	//Ta bort color-choosern från context_area
-	$("#notes_selected").hide();
+	$(".notes_selected").hide();
 	reset_info_box();
     }
 };
@@ -122,7 +122,8 @@ function note_selected_context(context_area) {
 };
 
 function start_page_context(context_area) {
-    $('#board_view').hide();;
+    $('.board_view').hide();;
+	$('.notes_selected').hide();;
     $('#boards_overview').show();;
     if ($('.board_container.selected').length > 0) {
 	$('#boards_selected').show();
