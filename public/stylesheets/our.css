@@ -109,7 +109,4 @@ opacity:1;
   background-size:60% 80%;
 }
 
-#content { 
-  position: absolute;
-  margin-left:39px;  
-}
+#content { }
