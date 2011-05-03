@@ -57,7 +57,7 @@ opacity:1;
 }
 
 
-#cont div {
+.board_container {
   width: 250px;
   height: 250px;
   float: left;
