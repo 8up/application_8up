@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   layout(:get_layout_name)
   
   def get_layout_name
-    if devise_controller?
+    if devise_controller? && action_name != 'edit'
       "log_in"
     else
       "application"
