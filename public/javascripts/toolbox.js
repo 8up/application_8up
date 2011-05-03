@@ -78,50 +78,29 @@ function gui_split_horizontally(event) {
 }
 
 function whiteboard_context(context_area) {
-    //date_info_box();
-
-    // Denn if-sats lägger till en split-div om ingen redan finns
-    if ($("#split_buttons_container").length == 0) {
-	var split_buttons = $('<div></div>');
-   
-	split_buttons.attr('id','split_buttons_container');
-	split_buttons.data("split_direction", "none");
-	var split_horiz = $('<img/>');
-	var split_vert = $('<img/>');
-	split_horiz.attr('id','split_horiz');
-	split_vert.attr('id', 'split_vert');
-
-	split_vert.attr('src','/images/button_v.png');
-	split_horiz.attr('src','/images/button_h.png');
-
-	split_horiz.addClass('split_button');
-	split_vert.addClass('split_button');
-	split_buttons.append(split_horiz);
-	split_buttons.append(split_vert);
-
-	split_horiz.click(gui_split_horizontally);
-	split_vert.click(gui_split_vertically);
-
-	context_area.append(split_buttons);
-    }
+    // Visa verktyg specifikt för board-vyn
+    $("#board_view").show();
+    $('#boards_overview').hide();
+    
     // Om någon note är markerad kör vi funktionen note_selected_context
     if ($('.selected').length > 0) {
+	$("#notes_selected").show();
 	note_selected_context(context_area);
     }
     else {
 	//Ta bort color-choosern från context_area
+	$("#notes_selected").hide();
 	reset_info_box();
-	context_area.children("#color_chooser").remove();
     }
-    
-    // Add split options
 };
 
 function note_selected_context(context_area) {
     update_info_box_notes();
+
+
     // nedan skall bara kalla show eller hide på rätt element i toolboxen
-    if (context_area.children("#color_chooser").length == 0) {
-	var color_chooser = $('<ul></ul>');
+    if ($("#color_chooser").children('li').length == 0) {
+	var color_chooser = $('#color_chooser');
 	var colors = ["green", "blue", "yellow", 
 		      "red", "orange", "pink", 
 		      "#f4e476", "crimson","fuchsia"];
@@ -133,21 +112,20 @@ function note_selected_context(context_area) {
 	    color.click(color_palette_handler);
 	    color_chooser.append(color);
 	}
-
-	color_chooser.attr('id','color_chooser');
-
-	context_area.append(color_chooser);
     }
 };
 
 function start_page_context(context_area) {
+    $('#board_view').hide();;
+    $('#boards_overview').show();;
     if ($('.board_container.selected').length > 0) {
+	$('#boards_selected').show();
 	board_selected_context(context_area);
     }
     else {
+	$('#boards_selected').hide();
 	reset_info_box();
     }
-    
 };
 
 // Context area är ett jquery-wrappat element där context-beroende data skall
@@ -161,7 +139,6 @@ function reset_info_box(){
 	$('#toolbox_info_updated').text("");
 	$('#toolbox_info_owner').text("");
 	$('#toolbox_info_name').text("");
-
 };
 
 function update_info_box_notes() {
@@ -193,18 +170,16 @@ function update_info_box_notes() {
     }
     else {
 	var info_text = [];
-	info_text.push($('<h1>' + selected_items.length + ' notes selected:</h1>'));
+	info_text.push( $(selected_items).length + ' notes selected:');
 	//Loop-funktion för att hämta ut namnen på de markerade objekten.
 	selected_items.each(function(){
 		if(($(this).text().trim()).length > 11){
 		    var trimmed_name = $(this).text().trim();
 		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
 		    info_text.push(abbriviated_name);
-		    info_text.push('<br/>');
 		} 
 		else {
 		    info_text.push($(this).text().trim());
-		    info_text.push('<br/>');
 		}	
 	    });
 	
@@ -240,18 +215,16 @@ function update_info_box_board() {
     }
     else {
 	var info_text = [];
-	info_text.push($('<h1>' + selected_items.length + ' boards selected:</h1>'));
+	info_text.push($(selected_items).length + ' boards selected:');
 	//Loop-funktion för att hämta ut namnen på de markerade objekten.
 	selected_items.each(function(){
 		if(($(this).text().trim()).length > 11){
 		    var trimmed_name = $(this).text().trim();
 		    var abbriviated_name = trimmed_name.substring(10,0) + "...";
 		    info_text.push(abbriviated_name);
-		    info_text.push('<br/>');
 		} 
 		else {
 		    info_text.push($(this).text().trim());
-		    info_text.push('<br/>');
 		}	
 	    });
 	
@@ -271,6 +244,7 @@ function update_info_box(names, created, updated, owner){
     if (names != "" && names != null) {
 	for (var i = 0; i < names.length; i++) {
 	    toolbox_info_name.append(names[i]);
+	    toolbox_info_name.append('<br/>');
 	}
     }
     if (created != "" && created != null) {
