@@ -115,9 +115,15 @@ $(document).ready(function () {
 
       header.parent().bind('deselect', function(e){
         var content = editor.getContent()
-        if($(content).text().length == 0){  
+        if(content.indexOf('<') >= 0){
+         if($(content).text().length == 0){
           content = 'Empty header'
+          }
         }
+        else if(content.length === 0){
+          content = 'Empty header';
+        }
+        
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 

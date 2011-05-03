@@ -1,13 +1,6 @@
 $(document).ready(function () {
 	$(".field").each(function(index, field) {
 		attach_field_handlers($(field)) });
-
-	$(".field").droppable({
-		drop: function(event, ui){
-			update(event,ui, this.id.split('_').pop());
-		}
-	});
-
 });
 //Uppdaterar fältens grannar efter vi fått svar från servern efter resize
 function update_fields(response_data) {
@@ -25,6 +18,18 @@ function update_fields(response_data) {
 //hanterare till events, lägg till dem här
 function attach_field_handlers(field) {
     field.resize8up();
+    field.droppable({
+  		drop: function(event, ui){
+  			update(event,ui, this.id.split('_').pop());
+  			$(this).removeClass('highlight');
+  		},
+  		over: function(event, ui){
+  		  $(this).addClass('highlight');
+  		},
+  		out: function(event, ui){
+		    $(this).removeClass('highlight');
+		  }
+  	});
 };
 
 
