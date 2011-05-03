@@ -2,6 +2,8 @@
   position: fixed;
   top: 0px;
   right: 10px;
+  z-index: 100000000;
+  background: #FFFFFF;
 }
 #menu_bar li {
     background: transparent; 

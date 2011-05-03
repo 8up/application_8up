@@ -5,12 +5,13 @@
     <%= stylesheet_link_tag :all %>
     <%= render 'layouts/javascripts'%>
     <%= csrf_meta_tag %>
-	<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+	<!--<link rel="shortcut icon" href="images/logo.png" type="image/x-icon" /> -->
   </head>
   <body>  
     <%= render 'layouts/toolbox' %>
-	<div id="content">    
-		<%= yield %>  
+    
+    <div id="content">    
+      <%= yield %>  
     </div>
     <div id="menu_bar">
       <ul>
