@@ -1,73 +1,76 @@
 <div id="toolbox_container"  <%= show_toolbox %>>
-  <div ID="toolbox_area_1">
-    <img src="/images/title2.png" id="title2"/>
-    
-    <div id="context_area">
-      <!-- Denna div visas om vi är i översiktsläget för boards-->
-      <div id="boards_overview" display="none">
-	<div> <span class="toolbox_button_add toolbox_buttons"><img src="/images/plus.png" style="margin-right:10px;" width="20px" height="20px"/>New Board</span></div>
+	<div ID="toolbox_area_1">
+		<img src="/images/title2.png" id="title2"/>
+
+		<div id="context_area">
+			<!-- Denna div visas om vi är i översiktsläget för boards-->
+			<div id="boards_overview" display="none">
+				<div> <span class="toolbox_button_add toolbox_buttons"><img src="/images/plus.png" style="margin-right:10px;" width="20px" height="20px"/>New Board</span></div>
+
+				<!-- Denna div visas om vi har markerat några boards i översiktsläget -->
+				<div id="boards_selected" display="none">
+					<div> <span class="toolbox_button_edit toolbox_buttons"><img src="/images/edit.png" style="margin-right:10px;" width="20px" height="20px"/>Edit</span></div>
+					<div> <span  class="toolbox_button_invite toolbox_buttons"><img src="/images/invite.png" style="margin-right:10px;" width="20px" height="20px"/>Invite</span></div>
+					<div> <span  class="toolbox_button_delete toolbox_buttons"><img src="/images/minus.png" style="margin-right:10px;" width="20px" height="20px"/>Delete</span></div>
+
+				</div>
+			</div>
+
+			<!-- Denna div visas när vi gått in i ett whiteboard, dvs /boards/:id -->
+			<div class="board_view" display="none">
+				<div> <span class="toolbox_button_create_note toolbox_buttons"><img src="/images/plus.png" style="margin-right:10px;" width="20px" height="20px"/>New note</span></div>
+				<div> <span  class="toolbox_button_invite toolbox_buttons"><img src="/images/invite.png" style="margin-right:10px;" width="20px" height="20px"/>Invite</span></div>
+			</div>
+			<div class="notes_selected" display="none">
+				<div> <span  class="toolbox_button_delete toolbox_buttons"><img src="/images/minus.png" style="margin-right:10px;" width="20px" height="20px"/>Delete</span></div>
+			</div>
+		</div>
+
+		<div ID="toolbox_text_container">
+			<div ID="toolbox_text_1">
+			<h3 id="toolbox_header_name">Information</h3>
+			</div>
+			<div Id="toolbox_text_2">
+				<div id="toolbox_info_name"></div>
+				<div id="toolbox_info_created"></div>
+				<div id="toolbox_info_updated"></div>
+				<div id="toolbox_info_owner"></div>
+			</div>
+		</div>
+		<div id="user_list_container">
+			<div id="online_user_title">Online users:</div>
+			<div id="online_user_list"></div>
+		</div>
 		
-	<!-- Denna div visas om vi har markerat några boards i översiktsläget -->
-	<div id="boards_selected" display="none">
-	  <div> <span class="toolbox_button_edit toolbox_buttons"><img src="/images/edit.png" style="margin-right:10px;" width="20px" height="20px"/>Edit</span></div>
-	<div> <span  class="toolbox_button_invite toolbox_buttons"><img src="/images/invite.png" style="margin-right:10px;" width="20px" height="20px"/>Invite</span></div>
-	<div> <span  class="toolbox_button_delete toolbox_buttons"><img src="/images/minus.png" style="margin-right:10px;" width="20px" height="20px"/>Delete</span></div>
+		<!-- denna div visas när vi markerat en eller flera notes -->
+		<div class = "board_view">
+			<div class="notes_selected" display="none">
+				<ul id="color_chooser">
+					<li class="palette_color" style="background-color: green;"/>
+					<li class="palette_color" style="background-color: blue;"/>
+					<li class="palette_color" style="background-color: yellow;"/>
+					<li class="palette_color" style="background-color: red;"/>
+					<li class="palette_color" style="background-color: orange;"/>
+					<li class="palette_color" style="background-color: pink;"/>
+					<li class="palette_color" style="background-color: #f4e476;"/>
+					<li class="palette_color" style="background-color: crimson;"/>
+					<li class="palette_color" style="background-color: fuchsia;"/>
+				</ul>
+				<div id="avatar">
+					<p>Avatar</p>
+					<img src="/images/avatar/<%= current_user().avatar %>"/>
+				</div>
+			</div>
+		<div id="split_buttons_container" data-split_direction="none">
+			<img id="split_vert" class="split_button" src="/images/button_v.png"/>
+			<img id="split_horiz" class="split_button" src="/images/button_h.png"/>
+		</div>
+		</div>
+	</div>
+	
+	<div ID="toolbox_area_2">
+		<img src="/images/panel_button_right.png" id="panel_arrow"/>
+	</div>
 
-	</div>
-      </div>
 
-      <!-- Denna div visas när vi gått in i ett whiteboard, dvs /boards/:id -->
-      <div id="board_view" display="hidden">
-		<div> <span class="toolbox_button_create_note toolbox_buttons"><img src="/images/plus.png" style="margin-right:10px;" width="20px" height="20px"/>New note</span></div>
-		<div> <span  class="toolbox_button_invite toolbox_buttons"><img src="/images/invite.png" style="margin-right:10px;" width="20px" height="20px"/>Invite</span></div>
-			<div> <span  class="toolbox_button_delete toolbox_buttons"><img src="/images/minus.png" style="margin-right:10px;" width="20px" height="20px"/>Delete</span></div>
-	<div id="split_buttons_container" data-split_direction="none">
-	<img id="split_vert" class="split_button" src="/images/button_v.png"/>
-	<img id="split_horiz" class="split_button" src="/images/button_h.png"/>
-	</div>
-	<!-- denna div visas när vi markerat en eller flera notes -->
-	<div id="notes_selected" display="none">
-	  <ul id="color_chooser">
-	    <li class="palette_color" style="background-color: green;"/>
-	    <li class="palette_color" style="background-color: blue;"/>
-	    <li class="palette_color" style="background-color: yellow;"/>
-	    <li class="palette_color" style="background-color: red;"/>
-	    <li class="palette_color" style="background-color: orange;"/>
-	    <li class="palette_color" style="background-color: pink;"/>
-	    <li class="palette_color" style="background-color: #f4e476;"/>
-	    <li class="palette_color" style="background-color: crimson;"/>
-	    <li class="palette_color" style="background-color: fuchsia;"/>
-	  </ul>
-	  <div id="avatar">
-	    <p>Avatar</p>
-	    <img src="/images/avatar/<%= current_user().avatar %>"/>
-	  </div>
-	</div>
-      </div>
-    </div>
-    
-    <div ID="toolbox_text_container">
-      <!--<div ID="toolbox_text_1">
-        <h3 id="toolbox_header_name">Information</h3>
-      </div>-->
-      <div Id="toolbox_text_2">
-        <div id="toolbox_info_name"></div>
-        <div id="toolbox_info_created"></div>
-        <div id="toolbox_info_updated"></div>
-        <div id="toolbox_info_owner"></div>
-      </div>
-    </div>
-    <div id="user_list_container">
-      <div id="online_user_title">Online users:</div>
-      <div id="online_user_list"></div>
-    </div>
-    
-    <div id="online_user_list" ></div>
-  </div>
-  
-  <div ID="toolbox_area_2">
-    <img src="/images/panel_button_right.png" id="panel_arrow"/>
-  </div>
-  
-  
 </div>
