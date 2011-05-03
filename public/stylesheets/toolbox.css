@@ -64,22 +64,18 @@ div#toolbox_text_container {
     border:solid;
     border-width:1px;
     border-color:#ff7817;
-    left:5px;
-    width:150px;
+    left:10px;
+    width:175px;
     background-color:#FFD5A8;
 }
 
 #toolbox_text_1 {
-    color:white;
+    color:#a74d0c;
     font:15px Segoe UI;
-    -webkit-text-stroke-width: 0.8px;
-   -webkit-text-stroke-color: black;
 }
 #toolbox_text_2 {
-    color:white;
+    color:#a74d0c;
     font:15px Segoe UI;
-    -webkit-text-stroke-width: 0.8px;
-   -webkit-text-stroke-color: black;
 }
 
 .palette_color {

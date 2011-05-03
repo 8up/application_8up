@@ -156,7 +156,6 @@ function board_selected_context(context_area) {
 };
 
 function reset_info_box(){
-	$('#toolbox_header_name').text("");
 	$('#toolbox_info_created').text("");
 	$('#toolbox_info_updated').text("");
 	$('#toolbox_info_owner').text("");
@@ -187,7 +186,7 @@ function update_info_box_notes() {
 			name.push(data.note.header);
 		    }
 		    update_info_box(name, data.note.created_at, data.note.updated_at, 
-				    null, null);
+				    null);
 		}
 	    });	
     }
@@ -208,7 +207,7 @@ function update_info_box_notes() {
 		}	
 	    });
 	
-	update_info_box(info_text, null, null, null, null);
+	update_info_box(info_text, null, null, null);
     }
 };
 
@@ -234,7 +233,7 @@ function update_info_box_board() {
 			name.push(data.board.name);
 		    }
 		    update_info_box(name, data.board.created_at, data.board.updated_at, 
-				    data.board.owner_name, null);
+				    data.board.owner_name);
 		}
 	    });	
     }
@@ -255,36 +254,31 @@ function update_info_box_board() {
 		}	
 	    });
 	
-	update_info_box(info_text, null, null, null, null);
+	update_info_box(info_text, null, null, null);
     }
 }
 
 
 //Funktion för att hämta information via json om objektet.
-function update_info_box(names, created, updated, owner, info_text){
+function update_info_box(names, created, updated, owner){
     reset_info_box();
-	var toolbox_name = $('#toolbox_header_name');
-	var toolbox_info_created = $('#toolbox_info_created');
-	var toolbox_info_updated = $('#toolbox_info_updated');
-	var toolbox_info_owner = $('#toolbox_info_owner');
-	var toolbox_info_name = $('#toolbox_info_name');
+    var toolbox_info_created = $('#toolbox_info_created');
+    var toolbox_info_updated = $('#toolbox_info_updated');
+    var toolbox_info_owner = $('#toolbox_info_owner');
+    var toolbox_info_name = $('#toolbox_info_name');
 
-	if (names != "" && names != null) {
-	    toolbox_name.empty();
-	    for (var i = 0; i < names.length; i++) {
-		toolbox_name.append(names[i]);
-	    }
+    if (names != "" && names != null) {
+	for (var i = 0; i < names.length; i++) {
+	    toolbox_info_name.append(names[i]);
 	}
-	if (created != "" && created != null) {
-	    toolbox_info_created.text(created);
-	}
-	if (updated != "" && update != null) {
-	    toolbox_info_updated.text(updated);
-	}
-	if (owner != "" && owner != null) {
-	    toolbox_info_owner.text(owner);
-	}
-	if (info_text != "" && info_text != null) {
-	    toolbox_info_name.text(info_text);
-	}
+    }
+    if (created != "" && created != null) {
+	toolbox_info_created.text(created);
+    }
+    if (updated != "" && update != null) {
+	toolbox_info_updated.text(updated);
+    }
+    if (owner != "" && owner != null) {
+	toolbox_info_owner.text(owner);
+    }
 };
