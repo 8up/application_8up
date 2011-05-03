@@ -19,7 +19,7 @@ function select(e, caller) {
 
 $(document).ready(
 	function(){
-		$('.field').click(function(e){
+		$('.field').live('click',function(e){
 			de_select(e, this);
 		});
 
