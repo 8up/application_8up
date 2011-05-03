@@ -64,22 +64,18 @@ div#toolbox_text_container {
     border:solid;
     border-width:1px;
     border-color:#ff7817;
-    left:5px;
-    width:150px;
+    left:10px;
+    width:175px;
     background-color:#FFD5A8;
 }
 
 #toolbox_text_1 {
-    color:white;
+    color:#a74d0c;
     font:15px Segoe UI;
-    -webkit-text-stroke-width: 0.8px;
-   -webkit-text-stroke-color: black;
 }
 #toolbox_text_2 {
-    color:white;
+    color:#a74d0c;
     font:15px Segoe UI;
-    -webkit-text-stroke-width: 0.8px;
-   -webkit-text-stroke-color: black;
 }
 
 .palette_color {
@@ -105,31 +101,19 @@ margin-top:10px;
 
 }
 
-.toolbox_button_delete{
+.toolbox_buttons{
 position:relative;
-width:35%;
+width:60%;
 font:20px Segoe UI;
-color:white;
+color:#a74d0c;
 text-decoration:none;
+margin-left:10px;
 }
-.toolbox_button_invite{
-position:relative;
-width:35%;
-font:20px Segoe UI;
-color:white;
-text-decoration:none;
-}
-.toolbox_button_delete:hover{
+.toolbox_buttons:hover{
 cursor:pointer;
+color:#ff7817;
   -webkit-text-stroke-width: 0.3px;
-   -webkit-text-stroke-color: orange;
+   -webkit-text-stroke-color: #F8C996;
 
 }
-.toolbox_button_invite:hover{
-cursor:pointer;
-  -webkit-text-stroke-width: 0.3px;
-   -webkit-text-stroke-color: orange;
-
-}
-
 

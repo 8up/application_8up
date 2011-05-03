@@ -1,12 +1,16 @@
 <div id="toolbox_container"  <%= show_toolbox %>>
   <div ID="toolbox_area_1">
     <img src="/images/title2.png" id="title2"/>
-    <div class="toolbox_button_delete">Delete</div>
-    <div class="toolbox_button_invite">Invite</div>
+    
+    <div> <span class="toolbox_button_add toolbox_buttons"><img src="/images/plus.png" style="margin-right:10px;" width="20px" height="20px"/>New Board</span></div>
+    <div> <span class="toolbox_button_edit toolbox_buttons"><img src="/images/edit.png" style="margin-right:10px;" hspace="10" width="20px" height="20px"/>Edit</span></div>
+    <div> <span  class="toolbox_button_invite toolbox_buttons"><img src="/images/invite.png" style="margin-right:10px;" hspace="10" width="20px" height="20px"/>Invite</span></div>
+    <div> <span  class="toolbox_button_delete toolbox_buttons"><img src="/images/minus.png" style="margin-right:10px;" hspace="10" width="20px" height="20px"/>Delete</span></div>
+    
     
     <div ID="toolbox_text_container">
       <div ID="toolbox_text_1">
-        <h3 id="toolbox_header_name">Name</h3>
+        <h3 id="toolbox_header_name">Information</h3>
       </div>
       <div Id="toolbox_text_2">
         <div id="toolbox_info_name"></div>
@@ -21,7 +25,21 @@
     </div>
     
     <div id="context_area">
-      
+      <!-- Denna div visas om vi är i översiktsläget för boards-->
+      <div id="boards_overview" display="none">
+	
+	<!-- Denna div visas om vi har markerat några boards i översiktsläget -->
+	<div id="boards_selected" display="none">
+	</div>
+      </div>
+
+      <!-- Denna div visas när vi gått in i ett whiteboard, dvs /boards/:id -->
+      <div id="board_view" display="none">
+	
+	<!-- denna div visas när vi markerat en eller flera notes -->
+	<div id="notes_selected" display="none">
+	</div>
+      </div>
     </div>
     
     <div id="online_user_list" ></div>
