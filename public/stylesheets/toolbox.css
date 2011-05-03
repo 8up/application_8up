@@ -64,6 +64,7 @@ div#toolbox_text_container {
     border:solid;
     border-width:1px;
     border-color:#ff7817;
+    top:10px;
     left:10px;
     width:175px;
     background-color:#FFD5A8;
@@ -72,6 +73,10 @@ div#toolbox_text_container {
 #toolbox_text_1 {
     color:#a74d0c;
     font:15px Segoe UI;
+    font-weight:bold;
+    border-bottom:solid;
+    border-width:1px;
+    border-color:#ff7817;
 }
 #toolbox_text_2 {
     color:#a74d0c;
@@ -116,4 +121,25 @@ color:#ff7817;
    -webkit-text-stroke-color: #F8C996;
 
 }
-
+#user_list_container{
+border:solid;
+border-width:1px;
+border-color:#ff7817;
+left:10px;
+width:175px;
+background-color:#FFD5A8;
+position:relative;
+top:10px;
+}
+#online_user_list{
+color:#a74d0c;
+font:13px Segoe UI
+}
+#online_user_title{
+color:#a74d0c;
+font:15px Segoe UI;
+font-weight:bold;
+border-bottom:double;
+border-width:1px;
+border-color:#ff7817;
+}
