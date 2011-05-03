@@ -111,3 +111,8 @@ div.note div.note_header:focus{
   word-wrap: break-word;
   overflow: auto;
 }
+
+#note_body img{
+  max-width: 320px;
+  max-height: 320px;
+}
