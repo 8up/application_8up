@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	$('#split_horiz').click(gui_split_horizontally);
+	$('#split_vert').click(gui_split_vertically);
+    
 	$('.toolbox_button_invite').click(function(){
 	show_invite();
   });
