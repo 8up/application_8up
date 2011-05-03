@@ -58,8 +58,8 @@ opacity:1;
 
 
 #cont div {
-  width: 250px;
-  height: 250px;
+  /*width: 250px;
+  height: 250px;*/
   float: left;
 
   margin: 10px;
@@ -80,7 +80,7 @@ opacity:1;
 
 #workspace div a:hover {
   color: black;
-  background-color: white;
+  background-color: transparent;
 }
 
 #workspace div.hotness0 {
