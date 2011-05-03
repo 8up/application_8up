@@ -107,7 +107,7 @@ function whiteboard_context(context_area) {
 
 function note_selected_context(context_area) {
     update_info_box_notes();
-
+    // nedan skall bara kalla show eller hide på rätt element i toolboxen
     if (context_area.children("#color_chooser").length == 0) {
 	var color_chooser = $('<ul></ul>');
 	var colors = ["green", "blue", "yellow", 

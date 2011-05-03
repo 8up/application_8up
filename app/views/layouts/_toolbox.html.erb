@@ -25,7 +25,21 @@
     </div>
     
     <div id="context_area">
-      
+      <!-- Denna div visas om vi är i översiktsläget för boards-->
+      <div id="boards_overview" display="none">
+	
+	<!-- Denna div visas om vi har markerat några boards i översiktsläget -->
+	<div id="boards_selected" display="none">
+	</div>
+      </div>
+
+      <!-- Denna div visas när vi gått in i ett whiteboard, dvs /boards/:id -->
+      <div id="board_view" display="none">
+	
+	<!-- denna div visas när vi markerat en eller flera notes -->
+	<div id="notes_selected" display="none">
+	</div>
+      </div>
     </div>
     
     <div id="online_user_list" ></div>
