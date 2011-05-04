@@ -58,15 +58,32 @@ opacity:1;
 
 
 .board_container {
-  /*width: 250px;
-  height: 250px;*/
   float: left;
-
   margin: 10px;
   padding: 2px ;
   text-align: center;
   vertical-align: middle;
   overflow: hidden;
+}
+
+.board_container ul.header{
+  display: inline;
+  list-style: none;
+  overflow: auto;
+  width: 100%;
+  padding-left: 230px;
+}
+.board_container ul.header li{
+  display: inline;
+}
+#workspace .board_container .header a{
+  font-size: inherit;
+  display: inline;
+  line-height: inherit;
+}
+#workspace .board_container .header a img{
+  width: 16px;
+  height: 16px;
 }
 
 #workspace div a {

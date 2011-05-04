@@ -4,11 +4,37 @@ class Board < ActiveRecord::Base
   has_one :owner, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::OWNER }
   has_many :participants, :through => :boards_permissions, :source => :user, :conditions => { "boards_permissions.role" => BoardsPermission::PP}
   has_many :fields
-  after_initialize :create_field
+
+  def initialize(params = {}, options = {})
+    @options = options
+    super(params)
+  end
+ 
+  def after_initialize
+    if self.in_trash == nil
+      self.in_trash = false
+    end
+
+    if fields == []
+      if @options.has_key? :size
+        size = @options[:size]
+      else
+        size = {:width => 1200, :height => 800}
+      end
+      width = size[:width]
+      height = size[:height]
+      field = Field.create({:position_x => 0, :position_y => 0, 
+                             :width=> width, :height => height})
+      fields << field
+    end
+  end
+
   
   def hotness
     rand(4)
   end    
+
+
   
   def trashcan
     Note.find(:all, :conditions => ["field_id = ? and trashcan = ?", self.fields, true])
@@ -81,18 +107,6 @@ class Board < ActiveRecord::Base
   end
   
 
-  def create_field
-    if self.in_trash == nil
-      self.in_trash = false
-    end
-    if fields == []
-      puts "foo"
-      field = Field.new
-      field.position_x = field.position_y = 0
-      field.width = field.height = 900
-      fields << field
-    end
-  end
 
   def split_field(field, direction, split_position)
     attributes = {};

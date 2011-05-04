@@ -87,10 +87,6 @@
   
   
   $(document).ready(function(){
-    
-    $('body').live('focus', function(e){
-      window.console.log(e);
-    });
 
     $("#window_wrapper").click(function(e){
       if(e.target == this)

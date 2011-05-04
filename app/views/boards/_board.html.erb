@@ -1,0 +1,17 @@
+<div id="board_<%= if not template then board.id else "template" end; %>" class="board_container" <%= "style='display:none'" if template %>>
+	<ul class="header" style="opacity:0">			
+		<li><a href="#" class="board_button_invite"><img src="/images/invite.png" alt="Invite others" title="Invite others"></a></li>	
+		<li><a href="#" class="board_button_edit"><img src="/images/edit.png" alt="Edit name" title="Edit name"></a></li>
+		<li><a href="#" class="board_button_delete"><img src="/images/delete.png" alt="Delete board" title="Delete board"></a></li>	
+	</ul>
+	<table width="300px" height="200px" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td valign="middle" align="center">
+
+				<%= if not template then link_to(board.name, board) else link_to('template', nil) end %>
+
+			</td>
+		</tr>
+	</table>
+
+</div>
