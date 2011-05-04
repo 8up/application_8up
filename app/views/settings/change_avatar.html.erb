@@ -1,10 +1,64 @@
-<%= form_tag :action => 'change_avatar' do %> 
+<br/>
+<br/>
+
+
+<form name="input" action="" method="post">
+  
+  <br/>
+  <br/>
+  <div id="choose_avatar">
+    <!--<fieldset><legend>Pojke</legend>-->
+  <div id="choose_avatar_m">
+    <ul>
+      <li><img name="my_avatar" src="/images/avatar/m_1.png" ><br/><input type="radio" name="Male" value="m_1.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_2.png" ><br/><input type="radio" name="Male" value="m_2.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_3.png" ><br/><input type="radio" name="Male" value="m_3.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_4.png" ><br/><input type="radio" name="Male" value="m_4.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_5.png" ><br/><input type="radio" name="Male" value="m_5.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_6.png" ><br/><input type="radio" name="Male" value="m_6.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_7.png" ><br/><input type="radio" name="Male" value="m_7.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_8.png" ><br/><input type="radio" name="Male" value="m_8.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_9.png" ><br/><input type="radio" name="Male" value="m_9.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/m_10.png" ><br/><input type="radio" name="Male" value="m_10.png" /></li>
+    </ul>
+  </div>
+  <!--</fieldset>-->
+  
+  <!--<fieldset><legend>tjej</legend>-->
+   <div id="choose_avatar_f">
+    <ul>
+      <li><img name="my_avatar" src="/images/avatar/f_1.png" ><br/><input type="radio" name="Female" value="f_1.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_2.png" ><br/><input type="radio" name="Female" value="f_2.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_3.png" ><br/><input type="radio" name="Female" value="f_3.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_4.png" ><br/><input type="radio" name="Female" value="f_4.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_5.png" ><br/><input type="radio" name="Female" value="f_5.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_6.png" ><br/><input type="radio" name="Female" value="f_6.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_7.png" ><br/><input type="radio" name="Female" value="f_7.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_8.png" ><br/><input type="radio" name="Female" value="f_8.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_9.png" ><br/><input type="radio" name="Female" value="f_9.png" /></li>
+      <li><img name="my_avatar" src="/images/avatar/f_10.png" ><br/><input type="radio" name="Female" value="f_10.png" /></li>
+    </ul>
+  </div>
+<!--</fieldset>-->
+</div>
+<br/>
+<input type="submit" value="Submit" />
+</form>
 
 
 
 
+<!--<%= form_tag :action => 'change_avatar' do %> 
 
 
-<%= submit_tag %>
+
+
+<%= radio_button("post", "category", "rails" ) %>
+<%= radio_button("post", "category", "Java") %>
+<br/>
+<br/>
+
+
+<%= submit_tag %>-->
 
 <% end %> 

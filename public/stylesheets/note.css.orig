@@ -1,17 +1,24 @@
 div.note {
-    width: 140px; 
-    height: 130px;
+    width: 100px; 
+    height: 100px;
     padding: 10px;
     padding-top: 10px;
-    background-image: url("/images/postit_yellow.png");
-    background-repeat:no-repeat;
-    background-size:100%;
+    background-color:#f4e476; 
     word-wrap: break-word;
-    overflow:hidden;
+    /*overflow:hidden;*/
+    box-shadow: 4px 4px 4px #8e8e8e;
     z-index:125;
 }
 div.note.selected {
-
+    -moz-box-shadow: 3px 3px 4px #000;
+    /* -webkit-box-shadow: 3px 3px 3px 4px #000;
+     */
+    box-shadow: 0px 0px 2px 1px #447;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+    /* For IE 5.5 - 7 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+    
 }
 
 div.note div.note_header,form {
@@ -105,14 +112,14 @@ div.note div.note_header:focus{
   overflow: auto;
 }
 
-#note_body img{
-  max-width: 320px;
-  max-height: 320px;
-}
-
+<<<<<<< HEAD
 .avatar_holder {
   position: absolute;
   top: -40px;
   left:-35px;
-  pointer-events: none;
+=======
+#note_body img{
+  max-width: 320px;
+  max-height: 320px;
+>>>>>>> edbda1b860997737e386e5d698953ccc871ba3ec
 }

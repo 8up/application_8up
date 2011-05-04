@@ -81,13 +81,20 @@ $(document).ready(function () {
 
     function edit_note_header(header) {
       var header = $(header);
+      
       header.keydown(function(e){
         if(e.keyCode == 46){
           e.stopPropagation();
+        }else if(e.keyCode == 13 && !e.shiftKey){
+          e.stopPropagation();
+          e.preventDefault();
+          de_select_element(header.parent());
+          header.parent().trigger('deselect');
         }
       })
 
       var editor = nicEditors.findEditor($(header).attr('id'));
+      
       if( editor == null){
         noteEditor.addInstance($(header).attr('id'));
         editor = nicEditors.findEditor($(header).attr('id'));
@@ -99,20 +106,17 @@ $(document).ready(function () {
       var target_url = "/notes/" + note_id + ".json";
 
       header.parent().bind('deselect', function(e){
-        var content = editor.getContent()
-        if(content.indexOf('<') >= 0){
-         if($(content).text().length == 0){
+        var raw_content = editor.getContent();
+        var content = $('<div></div>').append(raw_content);
+        
+        if(content.text().length == 0){
           content = 'Empty header'
-          }
-        }
-        else if(content.length === 0){
-          content = 'Empty header';
         }
         
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 
-          'note' : {'header' : content}
+          'note' : {'header' : content.html()}
         }, 
         success: function(data) {
 
@@ -125,6 +129,7 @@ $(document).ready(function () {
       });
       $("#toolbox_container").trigger("update");
       header.parent().draggable('enable');
+      header.blur();
     });
   };
 
@@ -155,7 +160,9 @@ $(document).ready(function () {
       note.addClass('selected');
       note.data('board_id', 'board_' + data.note.board_id);
       note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
-
+      var avatar= $('<div></div>');
+      avatar.addClass('avatar_holder');
+      note.append(avatar);
       header.html(data.note.header);
 
       attach_handlers(note, data);

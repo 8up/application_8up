@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 20110429131040
+#
+# Table name: fields
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  color      :string(255)
+#  position_x :integer
+#  position_y :integer
+#  width      :integer
+#  height     :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  board_id   :integer
+#
+
 # -*- coding: utf-8 -*-
 class Field < ActiveRecord::Base
   has_many :notes, :conditions => {:trashcan => false}

@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20110429131040
+#
+# Table name: boards
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  in_trash   :boolean
+#
+
 # -*- coding: utf-8 -*-
 class Board < ActiveRecord::Base
   has_many :boards_permissions

@@ -1,4 +1,3 @@
-(function(){
 function de_select_all(e, caller){
   if(e.target != caller){
 		return true;
@@ -31,8 +30,11 @@ $(document).ready(
 		notes.live('click', function(e) 
 		{
 		  if(!e.metaKey && !e.ctrlKey){
+		    var that = this;
 		    notes.each(function(index, element){
-  		    de_select_element(element);
+  		    if(element !== that){ 
+  		      de_select_element(element);
+		      }
   	    });
 	    }
 		  select(e, this);
@@ -65,7 +67,7 @@ $(document).ready(
 
 		$('.board_button_edit').live('click', function(){
 			var board = $(this).closest('.board_container');
-			var name = board.find('td a');
+			var name = board.find('.board_name');
 			window.console.log(name);
 			edit_board_name(name);
 		    });
@@ -75,4 +77,3 @@ $(document).ready(
 		    });
 	}
 );
-})();

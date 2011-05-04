@@ -14,6 +14,22 @@
 
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
+  
+  <p><%= f.label :Choose_Avatar %>
+  <div id="choose_avatar">
+  <ul>
+  <% Dir.entries("public/images/avatar").each do |pic| %>
+    <% if not(pic == "." || pic == "..")%>
+      <li><img name="my_avatar" src="/images/avatar/<%= pic%>" ><br/><%= radio_button_tag("user[avatar]" , pic ) %></li>
+  <% end %>
+  <% end %>
+</ul>
+</div>
+ </pS>
+<br/>
+<br/>
+<br/>
+<br/>
 
   <p><%= f.submit "Sign up" %></p>
 <% end %>
