@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('#split_vert').click(gui_split_vertically);
 
 	$('.toolbox_button_add').click(function(){
-		window.location = '/boards/new'
+		add_board();
 	});
 	$('.toolbox_button_create_note').click(function(e){
 		var f;
