@@ -20,11 +20,11 @@
 
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
-  
+  	</center>
+
   <p><%= f.label :Change_Avatar %>
   <div id="choose_avatar">
   <ul>
-	</center>
   <% Dir.entries("public/images/avatar").each do |pic| %>
     <% if not(pic == "." || pic == "..")%>
       <li><img name="my_avatar" src="/images/avatar/<%= pic%>" ><br/><%= radio_button_tag("user[avatar]" , pic , (pic == current_user().avatar)? true : false) %></li>
