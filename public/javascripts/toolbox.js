@@ -1,18 +1,20 @@
 $(document).ready(function(){
 	$('#split_horiz').click(gui_split_horizontally);
 	$('#split_vert').click(gui_split_vertically);
-    
-	$('.toolbox_button_invite').click(function(){
-	show_invite();
-  });
-	$('.toolbox_button_edit').click(function(){
-	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
-
-  });
+  
 	$('.toolbox_button_add').click(function(){
 	window.location = '/boards/new'
-
   });
+  $('.toolbox_button_create_note').click(function(e){
+		var f;
+	  $("div.field").click(f = function(e){
+        if (e.target != this) {
+          return true;
+        }
+        create_note(e);
+		$("div.field").unbind('click', f);
+      });
+	});
 	$('.palette_color').click(color_palette_handler);
 
 	$("#toolbox_container").bind('update',function(){
