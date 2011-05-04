@@ -81,13 +81,20 @@ $(document).ready(function () {
 
     function edit_note_header(header) {
       var header = $(header);
+      
       header.keydown(function(e){
         if(e.keyCode == 46){
           e.stopPropagation();
+        }else if(e.keyCode == 13 && !e.shiftKey){
+          e.stopPropagation();
+          e.preventDefault();
+          de_select_element(header.parent());
+          header.parent().trigger('deselect');
         }
       })
 
       var editor = nicEditors.findEditor($(header).attr('id'));
+      
       if( editor == null){
         noteEditor.addInstance($(header).attr('id'));
         editor = nicEditors.findEditor($(header).attr('id'));
@@ -125,6 +132,7 @@ $(document).ready(function () {
       });
       $("#toolbox_container").trigger("update");
       header.parent().draggable('enable');
+      header.blur();
     });
   };
 

@@ -1,4 +1,3 @@
-(function(){
 function de_select_all(e, caller){
   if(e.target != caller){
 		return true;
@@ -75,4 +74,3 @@ $(document).ready(
 		    });
 	}
 );
-})();
