@@ -43,7 +43,7 @@ $(document).ready(
       note_box(e);
     });
 		
-		$("html").click(function(e){
+		$("#workspace").click(function(e){
 			de_select_all(e, this);
 		});
 		
