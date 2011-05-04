@@ -60,7 +60,7 @@ $(document).ready(
 		});
 		
 		$('.board_button_invite').click(function(){
-  	  show_invite();
+  	  show_invite($('.selected').id8Up());
     });
   	$('.board_button_edit').click(function(){
   	  window.location = '/boards/' + $('.selected').id8Up() + '/edit'	

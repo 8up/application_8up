@@ -5,6 +5,9 @@ $(document).ready(function(){
 	$('.toolbox_button_add').click(function(){
 		add_board();
 	});
+	$('.toolbox_button_invite').click(function(e){
+	  show_invite($('.board_div').id8Up())
+	})
 	$('.toolbox_button_create_note').click(function(e){
 		var f;
 		$("div.field").click(f = function(e){
