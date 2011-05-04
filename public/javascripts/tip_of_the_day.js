@@ -9,8 +9,7 @@ tips[4]='Select one or more notes and then click on a color to change the color 
 tips[5]='Use the split buttons to split the fields.'
 tips[6]='Remove a note by selecting it and then clicking delete.'
 tips[7]='Press account to change your user settings.'
-tips[8]='Go fuck yourself!'
-tips[9]='Double-click a note to get the full size view.'
+tips[8]='Double-click a note to get the full size view.'
 
 
 $('#tip_of_the_day_list').text(tips[Math.floor(Math.random()*10)])
