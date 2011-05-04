@@ -19,6 +19,6 @@ board_overview_tips[3] = board_view_tips[7]
 board_overview_tips[4] ='Click on the toolbox border to close the toolbox.'
 
 
-$('#tip_of_the_day_list').text(board_view_tips[Math.floor(Math.random()*10)])
-$('#tip_of_the_day_list2').text(board_overview_tips[Math.floor(Math.random()*10)])
+$('#tip_of_the_day_list').text(board_view_tips[Math.floor(Math.random()*10)%9])
+$('#tip_of_the_day_list2').text(board_overview_tips[Math.floor(Math.random()*10)%5])
 });

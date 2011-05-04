@@ -81,7 +81,7 @@ function gui_split_horizontally(event) {
 function whiteboard_context(context_area) {
   // Visa verktyg specifikt för board-vyn
   $(".board_view").show();
-  $('#boards_overview').hide();
+  $('.boards_overview').hide();
 
   // Om någon note är markerad kör vi funktionen note_selected_context
   if ($('.selected').length > 0) {
@@ -118,7 +118,7 @@ function note_selected_context(context_area) {
 function start_page_context(context_area) {
   $('.board_view').hide();;
   $('.notes_selected').hide();;
-  $('#boards_overview').show();;
+  $('.boards_overview').show();;
   if ($('.board_container.selected').length > 0) {
     $('#boards_selected').show();
     board_selected_context(context_area);
