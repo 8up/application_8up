@@ -111,3 +111,9 @@ div.note div.note_header:focus{
   word-wrap: break-word;
   overflow: auto;
 }
+
+.avatar_holder {
+  position: absolute;
+  top: -40px;
+  left:-35px;
+}

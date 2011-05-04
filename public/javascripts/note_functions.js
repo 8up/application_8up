@@ -169,7 +169,9 @@ $(document).ready(function () {
       note.addClass('selected');
       note.data('board_id', 'board_' + data.note.board_id);
       note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
-
+      var avatar= $('<div></div>');
+      avatar.addClass('avatar_holder');
+      note.append(avatar);
       header.html(data.note.header);
 
       attach_handlers(note, data);

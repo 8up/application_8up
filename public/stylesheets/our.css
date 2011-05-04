@@ -113,11 +113,11 @@ opacity:1;
   margin-left:70px; 
   margin-right:30px;   
 }
-#choose_avatar div{
-  width: 1130px;
-  height:232px;
+#choose_avatar{
+  width: 540px;
+  height:240px;
   clear: both;
-  margin: 30px auto ;
+  margin: auto ;
 }
 #choose_avatar ul {
   list-style: none;
@@ -131,5 +131,10 @@ opacity:1;
   border-style: solid;
   border-color: #CC0;
   float: left;
-  margin-left: 2px;
+  margin: 5px 0px 0px 2px;
+}
+
+#choose_avatar img {
+  width: 50px;
+  height: 100px;
 }
