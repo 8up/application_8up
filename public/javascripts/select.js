@@ -30,8 +30,11 @@ $(document).ready(
 		notes.live('click', function(e) 
 		{
 		  if(!e.metaKey && !e.ctrlKey){
+		    var that = this;
 		    notes.each(function(index, element){
-  		    de_select_element(element);
+  		    if(element !== that){ 
+  		      de_select_element(element);
+		      }
   	    });
 	    }
 		  select(e, this);
