@@ -1,7 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function(){
-	set_page_context();
     });
 
 function set_page_context() {
@@ -22,6 +21,8 @@ function set_page_context() {
     }
   
 };
+//Vi behöver inte köra den här funktionen på readyeventet då den inte anväder DOM.
+set_page_context();
 
 (function($){
 	jQuery.fn.id8Up = function(){
