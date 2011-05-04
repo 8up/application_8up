@@ -50,11 +50,20 @@ $(document).ready(
 		
 		$(".board_container").mouseout(function(e){
 			de_select_element(this);
+			$(this).children('.header').css('opacity', 0);
 		});
 		
 		$(".board_container").mouseover(function(e){
 			select(e,$(this).closest("div"));
+			$(this).children('.header').css('opacity', 1);
 		});
+		
+		$('.board_button_invite').click(function(){
+  	show_invite();
+    });
+  	$('.board_button_edit').click(function(){
+  	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
+    });
 	}
 );
 })();

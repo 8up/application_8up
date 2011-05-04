@@ -34,21 +34,8 @@ $(document).ready(function () {
 
             }
           }); 
-
-
         })
       });
-
-	$('.toolbox_button_create_note').click(function(e){
-		var f;
-	  $("div.field").click(f = function(e){
-        if (e.target != this) {
-          return true;
-        }
-        create_note(e);
-		$("div.field").unbind('click', f);
-      });
-	});
 
       $("div.field").live('dblclick', function(e){
         if (e.target != this) {

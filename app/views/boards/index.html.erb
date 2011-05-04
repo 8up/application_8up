@@ -1,21 +1,10 @@
 <div id="workspace">
+	<%= render :partial => 'board', :locals => { :template => true } %>
   
   <% @boards.each_with_index do |board, index| %>
   <% if board.in_trash == false %>
-
-<div id="board_<%= board.id %>" class="board_container">
-  <table width="300px" height="200px" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-      <td valign="middle" align="center">
-          
-          <%= link_to board.name, board %>
-          
-	</td>
-      </tr>
-    </table>
-
-</div>
-<% end %>
+		<%= render :partial => 'board', :locals => { :board => board, :template => false } %>
+	<% end %>
 <% end %>
 
 </div>
