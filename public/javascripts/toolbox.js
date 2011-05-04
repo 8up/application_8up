@@ -290,7 +290,7 @@ function add_board() {
     board_content.text('')
     $('#workspace').append(new_board);
     new_board.fadeIn();
-
+    
     data = {"board[name]": "No title",
 	    "options[size]" : { width: view_width, 
 		    height: view_height }};
@@ -299,8 +299,42 @@ function add_board() {
 		var link_ref = "/boards/" + data.board.id;
 		new_board.attr("id", id);
 		board_content.attr('href',link_ref);
-		board_content.text(data.board.name)
+		board_content.text(data.board.name);
+		edit_board_name(board_content);
 	    }
 	});
    
+};
+
+function edit_board_name(header) {
+    var original_text = $(header).html();
+    var title_form = $("<form></form>");
+    var title_input = $("<input type='text' size='10'></input>");
+    //Titeln trimmas för tillfället 
+    title_input.val($.trim(original_text));
+    var board_id = $(header).closest('.board_container').attr('id').split('_').pop();
+    var url = "/boards/" + board_id;
+    
+    title_form.append(title_input);
+    $(header).replaceWith(title_form);
+       
+    title_input.focus();
+    title_input.select();
+
+    title_input.blur(function(e) { $(this).closest("form").submit(); });
+
+    title_form.submit(function(e) { 
+	
+	    var new_header_text = title_input.val();
+	    header.text(new_header_text);
+	    title_form.replaceWith(header);
+	    
+	    $.ajax({url: url, 
+			type: "PUT", 
+			data: {board : 
+			{name : new_header_text}} 
+		
+		});
+	return false; //ladda inte om sidan
+	});
 };

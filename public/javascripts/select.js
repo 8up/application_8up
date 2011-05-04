@@ -62,7 +62,11 @@ $(document).ready(
   	show_invite();
     });
   	$('.board_button_edit').click(function(){
-  	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
+		var board = $(this).closest('.board_container');
+		var name = board.find('td a');
+		window.console.log(name);
+		edit_board_name(name);
+		//window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
     });
 	}
 );
