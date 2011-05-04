@@ -84,7 +84,7 @@ div#toolbox_text_container {
 }
 
 .palette_color {
-    margin: 5px 5px 5px 5px;
+    margin: 2px 2px 2px 2px;
     width: 30px;
     height: 30px;
     float: left;
@@ -96,6 +96,7 @@ div#toolbox_text_container {
 }
 
 #avatar {
+    margin-top:25px;
     clear: both;
 }
 
@@ -143,4 +144,34 @@ font-weight:bold;
 border-bottom:double;
 border-width:1px;
 border-color:#ff7817;
+}
+#color_chooser{
+position:relative;
+margin-left:2px;
+}
+#color_chooser_container{
+position:relative;
+margin-top:15px;
+border:solid;
+border-width:1px;
+border-color:#ff7817;
+left:10px;
+width:175px;
+background-color:#FFD5A8;
+position:relative;
+top:10px;
+}
+#color_chooser_head{
+color:#a74d0c;
+    font:15px Segoe UI;
+    font-weight:bold;
+    border-bottom:solid;
+    border-width:1px;
+    border-color:#ff7817;
+}
+#clear_both_fix{
+clear:both;
+}
+#split_buttons_container{
+margin-top:15px;
 }

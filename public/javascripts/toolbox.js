@@ -167,10 +167,10 @@ function update_info_box_notes() {
 		$.ajax({url: url, type: 'GET',
 		success: function(data, textStatus, jqXHR){
 			var name = [];
-			if((data.note.header).length > 11){
+		    if((data.note.header).length > 12){
 				//trimma namnet om det är för långt
 				var trimmed_name = data.note.header.trim(); 
-				name.push(trimmed_name.substring(7,0) + "...");
+			name.push(trimmed_name.substring(11,0) + "...");
 			} 
 			else {
 				name.push(data.note.header);
@@ -187,9 +187,9 @@ function update_info_box_notes() {
 		info_text.push( $(selected_items).length + ' notes selected:');
 		//Loop-funktion för att hämta ut namnen på de markerade objekten.
 		selected_items.each(function(){
-			if(($(this).text().trim()).length > 11){
+		if(($(this).text().trim()).length > 12){
 				var trimmed_name = $(this).text().trim();
-				var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    var abbriviated_name = trimmed_name.substring(11,0) + "...";
 				info_text.push(abbriviated_name);
 			} 
 			else {
@@ -216,10 +216,10 @@ function update_info_box_board() {
 			if( $('.board_container.selected').length > 0){
 
 				var name = [];
-				if((data.board.name).length > 8){
+		    if((data.board.name).length > 12){
 					//trimma namnet om det är för långt
 					var trimmed_name = data.board.name.trim(); 
-					name.push(trimmed_name.substring(7,0) + "...");
+			name.push(trimmed_name.substring(11,0) + "...");
 				} 
 				else {
 					name.push(data.board.name);
