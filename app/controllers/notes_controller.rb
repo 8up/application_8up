@@ -68,7 +68,7 @@ class NotesController < ApplicationController
     
     if params.has_key? :avatar_action
       if  params[:avatar_action] == "remove"
-        PlacedAvatar.where({:user_id => current_user().id, :note_id => @note.id}).destroy    
+        PlacedAvatar.where({:user_id => current_user.id, :note_id => @note.id}).first.destroy    
       elsif params[:avatar_action] == "add"
         if PlacedAvatar.where({:user_id => current_user().id, :note_id => @note.id}).length == 0
           avatar_connection = PlacedAvatar.create(:user_id => current_user().id, :note_id => @note.id)
