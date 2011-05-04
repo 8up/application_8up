@@ -58,22 +58,22 @@ $(document).ready(function () {
     
     
     function color_palette_handler(e) {
-    		var x = $(e.target).css('background-color');
-
+    		var x = $(e.target).attr("data-color");
+    
     		$(".selected.note").each(function(index, domElement){
     			var note_id = $(domElement).attr('id').split('_').pop();
     			var board_id = $(domElement).data('board_id').split('_').pop();
     			var url_path =  "/boards/" + board_id + "/notes/" + 
     			    note_id + '.json';
     			var old_color = $(domElement).css('background-color');
-    			$(domElement).css('background-color', x);
+    			$(domElement).css('background-image', 'url(\'' + x + '\')');
     			$.ajax({ url: url_path, 
     				    type: 'POST',
     				    data: {_method:'PUT',
     					'note[color]': x 	},
     				    error: function(){
     				    // Om vi får error sätter vi tillbaka gamla färgen
-    				    $(domElement).css('background-color', old_color);
+    				    //$(domElement).css('background-color', old_color);
 
     				}});   
     		    });
@@ -148,7 +148,7 @@ $(document).ready(function () {
       'note[position_x]': posX,
       'note[position_y]': posY,
       'note[field_id]': field_id,
-      'note[color]': '#f4e476'
+      'note[color]': '/images/postit_yellow.png'
     }, 
     success: function(data, textStatus, jqXHR) {
       var header_id = "note_header_" + data.note.id;
