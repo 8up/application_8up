@@ -23,7 +23,6 @@ $(document).ready(
 				panel_arrow.attr("src", "/images/panel_button_right.png");
 			}
 		});
-		/*$("#toolbox_area_2").trigger('click');*/
 	}
 	
 );
