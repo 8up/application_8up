@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('#split_vert').click(gui_split_vertically);
 
 	$('.toolbox_button_add').click(function(){
-		window.location = '/boards/new'
+		add_board();
 	});
 	$('.toolbox_button_create_note').click(function(e){
 		var f;
@@ -287,6 +287,9 @@ function add_board() {
     var url = "/boards.json";
     var view_height = $(window).height();
     var view_width = $(window).width();
+    board_content.text('')
+    $('#workspace').append(new_board);
+    new_board.fadeIn();
 
     data = {"board[name]": "No title",
 	    "options[size]" : { width: view_width, 
@@ -297,8 +300,6 @@ function add_board() {
 		new_board.attr("id", id);
 		board_content.attr('href',link_ref);
 		board_content.text(data.board.name)
-		$('#workspace').append(new_board);
-		new_board.fadeIn();
 	    }
 	});
    
