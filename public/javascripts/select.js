@@ -48,29 +48,31 @@ $(document).ready(
 			de_select_all(e, this);
 		});
 		
-		$("div.board_container").live('mouseleave',function(e){
+		$("div.board_container").live('mouseleave', function(e){
 			de_select_element(this);
 			$(this).children('.header').css('opacity', 0);
 			
 		});
 		
-		$("div.board_container").live('mouseenter',function(e){
+		$("div.board_container").live('mouseenter', function(e){
 			select(e,$(this).closest("div"));
 			$(this).children('.header').css('opacity', 1);
 		});
 		
-		$('.board_button_invite').click(function(){
-  	  show_invite($('.selected').id8Up());
-    });
-  	$('.board_button_edit').click(function(){
-		var board = $(this).closest('.board_container');
-		var name = board.find('td a');
-		window.console.log(name);
-		edit_board_name(name);
-    });
-    $('.board_button_delete').click(function(e){
-  	  delete_selected(e);	
-    });
+		$('.board_button_invite').live('click', function(){
+			show_invite($('.selected').id8Up());
+		    });
+
+		$('.board_button_edit').live('click', function(){
+			var board = $(this).closest('.board_container');
+			var name = board.find('td a');
+			window.console.log(name);
+			edit_board_name(name);
+		    });
+
+		$('.board_button_delete').live('click', function(e){
+			delete_selected(e);	
+		    });
 	}
 );
 })();
