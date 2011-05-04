@@ -1,5 +1,28 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+$(document).ready(function(){
+	set_page_context();
+    });
+
+function set_page_context() {
+    var pathname = window.location.pathname;
+    var array = pathname.split("/");
+
+    // Ta bort alla tomma element ur arrayen
+    array = array.filter(function(element) { return element != "";});
+	
+    var lastElement = array.pop();
+    //Om sista elementet inte är ett NaN, så är det ett nummer, och 
+    // vi antar att vi är i ett whiteboard
+    if (!isNaN(lastElement)) {
+	window.page_context = 'whiteboard';
+    }
+    else {
+	window.page_context = 'start_page';
+    }
+  
+};
+
 (function($){
 	jQuery.fn.id8Up = function(){
 		return this.attr("id").split("_").pop();
