@@ -48,21 +48,25 @@ $(document).ready(
 			de_select_all(e, this);
 		});
 		
-		$(".board_container").mouseout(function(e){
+		$("div.board_container").live('mouseleave',function(e){
 			de_select_element(this);
 			$(this).children('.header').css('opacity', 0);
+			
 		});
 		
-		$(".board_container").mouseover(function(e){
+		$("div.board_container").live('mouseenter',function(e){
 			select(e,$(this).closest("div"));
 			$(this).children('.header').css('opacity', 1);
 		});
 		
 		$('.board_button_invite').click(function(){
-  	show_invite();
+  	  show_invite();
     });
   	$('.board_button_edit').click(function(){
-  	window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
+  	  window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
+    });
+    $('.board_button_delete').click(function(e){
+  	  delete_selected(e);	
     });
 	}
 );
