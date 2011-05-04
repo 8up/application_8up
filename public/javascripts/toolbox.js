@@ -167,10 +167,10 @@ function update_info_box_notes() {
 		$.ajax({url: url, type: 'GET',
 		success: function(data, textStatus, jqXHR){
 			var name = [];
-			if((data.note.header).length > 11){
+		    if((data.note.header).length > 12){
 				//trimma namnet om det är för långt
 				var trimmed_name = data.note.header.trim(); 
-				name.push(trimmed_name.substring(7,0) + "...");
+			name.push(trimmed_name.substring(11,0) + "...");
 			} 
 			else {
 				name.push(data.note.header);
@@ -187,9 +187,9 @@ function update_info_box_notes() {
 		info_text.push( $(selected_items).length + ' notes selected:');
 		//Loop-funktion för att hämta ut namnen på de markerade objekten.
 		selected_items.each(function(){
-			if(($(this).text().trim()).length > 11){
+		if(($(this).text().trim()).length > 12){
 				var trimmed_name = $(this).text().trim();
-				var abbriviated_name = trimmed_name.substring(10,0) + "...";
+		    var abbriviated_name = trimmed_name.substring(11,0) + "...";
 				info_text.push(abbriviated_name);
 			} 
 			else {
@@ -216,10 +216,10 @@ function update_info_box_board() {
 			if( $('.board_container.selected').length > 0){
 
 				var name = [];
-				if((data.board.name).length > 8){
+		    if((data.board.name).length > 12){
 					//trimma namnet om det är för långt
 					var trimmed_name = data.board.name.trim(); 
-					name.push(trimmed_name.substring(7,0) + "...");
+			name.push(trimmed_name.substring(11,0) + "...");
 				} 
 				else {
 					name.push(data.board.name);
@@ -283,7 +283,8 @@ function add_board() {
     var new_board = $('#board_template').clone();
   
     //Leta upp boardets innehåll
-    var board_content = new_board.find('td a');
+    var board_link = new_board.find('a.board_link');
+    var board_content = new_board.find('.board_name')
 
     new_board.attr("id","board_new");
 
@@ -301,7 +302,7 @@ function add_board() {
 		var id= "board_" + data.board.id;
 		var link_ref = "/boards/" + data.board.id;
 		new_board.attr("id", id);
-		board_content.attr('href',link_ref);
+		board_link.attr('href',link_ref);
 		board_content.text(data.board.name);
 		edit_board_name(board_content);
 	    }
@@ -310,13 +311,17 @@ function add_board() {
 };
 
 function edit_board_name(header) {
+    var board_container = $(header).closest('.board_container'); 
     var original_text = $(header).html();
     var title_form = $("<form></form>");
     var title_input = $("<input type='text' size='10'></input>");
     //Titeln trimmas för tillfället 
     title_input.val($.trim(original_text));
-    var board_id = $(header).closest('.board_container').attr('id').split('_').pop();
+    var board_id = board_container.attr('id').split('_').pop();
     var url = "/boards/" + board_id;
+    
+    //deaktivera alla länkar
+    $('a').click(stop_link = function(e) { e.preventDefault(); return false;})
     
     title_form.append(title_input);
     $(header).replaceWith(title_form);
@@ -324,20 +329,22 @@ function edit_board_name(header) {
     title_input.focus();
     title_input.select();
 
-    title_input.blur(function(e) { $(this).closest("form").submit(); });
+    title_input.blur(function(e) { title_form.submit(); });
 
     title_form.submit(function(e) { 
 	
 	    var new_header_text = title_input.val();
 	    header.text(new_header_text);
 	    title_form.replaceWith(header);
-	    
+	   
 	    $.ajax({url: url, 
 			type: "PUT", 
 			data: {board : 
 			{name : new_header_text}} 
 		
 		});
-	return false; //ladda inte om sidan
+	    
+	     $('a').unbind('click', stop_link); //Aktivera länkar igen
+	     return false; //ladda inte om sidan
 	});
 };
