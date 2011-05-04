@@ -263,3 +263,31 @@ function update_info_box(names, created, updated, owner){
 	toolbox_info_owner.text(owner);
     }
 };
+
+function add_board() {
+    var new_board = $('<div></div>');
+    var cell = $('<td></td>');
+    var link = $('<a></a>');
+    cell.attr('valign','middle');
+    cell.attr('align','center');
+   
+    
+    new_board.addClass("board_container");
+    new_board.attr("id","board_new");
+    var url = "/boards.json";
+    data = {"board[name]": "Unnamed"};
+    $.ajax({url: url, method: "POST", data: data, success: function(data) {
+		var id= "board_" + data.board.id;
+		var link_ref = "/boards/" + data.board.id;
+		new_board.attr("id", id);
+		link.attr('href',link_ref);
+
+		$('#workspace').append(new_board);
+	    }
+	});
+   
+}
+
+function create_note_response_handler(data) {
+    
+}
