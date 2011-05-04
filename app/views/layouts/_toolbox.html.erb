@@ -43,8 +43,10 @@
 		</div>
 		
 		<!-- denna div visas när vi markerat en eller flera notes -->
-		<div class = "board_view">
-			<div class="notes_selected" display="none">
+    <div class = "board_view">
+      <div class="notes_selected" display="none">
+        <div id="color_chooser_container">
+        <div id="color_chooser_head">Choose Color</div>
 				<ul id="color_chooser">
 					<li class="palette_color" style="background-color: green;"/>
 					<li class="palette_color" style="background-color: blue;"/>
@@ -54,8 +56,10 @@
 					<li class="palette_color" style="background-color: pink;"/>
 					<li class="palette_color" style="background-color: #f4e476;"/>
 					<li class="palette_color" style="background-color: crimson;"/>
-					<li class="palette_color" style="background-color: fuchsia;"/>
+					<li class="palette_color" style="background-color: #FFFFFF;"/>
 				</ul>
+        <div id="clear_both_fix"></div>
+      </div>
 				<div id="avatar">
 					<p>Avatar</p>
 					<img src="/images/avatar/<%= current_user().avatar %>"/>
