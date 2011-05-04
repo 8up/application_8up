@@ -121,4 +121,5 @@ div.note div.note_header:focus{
   position: absolute;
   top: -40px;
   left:-35px;
+  pointer-events: none;
 }
