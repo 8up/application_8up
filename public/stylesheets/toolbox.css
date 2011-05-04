@@ -182,8 +182,8 @@ border-color:#ff7817;
 left:10px;
 width:175px;
 background-color:#FFD5A8;
-position:relative;
-top:10px;
+position:absolute;
+bottom:10px;
 }
 #tip_of_the_day_list{
 color:#a74d0c;
