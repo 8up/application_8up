@@ -28,7 +28,11 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board.to_json(:methods => [:owner_name]) }
+      format.json  { render :json => @board.to_json(
+        :methods => [:owner_name], 
+        :include => {
+          :participants => {
+            :only => [:name]}}) }
     end
   end
 
