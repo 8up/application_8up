@@ -65,7 +65,7 @@ $(document).ready(
 
 		$('.board_button_edit').live('click', function(){
 			var board = $(this).closest('.board_container');
-			var name = board.find('td a');
+			var name = board.find('.board_name');
 			window.console.log(name);
 			edit_board_name(name);
 		    });
