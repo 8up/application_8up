@@ -53,9 +53,15 @@
 				</ul>
         <div id="clear_both_fix"></div>
       </div>
+<<<<<<< HEAD
       <div id="avatar">
-					<p>Avatar:</p>
+					<p>Avatar</p>
           <center><img src="/images/avatar/<%= current_user().avatar %>" /></center>
+=======
+				<div id="avatar">
+					<p>Avatar:</p>
+					<img src="/images/avatar/<%= current_user().avatar %>"/>
+>>>>>>> 3c218550ac8aee8b361d5fd09725ea8c56d33dfc
 				</div>
     </div>
     <div id="split_buttons_container" data-split_direction="none">
