@@ -48,24 +48,24 @@ $(document).ready(
 			de_select_all(e, this);
 		});
 		
-		$("div.board_container").live('mouseleave',function(e){
+		$("div.board_container").live('mouseleave', function(e){
 			de_select_element(this);
 			$(this).children('.header').css('opacity', 0);
 			
 		});
 		
-		$("div.board_container").live('mouseenter',function(e){
+		$("div.board_container").live('mouseenter', function(e){
 			select(e,$(this).closest("div"));
 			$(this).children('.header').css('opacity', 1);
 		});
 		
-		$('.board_button_invite').click(function(){
+		$('.board_button_invite').live('click', function(){
   	  show_invite($('.selected').id8Up());
     });
-  	$('.board_button_edit').click(function(){
+  	$('.board_button_edit').live('click', function(){
   	  window.location = '/boards/' + $('.selected').id8Up() + '/edit'	
     });
-    $('.board_button_delete').click(function(e){
+    $('.board_button_delete').live('click', function(e){
   	  delete_selected(e);	
     });
 	}
