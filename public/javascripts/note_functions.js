@@ -110,7 +110,7 @@ $(document).ready(function () {
         var content = $('<div></div>').append(raw_content);
         
         if(content.text().length == 0){
-          content = 'Empty header'
+          content.text('Empty header')
         }
         
         $.ajax({url: target_url, 

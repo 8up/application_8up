@@ -31,7 +31,7 @@ $(document).ready(
 		{
 		  if(!e.metaKey && !e.ctrlKey){
 		    var that = this;
-		    notes.each(function(index, element){
+		    $('.note').each(function(index, element){
   		    if(element !== that){ 
   		      de_select_element(element);
 		      }
