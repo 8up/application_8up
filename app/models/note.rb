@@ -1,3 +1,21 @@
+# == Schema Information
+# Schema version: 20110429131040
+#
+# Table name: notes
+#
+#  id         :integer         not null, primary key
+#  header     :string(255)
+#  body       :text
+#  position_x :integer
+#  position_y :integer
+#  owner_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  field_id   :integer
+#  trashcan   :boolean
+#  color      :string(255)
+#
+
 class Note < ActiveRecord::Base
   belongs_to :field
   has_one :content
