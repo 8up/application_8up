@@ -22,22 +22,11 @@ $(document).ready(function(){
 
   $("#toolbox_container").bind('update',function(){
     var context_area = $('#context_area');
-    var pathname = window.location.pathname;
-    var array = pathname.split("/");
-
-    // Ta bort alla tomma element ur arrayen
-    array = array.filter(function(element) { return element != "";});
-
-    var lastElement = array.pop();
-    //Om sista elementet inte är ett NaN, så är det ett nummer, och 
-    // vi antar att vi är i ett whiteboard
-    if (!isNaN(lastElement)) {
+    if (window.page_context=="whiteboard") {
       whiteboard_context(context_area);
-      window.page_context = 'whiteboard'
     }
     else {
       start_page_context(context_area);
-      window.page_context = 'start_page'
     }
   });
   $('#toolbox_container').trigger('update');
