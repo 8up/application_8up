@@ -43,11 +43,16 @@ $(document).ready(
       note_box(e);
     });
 		
+		//När används den här funktionen?
 		$("#workspace").click(function(e){
 			de_select_all(e, this);
 		});
 		
-		$(".board_container").click(function(e){
+		$(".board_container").mouseout(function(e){
+			de_select_element(this);
+		});
+		
+		$(".board_container").mouseover(function(e){
 			select(e,$(this).closest("div"));
 		});
 	}
