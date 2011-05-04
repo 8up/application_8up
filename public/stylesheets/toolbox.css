@@ -179,3 +179,25 @@ clear:both;
 #split_buttons_container{
 margin-top:15px;
 }
+#tip_of_the_day_container{
+border:solid;
+border-width:1px;
+border-color:#ff7817;
+left:10px;
+width:175px;
+background-color:#FFD5A8;
+position:relative;
+top:10px;
+}
+#tip_of_the_day_list{
+color:#a74d0c;
+font:13px Segoe UI
+}
+#tip_of_the_day_title{
+color:#a74d0c;
+font:15px Segoe UI;
+font-weight:bold;
+border-bottom:double;
+border-width:1px;
+border-color:#ff7817;
+}
