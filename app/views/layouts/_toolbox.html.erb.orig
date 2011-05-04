@@ -20,7 +20,7 @@
 
 		<div ID="toolbox_text_container">
 			<div ID="toolbox_text_1">
-			<h3 id="toolbox_header_name">Information</h3>
+			<h3 id="toolbox_header_name">Information:</h3>
 			</div>
 			<div Id="toolbox_text_2">
 				<div id="toolbox_info_name"></div>
@@ -39,7 +39,7 @@
     <div class = "board_view">
       <div class="notes_selected" display="none">
         <div id="color_chooser_container">
-        <div id="color_chooser_head">Choose Color</div>
+        <div id="color_chooser_head">Choose Color:</div>
 				<ul id="color_chooser">
 					<li class="palette_color" style="background-color: green;"/>
 					<li class="palette_color" style="background-color: blue;"/>
@@ -53,19 +53,22 @@
 				</ul>
         <div id="clear_both_fix"></div>
       </div>
+<<<<<<< HEAD
       <div id="avatar">
 					<p>Avatar</p>
           <center><img src="/images/avatar/<%= current_user().avatar %>" /></center>
+=======
+				<div id="avatar">
+					<p>Avatar:</p>
+					<img src="/images/avatar/<%= current_user().avatar %>"/>
+>>>>>>> 3c218550ac8aee8b361d5fd09725ea8c56d33dfc
 				</div>
     </div>
     <div id="split_buttons_container" data-split_direction="none">
 			<img id="split_vert" class="split_button" src="/images/button_v.png"/>
 			<img id="split_horiz" class="split_button" src="/images/button_h.png"/>
 		</div>
-<<<<<<< HEAD
   </div>
-=======
-		</div>
     
     <div class="board_view">
       <div id="tip_of_the_day_container">
@@ -74,7 +77,6 @@
 		</div>
   </div>
     
->>>>>>> e16764601d1a24f23a60e39f54807864e5e7b3fc
 	</div>
 	
 	<div ID="toolbox_area_2">
