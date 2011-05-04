@@ -6,7 +6,7 @@
     <div id="note_<%= note.id %>" class="note ui-widget-content" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px; background-color:<%= note.color %>"; data-board_id="board_<%= @board.id %>">
       <div  class="avatar_holder"  >
       <% note.placed_avatars.each do |placed_avatar| %>
-        <img <% if placed_avatar.user.id == current_user().id %> <%= "name='my_avatar'" %> <% end %> src="/images/avatar/<%= placed_avatar.user.avatar %>" width="50%">
+        <img <% if placed_avatar.user.id == current_user().id %> <%= "name='my_avatar'" %> <% end %> src="/images/avatar/<%= placed_avatar.user.avatar %>" >
       <% end %>
       </div>
       <div id="note_header_<%= note.id %>" class="note_header"><%= note.header.html_safe %></div>       
