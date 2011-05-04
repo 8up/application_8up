@@ -3,7 +3,6 @@ class SettingsController < ApplicationController
   
   def index
   @hide_toolbox = true
-  @hide_addbutton = true
 end
 
   def edit_password
@@ -11,7 +10,7 @@ end
   end
 
   def change_avatar
-
+    @hide_toolbox = true
   end
 
   def change_password
