@@ -106,20 +106,17 @@ $(document).ready(function () {
       var target_url = "/notes/" + note_id + ".json";
 
       header.parent().bind('deselect', function(e){
-        var content = editor.getContent()
-        if(content.indexOf('<') >= 0){
-         if($(content).text().length == 0){
+        var raw_content = editor.getContent();
+        var content = $('<div></div>').append(raw_content);
+        
+        if(content.text().length == 0){
           content = 'Empty header'
-          }
-        }
-        else if(content.length === 0){
-          content = 'Empty header';
         }
         
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 
-          'note' : {'header' : content}
+          'note' : {'header' : content.html()}
         }, 
         success: function(data) {
 
