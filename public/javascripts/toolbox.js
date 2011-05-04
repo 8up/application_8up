@@ -270,9 +270,8 @@ function update_info_box(names, created, updated, owner){
 };
 
 function add_board() {
-    var new_board = $('#board_container_template').clone();
-    var cell = $('<td></td>');
-
+    var new_board = $('#board_template').clone();
+  
     //Leta upp boardets innehåll
     var board_content = new_board.find('td a');
 
@@ -290,7 +289,9 @@ function add_board() {
 		var link_ref = "/boards/" + data.board.id;
 		new_board.attr("id", id);
 		board_content.attr('href',link_ref);
+		board_content.text(data.board.name)
 		$('#workspace').append(new_board);
+		new_board.fadeIn();
 	    }
 	});
    
