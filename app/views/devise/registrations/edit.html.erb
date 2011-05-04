@@ -4,7 +4,7 @@
 <br/>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   
-  <center><%= devise_error_messages! %></center>
+  <center><%= devise_error_messages! %>
 
   <p><%= f.label :email %><br />
   <%= f.email_field :email %></p>
@@ -18,12 +18,13 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <center><p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></p></center>
+  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></p>
   
   <p><%= f.label :Change_Avatar %>
   <div id="choose_avatar">
   <ul>
+	</center>
   <% Dir.entries("public/images/avatar").each do |pic| %>
     <% if not(pic == "." || pic == "..")%>
       <li><img name="my_avatar" src="/images/avatar/<%= pic%>" ><br/><%= radio_button_tag("user[avatar]" , pic , (pic == current_user().avatar)? true : false) %></li>
