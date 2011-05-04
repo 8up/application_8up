@@ -14,9 +14,6 @@
 #split_vert:hover {
     opacity:1;
 }
-#avatar img {
-    width:50%;
-}
 #toolbox_container { 
     z-index:255;
     float:left; 
@@ -95,9 +92,16 @@ div#toolbox_text_container {
     list-style-type: none;
 }
 
+
 #avatar {
-    margin-top:25px;
-    clear: both;
+    width: 90px;
+    height: 180px;
+    margin:25px 0px 0px 10px;
+    text-align: center;
+}
+#avatar img {
+    width: 76px;
+    height: 146px;
 }
 
 #title2 {
