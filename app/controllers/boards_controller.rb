@@ -28,7 +28,11 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @board }
-      format.json  { render :json => @board.to_json(:methods => [:owner_name]) }
+      format.json  { render :json => @board.to_json(
+        :methods => [:owner_name], 
+        :include => {
+          :participants => {
+            :only => [:name]}}) }
     end
   end
 
@@ -51,16 +55,22 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-    @board = Board.new(params[:board])
+    if params.has_key? :options
+      @board = Board.new(params[:board], params[:options])
+    else
+      @board = Board.new(params[:board])
+    end
     @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|
       if @board.save
         format.html { redirect_to(@board, :notice => 'Board was successfully created.') }
         format.xml  { render :xml => @board, :status => :created, :location => @board }
+        format.json { render :json => @board, :status => :created, :location => @board }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
+        format.json { render :json => @board.errors, :status => :unprocessable_entity }
       end
     end
   end

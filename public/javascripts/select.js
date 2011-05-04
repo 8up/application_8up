@@ -1,12 +1,15 @@
-function de_select(e, caller){
-	if(e.target != caller){
+function de_select_all(e, caller){
+  if(e.target != caller){
 		return true;
 	};
 	//Skapar eller tar bort klassen selected från objektet.
 	$(".selected").removeClass("selected").trigger('deselect');
 	$("#toolbox_container").trigger("update");
-	
 };
+function de_select_element(element){
+  $(element).removeClass("selected").trigger('deselect');
+  $("#toolbox_container").trigger("update");
+}
 
 function select(e, caller) {
 /*	if (e.target != caller) {
@@ -20,12 +23,18 @@ function select(e, caller) {
 $(document).ready(
 	function(){
 		$('.field').live('click',function(e){
-			de_select(e, this);
+			de_select_all(e, this);
 		});
 
-		$('.note').live('click', function(e) 
+    var notes = $('.note');
+		notes.live('click', function(e) 
 		{
-			select(e, this);
+		  if(!e.metaKey && !e.ctrlKey){
+		    notes.each(function(index, element){
+  		    de_select_element(element);
+  	    });
+	    }
+		  select(e, this);
 		});
 		
 		$( ".note" ).live('dblclick', function(e){
@@ -33,12 +42,35 @@ $(document).ready(
       note_box(e);
     });
 		
+		//När används den här funktionen?
 		$("#workspace").click(function(e){
-			de_select(e, this);
+			de_select_all(e, this);
 		});
 		
-		$("#cont div").click(function(e){
-			select(e,$(this).closest("div"));
+		$("div.board_container").live('mouseleave', function(e){
+			de_select_element(this);
+			$(this).children('.header').css('opacity', 0);
+			
 		});
+		
+		$("div.board_container").live('mouseenter', function(e){
+			select(e,$(this).closest("div"));
+			$(this).children('.header').css('opacity', 1);
+		});
+		
+		$('.board_button_invite').live('click', function(){
+			show_invite($('.selected').id8Up());
+		    });
+
+		$('.board_button_edit').live('click', function(){
+			var board = $(this).closest('.board_container');
+			var name = board.find('.board_name');
+			window.console.log(name);
+			edit_board_name(name);
+		    });
+
+		$('.board_button_delete').live('click', function(e){
+			delete_selected(e);	
+		    });
 	}
 );

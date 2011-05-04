@@ -112,13 +112,14 @@ div.note div.note_header:focus{
   overflow: auto;
 }
 
-#note_body img{
-  max-width: 320px;
-  max-height: 320px;
-}
-
+<<<<<<< HEAD
 .avatar_holder {
   position: absolute;
   top: -40px;
   left:-35px;
+=======
+#note_body img{
+  max-width: 320px;
+  max-height: 320px;
+>>>>>>> edbda1b860997737e386e5d698953ccc871ba3ec
 }

@@ -46,6 +46,7 @@ def index
 
   # GET /users/1/edit
   def edit
+    @hide_toolbox = true
     @user = User.find(params[:id])
   end
 
