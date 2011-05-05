@@ -44,12 +44,15 @@ $(document).ready(function () {
         create_note(e);
       });
 
-      //Dubbelklick på en lapps header gör att man kan redigera den
-      $("div.note div.note_header").live('click',function(e) {
-        if (e.target != this) {
-          return true;
-        }
-        edit_note_header(e.target);
+      //klick på en lapps header gör att man kan redigera den
+      $(".toolbox_button_edit").live('click',function(e) {
+	
+		if($(".selected").length == 1){
+			edit_note_header($(".selected").children(".note_header"));
+			//Bara en note som är markerad, edit är möjlig
+		}else{
+			//edit är inte möjlig
+		}
       });
 
       $(".note").draggable();

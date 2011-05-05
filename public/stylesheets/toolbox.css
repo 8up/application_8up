@@ -1,12 +1,13 @@
 .split_button {
   float:left;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin-left:10px;
 }
 #split_horiz {
+	margin-left:10px;
     float:left;
-    margin-left:10px;
+	font:13px Segoe UI;
     color:#a74d0c;
 }
 #split_horiz:hover {
@@ -17,6 +18,7 @@
     margin-top:8px;
     margin-left:10px;
     float:left;
+	font:13px Segoe UI;
     color:#a74d0c;
 }
 #split_vert:hover {
@@ -78,7 +80,7 @@ div#toolbox_text_container {
     border:solid;
     border-width:1px;
     border-color:#ff7817;
-    top:10px;
+    top:8px;
     left:10px;
     width:175px;
     background-color:#FFD5A8;
@@ -86,7 +88,7 @@ div#toolbox_text_container {
 
 #toolbox_text_1 {
     color:#a74d0c;
-    font:15px Segoe UI;
+    font:13px Segoe UI;
     font-weight:bold;
     border-bottom:solid;
     border-width:1px;
@@ -94,7 +96,7 @@ div#toolbox_text_container {
 }
 #toolbox_text_2 {
     color:#a74d0c;
-    font:15px Segoe UI;
+    font:13px Segoe UI;
 }
 
 .palette_color {
@@ -132,7 +134,7 @@ margin-top:10px;
 .toolbox_buttons{
 position:relative;
 width:60%;
-font:20px Segoe UI;
+font:13px Segoe UI;
 color:#a74d0c;
 text-decoration:none;
 margin-left:10px;
@@ -160,7 +162,7 @@ font:13px Segoe UI
 }
 #online_user_title{
 color:#a74d0c;
-font:15px Segoe UI;
+font:13px Segoe UI;
 font-weight:bold;
 border-bottom:double;
 border-width:1px;
@@ -184,7 +186,7 @@ top:10px;
 }
 #color_chooser_head{
 color:#a74d0c;
-    font:15px Segoe UI;
+    font:13px Segoe UI;
     font-weight:bold;
     border-bottom:solid;
     border-width:1px;
@@ -200,7 +202,7 @@ margin-top:15px;
 border:solid;
 border-width:1px;
 border-color:#ff7817;
-left:10px;
+left:49px;
 width:175px;
 background-color:#FFD5A8;
 position:absolute;
@@ -208,15 +210,15 @@ bottom:10px;
 }
 #tip_of_the_day_list{
 color:#a74d0c;
-font:13px Segoe UI
+font:12px Segoe UI
 }
 #tip_of_the_day_list2{
 color:#a74d0c;
-font:13px Segoe UI
+font:12px Segoe UI
 }
 #tip_of_the_day_title{
 color:#a74d0c;
-font:15px Segoe UI;
+font:13px Segoe UI;
 font-weight:bold;
 border-bottom:double;
 border-width:1px;
