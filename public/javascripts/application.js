@@ -42,11 +42,11 @@ set_page_context();
 	var handler_s = $('<div></div>');
 	handler_s.addClass("resizable8up-handle");
   //handler_s.handle_mouseenter();
-	handler_s.bind("onmousedown", function(event) {
+	handler_s.live("onmousedown", function(event) {
 		event.preventDefault();
 		return false;
 	    });
-	handler_s.bind("onselectstart",   function () { 
+	handler_s.live("onselectstart",   function () { 
 		return false; 
 	    });
 	var handler_n = handler_s.clone();

@@ -1,4 +1,9 @@
 $(document).ready(function(){
+  $('#avatar').addClass('tool');
+	$('#avatar').data('tool_type', 'instant');
+	$('#avatar').bind("click", attach_avatar);
+
+  
 	// Dessa borde inte vara här, snarare i html-filen, 
 	//men de är här tills vidare
 	$('#split_horiz').addClass('tool');
