@@ -8,9 +8,7 @@ function de_select_all(e, caller){
     $(".selected").each(function(index,element){
     var color = $(element).css("background-image").split("_select");
     $(element).css("background-image", color[0] + color[1]);
-    })
-    /*var color = [$(".selected")[i]].css("background-image").split("_select");
-    [$(".selected")[i]].css("background-image", color[0] + color[1]);*/
+  })
     }
 	$(".selected").removeClass("selected").trigger('deselect');
 	$("#toolbox_container").trigger("update");
