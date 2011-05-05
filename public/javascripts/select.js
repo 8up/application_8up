@@ -70,19 +70,6 @@ $(document).ready(
 			$(this).children('.header').css('opacity', 1);
 		});
 		
-		$('.board_button_invite').live('click', function(){
-			show_invite($('.selected').id8Up());
-		    });
-
-		$('.board_button_edit').live('click', function(){
-			var board = $(this).closest('.board_container');
-			var name = board.find('.board_name');
-			window.console.log(name);
-			edit_board_name(name);
-		    });
-
-		$('.board_button_delete').live('click', function(e){
-			delete_selected(e);	
-		    });
+    
 	}
 );
