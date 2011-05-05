@@ -61,11 +61,11 @@ set_page_context();
 	$(this).append(handler_e);
   $(this).append(handler_s);
 
-  if($(this).data("neighbours")["north"].length != 0)
+  if($(this).position().top != 0)
   {
 	  $(this).append(handler_n);
   }
-  if($(this).data("neighbours")["north"].length != 0)
+  if($(this).position().left != 0)
   {
     $(this).append(handler_w);
   }
