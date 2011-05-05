@@ -19,6 +19,9 @@ div.note div.note_header,form {
     font-size: 18px;
     font-family: Times New Roman;
     text-align: center;
+    overflow: hidden;
+    height: 110px;
+    padding-left: 3px
 }
 div.note div.note_header:focus{
   outline: 0;
