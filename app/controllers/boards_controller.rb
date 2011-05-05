@@ -137,7 +137,7 @@ class BoardsController < ApplicationController
     }
 
     if update_success
-      Pusher['notes'].trigger!('split-field', pusher_data)
+      Pusher["board-#{@board.id}"].trigger!('split-field', pusher_data)
       
       respond_to do |format|
         format.json { render :json => data}
@@ -171,7 +171,7 @@ class BoardsController < ApplicationController
 
     data = {:neighbours_map => updated_fields}
     
-    Pusher['notes'].trigger!('resize-field', @board.fields )
+    Pusher["board-#{@board.id}"].trigger!('resize-field', @board.fields )
     respond_to do |format|
       format.json { render :json => data }
     end

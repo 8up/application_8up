@@ -18,6 +18,7 @@
 
 class Note < ActiveRecord::Base
   belongs_to :field
+  has_one :board, :through => :field
   has_one :content
   has_many :placed_avatars
   
