@@ -18,6 +18,7 @@ div.note div.note_header {
     margin: 0px;
     font-size: 18px;
 	font-family:'Indie Flower';
+	font-weight: bold;
     text-align: center;
     overflow: hidden;
     height: 110px;
