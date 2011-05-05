@@ -8,7 +8,6 @@ div.note {
     background-size:100%;
     word-wrap: break-word;
     /*overflow:hidden;*/
-	font-family:'Indie Flower';
     z-index:125;
 }
 div.note.selected {
@@ -18,7 +17,7 @@ div.note.selected {
 div.note div.note_header {
     margin: 0px;
     font-size: 18px;
-    font-family: Times New Roman;
+	font-family:'Indie Flower';
     text-align: center;
     overflow: hidden;
     height: 110px;

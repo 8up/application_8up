@@ -160,7 +160,7 @@ function create_note_at_dom(data, field){
   note.addClass('note');
   note.addClass('selected');
   note.data('board_id', 'board_' + data.note.board_id);
-  note.css({'position': 'absolute', 'top' :  data.note.position_y + 50 + 'px', 'left' : data.note.position_x + 50 + 'px'});
+  note.css({'position': 'absolute', 'top' :  data.note.position_y - 50 + 'px', 'left' : data.note.position_x - 50 + 'px'});
   var avatar= $('<div></div>');
   avatar.addClass('avatar_holder');
   note.append(avatar);
