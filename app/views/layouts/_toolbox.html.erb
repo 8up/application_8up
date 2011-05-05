@@ -47,11 +47,11 @@
 				<div id="color_chooser_container">
 					<div id="color_chooser_head">Choose Color:</div>
 					<ul id="color_chooser">
-					<li class="palette_color" data-color="/images/postit_green.png" style="background-color: green;"/>
-						<li class="palette_color" data-color="/images/postit_blue.png" style="background-color: blue;"/>
-						<li class="palette_color" data-color="/images/postit_yellow.png" style="background-color: yellow;"/>
-						<li class="palette_color" data-color="/images/postit_red.png" style="background-color: red;"/>
-						<li class="palette_color" data-color="/images/postit_orange.png" style="background-color: orange;"/>
+					<li class="palette_color" data-color="/images/postit_green_select.png" style="background-color: green;"/>
+						<li class="palette_color" data-color="/images/postit_blue_select.png" style="background-color: blue;"/>
+						<li class="palette_color" data-color="/images/postit_yellow_select.png" style="background-color: yellow;"/>
+						<li class="palette_color" data-color="/images/postit_red_select.png" style="background-color: red;"/>
+						<li class="palette_color" data-color="/images/postit_orange_select.png" style="background-color: orange;"/>
 						<!--<li class="palette_color" style="background-color: pink;"/>
 						<li class="palette_color" style="background-color: #f4e476;"/>
 						<li class="palette_color" style="background-color: crimson;"/>
@@ -59,9 +59,11 @@
 					</ul>
 					<div id="clear_both_fix"></div>
         </div>        
-      <div id="avatar">
-        <span>Attach avatar:</span><img id="user_avatar" src="/images/avatar/<%= current_user().avatar %>"/>
-			</div>
+      <div id="avatar_button">
+        <img id="user_avatar" src="/images/avatar/<%= current_user().avatar %>"/>
+          <span id="add_avatar" class="tool">Add avatar</span>
+          <span id="remove_avatar" class="tool">Remove avatar</span>
+      </div>
 			</div>
 			<div id="split_buttons_container" data-split_direction="none">
         <img id="split" class="split_button" src="/images/split.png"/>
