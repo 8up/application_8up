@@ -8,6 +8,7 @@ div.note {
     background-size:100%;
     word-wrap: break-word;
     /*overflow:hidden;*/
+	font-family:'Indie Flower';
     z-index:125;
 }
 div.note.selected {
