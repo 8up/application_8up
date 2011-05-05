@@ -146,7 +146,7 @@ function update_note(data){
   note.css({
     'top' :  data.note.position_y + 'px', 
     'left' : data.note.position_x + 'px',
-    'background-image': 'url(' + data.note.color + ')'
+    //'background-image': 'url(' + data.note.color + ')'
   });
   note.children('.note_header').html(data.note.header);
 }

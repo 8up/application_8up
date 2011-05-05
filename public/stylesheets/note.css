@@ -3,7 +3,7 @@ div.note {
     height: 130px;
     padding: 10px;
     padding-top: 10px;
-    background-image: url("/images/postit_yellow.png");
+    background-image: url("/images/postit_yellow_select.png");
     background-repeat:no-repeat;
     background-size:100%;
     word-wrap: break-word;
