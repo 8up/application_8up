@@ -41,7 +41,7 @@
 				<div id="color_chooser_container">
 					<div id="color_chooser_head">Choose Color:</div>
 					<ul id="color_chooser">
-						<li class="palette_color" data-color="/images/postit_green.png" style="background-color: green; background-image: url("/images/postit_green.png");"/>
+					<li class="palette_color" data-color="/images/postit_green.png" style="background-color: green;"/>
 						<li class="palette_color" data-color="/images/postit_blue.png" style="background-color: blue;"/>
 						<li class="palette_color" data-color="/images/postit_yellow.png" style="background-color: yellow;"/>
 						<li class="palette_color" data-color="/images/postit_red.png" style="background-color: red;"/>
@@ -55,6 +55,19 @@
 				</div>
 				<div id="avatar">
 					<center><img src="/images/avatar/<%= current_user().avatar %>" /></center>
+					<li class="palette_color" data-color="/images/postit_blue.png" style="background-color: blue;"/>
+					<li class="palette_color" data-color="/images/postit_yellow.png" style="background-color: yellow;"/>
+					<li class="palette_color" data-color="/images/postit_red.png" style="background-color: red;"/>
+					<li class="palette_color" data-color="/images/postit_orange.png" style="background-color: orange;"/>
+					<!--<li class="palette_color" style="background-color: pink;"/>
+					<li class="palette_color" style="background-color: #f4e476;"/>
+					<li class="palette_color" style="background-color: crimson;"/>
+					<li class="palette_color" style="background-color: #FFFFFF;"/>-->
+				</ul>
+        <div id="clear_both_fix"></div>
+      </div>
+      <div id="avatar">
+          <center><img src="/images/avatar/<%= current_user().avatar %>" /></center>
 				</div>
 			</div>
 			<div id="split_buttons_container" data-split_direction="none">
