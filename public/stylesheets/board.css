@@ -23,11 +23,8 @@ div.board_container.selected table{
 opacity:1;
 }
 
-div.board_container table tbody tr td a{
+div.board_container table tbody tr td h1{
 color:black;
 font-family:Hand Of Sean;
 background:transparent;
-}
-div.board_container table tbody tr td a:hover{
-  background:black;
 }
