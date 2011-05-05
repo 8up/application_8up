@@ -1,6 +1,34 @@
+/*
+ Tools skall fungera så här: det finns två varianter, momentana och aktiverade.
+ Momentana utför den önskade åtgärden direkt (delete, add board, invite)
+ Aktiverade (add note, split field, osv) sätter verktyget som aktivt, varvid alla andra sätts 
+ till icke-aktiva. Det aktiva verktyget skall deaktiveras när det utfört sin handling
+ Klasser på tools som används:
+ tool - alla tools skall ha denna klass
+ tool_active - talar om ifall ett verktyg är aktivt
+
+ data som används på tools:
+ data-tool_type: [instant, activated, toggle] - talar om vilken sorts verktyg det är
+ data-tool_state: [active, inactive] - vilket tillstånd detta tool är i, i första hand används det för aktiverade tools för att aktivera om man trycker på samma tool två gånger
+ data-tool_data: data som ett tool behöver för att köras
+ 
+ Alla tools skall ha handlers som lyssnar på eventet 'activate'. Tools som är 
+ aktiverbara skall också ha en funktion som lyssnar på 'deactivate'
+*/
+
+
 $(document).ready(function(){
-  $('#split_horiz').click(gui_split_horizontally);
-  $('#split_vert').click(gui_split_vertically);
+	$('#split_horiz').addClass('tool');
+	$('#split_horiz').data('tool_type', 'activated');
+	$('#split_horiz').data('tool_state', 'inactive');	
+	$('#split_horiz').bind('activate', activate_horizontal_split);
+	$('#split_horiz').bind('deactivate', deactivate_split);
+
+	$('#split_vert').addClass('tool');
+	$('#split_vert').data('tool_type', 'activated');
+	$('#split_vert').data('tool_state', 'inactive');	
+	$('#split_vert').bind('activate', activate_vertical_split);
+	$('#split_vert').bind('deactivate', deactivate_split);
 
   $('.toolbox_button_add').click(function(){
     add_board();
@@ -8,17 +36,19 @@ $(document).ready(function(){
   $('.toolbox_button_invite').click(function(e){
     show_invite($('.board_div').id8Up())
   })
-  $('.toolbox_button_create_note').click(function(e){
-    var f;
-    $("div.field").click(f = function(e){
-      if (e.target != this) {
-        return true;
-      }
-      create_note(e);
-      $("div.field").unbind('click', f);
-    });
-  });
+      $('.toolbox_button_create_note').click(function(e){
+	      var f;
+	      $("div.field").click(f = function(e){
+		      if (e.target != this) {
+			  return true;
+		      }
+		      create_note(e);
+		      $("div.field").unbind('click', f);
+		  });
+	  });
+
   $('.palette_color').click(color_palette_handler);
+  //$('.palette_color').bind('activate', color_palette_handler);
 
   $("#toolbox_container").bind('update',function(){
     var context_area = $('#context_area');
@@ -30,52 +60,57 @@ $(document).ready(function(){
     }
   });
   $('#toolbox_container').trigger('update');
+
+  $('.tool').click(tool_pressed_handler);
 });
 
-function gui_split_vertically(event) {
-  //Om vi inte redan satt flaggan, eller den är åt andra hållet,
-  //sätter vi den vertikalt
-  if ($("#split_buttons_container").data("split_direction") == "none" || 
-  $("#split_buttons_container").data("split_direction") == "horizontal") 
-  {
+//Jquery-funktion som deaktiverar tools
+(function($){
+	jQuery.fn.tool_deactivate = function(){
+	    this.each( function() {
+		    $(this).trigger('deactivate');
+		    if ($(this).data('tool_state') == "active") {
+			$(this).removeClass("tool_active");
+			$(this).data('tool_state', "inactive");
+		    }    
+		})
+	}
+})(jQuery);
 
-    reset_split();
-    //Vi använder en klass för att styla knappen som nedtryckt
-    $("#split_vert").addClass("depressed"); 
-    $("#split_buttons_container").data("split_direction", 
-    "vertical"); 
-    set_split();
-  }
-  //Om vi redan inlett det ångrar ett till klick
-  else if ($("#split_buttons_container").data("split_direction") 
-  == "vertical") {
-    reset_split();
-  }
-  //Annars gör vi inget
-};
 
-function gui_split_horizontally(event) {
+// Denna funktion ser till att aktivera verktygets funktion, och deaktivera alla andra
+function tool_pressed_handler(event) {
+    var tool = $(event.target);
 
-  //Om vi inte redan satt flaggan, eller den är åt andra hållet,
-  //sätter vi den horizontellt
-  if ($("#split_buttons_container").data("split_direction") == "none" || 
-  $("#split_buttons_container").data("split_direction") == "vertical") 
-  {
-    reset_split();
-    $("split_vert").removeClass("depressed");
-    //Vi använder en klass för att styla knappen som nedtryckt
-    $("#split_horiz").addClass("depressed"); 
-    $("#split_buttons_container").data("split_direction", 
-    "horizontal"); 
-    set_split();
-  }
-  //Om vi redan inlett det ångrar ett till klick
-  else if ($("#split_buttons_container").data("split_direction") 
-  == "horizontal") {
-    reset_split();
-  }
-  //Annars gör vi inget
+    // Om eventet inte är ett tool returnerar vi bara
+    if (!tool.hasClass('tool')) {
+	return true;
+    }
+    
+    if (tool.data('tool_type') == "activated") {
+	//Kolla om verktyget redan var aktivt, i sådana fall skall det deaktiveras
 
+	if (tool.data('tool_state') == "active") {
+	    tool.tool_deactivate();
+	    return true;
+	}	
+	//deaktivera alla tools
+	$(".tool").tool_deactivate();
+	   
+	//Aktivera detta tool
+  	tool.data('tool_state', "active");
+	tool.addClass('tool_active');
+	
+	tool.trigger('activate');
+    }
+    else if (tool.data('tool_type') == "instant") {
+	$(".tool").trigger('deactivate');
+	tool.trigger('activate'); //kör verktyget
+    }
+    else if (tool.data('tool_type') == "toggle")
+	{
+	    //Här skall kod för toggle-tool finnas, exempelvis avatar
+	}
 }
 
 function whiteboard_context(context_area) {
