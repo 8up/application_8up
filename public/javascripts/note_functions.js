@@ -109,9 +109,9 @@ $(document).ready(function () {
         var raw_content = editor.getContent();
         var content = $('<div></div>').append(raw_content);
         
-        if(content.text().length == 0){
+       /* if(content.text().length == 0){
           content.text('Empty header')
-        }
+        }*/
         
         $.ajax({url: target_url, 
           type: "PUT", 

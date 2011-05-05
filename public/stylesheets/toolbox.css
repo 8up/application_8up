@@ -1,18 +1,27 @@
 .split_button {
+  float:left;
     width: 50px;
     height: 50px;
+    margin-left:10px;
 }
 #split_horiz {
-    opacity:0.5;
+    float:left;
+    margin-left:10px;
+    color:#a74d0c;
 }
 #split_horiz:hover {
-    opacity:1;
+    color:#ff7817;
+    cursor:pointer;
 }
 #split_vert {
-    opacity:0.5;
+    margin-top:8px;
+    margin-left:10px;
+    float:left;
+    color:#a74d0c;
 }
 #split_vert:hover {
-    opacity:1;
+    color:#ff7817;
+    cursor:pointer;
 }
 #toolbox_container { 
     z-index:255;
@@ -94,14 +103,14 @@ div#toolbox_text_container {
 
 
 #avatar {
-    width: 90px;
-    height: 180px;
+    width: 9px;
+    height: 18px;
     margin:25px 0px 0px 10px;
     text-align: center;
 }
 #avatar img {
-    width: 76px;
-    height: 146px;
+    width: 20px;
+    height: 30px;
 }
 
 #title2 {
