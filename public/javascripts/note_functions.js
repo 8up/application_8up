@@ -144,11 +144,17 @@ function change_field_note(data){
 function update_note(data){
   var note = $('#note_' + data.note.id);
   note.css({
-    'top' :  data.note.position_y + 'px', 
-    'left' : data.note.position_x + 'px',
-    'background-image': 'url(' + data.note.color + ')'
+    'top' :  data.note.position_y - 50 + 'px', 
+    'left' : data.note.position_x - 50 + 'px',
+    //'background-image': 'url(' + data.note.color + ')'
   });
   note.children('.note_header').html(data.note.header);
+  
+  var parent_id = '#field_' + data.note.field_id;
+  if(note.parent(parent_id).length == 0){
+    note.detach();
+    $(parent_id).append(note);
+  }
 }
 
 function create_note_at_dom(data, field){
@@ -160,7 +166,7 @@ function create_note_at_dom(data, field){
   note.addClass('note');
   note.addClass('selected');
   note.data('board_id', 'board_' + data.note.board_id);
-  note.css({'position': 'absolute', 'top' :  data.note.position_y + 'px', 'left' : data.note.position_x + 'px'});
+  note.css({'position': 'absolute', 'top' :  data.note.position_y - 50 + 'px', 'left' : data.note.position_x - 50 + 'px'});
   var avatar= $('<div></div>');
   avatar.addClass('avatar_holder');
   note.append(avatar);

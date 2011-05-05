@@ -16,4 +16,38 @@
 	channel.bind('updated', function(data){
 		update_note(data);
 	});
+	channel.bind('resize-field', function(data){
+		update_fields(data);
+	});
+	channel.bind('split-field', function(data){
+		_.each(data.fields, function(field){
+			field = field.field;
+			var $field = $('#field_' + field.id);
+			if($field.length == 0){
+				$field = $('.field').first().clone();
+				$field.id = '#field_' + field.id;
+				$field.html('');
+				$('.board_div').append($field);
+				$field.css({
+	    		'height': field.height,
+		      'width': field.width,
+		      'top': field.position_y,
+		      'left': field.position_x
+		    });
+				attach_field_handlers($field);
+				
+			}else
+			{
+				$field.css({
+	    		'height': field.height,
+		      'width': field.width,
+		      'top': field.position_y,
+		      'left': field.position_x
+		    });
+			}
+			
+			
+			
+		})
+	})
 </script>

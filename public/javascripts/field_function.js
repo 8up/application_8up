@@ -74,3 +74,15 @@ function field_handle_direction(handle) {
 	}
     return direction;
 };
+
+
+function update_fields(data){
+  _.each(data, function(field){
+    $('#field_' + field.field.id).css({
+      'height': field.field.height,
+      'width': field.field.width,
+      'top': field.field.position_y,
+      'left': field.field.position_x
+    });
+  });
+}
