@@ -18,6 +18,8 @@
 
 
 $(document).ready(function(){
+	// Dessa borde inte vara här, snarare i html-filen, 
+	//men de är här tills vidare
 	$('#split_horiz').addClass('tool');
 	$('#split_horiz').data('tool_type', 'activated');
 	$('#split_horiz').data('tool_state', 'inactive');	
@@ -32,14 +34,19 @@ $(document).ready(function(){
 
 	$('.toolbox_button_add').addClass("tool");
 	$('.toolbox_button_add').data('tool_type', 'instant');
-	$('.toolbox_button_add').bind('activate', function(){
-		add_board();
-	    });
+	$('.toolbox_button_add').bind('activate', add_board);
  
-  $('.toolbox_button_invite').click(function(e){
-    show_invite($('.board_div').id8Up())
-  })
-      $('.toolbox_button_create_note').click(function(e){
+	$('.palette_color').addClass("tool");
+	$('.palette_color').data('tool_type', 'instant');
+	$('.palette_color').bind('activate', color_palette_handler);
+
+	$('.toolbox_button_invite').addClass("tool");
+	$('.toolbox_button_invite').data('tool_type', 'instant');
+	$('.toolbox_button_invite').bind('activate', function(e){
+		show_invite($('.board_div').id8Up())
+		    });
+	
+	$('.toolbox_button_create_note').click(function(e){
 	      var f;
 	      $("div.field").click(f = function(e){
 		      if (e.target != this) {
@@ -49,10 +56,8 @@ $(document).ready(function(){
 		      $("div.field").unbind('click', f);
 		  });
 	  });
-
-  $('.palette_color').click(color_palette_handler);
-  //$('.palette_color').bind('activate', color_palette_handler);
-
+      $('.tool').click(tool_pressed_handler);
+  
   $("#toolbox_container").bind('update',function(){
     var context_area = $('#context_area');
     if (window.page_context=="whiteboard") {
@@ -64,7 +69,7 @@ $(document).ready(function(){
   });
   $('#toolbox_container').trigger('update');
 
-  $('.tool').click(tool_pressed_handler);
+ 
 });
 
 //Jquery-funktion som deaktiverar tools
@@ -107,12 +112,12 @@ function tool_pressed_handler(event) {
 	tool.trigger('activate');
     }
     else if (tool.data('tool_type') == "instant") {
-	$(".tool").trigger('deactivate');
+	$(".tool").tool_deactivate();
 	tool.trigger('activate'); //kör verktyget
     }
     else if (tool.data('tool_type') == "toggle")
 	{
-	    //Här skall kod för toggle-tool finnas, exempelvis avatar
+	    //Här skall kod för toggle-tool finnas, exempelvis avatar-verktyget
 	}
 }
 
