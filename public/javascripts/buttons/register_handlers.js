@@ -1,8 +1,11 @@
 $(document).ready(function(){
-  $('#avatar').addClass('tool');
-	$('#avatar').data('tool_type', 'instant');
-	$('#avatar').bind("click", attach_avatar);
-
+	$('#add_avatar').addClass('tool');
+	$('#add_avatar').data('tool_type', 'instant');
+	$('#add_avatar').bind("click", add_avatar);
+  
+	$('#remove_avatar').addClass('tool');
+	$('#remove_avatar').data('tool_type', 'instant');
+	$('#remove_avatar').bind("click", remove_avatar);
   
 	// Dessa borde inte vara här, snarare i html-filen, 
 	//men de är här tills vidare

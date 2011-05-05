@@ -59,9 +59,11 @@
 					</ul>
 					<div id="clear_both_fix"></div>
         </div>        
-      <div id="avatar">
-        <span>Attach avatar:</span><img id="user_avatar" src="/images/avatar/<%= current_user().avatar %>"/>
-			</div>
+      <div id="avatar_button">
+        <img id="user_avatar" src="/images/avatar/<%= current_user().avatar %>"/>
+          <span id="add_avatar" class="tool">Add avatar</span>
+          <span id="remove_avatar" class="tool">Remove avatar</span>
+      </div>
 			</div>
 			<div id="split_buttons_container" data-split_direction="none">
         <img id="split" class="split_button" src="/images/split.png"/>
