@@ -43,12 +43,9 @@ function do_split(e) {
 		    // Här kommer vi måsta lägga in kod för att 
 		    // flytta notes från det gamla fältet till det nya
 		update_fields(data);
-	    } 
-	});
-  $(".resizable8up-handle").each(function()
-  {
-    add_merge_div($(this));
-  });
+    }
+	  });
+  
     data['split_element'].tool_deactivate();
 
 };
