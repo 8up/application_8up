@@ -58,11 +58,20 @@ set_page_context();
 	handler_e.addClass("resizable8up-e");
 	handler_s.addClass("resizable8up-s");
 
-	$(this).append(handler_n);
 	$(this).append(handler_e);
-	$(this).append(handler_w);
-	$(this).append(handler_s);
-    }
+  $(this).append(handler_s);
+
+  if($(this).position().top != 0)
+  {
+	  $(this).append(handler_n);
+  }
+  if($(this).position().left != 0)
+  {
+    $(this).append(handler_w);
+  }
+	
+
+  }
 })(jQuery);
 
 $.fn.selectRange = function(start, end) {
