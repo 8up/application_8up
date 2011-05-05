@@ -30,9 +30,12 @@ $(document).ready(function(){
 	$('#split_vert').bind('activate', activate_vertical_split);
 	$('#split_vert').bind('deactivate', deactivate_split);
 
-  $('.toolbox_button_add').click(function(){
-    add_board();
-  });
+	$('.toolbox_button_add').addClass("tool");
+	$('.toolbox_button_add').data('tool_type', 'instant');
+	$('.toolbox_button_add').bind('activate', function(){
+		add_board();
+	    });
+ 
   $('.toolbox_button_invite').click(function(e){
     show_invite($('.board_div').id8Up())
   })
@@ -318,36 +321,6 @@ function update_info_box(names, created, updated, owner, participants){
   }
 };
 
-function add_board() {
-  var new_board = $('#board_template').clone();
-
-  //Leta upp boardets innehåll
-  var board_link = new_board.find('a.board_link');
-  var board_content = new_board.find('.board_name')
-
-  new_board.attr("id","board_new");
-
-  var url = "/boards.json";
-  var view_height = $(window).height();
-  var view_width = $(window).width();
-  board_content.text('')
-  $('#workspace').append(new_board);
-  new_board.fadeIn();
-
-  data = {"board[name]": "No title",
-  "options[size]" : { width: view_width, 
-    height: view_height }};
-    $.ajax({url: url, type: "POST", data: data, success: function(data) {
-      var id= "board_" + data.board.id;
-      var link_ref = "/boards/" + data.board.id;
-      new_board.attr("id", id);
-      board_link.attr('href',link_ref);
-      board_content.text(data.board.name);
-      edit_board_name(board_content);
-    }
-  });
-
-};
 
 function edit_board_name(header) {
   var board_container = $(header).closest('.board_container'); 
