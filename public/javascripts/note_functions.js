@@ -149,6 +149,12 @@ function update_note(data){
     //'background-image': 'url(' + data.note.color + ')'
   });
   note.children('.note_header').html(data.note.header);
+  
+  var parent_id = '#field_' + data.note.field_id;
+  if(note.parent(parent_id).length == 0){
+    note.detach();
+    $(parent_id).append(note);
+  }
 }
 
 function create_note_at_dom(data, field){
