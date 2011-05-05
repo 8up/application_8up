@@ -45,7 +45,7 @@ $(document).ready(function () {
       });
 
       //Dubbelklick på en lapps header gör att man kan redigera den
-      $("div.note div.note_header").click(function(e) {
+      $("div.note div.note_header").live('click',function(e) {
         if (e.target != this) {
           return true;
         }
@@ -121,10 +121,11 @@ $(document).ready(function () {
         success: function(data) {
 
           var header_text = data.note.header;
-          header.html(header_text);
-          header.parent().dblclick(function(e) {
-            edit_note_header(e.target);
-          });
+          //header.html(header_text);
+          editor.setContent(header_text);
+          //header.parent().dblclick(function(e) {
+        //    edit_note_header(e.target);
+          //});
         }
       });
       $("#toolbox_container").trigger("update");
