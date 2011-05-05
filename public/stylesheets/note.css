@@ -105,7 +105,7 @@ div.note div.note_header:focus{
   width: 100%;
   height: 100%;
   word-wrap: break-word;
-  overflow: auto;
+  /*overflow: auto;*/
 }
 
 #note_body img{
@@ -116,6 +116,6 @@ div.note div.note_header:focus{
 .avatar_holder {
   position: absolute;
   top: -40px;
-  left:-35px;
+  right:135px;
   pointer-events: none;
 }

@@ -24,8 +24,8 @@ $(document).ready(function () {
                 avatar_holder.children("[name|=my_avatar]").remove();
               }
               else{
-                var has_avatar_check = avatar_holder.children("[name|=my_avatar]").length > 0;
-                if (!has_avatar_check){
+                 var has_avatar_check = avatar_holder.children("[name|=my_avatar]").length > 0;
+              if (!has_avatar_check){
                   var new_avatar = $('<img name="my_avatar" src="/images/avatar/' + data.note.avatar + '" width="50%">');
                 }
                 avatar_holder.append(new_avatar);
