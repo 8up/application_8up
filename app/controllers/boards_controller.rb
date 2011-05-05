@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+require 'pusher'
+Pusher.app_id = '5364'
+Pusher.key = '83cad248adce476e852e'
+Pusher.secret = '1dea4f02257881216844'
+
 class BoardsController < ApplicationController
   #load_resource :find_by => :owner_id
   #authorize_resource
@@ -118,13 +123,22 @@ class BoardsController < ApplicationController
                                    params[:split_position].to_i)
     
     update_success = @field.save and new_field.save
+    
+    
 
     @board.reload
 
     updated_fields = @board.get_field_neighbours
     data = {:neighbours_map => updated_fields, :new_field => new_field}
+    
+    pusher_data = {
+      :fields => @board.fields,
+      :notes => new_field.notes
+    }
 
     if update_success
+      Pusher['notes'].trigger!('split-field', pusher_data)
+      
       respond_to do |format|
         format.json { render :json => data}
       end
@@ -139,6 +153,9 @@ class BoardsController < ApplicationController
     remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
     updated_fields = @board.get_field_neighbours
     data = {:neighbours_map => updated_fields}
+    
+    
+    #Pusher['notes'].trigger!('merge-field', @board.fields)
     respond_to do |format|
       format.json { render :json => data }
     end
@@ -153,6 +170,8 @@ class BoardsController < ApplicationController
     updated_fields = @board.get_field_neighbours
 
     data = {:neighbours_map => updated_fields}
+    
+    Pusher['notes'].trigger!('resize-field', @board.fields )
     respond_to do |format|
       format.json { render :json => data }
     end
