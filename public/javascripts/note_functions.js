@@ -108,7 +108,7 @@ $(document).ready(function () {
       header.parent().draggable('disable');
       var target_url = "/notes/" + note_id + ".json";
 
-      header.parent().bind('deselect', function(e){
+      header.parent().one('deselect', function(e){
         var raw_content = editor.getContent();
         var content = $('<div></div>').append(raw_content);
         
@@ -155,7 +155,7 @@ $(document).ready(function () {
       'note[color]': '/images/postit_yellow.png'
     }, 
     success: function(data, textStatus, jqXHR) {
-      create_note_at_dom(data, $(e.target));
+      //create_note_at_dom(data, $(e.target));
     }
   });
 };
@@ -164,14 +164,23 @@ function attach_handlers(note, note_data) {
   note.draggable();
 };
 
-function update_note(data){
+function change_field_note(data){
   //	alert("hej");
   var note_id = "note_" + data.note.id;
   var field_id = "field_" + data.note.field_id;
   var note = $('#' + note_id).detach();
   $('#' + field_id).append(note);
   note.css("left", data.note.position_x).css("top", data.note.position_y);
+}
 
+function update_note(data){
+  var note = $('#note_' + data.note.id);
+  note.css({
+    'top' :  data.note.position_y + 'px', 
+    'left' : data.note.position_x + 'px',
+    'background-image': 'url(' + data.note.color + ')'
+  });
+  note.children('.note_header').html(data.note.header);
 }
 
 function create_note_at_dom(data, field){

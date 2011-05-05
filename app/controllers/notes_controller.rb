@@ -86,8 +86,10 @@ class NotesController < ApplicationController
       @note[:avatar] = avatar_filename
     end    
     
+    
     respond_to do |format|
       if @note.update_attributes(params[:note])
+        Pusher['notes'].trigger!('updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
         format.xml  { head :ok }
