@@ -1,7 +1,7 @@
 function do_split(e) {
-    var field = $(this)
-    var direction = $("#split_buttons_container").data("split_direction");
-    
+    var data = e.data;
+    var field = $(this);
+    var direction = data['direction'];
 
     //Om direction varken är vertical eller horizontal gör vi inget
     if (!(direction == "vertical" || direction == "horizontal")) {
@@ -46,19 +46,49 @@ function do_split(e) {
 	    } 
 	});
 
-    
-
-    reset_split(); //återställ
+    data['split_element'].tool_deactivate();
 };
 
 //Remove the split-handler from all fields
 function reset_split() {
     $(".field").unbind("click",do_split);
-    $("#split_buttons_container #split_vert,#split_horiz").removeClass("depressed");
-    $("#split_buttons_container").data("split_direction", "none");
 };
 
 //Set the split-handler for all fields
-function set_split() {
-    $(".field").bind("click",do_split);
+function set_split(direction, element) {
+    $(".field").bind("click",{direction: direction, split_element: element},do_split);
+};
+
+function activate_horizontal_split(event) {
+    set_split("horizontal", $(this));
+}
+
+function activate_vertical_split(event) {
+    set_split("vertical", $(this));
+}
+
+function deactivate_split(event) {
+    reset_split();
+}
+
+function gui_split_vertically2(event) {
+  //Om vi inte redan satt flaggan, eller den är åt andra hållet,
+  //sätter vi den vertikalt
+  if ($("#split_buttons_container").data("split_direction") == "none" || 
+  $("#split_buttons_container").data("split_direction") == "horizontal") 
+  {
+
+    reset_split();
+    //Vi använder en klass för att styla knappen som nedtryckt
+    $("#split_vert").addClass("depressed"); 
+    $("#split_buttons_container").data("split_direction", 
+    "vertical"); 
+    set_split();
+  }
+  //Om vi redan inlett det ångrar ett till klick
+  else if ($("#split_buttons_container").data("split_direction") 
+  == "vertical") {
+    reset_split();
+  }
+  //Annars gör vi inget
 };

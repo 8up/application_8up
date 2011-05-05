@@ -37,6 +37,14 @@
     -webkit-box-shadow: inset 0 0 18px #3366cc;
     box-shadow: inset 0 0 18px #3366cc;
 }
+
+.tool.tool_active {
+    opacity:1;
+    -moz-box-shadow: inset 0 0 18px ##3366cc;
+    -webkit-box-shadow: inset 0 0 18px #3366cc;
+    box-shadow: inset 0 0 18px #3366cc;
+}
+
 #panel_arrow {
     opacity:0.4;
 }
@@ -194,7 +202,7 @@ margin-top:15px;
 border:solid;
 border-width:1px;
 border-color:#ff7817;
-left:10px;
+left:49px;
 width:175px;
 background-color:#FFD5A8;
 position:absolute;
