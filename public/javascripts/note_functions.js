@@ -3,39 +3,7 @@ $(document).ready(function () {
   window.noteEditor = myNicEditor;
 
 
-      $('#avatar').click(function(e) {
-        var x = $(e.target).attr('src');
 
-        $(".selected.note").each(function(index, domElement){
-          var avatar_holder = $(domElement).find('.avatar_holder');
-          var has_avatar = avatar_holder.children("[name|=my_avatar]").length > 0;
-          var note_id = $(domElement).attr('id').split('_').pop();
-          var board_id = $(domElement).data('board_id').split('_').pop();
-          var url_path =  "/boards/" + board_id + "/notes/" + note_id + '.json';
-          if(has_avatar){
-            avatar_holder.children("[name|=my_avatar]").remove();
-          };  
-          $.ajax({ url: url_path, 
-            type: 'POST',
-            data: {_method:'PUT',
-            'avatar_action': has_avatar ? "remove" : "add" 	},
-            success: function(data, textStatus, jqXHR){
-              if(has_avatar){
-                avatar_holder.children("[name|=my_avatar]").remove();
-              }
-              else{
-                var has_avatar_check = avatar_holder.children("[name|=my_avatar]").length > 0;
-                if (!has_avatar_check){
-                  var new_avatar = $('<img name="my_avatar" src="/images/avatar/' + data.note.avatar + '" width="50%">');
-                }
-                avatar_holder.append(new_avatar);
-
-              }
-
-            }
-          }); 
-        })
-      });
 
       $("div.field").live('dblclick', function(e){
         if (e.target != this) {
@@ -108,7 +76,7 @@ $(document).ready(function () {
       header.parent().draggable('disable');
       var target_url = "/notes/" + note_id + ".json";
 
-      header.parent().bind('deselect', function(e){
+      header.parent().one('deselect', function(e){
         var raw_content = editor.getContent();
         var content = $('<div></div>').append(raw_content);
         
@@ -155,25 +123,7 @@ $(document).ready(function () {
       'note[color]': '/images/postit_yellow.png'
     }, 
     success: function(data, textStatus, jqXHR) {
-      var header_id = "note_header_" + data.note.id;
-      var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
-      var header = $(header_html);
-      var note = $('<div></div>');
-      note.attr('id', 'note_' + data.note.id);
-      note.addClass('note');
-      note.addClass('selected');
-      note.data('board_id', 'board_' + data.note.board_id);
-      note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
-      var avatar= $('<div></div>');
-      avatar.addClass('avatar_holder');
-      note.append(avatar);
-      header.html(data.note.header);
-
-      attach_handlers(note, data);
-      note.append(header);
-      $(e.target).append(note);
-      edit_note_header(header);
-      $("#toolbox_container").trigger("update");
+      //create_note_at_dom(data, $(e.target));
     }
   });
 };
@@ -182,12 +132,43 @@ function attach_handlers(note, note_data) {
   note.draggable();
 };
 
-function update_note(data){
+function change_field_note(data){
   //	alert("hej");
   var note_id = "note_" + data.note.id;
   var field_id = "field_" + data.note.field_id;
   var note = $('#' + note_id).detach();
   $('#' + field_id).append(note);
   note.css("left", data.note.position_x).css("top", data.note.position_y);
+}
 
+function update_note(data){
+  var note = $('#note_' + data.note.id);
+  note.css({
+    'top' :  data.note.position_y + 'px', 
+    'left' : data.note.position_x + 'px',
+    'background-image': 'url(' + data.note.color + ')'
+  });
+  note.children('.note_header').html(data.note.header);
+}
+
+function create_note_at_dom(data, field){
+  var header_id = "note_header_" + data.note.id;
+  var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
+  var header = $(header_html);
+  var note = $('<div></div>');
+  note.attr('id', 'note_' + data.note.id);
+  note.addClass('note');
+  note.addClass('selected');
+  note.data('board_id', 'board_' + data.note.board_id);
+  note.css({'position': 'absolute', 'top' :  data.note.position_y + 'px', 'left' : data.note.position_x + 'px'});
+  var avatar= $('<div></div>');
+  avatar.addClass('avatar_holder');
+  note.append(avatar);
+  header.html(data.note.header);
+
+  attach_handlers(note, data);
+  note.append(header);
+  field.append(note);
+  edit_note_header(header);
+  $("#toolbox_container").trigger("update");
 }

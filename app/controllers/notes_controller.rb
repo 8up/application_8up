@@ -1,3 +1,9 @@
+require 'pusher'
+Pusher.app_id = '5364'
+Pusher.key = '83cad248adce476e852e'
+Pusher.secret = '1dea4f02257881216844'
+
+
 class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
@@ -50,6 +56,7 @@ class NotesController < ApplicationController
         field = Field.find(@note.field_id)
         board = Board.find(field.board_id)
         @note[:board_id] = board.id
+        Pusher['notes'].trigger!('created', @note.to_json )
         format.json { render :json =>  @note }
 
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
@@ -79,8 +86,10 @@ class NotesController < ApplicationController
       @note[:avatar] = avatar_filename
     end    
     
+    
     respond_to do |format|
       if @note.update_attributes(params[:note])
+        Pusher['notes'].trigger!('updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
         format.xml  { head :ok }

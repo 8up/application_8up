@@ -1,58 +1,4 @@
-/*
- Tools skall fungera så här: det finns två varianter, momentana och aktiverade.
- Momentana utför den önskade åtgärden direkt (delete, add board, invite)
- Aktiverade (add note, split field, osv) sätter verktyget som aktivt, varvid alla andra sätts 
- till icke-aktiva. Det aktiva verktyget skall deaktiveras när det utfört sin handling
- Klasser på tools som används:
- tool - alla tools skall ha denna klass
- tool_active - talar om ifall ett verktyg är aktivt
-
- data som används på tools:
- data-tool_type: [instant, activated, toggle] - talar om vilken sorts verktyg det är
- data-tool_state: [active, inactive] - vilket tillstånd detta tool är i, i första hand används det för aktiverade tools för att aktivera om man trycker på samma tool två gånger
- data-tool_data: data som ett tool behöver för att köras
- 
- Alla tools skall ha handlers som lyssnar på eventet 'activate'. Tools som är 
- aktiverbara skall också ha en funktion som lyssnar på 'deactivate'
-*/
-
-
 $(document).ready(function(){
-	$('#split_horiz').addClass('tool');
-	$('#split_horiz').data('tool_type', 'activated');
-	$('#split_horiz').data('tool_state', 'inactive');	
-	$('#split_horiz').bind('activate', activate_horizontal_split);
-	$('#split_horiz').bind('deactivate', deactivate_split);
-
-	$('#split_vert').addClass('tool');
-	$('#split_vert').data('tool_type', 'activated');
-	$('#split_vert').data('tool_state', 'inactive');	
-	$('#split_vert').bind('activate', activate_vertical_split);
-	$('#split_vert').bind('deactivate', deactivate_split);
-
-	$('.toolbox_button_add').addClass("tool");
-	$('.toolbox_button_add').data('tool_type', 'instant');
-	$('.toolbox_button_add').bind('activate', function(){
-		add_board();
-	    });
- 
-  $('.toolbox_button_invite').click(function(e){
-    show_invite($('.board_div').id8Up())
-  })
-      $('.toolbox_button_create_note').click(function(e){
-	      var f;
-	      $("div.field").click(f = function(e){
-		      if (e.target != this) {
-			  return true;
-		      }
-		      create_note(e);
-		      $("div.field").unbind('click', f);
-		  });
-	  });
-
-  $('.palette_color').click(color_palette_handler);
-  //$('.palette_color').bind('activate', color_palette_handler);
-
   $("#toolbox_container").bind('update',function(){
     var context_area = $('#context_area');
     if (window.page_context=="whiteboard") {
@@ -62,59 +8,11 @@ $(document).ready(function(){
       start_page_context(context_area);
     }
   });
+  
   $('#toolbox_container').trigger('update');
 
-  $('.tool').click(tool_pressed_handler);
+ 
 });
-
-//Jquery-funktion som deaktiverar tools
-(function($){
-	jQuery.fn.tool_deactivate = function(){
-	    this.each( function() {
-		    $(this).trigger('deactivate');
-		    if ($(this).data('tool_state') == "active") {
-			$(this).removeClass("tool_active");
-			$(this).data('tool_state', "inactive");
-		    }    
-		})
-	}
-})(jQuery);
-
-
-// Denna funktion ser till att aktivera verktygets funktion, och deaktivera alla andra
-function tool_pressed_handler(event) {
-    var tool = $(event.target);
-
-    // Om eventet inte är ett tool returnerar vi bara
-    if (!tool.hasClass('tool')) {
-	return true;
-    }
-    
-    if (tool.data('tool_type') == "activated") {
-	//Kolla om verktyget redan var aktivt, i sådana fall skall det deaktiveras
-
-	if (tool.data('tool_state') == "active") {
-	    tool.tool_deactivate();
-	    return true;
-	}	
-	//deaktivera alla tools
-	$(".tool").tool_deactivate();
-	   
-	//Aktivera detta tool
-  	tool.data('tool_state', "active");
-	tool.addClass('tool_active');
-	
-	tool.trigger('activate');
-    }
-    else if (tool.data('tool_type') == "instant") {
-	$(".tool").trigger('deactivate');
-	tool.trigger('activate'); //kör verktyget
-    }
-    else if (tool.data('tool_type') == "toggle")
-	{
-	    //Här skall kod för toggle-tool finnas, exempelvis avatar
-	}
-}
 
 function whiteboard_context(context_area) {
   // Visa verktyg specifikt för board-vyn
@@ -281,7 +179,7 @@ function update_info_box_board() {
 }
 
 
-//Funktion för att hämta information via json om objektet.
+//Funktion för att uppdatera info-boxens innehåll
 function update_info_box(names, created, updated, owner, participants){
   reset_info_box();
   var toolbox_info_created = $('#toolbox_info_created');
@@ -322,41 +220,3 @@ function update_info_box(names, created, updated, owner, participants){
 };
 
 
-function edit_board_name(header) {
-  var board_container = $(header).closest('.board_container'); 
-  var original_text = $(header).html();
-  var title_form = $("<form></form>");
-  var title_input = $("<input type='text' size='10'></input>");
-  //Titeln trimmas för tillfället 
-  title_input.val($.trim(original_text));
-  var board_id = board_container.attr('id').split('_').pop();
-  var url = "/boards/" + board_id;
-
-  //deaktivera alla länkar
-  $('a').click(stop_link = function(e) { e.preventDefault(); return false;})
-
-  title_form.append(title_input);
-  $(header).replaceWith(title_form);
-
-  title_input.focus();
-  title_input.select();
-
-  title_input.blur(function(e) { title_form.submit(); });
-
-  title_form.submit(function(e) { 
-
-    var new_header_text = title_input.val();
-    header.text(new_header_text);
-    title_form.replaceWith(header);
-
-    $.ajax({url: url, 
-      type: "PUT", 
-      data: {board : 
-        {name : new_header_text}} 
-
-      });
-
-      $('a').unbind('click', stop_link); //Aktivera länkar igen
-      return false; //ladda inte om sidan
-    });
-  };

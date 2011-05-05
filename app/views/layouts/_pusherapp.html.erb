@@ -1,0 +1,19 @@
+<script src="http://js.pusherapp.com/1.8/pusher.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) window.console.log(message);
+  };
+
+  // Flash fallback logging - don't include this in production
+  WEB_SOCKET_DEBUG = true;
+
+  var pusher = new Pusher('83cad248adce476e852e');
+  var channel = pusher.subscribe('notes');
+  channel.bind('created', function(data) {
+    create_note_at_dom(data, $('#field_' + data.note.field_id));
+  });
+	channel.bind('updated', function(data){
+		update_note(data);
+	});
+</script>
