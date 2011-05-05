@@ -3,12 +3,13 @@ $(document).ready(function()
   $(".resizable8up-handle").each(function()
   {
     add_merge_div($(this));
-  })
+  });
 }); 
 
 function add_merge_div(resizable8up_h)
 {
     var resizable8up_handle = $(resizable8up_h);
+    $(resizable8up_handle).children(".hover").remove();
     var hover_div = $('<div></div>');
     hover_div.addClass("hover");
     hover_div.height(25);
@@ -196,12 +197,6 @@ function field_merge(field_1, field_2, merge_direction)
       $(element).offset(element_offset);  
     });
     field_2.height(new_height);
-    field_2.children(".resizable8up_handle").children(".hover").remove();
-    field_2.children(".resizable8up-handle").each(function(index, element)
-    {
-      add_merge_div($(element));
-    });
-    //field_1.children('.note').appendTo(field_2);
     field_1.remove();
     $.ajax({url: "/boards/" + board_id  + 
 		"/merge_fields/" +  field_id , type:"POST", 
@@ -209,27 +204,21 @@ function field_merge(field_1, field_2, merge_direction)
     }
   if (merge_direction == "west")
     {
-    field_1.children('.note').each(function(index, element) 
-    {
-      var field_2_width = field_2.width();
-      var note_position_left = $(element).position().left;
-      var update = field_2_width + note_position_left;
-      var element_offset = $(element).offset();
-      element_offset.left = update;
-      field_2.append(element);
-      $(element).offset(element_offset);
-    });
-    field_2.width(new_width);
-    field_2.children(".resizable8up_handle").children(".hover").remove();
-    field_2.children(".resizable8up-handle").each(function(index, element)
-    {
-      add_merge_div($(element));
-    });    
-    //field_1.children('.note').appendTo(field_2);
-    field_1.remove();
-    $.ajax({url: "/boards/" + board_id  + 
-		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
+      field_1.children('.note').each(function(index, element) 
+      {
+        var field_2_width = field_2.width();
+        var note_position_left = $(element).position().left;
+        var update = field_2_width + note_position_left;
+        var element_offset = $(element).offset();
+        element_offset.left = update;
+        field_2.append(element);
+        $(element).offset(element_offset);
+      });
+      field_2.width(new_width);    
+      field_1.remove();
+      $.ajax({url: "/boards/" + board_id  + 
+	  	"/merge_fields/" +  field_id , type:"POST", 
+	  	data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
     }
   if (merge_direction == "south")
     {
@@ -243,16 +232,10 @@ function field_merge(field_1, field_2, merge_direction)
         field_1.append(element);
         $(element).offset(element_offset);
       });
-        field_1.height(new_height);
-        field_1.children(".resizable8up_handle").children(".hover").remove();
-        field_1.children(".resizable8up-handle").each(function(index,element)
-        {
-          add_merge_div($(element));
-        });        
-      //field_2.children('.note').appendTo(field_1);
+      field_1.height(new_height);       
       field_2.remove();
       $.ajax({url: "/boards/" + board_id  + 
-		  "/merge_fields/" +  field_id , type:"POST", 
+	    "/merge_fields/" +  field_id , type:"POST", 
 		  data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: update_fields})
     }
   if (merge_direction == "east")
@@ -267,16 +250,14 @@ function field_merge(field_1, field_2, merge_direction)
         field_1.append(element);
         $(element).offset(element_offset);  
       });
-      field_1.width(new_width);
-      field_1.children(".resizable8up_handle").children(".hover").remove();
-      field_1.children(".resizable8up-handle").each(function(index,element)
-      {
-        add_merge_div($(element));
-      });      
-    //field_2.children('.note').appendTo(field_1);
-    field_2.remove();
-    $.ajax({url: "/boards/" + board_id  + 
-		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: update_fields })
+      field_1.width(new_width);      
+      field_2.remove();
+      $.ajax({url: "/boards/" + board_id  + 
+	  	"/merge_fields/" +  field_id , type:"POST", 
+	  	data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: update_fields })
     }
+    $(".resizable8up-handle").each(function()
+    {
+      add_merge_div($(this));
+    });
 }

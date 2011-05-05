@@ -56,7 +56,7 @@ class NotesController < ApplicationController
         field = Field.find(@note.field_id)
         board = Board.find(field.board_id)
         @note[:board_id] = board.id
-        Pusher['notes'].trigger!('created', @note.to_json )
+        Pusher["board-#{board.id}"].trigger!('created', @note.to_json )
         format.json { render :json =>  @note }
 
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
@@ -89,7 +89,7 @@ class NotesController < ApplicationController
     
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        Pusher['notes'].trigger!('updated', @note.to_json({:include => :placed_avatars}) )
+        Pusher["board-#{@note.board.id}"].trigger!('updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
         format.xml  { head :ok }

@@ -9,7 +9,7 @@
   WEB_SOCKET_DEBUG = true;
 
   var pusher = new Pusher('83cad248adce476e852e');
-  var channel = pusher.subscribe('notes');
+  var channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
   channel.bind('created', function(data) {
     create_note_at_dom(data, $('#field_' + data.note.field_id));
   });
@@ -34,8 +34,6 @@
 		      'top': field.position_y,
 		      'left': field.position_x
 		    });
-		   
-				//$field.resize8up();
 				attach_field_handlers($field);
 				
 			}else
