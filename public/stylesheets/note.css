@@ -14,7 +14,7 @@ div.note.selected {
 
 }
 
-div.note div.note_header,form {
+div.note div.note_header {
     margin: 0px;
     font-size: 18px;
     font-family: Times New Roman;
