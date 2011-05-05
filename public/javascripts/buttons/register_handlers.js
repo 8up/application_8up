@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('#add_avatar').addClass('tool');
 	$('#add_avatar').data('tool_type', 'instant');
 	$('#add_avatar').bind("click", add_avatar);
@@ -35,18 +36,13 @@ $(document).ready(function(){
 		show_invite($('.board_div').id8Up())
 		    });
 	
-	$('.toolbox_button_create_note').click(function(e){
-	      var f;
-	      $("div.field").click(f = function(e){
-		      if (e.target != this) {
-			  return true;
-		      }
-		      create_note(e);
-		      $("div.field").unbind('click', f);
-		  });
-	  });
-    
-    $('.board_button_invite').live('click', function(){
+	$('.toolbox_button_create_note').addClass('tool');
+	$('.toolbox_button_create_note').data('tool_type', 'activated');
+	$('.toolbox_button_create_note').data('tool_state', 'inactive');	
+	$('.toolbox_button_create_note').bind('activate', add_note_activate);
+	$('.toolbox_button_create_note').bind('deactivate', add_note_deactivate);
+	
+	$('.board_button_invite').live('click', function(){
 			show_invite($('.selected').id8Up());
 		    });
 
