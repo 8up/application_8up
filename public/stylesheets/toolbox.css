@@ -112,13 +112,13 @@ div#toolbox_text_container {
 }
 
 
-#avatar {
+#avatar_button {
     width: 9px;
     height: 18px;
     margin:25px 0px 0px 10px;
     text-align: center;
 }
-#avatar img {
+#avatar_button img {
     width: 20px;
     height: 30px;
 }
