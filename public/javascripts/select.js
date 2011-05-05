@@ -3,6 +3,8 @@ function de_select_all(e, caller){
 		return true;
 	};
 	//Skapar eller tar bort klassen selected från objektet.
+    var color = $(".selected").css("background-image").split("_select");
+    $(".selected").css("background-image", color[0] + color[1]);
 	$(".selected").removeClass("selected").trigger('deselect');
 	$("#toolbox_container").trigger("update");
 };
@@ -16,8 +18,15 @@ function select(e, caller) {
 		return true;
     };*/
 	//Skapar eller tar bort klassen selected från objektet.
+  if($(caller).css("background-image").split("_select")[1] == undefined) {    
+    var color = $(caller).css("background-image").split(".");
+    $(caller).css("background-image", color[0] + "_select." + color[1]);    
+  } 
+  
 	$(caller).addClass("selected").trigger('select');
 	$("#toolbox_container").trigger("update");
+  
+  
 };
 
 $(document).ready(
