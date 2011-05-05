@@ -45,8 +45,12 @@ function do_split(e) {
 		update_fields(data);
 	    } 
 	});
-
+  $(".resizable8up-handle").each(function()
+  {
+    add_merge_div($(this));
+  });
     data['split_element'].tool_deactivate();
+
 };
 
 //Remove the split-handler from all fields
