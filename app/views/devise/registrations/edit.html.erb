@@ -17,33 +17,27 @@
 
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
-
+  <br/>
+  <br/>
   <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></p>
   </center>
 
-  <p><%= f.label :Change_Avatar %>
+  <center><p><%= f.label :Change_Avatar %></center>
   <div id="choose_avatar">
   <ul>
   <% Dir.entries("public/images/avatar").each do |pic| %>
     <% if not(pic == "." || pic == "..")%>
-      <li><img name="my_avatar" src="/images/avatar/<%= pic%>" ><br/><%= radio_button_tag("user[avatar]" , pic , (pic == current_user().avatar)? true : false) %></li>
+    <li><img name="my_avatar" src="/images/avatar/<%= pic%>" ><br/><center><%= radio_button_tag("user[avatar]" , pic , (pic == current_user().avatar)? true : false) %></center></li>
   <% end %>
   <% end %>
 </ul>
 </div>
  </p>
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-  <p><%= f.submit "Update" %></p>
+<center><p><%= f.submit "Update" %></p></center>
 <% end %>
-
-<h3>Cancel my account</h3>
-
+<br/>
+<center>
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+<br/>
+<%= link_to "Back", :back %></center>
