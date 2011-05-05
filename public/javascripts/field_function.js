@@ -49,7 +49,7 @@ function update(event, ui, field_id){
 		note:note_data
 	},
   success: function(data, textStatus, jqXHR) {
-    update_note(data);
+      change_field_note(data);
 		}
 	});	
 }
