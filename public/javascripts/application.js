@@ -58,6 +58,9 @@ set_page_context();
 	handler_e.addClass("resizable8up-e");
 	handler_s.addClass("resizable8up-s");
 
+	$(this).append(handler_e);
+  $(this).append(handler_s);
+
   if($(this).data("neighbours")["north"].length != 0)
   {
 	  $(this).append(handler_n);
@@ -67,8 +70,7 @@ set_page_context();
     $(this).append(handler_w);
   }
 	
-	$(this).append(handler_e);
-  $(this).append(handler_s);
+
   }
 })(jQuery);
 
