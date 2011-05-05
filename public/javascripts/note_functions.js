@@ -152,25 +152,7 @@ $(document).ready(function () {
       'note[color]': '/images/postit_yellow.png'
     }, 
     success: function(data, textStatus, jqXHR) {
-      var header_id = "note_header_" + data.note.id;
-      var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
-      var header = $(header_html);
-      var note = $('<div></div>');
-      note.attr('id', 'note_' + data.note.id);
-      note.addClass('note');
-      note.addClass('selected');
-      note.data('board_id', 'board_' + data.note.board_id);
-      note.css({'position': 'absolute', 'top' :  posY + 'px', 'left' : posX + 'px'});
-      var avatar= $('<div></div>');
-      avatar.addClass('avatar_holder');
-      note.append(avatar);
-      header.html(data.note.header);
-
-      attach_handlers(note, data);
-      note.append(header);
-      $(e.target).append(note);
-      edit_note_header(header);
-      $("#toolbox_container").trigger("update");
+      create_note_at_dom(data, $(e.target));
     }
   });
 };
@@ -187,4 +169,26 @@ function update_note(data){
   $('#' + field_id).append(note);
   note.css("left", data.note.position_x).css("top", data.note.position_y);
 
+}
+
+function create_note_at_dom(data, field){
+  var header_id = "note_header_" + data.note.id;
+  var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
+  var header = $(header_html);
+  var note = $('<div></div>');
+  note.attr('id', 'note_' + data.note.id);
+  note.addClass('note');
+  note.addClass('selected');
+  note.data('board_id', 'board_' + data.note.board_id);
+  note.css({'position': 'absolute', 'top' :  data.note.position_y + 'px', 'left' : data.note.position_x + 'px'});
+  var avatar= $('<div></div>');
+  avatar.addClass('avatar_holder');
+  note.append(avatar);
+  header.html(data.note.header);
+
+  attach_handlers(note, data);
+  note.append(header);
+  field.append(note);
+  edit_note_header(header);
+  $("#toolbox_container").trigger("update");
 }
