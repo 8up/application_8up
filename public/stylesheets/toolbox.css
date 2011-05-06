@@ -132,7 +132,7 @@ div#toolbox_text_container {
     color:#ff7817;
     cursor:pointer;
 }
-.user_avatar{
+#user_avatar{
     float:left;
     width: 40px;
     height: 40px;
