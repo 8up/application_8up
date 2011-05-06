@@ -24,7 +24,7 @@ function ghost_note_move(e) {
     var x = e.pageX;
     var y = e.pageY;
     
-    e.data['note'].offset({top: y -50, left: x -50});
+    e.data['note'].offset({top: y, left: x});
 }
 
 function field_add_note_handler(e) {
