@@ -29,7 +29,7 @@ function select(e, caller) {
   if($(caller).css("background-image").split("_select")[1] == undefined) {    
     var bg_image = $(caller).css("background-image");
     var color = bg_image.substring(0, bg_image.length-5);
-    $(caller).css("background-image", color + "_select.png");    
+    $(caller).css("background-image", color + "_select.png)");    
   } 
   
 	$(caller).addClass("selected").trigger('select');
