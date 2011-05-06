@@ -158,3 +158,15 @@ opacity:1;
   width: 50px;
   height: 70px;
 }
+
+#board_title {
+    position: fixed;
+    left: 50%;
+    top: 0px;
+    z-index: 500;
+    font-family:arial; 
+    font-size:18px;
+    color:#a74d0c;
+    font-weight:bold;
+    opacity: 0.5;
+}

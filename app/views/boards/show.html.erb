@@ -1,3 +1,6 @@
+<div id="board_title">
+  <%= @board.name %>
+</div>
 <div id="board_<%= @board.id %>" class="board_div">
   <% @board.fields.each do |field|%>
   <div id="field_<%= field.id %>" class="field ui-widget-content" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;" data-neighbours="<%= @board.get_neighbours(field.id).to_json%>">
