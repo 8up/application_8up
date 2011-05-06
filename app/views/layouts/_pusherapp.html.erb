@@ -12,8 +12,11 @@
   <% if @board %>
   var channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
   channel.bind('created', function(data) {
-    create_note_at_dom(data, $('#field_' + data.note.field_id));
+    create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
   });
+  channel.bind('destroyed', function(data){
+		delete_note(data.note.id);
+	});
 	channel.bind('updated', function(data){
 		update_note(data);
 	});
@@ -51,5 +54,6 @@
 			
 		})
 	});
+	window.current_user = <%= current_user.id %>
 	<% end %>
 </script>

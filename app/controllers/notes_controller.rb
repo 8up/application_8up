@@ -56,11 +56,11 @@ class NotesController < ApplicationController
         field = Field.find(@note.field_id)
         board = Board.find(field.board_id)
         @note[:board_id] = board.id
-        Pusher["board-#{board.id}"].trigger!('created', @note.to_json )
-        format.json { render :json =>  @note }
 
+        format.json { render :json =>  @note }
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
+        Pusher["board-#{board.id}"].trigger!('created', {:note => @note, :user => current_user.id} )
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
@@ -116,6 +116,7 @@ class NotesController < ApplicationController
     if @note.save
       respond_to do |format|
         format.json { render :json => { :status => 'ok'} }
+        Pusher["board-#{@note.board.id}"].trigger!('destroyed', @note)
       end
     end
 

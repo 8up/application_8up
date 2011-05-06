@@ -41,7 +41,7 @@ $(document).ready(function () {
     			$.ajax({ url: url_path, 
     				    type: 'POST',
     				    data: {_method:'PUT',
-    					'note[color]': x 	},
+    					'note[color]': x.replace('_select', '') 	},
     				    error: function(){
     				    // Om vi får error sätter vi tillbaka gamla färgen
     				    //$(domElement).css('background-color', old_color);
@@ -123,7 +123,7 @@ $(document).ready(function () {
       'note[color]': '/images/postit_yellow.png'
     }, 
     success: function(data, textStatus, jqXHR) {
-      //create_note_at_dom(data, $(e.target));
+      create_note_at_dom(data, $(e.target), true);
     }
   });
 };
@@ -157,16 +157,23 @@ function update_note(data){
   }
 }
 
-function create_note_at_dom(data, field){
+function create_note_at_dom(data, field, select){
+  if($('#note_' + data.note.id).length > 0)
+    return;
   var header_id = "note_header_" + data.note.id;
   var header_html = '<div id="'  + header_id + '" class="note_header"></div>' ;
   var header = $(header_html);
   var note = $('<div></div>');
   note.attr('id', 'note_' + data.note.id);
   note.addClass('note');
-  note.addClass('selected');
+  
   note.data('board_id', 'board_' + data.note.board_id);
-  note.css({'position': 'absolute', 'top' :  data.note.position_y + 'px', 'left' : data.note.position_x + 'px'});
+  note.css({
+    'position': 'absolute', 
+    'top' :  data.note.position_y + 'px', 
+    'left' : data.note.position_x + 'px',
+    'background-image': 'url(' + data.note.color + ')' 
+  });
   var avatar= $('<div></div>');
   avatar.addClass('avatar_holder');
   note.append(avatar);
@@ -175,6 +182,17 @@ function create_note_at_dom(data, field){
   attach_handlers(note, data);
   note.append(header);
   field.append(note);
-  edit_note_header(header);
+  if(select){
+    edit_note_header(header);
+    
+    window.select(null, note);
+    //note.addClass('selected');
+    //note.trigger('select');
+  }
+  $("#toolbox_container").trigger("update");
+}
+
+function delete_note(id){
+  $('#note_' + id).remove();
   $("#toolbox_container").trigger("update");
 }

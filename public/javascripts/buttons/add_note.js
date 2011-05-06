@@ -6,6 +6,7 @@ function add_note_activate(e){
     ghost.css('z-index', '2000');
     ghost.css('opacity', '0.5');
     ghost.css('pointer-events', 'none');
+    ghost.css('background-image', 'url(/images/postit_yellow.png)');
     ghost.offset({top:0,left:0});
     ghost.show();
     $('.board_div').append(ghost);
