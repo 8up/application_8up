@@ -8,9 +8,9 @@
   // Flash fallback logging - don't include this in production
   WEB_SOCKET_DEBUG = true;
 
-  var pusher = new Pusher('83cad248adce476e852e');
+  window.pusher = new Pusher('83cad248adce476e852e');
   <% if @board %>
-  var channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
+  window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
   channel.bind('created', function(data) {
     create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
   });
