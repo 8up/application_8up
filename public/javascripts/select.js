@@ -27,8 +27,9 @@ function select(e, caller) {
     };*/
 	//Skapar eller tar bort klassen selected från objektet.
   if($(caller).css("background-image").split("_select")[1] == undefined) {    
-    var color = $(caller).css("background-image").split(".");
-    $(caller).css("background-image", color[0] + "_select." + color[1]);    
+    var bg_image = $(caller).css("background-image");
+    var color = bg_image.substring(0, bg_image-5);
+    $(caller).css("background-image", color + "_select.png");    
   } 
   
 	$(caller).addClass("selected").trigger('select');
