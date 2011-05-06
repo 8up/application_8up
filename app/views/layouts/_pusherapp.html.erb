@@ -9,9 +9,11 @@
   WEB_SOCKET_DEBUG = true;
 
   window.pusher = new Pusher('83cad248adce476e852e');
+  
   <% if @board %>
-  window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
-  channel.bind('created', function(data) {
+    window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
+  
+    channel.bind('created', function(data) {
     create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
   });
   channel.bind('destroyed', function(data){
@@ -23,37 +25,16 @@
 	channel.bind('resize-field', function(data){
 		update_fields(data);
 	});
-	channel.bind('split-field', function(data){
-		_.each(data.fields, function(field){
-			field = field.field;
-			var $field = $('#field_' + field.id);
-			if($field.length == 0){
-				$field = $('.field').first().clone();
-				$field.id = '#field_' + field.id;
-				$field.html('');
-				$('.board_div').append($field);
-				$field.css({
-	    		'height': field.height,
-		      'width': field.width,
-		      'top': field.position_y,
-		      'left': field.position_x
-		    });
-				attach_field_handlers($field);
-				
-			}else
-			{
-				$field.css({
-	    		'height': field.height,
-		      'width': field.width,
-		      'top': field.position_y,
-		      'left': field.position_x
-		    });
-			}
 			
 			
 			
-		})
-	});
+      
+      
 	window.current_user = <%= current_user.id %>
-	<% end %>
+	<% else %>
+      window.channel = pusher.subscribe('<%= "overview" %>');
+  
+  
+  <% end %>
+  
 </script>

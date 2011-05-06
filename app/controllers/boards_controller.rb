@@ -129,11 +129,14 @@ class BoardsController < ApplicationController
     @board.reload
 
     updated_fields = @board.get_field_neighbours
-    data = {:neighbours_map => updated_fields, :new_field => new_field}
+    data = {:neighbours_map => updated_fields, 
+      :new_field => new_field}
     
     pusher_data = {
       :fields => @board.fields,
-      :notes => new_field.notes
+      :notes => new_field.notes,
+      :neighbours_map => updated_fields, 
+      :new_field => new_field
     }
 
     if update_success

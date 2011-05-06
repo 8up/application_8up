@@ -1,3 +1,42 @@
+$(document).ready(function() {
+  window.channel.bind('split-field', function(data){
+	_.each(data.fields, function(field){
+		field = field.field;
+		var $field = $('#field_' + field.id);
+		if($field.length == 0){
+        if ($('#tmp_field').length == 1) {
+        $field = $('#tmp_field');
+    } 
+    else {  
+		    $field = $('.field').first().clone();
+    } 		    
+      $field.attr('id', 'field_' + field.id);
+		    $field.empty();
+		    $('.board_div').append($field);
+		    $field.css({
+			    'height': field.height,
+				  'width': field.width,
+				  'top': field.position_y,
+				  'left': field.position_x
+				});
+		    attach_field_handlers($field);
+				
+		}else
+		    {
+			$field.css({
+				'height': field.height,
+				'width': field.width,
+				'top': field.position_y,
+				'left': field.position_x
+			});
+		    }
+     
+      })
+  update_field_neighbours(data);
+    }
+  )
+})
+
 function do_split(e) {
     var data = e.data;
     var field = $(this);
@@ -8,11 +47,11 @@ function do_split(e) {
 	return true;
     }
     var board_id =field.parent().id8Up(); 
-    var field_id = field.id8Up();                         ;
+    var field_id = field.id8Up();                         
    
-    var new_field = field.clone();
+    var new_field = field.clone(); //klonen används medan vi väntar på 
     new_field.html(''); //radera innehållet i klonen
-    new_field.attr("id", "");
+    new_field.attr("id", "tmp_field");
     var split_position = 0;
     field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
     if (direction == "vertical") {
@@ -37,18 +76,19 @@ function do_split(e) {
     $.ajax({url: "/boards/" + board_id  + 
 		"/split_field/" +  field_id , type:"POST", 
 		data:{
-		split_direction : direction, split_position: split_position } , 
-		success: function(data) {
+		split_direction : direction, split_position: split_position } //, 
+		/*		success: function(data) {
 		new_field.attr("id", "field_" + data.new_field.field.id); 
 		    // Här kommer vi måsta lägga in kod för att 
 		    // flytta notes från det gamla fältet till det nya
-		update_fields(data);
-    }
+        update_fields(data);
+        }*/
 	  });
   
     data['split_element'].tool_deactivate();
 
 };
+
 
 //Remove the split-handler from all fields
 function reset_split() {
@@ -71,25 +111,3 @@ function activate_vertical_split(event) {
 function deactivate_split(event) {
     reset_split();
 }
-
-function gui_split_vertically2(event) {
-  //Om vi inte redan satt flaggan, eller den är åt andra hållet,
-  //sätter vi den vertikalt
-  if ($("#split_buttons_container").data("split_direction") == "none" || 
-  $("#split_buttons_container").data("split_direction") == "horizontal") 
-  {
-
-    reset_split();
-    //Vi använder en klass för att styla knappen som nedtryckt
-    $("#split_vert").addClass("depressed"); 
-    $("#split_buttons_container").data("split_direction", 
-    "vertical"); 
-    set_split();
-  }
-  //Om vi redan inlett det ångrar ett till klick
-  else if ($("#split_buttons_container").data("split_direction") 
-  == "vertical") {
-    reset_split();
-  }
-  //Annars gör vi inget
-};
