@@ -4,38 +4,24 @@ $(document).ready(function() {
 		field = field.field;
 		var $field = $('#field_' + field.id);
 		if($field.length == 0){
-        if ($('#tmp_field').length == 1) {
-        $field = $('#tmp_field');
-    } 
-    else {  
-		    $field = $('.field').first().clone();
-    } 		    
-      $field.attr('id', 'field_' + field.id);
+		    //Skapa nytt fält, eller döp om det 
+		    //temporära om denna klient är den
+		    //som gjorde splitten
+		    if ($('#tmp_field').length == 1) {
+			$field = $('#tmp_field');
+		    } 
+		    else {  
+			$field = $('.field').first().clone();
+		    } 		    
+		    $field.attr('id', 'field_' + field.id);
 		    $field.empty();
 		    $('.board_div').append($field);
-		    $field.css({
-			    'height': field.height,
-				  'width': field.width,
-				  'top': field.position_y,
-				  'left': field.position_x
-				});
 		    attach_field_handlers($field);
-				
-		}else
-		    {
-			$field.css({
-				'height': field.height,
-				'width': field.width,
-				'top': field.position_y,
-				'left': field.position_x
-			});
-		    }
-     
-      })
-  update_field_neighbours(data);
-    }
-  )
-})
+		}
+     	    });
+	update_fields(data);
+      });
+    });
 
 function do_split(e) {
     var data = e.data;

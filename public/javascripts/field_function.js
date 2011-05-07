@@ -3,16 +3,19 @@ $(document).ready(function () {
 		attach_field_handlers($(field)) });
 });
 //Uppdaterar fältens grannar efter vi fått svar från servern efter resize
-function update_field_neighbours(response_data) {
-    //response data är ett json-objekt med field-id som attribut 
-    //och nya neighbour-maps som värden
-    window.console.log(response_data)
-    var neighbours_map = response_data["neighbours_map"];
-    for (var field_id in neighbours_map) {
-	    var field = $(("#field_" + field_id));
-    	var neighbours = neighbours_map[field_id];
-    	field.data('neighbours', neighbours);
-    }
+function update_fields(data) {
+    _.each(data.fields, function(field) {
+	    field = field.field;
+	    window.console.log(field);
+	    var $field = $(("#field_" + field.id));
+	    $field.data('neighbours', field.neighbours);
+	    $field.css({
+		    'height': field.height,
+			'width': field.width,
+			'top': field.position_y,
+			'left': field.position_x
+                        });
+	});
 };
 
 // Nya fields kommer köra denna funktion för att attach:a 
@@ -76,14 +79,3 @@ function field_handle_direction(handle) {
     return direction;
 };
 
-
-function update_fields_(data){
-  _.each(data, function(field){
-    $('#field_' + field.field.id).css({
-      'height': field.field.height,
-      'width': field.field.width,
-      'top': field.field.position_y,
-      'left': field.field.position_x
-    });
-  });
-}
