@@ -213,7 +213,7 @@ function update_info_box(names, created, updated, owner, participants){
     var text = _(participants).chain()
       .pluck('name')
       .reduce(
-        function(memo, name){ memo + '</br>' + name}
+        function(memo, name){ return memo + '</br>' + name}
       );
     toolbox_info_participants.html('Participants:</br>' + text.value());
   }
