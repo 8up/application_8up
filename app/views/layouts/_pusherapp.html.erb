@@ -1,5 +1,6 @@
 <script src="http://js.pusherapp.com/1.8/pusher.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+  window.current_user_name = "<%= current_user().name %>";
   // Enable pusher logging - don't include this in production
   Pusher.log = function(message) {
     if (window.console && window.console.log) window.console.log(message);
@@ -13,13 +14,13 @@
   <% if @board %>
     window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
   
-    channel.bind('created', function(data) {
+    channel.bind('note-created', function(data) {
     create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
   });
-  channel.bind('destroyed', function(data){
+  channel.bind('note-destroyed', function(data){
 		delete_note(data.note.id);
 	});
-	channel.bind('updated', function(data){
+	channel.bind('note-updated', function(data){
 		update_note(data);
 	});
 			

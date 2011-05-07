@@ -60,9 +60,41 @@ class NotesController < ApplicationController
         format.json { render :json =>  @note }
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
-        Pusher["board-#{board.id}"].trigger!('created', {:note => @note, :user => current_user.id} )
+        Pusher["board-#{board.id}"].trigger!('note-created', {:note => @note, :user => current_user.id} )
       else
         format.html { render :action => "new" }
+        format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def avatar
+    @note = Note.find(params[:id])
+    
+    if  params[:avatar_action] == "remove"
+      PlacedAvatar.where({:user_id => current_user.id, 
+                           :note_id => @note.id}).first.destroy    
+    elsif params[:avatar_action] == "add"
+      if PlacedAvatar.where({:user_id => current_user().id, 
+                              :note_id => @note.id}).length == 0
+        avatar_connection = PlacedAvatar.create(:user_id => current_user().id, 
+                                                :note_id => @note.id)
+      end
+    end
+    
+    avatar_filename = current_user().avatar;
+    @note[:avatar] = avatar_filename
+ 
+    
+    
+    respond_to do |format|
+      if @note.update_attributes(params[:note])
+        Pusher["board-#{@note.board.id}"].trigger!('note-updated', @note.to_json({:include => :placed_avatars}) )
+        format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
+        format.json { render :json => @note }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
       end
     end
@@ -75,7 +107,7 @@ class NotesController < ApplicationController
     
     if params.has_key? :avatar_action
       if  params[:avatar_action] == "remove"
-        PlacedAvatar.where({:user_id => current_user.id, :note_id => @note.id}).first.destroy    
+        PlacedAvatar.where({:user_id => current_user.id, :note_id => @note.id}).first.destroy
       elsif params[:avatar_action] == "add"
         if PlacedAvatar.where({:user_id => current_user().id, :note_id => @note.id}).length == 0
           avatar_connection = PlacedAvatar.create(:user_id => current_user().id, :note_id => @note.id)
@@ -83,13 +115,15 @@ class NotesController < ApplicationController
       end
     
       avatar_filename = current_user().avatar;
-      @note[:avatar] = avatar_filename
+      @note[:avatar] = {:avatar_filename => "/images/avatar/" + avatar_filename,
+        :avatar_owner => current_user().name,
+      :avatar_action => params[:avatar_action] }
     end    
     
     
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        Pusher["board-#{@note.board.id}"].trigger!('updated', @note.to_json({:include => :placed_avatars}) )
+        Pusher["board-#{@note.board.id}"].trigger!('note-updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
         format.xml  { head :ok }
@@ -116,7 +150,7 @@ class NotesController < ApplicationController
     if @note.save
       respond_to do |format|
         format.json { render :json => { :status => 'ok'} }
-        Pusher["board-#{@note.board.id}"].trigger!('destroyed', @note)
+        Pusher["board-#{@note.board.id}"].trigger!('note-destroyed', @note)
       end
     end
 
