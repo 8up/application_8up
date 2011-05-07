@@ -1,6 +1,7 @@
 $(document).ready(function() {
   window.channel.bind('split-field', function(data){
-	_.each(data.fields, function(field){
+	  var new_fields = [];
+	  _.each(data.fields, function(field){
 		field = field.field;
 		var $field = $('#field_' + field.id);
 		if($field.length == 0){
@@ -16,10 +17,13 @@ $(document).ready(function() {
 		    $field.attr('id', 'field_' + field.id);
 		    $field.empty();
 		    $('.board_div').append($field);
-		    attach_field_handlers($field);
+		    new_fields.push($field);
 		}
-     	    });
+	      });
 	update_fields(data);
+	for (var i = 0; i < new_fields.length; i++) {
+	    attach_field_handlers(new_fields[i]);    
+	}
       });
     });
 
