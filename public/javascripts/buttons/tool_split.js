@@ -1,41 +1,31 @@
 $(document).ready(function() {
   window.channel.bind('split-field', function(data){
-	_.each(data.fields, function(field){
+	  var new_fields = [];
+	  _.each(data.fields, function(field){
 		field = field.field;
 		var $field = $('#field_' + field.id);
 		if($field.length == 0){
-        if ($('#tmp_field').length == 1) {
-        $field = $('#tmp_field');
-    } 
-    else {  
-		    $field = $('.field').first().clone();
-    } 		    
-      $field.attr('id', 'field_' + field.id);
+		    //Skapa nytt fält, eller döp om det 
+		    //temporära om denna klient är den
+		    //som gjorde splitten
+		    if ($('#tmp_field').length == 1) {
+			$field = $('#tmp_field');
+		    } 
+		    else {  
+			$field = $('.field').first().clone();
+		    } 		    
+		    $field.attr('id', 'field_' + field.id);
 		    $field.empty();
 		    $('.board_div').append($field);
-		    $field.css({
-			    'height': field.height,
-				  'width': field.width,
-				  'top': field.position_y,
-				  'left': field.position_x
-				});
-		    attach_field_handlers($field);
-				
-		}else
-		    {
-			$field.css({
-				'height': field.height,
-				'width': field.width,
-				'top': field.position_y,
-				'left': field.position_x
-			});
-		    }
-     
-      })
-  update_field_neighbours(data);
-    }
-  )
-})
+		    new_fields.push($field);
+		}
+	      });
+	update_fields(data);
+	for (var i = 0; i < new_fields.length; i++) {
+	    attach_field_handlers(new_fields[i]);    
+	}
+      });
+    });
 
 function do_split(e) {
     var data = e.data;

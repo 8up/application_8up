@@ -123,8 +123,6 @@ class BoardsController < ApplicationController
                                    params[:split_position].to_i)
     
     update_success = @field.save and new_field.save
-    
-    
 
     @board.reload
 
@@ -132,10 +130,14 @@ class BoardsController < ApplicationController
     data = {:neighbours_map => updated_fields, 
       :new_field => new_field}
     
+    fields = @board.fields
+    for field in fields
+      field[:neighbours] = updated_fields[field.id]
+    end
+
     pusher_data = {
-      :fields => @board.fields,
+      :fields => fields,
       :notes => new_field.notes,
-      :neighbours_map => updated_fields, 
       :new_field => new_field
     }
 
@@ -172,11 +174,18 @@ class BoardsController < ApplicationController
     @board.resize_field(@field, params)
     updated_fields = @board.get_field_neighbours
 
-    data = {:neighbours_map => updated_fields}
-    
-    Pusher["board-#{@board.id}"].trigger!('resize-field', @board.fields )
+    fields = @board.fields
+    for field in fields
+      field[:neighbours] = updated_fields[field.id]
+    end
+
+    pusher_data = {
+      :fields => fields,
+    }
+
+    Pusher["board-#{@board.id}"].trigger!('resize-field', pusher_data )
     respond_to do |format|
-      format.json { render :json => data }
+      format.json { render :json => { :status => "ok"} }
     end
   end
   

@@ -1,10 +1,6 @@
 $(document).ready(function () {
   var myNicEditor = new nicEditor();
   window.noteEditor = myNicEditor;
-
-
-
-
       $("div.field").live('dblclick', function(e){
         if (e.target != this) {
           return true;
@@ -154,6 +150,17 @@ function update_note(data){
   if(note.parent(parent_id).length == 0){
     note.detach();
     $(parent_id).append(note);
+  }
+  if ("avatar" in data.note) {
+      var avatar_owner = data.note.avatar.avatar_owner;
+      var avatar_filename = data.note.avatar.avatar_filename;
+      var avatar_action = data.note.avatar.avatar_action;
+      if (avatar_action == "add") {
+	  avatar_add(note, avatar_filename, avatar_owner);
+      }
+      else {
+	  avatar_remove(note, avatar_owner);
+      }
   }
 }
 
