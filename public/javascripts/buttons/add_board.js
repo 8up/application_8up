@@ -8,15 +8,11 @@ function add_board() {
   new_board.attr("id","board_new");
 
   var url = "/boards.json";
-  var view_height = $(window).height();
-  var view_width = $(window).width();
   board_content.text('')
   $('#workspace').append(new_board);
   new_board.fadeIn();
 
-  data = {"board[name]": "No title",
-  "options[size]" : { width: view_width, 
-    height: view_height }};
+  data = {"board[name]": "No title"};
     $.ajax({url: url, type: "POST", data: data, success: function(data) {
       var id= "board_" + data.board.id;
       var link_ref = "/boards/" + data.board.id;

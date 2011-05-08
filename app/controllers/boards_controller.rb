@@ -60,11 +60,7 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-    if params.has_key? :options
-      @board = Board.new(params[:board], params[:options])
-    else
       @board = Board.new(params[:board])
-    end
     @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|

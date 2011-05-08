@@ -28,11 +28,7 @@ class Board < ActiveRecord::Base
     end
 
     if fields == []
-      if @options.has_key? :size
-        size = @options[:size]
-      else
-        size = {:width => 1200, :height => 800}
-      end
+      size = {:width => 3000, :height => 3000}
       width = size[:width]
       height = size[:height]
       field = Field.create({:position_x => 0, :position_y => 0, 
