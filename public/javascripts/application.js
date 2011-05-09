@@ -18,7 +18,7 @@ function set_page_context() {
   var array = pathname.split("/");
 
   // Ta bort alla tomma element ur arrayen
-  array = array.filter(function(element) { return element != "";});
+  array = _.filter(array, function(element) { return element != "";});
 
   var lastElement = array.pop();
   //Om sista elementet inte är ett NaN, så är det ett nummer, och 
