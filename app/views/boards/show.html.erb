@@ -12,7 +12,7 @@
       <img class="avatar_image <%if placed_avatar.user.id == current_user().id %><%='my_avatar'%><% end %>" title="<%= placed_avatar.user.name %>" src="/images/avatar/<%= placed_avatar.user.avatar %>" >
       <% end %>
       </div>
-      <div id="note_header_<%= note.id %>" class="note_header"><%= note.header.html_safe %></div>       
+      <p id="note_header_<%= note.id %>" class="note_header"><%= note.header.html_safe %></p>       
     </div>
 
 

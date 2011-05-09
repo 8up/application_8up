@@ -13,7 +13,7 @@ div.note.selected {
 
 }
 
-div.note div.note_header {
+div.note .note_header {
     margin: 0px;
     font-size: 18px;
     font-family:'Indie Flower';
@@ -21,9 +21,18 @@ div.note div.note_header {
     text-align: center;
     overflow: hidden;
     height: 110px;
-    padding-left: 3px
+    width: 137px;
+    padding:0 0 0 3px;
+    background: none;
+    border: none;
+    display: block;
+    resize: none;
+    line-height: 18px;
+    white-space:pre-wrap;
 }
-div.note div.note_header:focus{
+div.note textarea.note_header {
+}
+div.note textarea.note_header:focus{
   outline: 0;
 }
 
