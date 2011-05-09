@@ -18,6 +18,11 @@ $(document).ready(function() {
 		    $field.empty();
 		    $('.board_div').append($field);
 		    new_fields.push($field);
+		    // Flytta de notes som skall till det nya fältet
+		    for (var i=0; i < data.notes.length; i++) {
+			var $note = $("#note_" + data.notes[i].note.id);
+			$note.appendTo($field);
+		    }
 		}
 	      });
 	update_fields(data);
