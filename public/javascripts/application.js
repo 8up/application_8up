@@ -1,6 +1,16 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $(document).ready(function(){
+  $.preLoadImages('/images/postit_yellow.png',
+                  '/images/postit_yellow_select.png',
+                  '/images/postit_green.png',
+                  '/images/postit_green_select.png',
+                  '/images/postit_blue.png',
+                  '/images/postit_blue_select.png',
+                  '/images/postit_red.png',
+                  '/images/postit_red_select.png',
+                  '/images/postit_orange.png',
+                  '/images/postit_orange_select.png');
 });
 
 function set_page_context() {
@@ -72,19 +82,13 @@ set_page_context();
 
 
     }
-    })(jQuery);
-
-    $.fn.selectRange = function(start, end) {
-      return this.each(function() {
-        if (this.setSelectionRange) {
-          this.focus();
-          this.setSelectionRange(start, end);
-        } else if (this.createTextRange) {
-          var range = this.createTextRange();
-          range.collapse(true);
-          range.moveEnd('character', end);
-          range.moveStart('character', start);
-          range.select();
-        }
-      });
-    };
+    var cache = [];
+    $.preLoadImages = function() {
+      var args_len = arguments.length;
+      for (var i = args_len; i--;) {
+        var cacheImage = document.createElement('img');
+        cacheImage.src = arguments[i];
+        cache.push(cacheImage);
+      }
+    }
+})(jQuery);
