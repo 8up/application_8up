@@ -67,6 +67,10 @@ opacity:1;
   overflow: hidden;
 }
 
+.board_container table{
+  cursor: pointer;
+}
+
 .board_container ul.header{
   display: inline;
   list-style: none;

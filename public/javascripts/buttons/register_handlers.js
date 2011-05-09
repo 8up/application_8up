@@ -1,4 +1,8 @@
 $(document).ready(function(){
+  
+  $('.board_container table').live('click', function(event){
+    window.location.href = $(this).find('a').attr('href')
+  })
 	
 	$('#add_avatar').addClass('tool');
 	$('#add_avatar').data('tool_type', 'instant');
