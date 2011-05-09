@@ -12,8 +12,10 @@
 	<link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css'>
 	</head>
-  <body>  
-    <%= render 'layouts/toolbox' %>
+  <body> 
+	  <% if not devise_controller? %> 
+    	<%= render 'layouts/toolbox' %>
+    <% end %>
     <div id="content">    
       <%= yield %>  
     </div>
