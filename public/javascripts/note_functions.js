@@ -19,7 +19,7 @@ $(document).ready(function () {
 		    }
       });
 
-      $(".note").draggable();
+      $(".note").draggable({stack: ".note"});
 
     });
     
@@ -57,9 +57,8 @@ $(document).ready(function () {
           'note' : {'header' : text_area.val()}
         }, 
         success: function(data) {
-
-          header.text(data.note.header);
           text_area.replaceWith(header);
+          header.text(data.note.header);
         }
       });
       $("#toolbox_container").trigger("update");
@@ -106,7 +105,7 @@ function note_change_color(note, color) {
 };
 
 function attach_handlers(note, note_data) {
-  note.draggable();
+  note.draggable({stack: ".note"});
 };
 
 function change_field_note(data){
