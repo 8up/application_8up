@@ -126,3 +126,34 @@ div.note textarea.note_header:focus{
   left:98px;
   pointer-events: none;
 }
+
+div.note.color-green{
+  background-image: url(/images/postit_green.png);
+}
+div.note.color-green.selected{
+  background-image: url(/images/postit_green_select.png);
+}
+div.note.color-yellow{
+  background-image: url(/images/postit_yellow.png);
+}
+div.note.color-yellow.selected{
+  background-image: url(/images/postit_yellow_select.png);
+}
+div.note.color-orange{
+  background-image: url(/images/postit_orange.png);
+}
+div.note.color-orange.selected{
+  background-image: url(/images/postit_orange_select.png);
+}
+div.note.color-blue{
+  background-image: url(/images/postit_blue.png);
+}
+div.note.color-blue.selected{
+  background-image: url(/images/postit_blue_select.png);
+}
+div.note.color-red{
+  background-image: url(/images/postit_red.png);
+}
+div.note.color-red.selected{
+  background-image: url(/images/postit_red_select.png);
+}
