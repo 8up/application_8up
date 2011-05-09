@@ -59,8 +59,7 @@ $(document).ready(function () {
         success: function(data) {
 
           header.text(data.note.header);
-          text_area.detach();
-          parent.append(header);
+          text_area.replaceWith(header);
         }
       });
       $("#toolbox_container").trigger("update");
@@ -126,7 +125,9 @@ function update_note(data){
     'left' : data.note.position_x + 'px',
 	});
   note_change_color(note, data.note.color);
-  note.children('.note_header').html(data.note.header);
+  
+  if(!note.children('.note_header').is('text_area'))
+    note.children('.note_header').html(data.note.header);
   
   var parent_id = '#field_' + data.note.field_id;
   if(note.parent(parent_id).length == 0){

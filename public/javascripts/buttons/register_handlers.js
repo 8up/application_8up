@@ -3,6 +3,9 @@ $(document).ready(function(){
   $('.board_container table').live('click', function(event){
     window.location.href = $(this).find('a').attr('href')
   })
+  $( ".note" ).live('dblclick', function(e){
+    edit_note_header($(this).find('.note_header'));
+  });
 	
 	$('#add_avatar').addClass('tool');
 	$('#add_avatar').data('tool_type', 'instant');
