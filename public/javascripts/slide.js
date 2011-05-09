@@ -7,7 +7,8 @@ $(document).ready(
 	  $('#workspace').width($(window).width() - toolbox_width); 
     
 		$("#toolbox_area_2").click(function(){
-			$("div#toolbox_area_1").toggle();
+			$("div#toolbox_area_1").toggle("slide", 150);
+			
 			if(window.page_context == 'start_page'){
 			  var old_width = $('#workspace').width();
 			  var toolbox_width = $('#toolbox_container').width();
