@@ -13,6 +13,11 @@ div.note.selected {
 
 }
 
+.ghost-note {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 div.note div.note_header {
     margin: 0px;
     font-size: 18px;
