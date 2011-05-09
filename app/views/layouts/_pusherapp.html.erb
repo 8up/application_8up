@@ -13,7 +13,8 @@
   
   <% if @board %>
     window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
-    window.current_user = <%= current_user.id %>
+    window.current_user = <%= current_user.id %>;
+    window.current_board = <%= @board.id %>; 
   <% else %>
   window.channel = pusher.subscribe('<%= "overview" %>');
   

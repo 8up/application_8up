@@ -10,3 +10,4 @@ window.channel.bind('note-updated', function(data){
 window.channel.bind('resize-field', function(data){
   update_fields(data);
 });
+window.channel.bind('merge-field', merge_field_callback);

@@ -1,7 +1,13 @@
+
+
 $(document).ready(function () {
 	$(".field").each(function(index, field) {
 		attach_field_handlers($(field)) });
 });
+
+function get_neighbours(field, direction) {
+    return $(field).data("neighbours")[direction];
+}
 //Uppdaterar fältens grannar efter vi fått svar från servern efter resize
 function update_fields(data) {
     _.each(data.fields, function(field) {

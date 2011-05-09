@@ -81,7 +81,6 @@ function do_split(e) {
 	  });
   
     data['split_element'].tool_deactivate();
-
 };
 
 

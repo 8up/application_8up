@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # == Schema Information
 # Schema version: 20110429131040
 #
@@ -215,7 +216,7 @@ class Board < ActiveRecord::Base
     field_to_enlarge.save
     field_to_delete.destroy
 
-    return field_to_enlarge
+    return { :remaining => field_to_enlarge, :removed => field_to_delete}
   end
 
   ## Ändra storlek på ett fält. Resize params är en hash-map med nycklarna

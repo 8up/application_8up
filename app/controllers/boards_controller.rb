@@ -151,14 +151,26 @@ class BoardsController < ApplicationController
     field_to_enlarge = Field.find(params[:field_to_enlarge])
     field_to_delete = Field.find(params[:field_to_delete])
     
-    remaining_field = @board.merge_fields(field_to_enlarge, field_to_delete)
+    result = 
+      @board.merge_fields(field_to_enlarge, field_to_delete)
+    update_success = result[:remaining].save
+    @board.reload
     updated_fields = @board.get_field_neighbours
-    data = {:neighbours_map => updated_fields}
+    fields = @board.fields
+    for field in fields
+      field[:neighbours] = updated_fields[field.id]
+    end
+
+    pusher_data = {
+      :fields => fields,
+      :result => result
+    }
     
-    
-    #Pusher['notes'].trigger!('merge-field', @board.fields)
-    respond_to do |format|
-      format.json { render :json => data }
+    if update_success
+      Pusher["board-#{@board.id}"].trigger!('merge-field', pusher_data)
+      respond_to do |format|
+        format.json { render :json => pusher_data }
+      end
     end
 
   end
