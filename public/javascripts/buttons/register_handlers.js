@@ -3,12 +3,16 @@ $(document).ready(function(){
   $('.board_container table').live('click', function(event){
     window.location.href = $(this).find('a').attr('href')
   })
+
 	$('#merge_button').addClass('tool');
 	$('#merge_button').data('tool_type', 'activated');
 	$('#merge_button').data('tool_state', 'inactive');	
 	$('#merge_button').bind('activate', activate_merge);
 	$('#merge_button').bind('deactivate', deactivate_merge);
-
+	
+	$( ".note" ).live('dblclick', function(e){
+		edit_note_header($(this).find('.note_header'));
+	    });
 	
 	$('#add_avatar').addClass('tool');
 	$('#add_avatar').data('tool_type', 'instant');
