@@ -13,24 +13,9 @@
   
   <% if @board %>
     window.channel = pusher.subscribe('<%= "board-#{@board.id}" %>');
-  
-    channel.bind('note-created', function(data) {
-    create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
-  });
-  channel.bind('note-destroyed', function(data){
-		delete_note(data.note.id);
-	});
-	channel.bind('note-updated', function(data){
-		update_note(data);
-	});
-			
-			
-			
-      
-      
-	window.current_user = <%= current_user.id %>
-	<% else %>
-      window.channel = pusher.subscribe('<%= "overview" %>');
+    window.current_user = <%= current_user.id %>
+  <% else %>
+  window.channel = pusher.subscribe('<%= "overview" %>');
   
   
   <% end %>
