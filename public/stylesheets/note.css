@@ -34,6 +34,9 @@ div.note .note_header {
     line-height: 15px;
     white-space:pre-wrap;
 }
+div.note p.note_header{
+  cursor:default;
+}
 div.note textarea.note_header {
 }
 div.note textarea.note_header:focus{
