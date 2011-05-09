@@ -83,12 +83,39 @@ function do_split(e) {
 //Remove the split-handler from all fields
 function reset_split() {
     $(".field").unbind("click",do_split);
+    $(".field").unbind("mouse_move", split_helper_mover);
+    $(".split_helper").remove();
 };
 
 //Set the split-handler for all fields
 function set_split(direction, element) {
-    $(".field").bind("click",{direction: direction, split_element: element},do_split);
+    var split_helper = $("<div/>");
+    split_helper.addClass("split_helper");
+    $(".board_div").append(split_helper);
+    
+    $(".field").bind("mousemove", 
+		     {split_helper:split_helper,
+			     direction: direction}, 
+		     split_helper_mover);
+    $(".field").bind("click",{split_helper: split_helper, 
+		direction: direction, 
+		split_element: element},do_split);
 };
+
+function split_helper_mover(event) {
+    var field = $(this);
+    var direction = event.data.direction;
+    if (direction == "horizontal") {
+	event.data.split_helper.width(field.width());
+	event.data.split_helper.offset({left: field.offset().left, top: event.pageY});
+    }
+    else if (direction == "vertical") {
+	event.data.split_helper.height(field.height());
+	event.data.split_helper.offset( { top: field.offset().top, 
+		    left: event.pageX });
+    }
+};
+
 
 function activate_horizontal_split(event) {
     set_split("horizontal", $(this));
