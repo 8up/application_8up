@@ -39,8 +39,9 @@ $(document).ready(function () {
         }else if(e.keyCode == 13 && !e.shiftKey){
           e.stopPropagation();
           e.preventDefault();
-          de_select_element(header.parent());
+          de_select_element(parent);
           parent.trigger('deselect');
+          text_area.blur();
         }
       })
       var note_id = $(text_area).closest("div.note").id8Up();
@@ -49,8 +50,8 @@ $(document).ready(function () {
       text_area.parent().draggable('disable');
       var target_url = "/notes/" + note_id + ".json";
 
-      parent.one('deselect', function(e){
-        text_area.blur();
+      text_area.bind('blur', function(e){
+        //text_area.blur();
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 
@@ -59,6 +60,7 @@ $(document).ready(function () {
         success: function(data) {
           text_area.replaceWith(header);
           header.text(data.note.header);
+          //text_area.unbind('blur'm )
         }
       });
       $("#toolbox_container").trigger("update");
