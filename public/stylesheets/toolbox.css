@@ -1,13 +1,13 @@
 .split_button {
   float:left;
-    width: 40px;
-    height: 40px;
-    margin-left:10px;
+  width: 40px;
+  height: 40px;
+  margin-left:10px;
 }
 #split_horiz {
-	  margin-left:10px;
+    margin-left:10px;
     float:left;
-	  font:13px Segoe UI;
+    font:13px Segoe UI;
     color:#a74d0c;
 }
 #split_horiz:hover {
@@ -18,7 +18,7 @@
     margin-top:8px;
     margin-left:10px;
     float:left;
-	font:13px Segoe UI;
+    font:13px Segoe UI;
     color:#a74d0c;
 }
 #split_vert:hover {
@@ -26,7 +26,6 @@
     cursor:pointer;
 }
 #toolbox_container { 
-    z-index:255;
     float:left; 
     position:fixed; 
     height: 100%; 

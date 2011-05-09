@@ -8,23 +8,21 @@ div.board_container{
     word-wrap: break-word;
     overflow:hidden;
     /*box-shadow: 4px 4px 4px #8e8e8e;*/
-    z-index:0;
 }
 div.board_container table{
   background-repeat:no-repeat;
   background-size:100%;
   background-image:url("/images/whiteboard.png");
-color:black;
-opacity:0.5;
-
+  color:black;
+  opacity:0.5;
 }
 
-div.board_container.selected table{
-opacity:1;
+div.board_container.selected table {
+    opacity: 1;
 }
 
 div.board_container table tbody tr td h1{
-color:black;
-font-family:'Swanky and Moo Moo';
-background:transparent;
+    color:black;
+    font-family:'Swanky and Moo Moo';
+    background:transparent;
 }
