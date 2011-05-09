@@ -6,7 +6,7 @@
   <div id="field_<%= field.id %>" class="field ui-widget-content" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;" data-neighbours="<%= @board.get_neighbours(field.id).to_json%>">
 
     <% field.notes.each do |note|%>
-    <div id="note_<%= note.id %>" class="note ui-widget-content" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px; background-image:url('<%= note.color %>')"; data-board_id="board_<%= @board.id %>">
+    <div id="note_<%= note.id %>" class="note ui-widget-content color-<%= note.color %>" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px;"; data-board_id="board_<%= @board.id %>">
       <div  class="avatar_holder"  >
       <% note.placed_avatars.each do |placed_avatar| %>
       <img class="avatar_image <%if placed_avatar.user.id == current_user().id %><%='my_avatar'%><% end %>" title="<%= placed_avatar.user.name %>" src="/images/avatar/<%= placed_avatar.user.avatar %>" >

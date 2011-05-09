@@ -3,14 +3,9 @@ function add_note_activate(e){
     var ghost = $("<div/>");
     ghost.addClass('ghost-note');
     ghost.addClass("note");
-    ghost.css('z-index', '2000');
-    ghost.css('opacity', '0.5');
-    ghost.css('pointer-events', 'none');
-    ghost.css('background-image', 'url(/images/postit_yellow.png)');
     ghost.offset({top:0,left:0});
     ghost.show();
     $('.board_div').append(ghost);
-    
     $("div.field").click({note: ghost, button: button} ,field_add_note_handler);
     $("div.board_div").bind("mousemove",{note: ghost} ,ghost_note_move);
 }
@@ -18,7 +13,7 @@ function add_note_activate(e){
 function add_note_deactivate(e) {
     $('.ghost-note').remove();
     $("div.field").unbind('click', field_add_note_handler);
-    $("div.board_div").unbind("mousemove",ghost_note_move);
+    $("div.board_div").unbind("mousemove", ghost_note_move);
 }
 
 function ghost_note_move(e) {

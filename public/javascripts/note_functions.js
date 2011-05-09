@@ -70,6 +70,19 @@ $(document).ready(function () {
     });
   };
 
+function note_change_color(note, color) {
+    // -5 i san om du försöker förstå regexpet
+    //	    $(note)[0].className = $(note)[0].className.replace(/color-.*?\s/g, '');
+    // Ovan tar inte bort alla colors, nedan gör det explicit
+    $(note).removeClass('color-yellow');
+    $(note).removeClass('color-blue');
+    $(note).removeClass('color-green');
+    $(note).removeClass('color-red');
+    $(note).removeClass('color-orange');
+    
+    $(note).addClass("color-" + color);
+}
+
   function create_note(e) {
     var field = $(e.target);
     var field_id = $(e.target).attr('id').split('_').pop();
@@ -85,7 +98,7 @@ $(document).ready(function () {
       'note[position_x]': posX,
       'note[position_y]': posY,
       'note[field_id]': field_id,
-      'note[color]': '/images/postit_yellow.png'
+      'note[color]': 'yellow'
     }, 
     success: function(data, textStatus, jqXHR) {
       create_note_at_dom(data, $(e.target), true);
@@ -111,8 +124,8 @@ function update_note(data){
   note.css({
     'top' :  data.note.position_y + 'px', 
     'left' : data.note.position_x + 'px',
-    //'background-image': 'url(' + data.note.color + ')'
-  });
+	});
+  note_change_color(note, data.note.color);
   note.children('.note_header').html(data.note.header);
   
   var parent_id = '#field_' + data.note.field_id;
@@ -147,9 +160,10 @@ function create_note_at_dom(data, field, select){
   note.css({
     'position': 'absolute', 
     'top' :  data.note.position_y + 'px', 
-    'left' : data.note.position_x + 'px',
-    'background-image': 'url(' + data.note.color + ')' 
+    'left' : data.note.position_x + 'px'
   });
+
+  note.addClass("color-" + data.note.color);
   var avatar= $('<div></div>');
   avatar.addClass('avatar_holder');
   note.append(avatar);

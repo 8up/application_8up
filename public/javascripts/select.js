@@ -2,23 +2,23 @@ function de_select_all(e, caller){
   if(e.target != caller){
 		return true;
 	};
-	//Skapar eller tar bort klassen selected från objektet.
-
+  /*
   if($(".selected").hasClass("note")){
     $(".selected").each(function(index,element){
-    var color = $(element).css("background-image").split("_select");
-    $(element).css("background-image", color[0] + color[1]);
-  })
-    }
-	$(".selected").removeClass("selected").trigger('deselect');
-	$("#toolbox_container").trigger("update");
+	    var color = $(element).css("background-image").split("_select");
+	    $(element).css("background-image", color[0] + color[1]);
+	})
+	} */
+  $(".selected").removeClass("selected").trigger('deselect');
+  $("#toolbox_container").trigger("update");
 };
 function de_select_element(element){
+    /*
     var color = $(element).css("background-image").split("_select");
     $(element).css("background-image", color[0] + color[1]);
-  
-  $(element).removeClass("selected").trigger('deselect');
-  $("#toolbox_container").trigger("update");
+    */
+    $(element).removeClass("selected").trigger('deselect');
+    $("#toolbox_container").trigger("update");
 }
 
 function select(e, caller) {
@@ -26,14 +26,14 @@ function select(e, caller) {
 		return true;
     };*/
 	//Skapar eller tar bort klassen selected från objektet.
-  if($(caller).css("background-image").split("_select")[1] == undefined) {    
+    /*if($(caller).css("background-image").split("_select")[1] == undefined) {    
     var bg_image = $(caller).css("background-image");
     var color = bg_image.substring(0, bg_image.length-5);
     $(caller).css("background-image", color + "_select.png)");    
-  } 
+    } */
   
-	$(caller).addClass("selected").trigger('select');
-	$("#toolbox_container").trigger("update");
+    $(caller).addClass("selected").trigger('select');
+    $("#toolbox_container").trigger("update");
   
   
 };

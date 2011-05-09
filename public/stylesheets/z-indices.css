@@ -1,39 +1,10 @@
-div.board_container{
-    z-index:0;
-}
-
-.resizable8up-handle {
-    z-index: 5;
-}
-
-.resizable8up-helper { 
-    z-index: 100;
-}
-
-.split_helper {
-    z-index: 700;
-}
-
-div.note {
-    z-index:125;
-}
-.background{
-    z-index: 125;
-}
-
-#window_wrapper
-{
-  z-index: 126;
-}
-
-#menu_bar {
-  z-index: 125;
-}
-
-#board_title {
-    z-index: 500;
-}
-
-#toolbox_container { 
-    z-index:255;
-}
+div.board_container{ z-index:0; }
+.resizable8up-handle { z-index: 5; }
+.resizable8up-helper { z-index: 100; }
+.split_helper { z-index: 700; }
+div.note { z-index:125; }
+.background{ z-index: 125; }
+#window_wrapper { z-index: 126; }
+#menu_bar { z-index: 125; }
+#board_title { z-index: 500; }
+#toolbox_container { z-index:255; }
