@@ -61,6 +61,9 @@ function save_toolbar_state() {
     
     try {
 	var toolbox_state = JSON.parse(localStorage.getItem("hjortron_toolbar_state"));
+	if (toolbox_state == null) {
+	    toolbox_state = {};
+	}
 	toolbox_state[user] = state; 
 	 //saves to the database, "key", "value"
 	localStorage.setItem("hjortron_toolbar_state", 
@@ -73,7 +76,6 @@ function save_toolbar_state() {
     }
 }
 
-
 function get_toolbar_state() {
     var user = window.current_user;
     if (typeof(localStorage) == 'undefined' ) {
@@ -82,6 +84,8 @@ function get_toolbar_state() {
     }
     var toolbox_text_state = localStorage.getItem("hjortron_toolbar_state");
     var toolbox_state = JSON.parse(toolbox_text_state); 
+    if (toolbox_state == null) 
+	return null;
     if (user in toolbox_state)
 	return toolbox_state[user];
     else 
