@@ -23,7 +23,17 @@ function update_fields(data) {
                         });
 	});
 };
-
+function update_single_field(data) {
+    window.console.log(data);
+    var field_id = data.field.id;
+    var field = $("#field_" + field_id);
+    var field_header = field.children("h1");
+    if (field_header.length == 0) {
+	field_header = $('<h1 class="field_name"></h1>');
+	field.append(field_header);
+    }
+    field_header.text(data.field.name);
+}
 // Nya fields kommer köra denna funktion för att attach:a 
 //hanterare till events, lägg till dem här
 function attach_field_handlers(field) {

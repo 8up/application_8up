@@ -12,6 +12,22 @@ div.field.highlight {
   background-color: #C2C2C2;
 }
 
+.field_name {
+    font-size: 36px;
+    font-weight: bold;
+    pointer-events: none;
+    position: absolute;
+    color: #AAA;
+    left: 45%;
+    top: 10%;
+    background-color: transparent;
+}
+
+textarea.field_name {
+    right: 10%;
+    left: 10%;
+} 
+
 .mergable {
     -moz-box-shadow: inset 0 0 18px ##3366cc;
     -webkit-box-shadow: inset 0 0 18px #3366cc;
