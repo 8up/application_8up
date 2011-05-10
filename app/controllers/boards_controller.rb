@@ -58,7 +58,7 @@ class BoardsController < ApplicationController
   # POST /boards
   # POST /boards.xml
   def create
-      @board = Board.new(params[:board])
+    @board = Board.new(params[:board])
     @board.set_permission(current_user,BoardsPermission::OWNER)    
 
     respond_to do |format|
@@ -136,7 +136,7 @@ class BoardsController < ApplicationController
     }
 
     if update_success
-      publish_to_faye("/board/#{@board.id}", pusher_data, "split-field")
+      publish_to_faye("/board/#{@board.id}", pusher_data, "field-split")
       #Pusher["board-#{@board.id}"].trigger!('split-field', pusher_data)
       
       respond_to do |format|
@@ -166,7 +166,7 @@ class BoardsController < ApplicationController
     }
     
     if update_success
-      publish_to_faye("/board/#{@board.id}", pusher_data, "merge-field")
+      publish_to_faye("/board/#{@board.id}", pusher_data, "field-merge")
       #Pusher["board-#{@board.id}"].trigger!('merge-field', pusher_data)
       respond_to do |format|
         format.json { render :json => pusher_data }
@@ -190,7 +190,7 @@ class BoardsController < ApplicationController
     pusher_data = {
       :fields => fields,
     }
-    publish_to_faye("/board/#{@board.id}", pusher_data, "resize-field")
+    publish_to_faye("/board/#{@board.id}", pusher_data, "field-resize")
     #Pusher["board-#{@board.id}"].trigger!('resize-field', pusher_data )
     respond_to do |format|
       format.json { render :json => { :status => "ok"} }
