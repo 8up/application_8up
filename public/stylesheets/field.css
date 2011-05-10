@@ -31,13 +31,18 @@ div.field_name {
     font-weight: bold;
     color: #AAA;
     width: 20%;
-    height: 40px;
+    height: 73px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     text-align: center;
     background-color: transparent;
     padding-top: 13px;
+    resize: none;
+    overflow: hidden;
+}
+textarea.field_name{
+  padding: 13px 0 0 0;
 }
 div.field_name.activated {
     background-color: #C2C2E2;
