@@ -19,8 +19,6 @@ class BoardsController < ApplicationController
       format.xml  { render :xml => @boards }
     end
   end
-
-  
   
   # GET /boards/1
   # GET /boards/1.xml
@@ -138,7 +136,8 @@ class BoardsController < ApplicationController
     }
 
     if update_success
-      Pusher["board-#{@board.id}"].trigger!('split-field', pusher_data)
+      publish_to_faye("/board/#{@board.id}", pusher_data, "split-field")
+      #Pusher["board-#{@board.id}"].trigger!('split-field', pusher_data)
       
       respond_to do |format|
         format.json { render :json => data}
@@ -167,7 +166,8 @@ class BoardsController < ApplicationController
     }
     
     if update_success
-      Pusher["board-#{@board.id}"].trigger!('merge-field', pusher_data)
+      publish_to_faye("/board/#{@board.id}", pusher_data, "merge-field")
+      #Pusher["board-#{@board.id}"].trigger!('merge-field', pusher_data)
       respond_to do |format|
         format.json { render :json => pusher_data }
       end
@@ -190,8 +190,8 @@ class BoardsController < ApplicationController
     pusher_data = {
       :fields => fields,
     }
-
-    Pusher["board-#{@board.id}"].trigger!('resize-field', pusher_data )
+    publish_to_faye("/board/#{@board.id}", pusher_data, "resize-field")
+    #Pusher["board-#{@board.id}"].trigger!('resize-field', pusher_data )
     respond_to do |format|
       format.json { render :json => { :status => "ok"} }
     end

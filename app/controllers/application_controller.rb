@@ -16,5 +16,13 @@ class ApplicationController < ActionController::Base
     current_user.update_attribute(:last_request_at, Time.now) if
     user_signed_in?
   end
+
+  def publish_to_faye(channel, data, action)
+    faye_port = 9292
+    faye_url = "http://localhost:#{faye_port}/faye"
+    message = {:channel => channel, :data => {:action => action, :data => data} }
+    uri = URI.parse(faye_url)  
+    Net::HTTP.post_form(uri, :message => message.to_json) 
+  end
    
 end
