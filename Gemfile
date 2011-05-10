@@ -10,6 +10,8 @@ gem 'jquery-rails', '>= 0.2.6'
 gem 'devise', '1.3.3'
 gem "cancan"
 gem "pusher"
+gem 'faye'
+gem 'thin'
 
 # Use unicorn as the web server
 # gem 'unicorn'

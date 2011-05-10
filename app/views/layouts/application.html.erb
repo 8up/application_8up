@@ -3,7 +3,8 @@
   <head>
     <title>Application8up</title>
     <%= stylesheet_link_tag :all %>
-    <%= render 'layouts/pusherapp' %>
+    <%= if false then render 'layouts/pusherapp' end %>
+    <%= render 'layouts/faye' %>
     <%= render 'layouts/javascripts'%>
     <%= csrf_meta_tag %>
     
@@ -13,7 +14,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Swanky+and+Moo+Moo' rel='stylesheet' type='text/css'>
 	</head>
   <body> 
-	  <% if not devise_controller? %> 
+     <% if not devise_controller? %> 
     	<%= render 'layouts/toolbox' %>
     <% end %>
     <div id="content">    

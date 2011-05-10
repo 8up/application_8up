@@ -120,7 +120,7 @@ function change_field_note(data){
 }
 
 function update_note(data){
-  var note = $('#note_' + data.note.id);
+    var note = $('#note_' + data.note.id);
   note.css({
     'top' :  data.note.position_y + 'px', 
     'left' : data.note.position_x + 'px',

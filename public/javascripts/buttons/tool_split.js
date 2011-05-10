@@ -1,4 +1,4 @@
-window.channel.bind('split-field', function(data){
+function split_field_callback(data){
 	var new_fields = [];
 	_.each(data.fields, function(field){
 		field = field.field;
@@ -31,7 +31,7 @@ window.channel.bind('split-field', function(data){
 	for (var i = 0; i < new_fields.length; i++) {
 	    attach_field_handlers(new_fields[i]);    
 	}
-    });
+};
 
 function do_split(e) {
     var data = e.data;

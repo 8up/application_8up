@@ -3,7 +3,6 @@ Pusher.app_id = '5364'
 Pusher.key = '83cad248adce476e852e'
 Pusher.secret = '1dea4f02257881216844'
 
-
 class NotesController < ApplicationController
   # GET /notes
   # GET /notes.xml
@@ -60,7 +59,8 @@ class NotesController < ApplicationController
         format.json { render :json =>  @note }
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
-        Pusher["board-#{board.id}"].trigger!('note-created', {:note => @note, :user => current_user.id} )
+        publish_to_faye("/board/#{@board.id}", {:note => @note, :user => current_user.id}, "note-created")
+        #Pusher["board-#{board.id}"].trigger!('note-created', {:note => @note, :user => current_user.id} )
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @note.errors, :status => :unprocessable_entity }
@@ -88,11 +88,14 @@ class NotesController < ApplicationController
         :avatar_owner => current_user().name,
       :avatar_action => params[:avatar_action] }
     end    
+   
+    @board = @note.field.board
     
-    
+    publish_to_faye("/board/#{@board.id}",@note, "note-update")
+
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        Pusher["board-#{@note.board.id}"].trigger!('note-updated', @note.to_json({:include => :placed_avatars}) )
+        #Pusher["board-#{@note.board.id}"].trigger!('note-updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
         format.xml  { head :ok }
@@ -119,7 +122,8 @@ class NotesController < ApplicationController
     if @note.save
       respond_to do |format|
         format.json { render :json => { :status => 'ok'} }
-        Pusher["board-#{@note.board.id}"].trigger!('note-destroyed', @note)
+        publish_to_faye("/board/#{@board.id}", @note, "note-destroyed")
+        #Pusher["board-#{@note.board.id}"].trigger!('note-destroyed', @note)
       end
     end
 
