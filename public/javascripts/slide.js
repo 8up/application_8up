@@ -82,6 +82,8 @@ function get_toolbar_state() {
     }
     var toolbox_text_state = localStorage.getItem("hjortron_toolbar_state");
     var toolbox_state = JSON.parse(toolbox_text_state); 
-    
-    return toolbox_state[user];
+    if (user in toolbox_state)
+	return toolbox_state[user];
+    else 
+	return null;
 }
