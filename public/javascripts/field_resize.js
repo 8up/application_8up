@@ -2,11 +2,6 @@ $(document).ready(function() {
     $(".resizable8up-handle").live('mousedown',field_resize_handle);
     });
 
-window.channel.bind('resize-field', function(data){
-	update_fields(data);
-    });
-
-
 function field_resize_handle(event) {
     if (event.target != this) {
 	return true;
