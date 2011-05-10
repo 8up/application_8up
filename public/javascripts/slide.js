@@ -79,8 +79,9 @@ function get_toolbar_state() {
     if (typeof(localStorage) == 'undefined' ) {
 	alert('Your browser does not support HTML5 localStorage. Try upgrading.');
 	return;
-    } 
-    var toolbox_state = JSON.parse(localStorage.getItem("hjortron_toolbar_state")); 
+    }
+    var toolbox_text_state = localStorage.getItem("hjortron_toolbar_state");
+    var toolbox_state = JSON.parse(toolbox_text_state); 
     
     return toolbox_state[user];
 }
