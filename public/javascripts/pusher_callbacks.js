@@ -31,7 +31,7 @@ window.channel.bind('merge-field', merge_field_callback);*/
     };
     
     //var client = new Faye.Client('http://localhost:9292/faye');
-    window.channel.subscribe('/board/' +  window.current_board, function(message){
+    window.faye.subscribe('/board/' +  window.current_board, function(message){
       onAction(message.action, message.data);
     });  
   };
