@@ -1,5 +1,5 @@
 div.board_container{ z-index:0; }
-.resizable8up-handle { z-index: 5; }
+.resizable8up-handle { z-index: 0; }
 .resizable8up-helper { z-index: 100; }
 .split_helper { z-index: 700; }
 div.note { z-index:125; }

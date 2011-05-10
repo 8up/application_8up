@@ -1,0 +1,14 @@
+.note.color-green { background-image: url('/images/postit_green.png');}
+.note.color-green.selected {background-image: url('/images/postit_green_select.png');}
+
+.note.color-blue {background-image: url('/images/postit_blue.png');}
+.note.color-blue.selected {background-image: url('/images/postit_blue_select.png');}
+
+.note.color-yellow {background-image: url('/images/postit_yellow.png');}
+.note.color-yellow.selected {background-image: url('/images/postit_yellow_select.png');}
+
+.note.color-red {background-image: url('/images/postit_red.png');}
+.note.color-red.selected {background-image: url('/images/postit_red_select.png');}
+
+.note.color-orange {background-image: url('/images/postit_orange.png');}
+.note.color-orange.selected {background-image: url('/images/postit_orange_select.png');}

@@ -1,6 +1,6 @@
 div.note {
-    width: 140px; 
-    height: 130px;
+    width: 97px; 
+    height: 80px;
     padding: 10px;
     padding-top: 10px;
     background-image: url("/images/postit_yellow_select.png");
@@ -18,17 +18,28 @@ div.note.selected {
     pointer-events: none;
 }
 
-div.note div.note_header {
+div.note .note_header {
     margin: 0px;
-    font-size: 18px;
+    font-size: 15px;
     font-family:'Indie Flower';
-    font-weight: bold;
-    text-align: center;
+    text-align: left;
     overflow: hidden;
-    height: 110px;
-    padding-left: 3px
+    height: 80px;
+    width: 94px;
+    padding:0 0 0 3px;
+    background: none;
+    border: none;
+    display: block;
+    resize: none;
+    line-height: 15px;
+    white-space:pre-wrap;
 }
-div.note div.note_header:focus{
+div.note p.note_header{
+  cursor:default;
+}
+div.note textarea.note_header {
+}
+div.note textarea.note_header:focus{
   outline: 0;
 }
 
@@ -111,7 +122,7 @@ div.note div.note_header:focus{
 
 .avatar_holder {
   position: absolute;
-  top: -40px;
-  right:135px;
+  top: -16px;
+  left:98px;
   pointer-events: none;
 }

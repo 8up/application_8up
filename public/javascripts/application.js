@@ -51,7 +51,7 @@ set_page_context();
 
       var handler_s = $('<div></div>');
       handler_s.addClass("resizable8up-handle");
-      //handler_s.handle_mouseenter();
+
       handler_s.live("onmousedown", function(event) {
         event.preventDefault();
         return false;

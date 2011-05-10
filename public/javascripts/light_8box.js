@@ -102,9 +102,8 @@
       }
     });
 
-    f = {};
-    $("#note_body").dblclick(init_event);
   });
+    $("#note_body").dblclick(init_event);
   
   
   window.note_box = note_box;

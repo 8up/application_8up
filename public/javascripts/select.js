@@ -58,10 +58,7 @@ $(document).ready(
 		  select(e, this);
 		});
 		
-		$( ".note" ).live('dblclick', function(e){
-      //if(e.target === this)
-      note_box(e);
-    });
+		
 		
 		//När används den här funktionen?
 		$("#workspace").click(function(e){

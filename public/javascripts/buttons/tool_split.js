@@ -1,7 +1,6 @@
-$(document).ready(function() {
-  window.channel.bind('split-field', function(data){
-	  var new_fields = [];
-	  _.each(data.fields, function(field){
+window.channel.bind('split-field', function(data){
+	var new_fields = [];
+	_.each(data.fields, function(field){
 		field = field.field;
 		var $field = $('#field_' + field.id);
 		if($field.length == 0){
@@ -18,18 +17,20 @@ $(document).ready(function() {
 		    $field.empty();
 		    $('.board_div').append($field);
 		    new_fields.push($field);
+		    
 		    // Flytta de notes som skall till det nya fältet
 		    for (var i=0; i < data.notes.length; i++) {
 			var $note = $("#note_" + data.notes[i].note.id);
+			var offset = $note.offset();
 			$note.appendTo($field);
+			$note.offset(offset);
 		    }
 		}
-	      });
+	    });
 	update_fields(data);
 	for (var i = 0; i < new_fields.length; i++) {
 	    attach_field_handlers(new_fields[i]);    
 	}
-      });
     });
 
 function do_split(e) {
@@ -81,7 +82,6 @@ function do_split(e) {
 	  });
   
     data['split_element'].tool_deactivate();
-
 };
 
 

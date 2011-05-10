@@ -11,70 +11,62 @@ $(document).ready(function () {
       //klick på en lapps header gör att man kan redigera den
       $(".toolbox_button_edit").live('click',function(e) {
 	
-		if($(".selected").length == 1){
-			edit_note_header($(".selected").children(".note_header"));
-			//Bara en note som är markerad, edit är möjlig
-		}else{
-			//edit är inte möjlig
-		}
+		    if($(".selected").length == 1){
+			    edit_note_header($(".selected").children(".note_header"));
+			    //Bara en note som är markerad, edit är möjlig
+		    }else{
+			    //edit är inte möjlig
+		    }
       });
 
-      $(".note").draggable();
+      $(".note").draggable({stack: ".note"});
 
     });
     
     function edit_note_header(header) {
-      var header = $(header);
       
-      header.keydown(function(e){
+      var header = $(header);
+      var text_area = $("<textarea id='' class='note_header'></textarea>");
+      text_area.text(header.text());
+      text_area.attr("id", header.attr('id'));
+      var parent = header.parent();
+      
+      header.replaceWith(text_area);
+      
+      text_area.keydown(function(e){
         if(e.keyCode == 46){
           e.stopPropagation();
         }else if(e.keyCode == 13 && !e.shiftKey){
           e.stopPropagation();
           e.preventDefault();
-          de_select_element(header.parent());
-          header.parent().trigger('deselect');
+          de_select_element(parent);
+          parent.trigger('deselect');
+          text_area.blur();
         }
       })
+      var note_id = $(text_area).closest("div.note").id8Up();
 
-      var editor = nicEditors.findEditor($(header).attr('id'));
-      
-      if( editor == null){
-        noteEditor.addInstance($(header).attr('id'));
-        editor = nicEditors.findEditor($(header).attr('id'));
-      }
-      var note_id = $(header).closest("div.note").id8Up();
-
-      header.focus();
-      header.parent().draggable('disable');
+      text_area.focus();
+      text_area.parent().draggable('disable');
       var target_url = "/notes/" + note_id + ".json";
 
-      header.parent().one('deselect', function(e){
-        var raw_content = editor.getContent();
-        var content = $('<div></div>').append(raw_content);
-        
-       /* if(content.text().length == 0){
-          content.text('Empty header')
-        }*/
-        
+      text_area.bind('blur', function(e){
+        //text_area.blur();
         $.ajax({url: target_url, 
           type: "PUT", 
           data: {'id': note_id, 
-          'note' : {'header' : content.html()}
+          'note' : {'header' : text_area.val()}
         }, 
         success: function(data) {
-
-          var header_text = data.note.header;
-          //header.html(header_text);
-          editor.setContent(header_text);
-          //header.parent().dblclick(function(e) {
-        //    edit_note_header(e.target);
-          //});
+          text_area.replaceWith(header);
+          header.text(data.note.header);
+          //text_area.unbind('blur'm )
         }
       });
       $("#toolbox_container").trigger("update");
-      header.parent().draggable('enable');
-      header.blur();
+      
+      parent.draggable('enable');
+      //header.blur();
     });
   };
 
@@ -115,7 +107,7 @@ function note_change_color(note, color) {
 };
 
 function attach_handlers(note, note_data) {
-  note.draggable();
+  note.draggable({stack: ".note"});
 };
 
 function change_field_note(data){
@@ -134,7 +126,9 @@ function update_note(data){
     'left' : data.note.position_x + 'px',
 	});
   note_change_color(note, data.note.color);
-  note.children('.note_header').html(data.note.header);
+  
+  if(!note.children('.note_header').is('text_area'))
+    note.children('.note_header').html(data.note.header);
   
   var parent_id = '#field_' + data.note.field_id;
   if(note.parent(parent_id).length == 0){

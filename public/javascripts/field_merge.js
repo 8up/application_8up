@@ -1,263 +1,136 @@
-$(document).ready(function()
-{
-  $(".resizable8up-handle").each(function()
-  {
-    add_merge_div($(this));
-  });
-}); 
-
-function add_merge_div(resizable8up_h)
-{
-    var resizable8up_handle = $(resizable8up_h);
-    $(resizable8up_handle).children(".hover").remove();
-    var hover_div = $('<div></div>');
-    hover_div.addClass("hover");
-    hover_div.height(25);
-    hover_div.width(25);
-    hover_div.css('z-index','270');
-    hover_div.css('position','absolute');
-    hover_div.css('background-color','black');
-    
-    var field_1 = resizable8up_handle.parent();
-    var field_1_neighbours = field_1.data("neighbours");
-    var field_1_neighbours_n = field_1_neighbours["north"];
-    var field_1_neighbours_s = field_1_neighbours["south"];
-    var field_1_neighbours_w = field_1_neighbours["west"];
-    var field_1_neighbours_e = field_1_neighbours["east"];
-    var field_2;
-    var merge_direction;
-    
-    if(resizable8up_handle.hasClass("resizable8up-n"))
-    {
-      var n_offset_top = 0;
-      var n_offset_left = resizable8up_handle.width()/2 - hover_div.width()/2;
-      hover_div.offset({top: n_offset_top});
-      hover_div.offset({left: n_offset_left});
-      if(field_1_neighbours_n.length == 1)
-        {
-        field_2 = $(("#field_" + field_1_neighbours_n[0]));
-        if(field_2.data("neighbours")["south"].length == 1) 
-          {
-          resizable8up_handle.prepend(hover_div);
-          }
-        }
-    }
-    else if(resizable8up_handle.hasClass("resizable8up-s"))
-    {
-      var s_offset_top = resizable8up_handle.height() - hover_div.height();
-      var s_offset_left = resizable8up_handle.width()/2 - hover_div.width()/2;
-      hover_div.offset({top: s_offset_top}); 
-      hover_div.offset({left: s_offset_left});
-      if(field_1_neighbours_s.length == 1)
-        {
-        field_2 = $(("#field_" + field_1_neighbours_s[0]));
-        if(field_2.data("neighbours")["north"].length == 1) 
-          {
-          resizable8up_handle.prepend(hover_div);
-          }
-        }
-    }
-    else if(resizable8up_handle.hasClass("resizable8up-w"))
-    { 
-      var w_offset_top = resizable8up_handle.height()/2 - hover_div.height()/2;
-      var w_offset_left = 0;
-      hover_div.offset({top: w_offset_top});
-      hover_div.offset({left: w_offset_left});
-      if(field_1_neighbours_w.length == 1)
-        {
-        field_2 = $(("#field_" + field_1_neighbours_w[0]));
-        if(field_2.data("neighbours")["east"].length == 1) 
-          {
-          resizable8up_handle.prepend(hover_div);
-          }
-        }
-    }
-    else if(resizable8up_handle.hasClass("resizable8up-e"))
-    {
-      var e_offset_top = resizable8up_handle.height()/2 - hover_div.height()/2;
-      var e_offset_left = resizable8up_handle.width() - hover_div.width();
-      hover_div.offset({top: e_offset_top});
-      hover_div.offset({left: e_offset_left});
-      if(field_1_neighbours_e.length == 1)
-        {
-        field_2 = $(("#field_" + field_1_neighbours_e[0]));
-        if(field_2.data("neighbours")["west"].length == 1) 
-          {
-          resizable8up_handle.prepend(hover_div);
-          }
-        }      
-    }
-
-    hover_div.click(click_merge);
+function activate_merge(event) {
+    var possible_merges = get_mergable_handles();
+    possible_merges.click(merge_fields);
+    possible_merges.addClass("mergable");
+    possible_merges.bind("mousedown", stop_resize)
 }
 
-
-function click_merge(e)
-{
-  var resizable8up_handle = $(e.target).parent();
-  var field_1 = resizable8up_handle.parent();
-  var field_1_neighbours = field_1.data("neighbours");
-  var field_1_neighbours_n = field_1_neighbours["north"];
-  var field_1_neighbours_s = field_1_neighbours["south"];
-  var field_1_neighbours_w = field_1_neighbours["west"];
-  var field_1_neighbours_e = field_1_neighbours["east"];
-  var field_2;
-  var merge_direction;
-
-  if (resizable8up_handle.hasClass("resizable8up-n") || resizable8up_handle.hasClass("resizable8up-s")) 
-  {      
-    if(resizable8up_handle.hasClass("resizable8up-n"))
-    {
-      if(field_1_neighbours_n.length == 1)
-      {
-        field_2 = $(("#field_" + field_1_neighbours_n[0]));
-        if(field_2.data("neighbours")["south"].length != 1)
-        {
-          alert("Kan inte merga dessa fält");
-        }
-        merge_direction = "north";
-      }
-      else if(field_1_neighbours_n.length != 1) 
-      {
-        alert("Kan inte merga dessa fält!");
-      }
-    }
-    else 
-    {
-      if(field_1_neighbours_s.length == 1) 
-      {
-        field_2 = $(("#field_" + field_1_neighbours_s[0]));
-        if(field_2.data("neighbours")["north"].length != 1)
-        {
-          alert("Kan inte merga dessa fält");
-        }
-        merge_direction = "south";
-      }
-      else if(field_1_neighbours_s.length != 1) 
-      {
-        alert("Kan inte merga dessa fält!");
-      }
-    }
-  }
-  else if (resizable8up_handle.hasClass("resizable8up-w") || resizable8up_handle.hasClass("resizable8up-e")) 
-  {      
-    if(resizable8up_handle.hasClass("resizable8up-w")) 
-    {
-      if(field_1_neighbours_w.length == 1)
-      {
-        field_2 = $(("#field_" + field_1_neighbours_w[0]));
-        if(field_2.data("neighbours")["east"].length != 1)
-        {
-          alert("Kan inte merga dessa fält");
-        }
-        merge_direction = "west";
-      }
-      else if(field_1_neighbours_w.length != 1) 
-      {
-        alert("Kan inte merga dessa fält!");
-      }
-    }
-    else 
-    {
-      if(field_1_neighbours_e.length == 1) 
-      {
-        field_2 = $(("#field_" + field_1_neighbours_e[0]));
-        if(field_2.data("neighbours")["west"].length != 1)
-        {
-          alert("Kan inte merga dessa fält");
-        }
-        merge_direction = "east";
-      }
-      else if(field_1_neighbours_e.length != 1) 
-      {
-        alert("Kan inte merga dessa fält!");
-      }
-    }  
-  }
-  field_merge(field_1, field_2, merge_direction);
+function stop_resize() {
+    return false;
 }
 
-function field_merge(field_1, field_2, merge_direction)
-{
-  var board_id =field_1.closest(".board_div").id8Up(); 
-  var field_id = field_1.id8Up();
-  var new_height = field_1.height() + field_2.height();
-  var new_width = field_1.width() + field_2.width();
+function deactivate_merge(event) {
+    $(".mergable").unbind("click", merge_fields);
+    $(".mergable").unbind("mousedown", stop_resize);
+    $(".mergable").removeClass("mergable");
+}
+
+// Returnerar alla handtag som skulle vara merge-bara
+function get_mergable_handles() {
+    var mergables = $(".resizable8up-handle").filter(function(handle) {
+	    var handle = $(this);
+	    var field = $(handle).parent();
+	    var direction = field_handle_direction(handle);
+	    var neighbours = field.data("neighbours")[direction];
+	    //Om vi inte har en granne kan vi inte merge:a detta fält
+	    if (neighbours.length != 1) {
+		return false;
+	    }
+	    var neighbour_field = $("#field_" + neighbours[0]);
+	    var reverse_direction = null;
+	    
+	    if (direction == "north") reverse_direction = "south";
+	    else if (direction == "south") reverse_direction = "north";
+	    else if (direction == "west") reverse_direction = "east";
+	    else if (direction == "east") reverse_direction = "west";
+	    
+	    if (neighbour_field.data("neighbours")[reverse_direction].length == 1) {
+		return true;
+	    }
+	    
+	    return false;
+	});
+    return mergables;
+}
+
+function merge_fields(event) {
+    var handle = $(event.target);
+    var field = $(handle).parent();
+    var direction = field_handle_direction(handle);
+    var neighbours = field.data("neighbours")[direction];
+    //Om vi inte har precis en granne kan vi inte merge:a detta fält
+    if (neighbours.length != 1) {
+	return false;
+    }
+    var neighbour_field = $("#field_" + neighbours[0]);
+    var reverse_direction = null;
+	    
+    if (direction == "north") reverse_direction = "south";
+    else if (direction == "south") reverse_direction = "north";
+    else if (direction == "west") reverse_direction = "east";
+    else if (direction == "east") reverse_direction = "west";
+	    
+    if (neighbour_field.data("neighbours")[reverse_direction].length != 1) {
+	return true;//fortsätt inte om inte båda fält som skall slås samman har precis en granne
+	// borde kolla att de är varandras grannar
+    }
     
-  if (merge_direction == "north")
-  {
-    field_1.children(".note").each(function(index, element) 
-    {
-      var field_2_height = field_2.height();
-      var note_position_top = $(element).position().top;
-      var update = field_2_height + note_position_top;
-      var element_offset = $(element).offset();
-      element_offset.top = update;
-      field_2.append(element);
-      $(element).offset(element_offset);  
-    });
-    field_2.height(new_height);
-    field_1.remove();
-    $.ajax({url: "/boards/" + board_id  + 
-		"/merge_fields/" +  field_id , type:"POST", 
-		data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "vertical"} , success: update_fields})
+    //För enkelhetens skulle tar vi alltid bort det lägsta/högra fältet
+    var to_keep, to_remove;
+    if (direction == "south" || direction == "north") {
+	if (field.offset().top > neighbour_field.offset().top) {
+	    to_keep = neighbour_field;
+	    to_remove = field;
+	} 
+	else {
+	    to_keep = field;
+	    to_remove = neighbour_field;
+	}
     }
-  if (merge_direction == "west")
-    {
-      field_1.children('.note').each(function(index, element) 
-      {
-        var field_2_width = field_2.width();
-        var note_position_left = $(element).position().left;
-        var update = field_2_width + note_position_left;
-        var element_offset = $(element).offset();
-        element_offset.left = update;
-        field_2.append(element);
-        $(element).offset(element_offset);
-      });
-      field_2.width(new_width);    
-      field_1.remove();
-      $.ajax({url: "/boards/" + board_id  + 
-	  	"/merge_fields/" +  field_id , type:"POST", 
-	  	data:{field_to_enlarge : field_2.id8Up(), field_to_delete : field_1.id8Up(), merge_direction : "horizontal"} , success: update_fields})
+    
+    else if (direction == "west" || direction == "east") {
+	if (field.offset().left > neighbour_field.offset().left) {
+	    to_keep = neighbour_field;
+	    to_remove = field;
+	} 
+	else {
+	    to_keep = field;
+	    to_remove = neighbour_field;
+	}
     }
-  if (merge_direction == "south")
-    {
-      field_2.children('.note').each(function(index, element) 
-      {
-        var field_1_height = field_1.height();
-        var note_position_top = $(element).position().top;
-        var update = field_1_height + note_position_top;
-        var element_offset = $(element).offset();
-        element_offset.top = update;
-        field_1.append(element);
-        $(element).offset(element_offset);
-      });
-      field_1.height(new_height);       
-      field_2.remove();
-      $.ajax({url: "/boards/" + board_id  + 
-	    "/merge_fields/" +  field_id , type:"POST", 
-		  data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "vertical"} , success: update_fields})
+    
+    to_remove.find(".note").each(function(index, note) {
+	    note = $(note);
+	    var offset = note.offset();
+	    note.appendTo(to_keep);
+	    note.offset(offset);
+	});
+	
+
+    if (direction == "south" || direction == "north") {
+	to_keep.height(to_keep.height() + to_remove.height());
     }
-  if (merge_direction == "east")
-    {
-      field_2.children('.note').each(function(index, element) 
-      {
-        var field_1_width = field_1.width();
-        var note_position_left = $(element).position().left;
-        var update = field_1_height + note_position_left;
-        var element_offset = $(element).offset();
-        element_offset.left = update;
-        field_1.append(element);
-        $(element).offset(element_offset);  
-      });
-      field_1.width(new_width);      
-      field_2.remove();
-      $.ajax({url: "/boards/" + board_id  + 
-	  	"/merge_fields/" +  field_id , type:"POST", 
-	  	data:{field_to_enlarge : field_1.id8Up(), field_to_delete : field_2.id8Up(), merge_direction : "horizontal"} , success: update_fields })
+    else if (direction == "west" || direction == "east") {
+	to_keep.width(to_keep.width() + to_remove.width());
     }
-    $(".resizable8up-handle").each(function()
-    {
-      add_merge_div($(this));
-    });
+
+    to_remove.remove();
+
+    var board_id, field_id_1, field_id_2, merge_direction;
+    field_id_1 = to_keep.id8Up();
+    field_id_2 = to_remove.id8Up();
+    board_id = window.current_board;
+    merge_direction = (direction == "west" || direction == "east") 
+	? "horizontal" : "vertical";
+
+    $.ajax({ url: "/boards/" + board_id + "/merge_fields/" + field_id_1, 
+		type: "POST", 
+		data: {field_to_enlarge : field_id_1, 
+		    field_to_delete : field_id_2, 
+		    merge_direction : merge_direction } });
+
+    $("#merge_button").tool_deactivate();
 }
+
+function merge_field_callback(data) {
+    var remaining_id = data.result.remaining.field.id;
+    var removed_id = data.result.removed.field.id;
+    var remaining_field = $("#field_" + remaining_id);
+    var removed_field = $("#field_" + removed_id);
+
+    if (removed_field.length !=0) {
+	removed_field.find(".note").appendTo(remaining_field);
+	removed_field.remove();
+    }
+    update_fields(data);
+};
