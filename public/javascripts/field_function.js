@@ -1,8 +1,11 @@
-
-
 $(document).ready(function () {
 	$(".field").each(function(index, field) {
 		attach_field_handlers($(field)) });
+
+	$("div.field_name").live("dblclick", 
+				 function(event) { 
+				     name_field($(event.target).parent()); 
+				 });
 });
 
 function get_neighbours(field, direction) {

@@ -12,6 +12,7 @@ div.field.highlight {
   background-color: #C2C2C2;
 }
 textarea.field_name {
+    display:block;
     border: none;
     border-style: none; 
     border-color: Transparent; 
@@ -19,24 +20,24 @@ textarea.field_name {
     outline: 0;
     padding-top: 0px;
 } 
+
+div.field_name {
+    /*pointer-events: none;*/ 
+}
+
 .field_name {
     font-size: 36px;
     font-weight: bold;
-    line-height: 30px;
-    pointer-events: none;
-    position: absolute;
     color: #AAA;
-    width: 70%;
-    height: 40px;
-    left: 15%;
+    width: 20%;
+x    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 20px;
     text-align: center;
     background-color: transparent;
     padding-top: 13px;
-    resize: none;
 }
-
-
 div.field_name.activated {
     background-color: #C2C2E2;
 }

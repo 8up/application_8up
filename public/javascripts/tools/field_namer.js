@@ -1,15 +1,19 @@
 function activate_field_namer(event) {
-    $('.field').bind("click", name_field);
+    $('.field').bind("click", field_namer_delegator);
     $('div.field_name').addClass("activated");
 }
 
+function field_namer_delegator(event) {
+    name_field($(this)); 
+}
+
 function deactivate_field_namer(event) {
-    $('.field').unbind("click", name_field);
+    $('.field').unbind("click", field_namer_delegator);
     $('div.field_name').removeClass("activated");
 }
 
-function name_field(event) {
-    var field = $(this);
+function name_field(field) {
+    var field = $(field);
     var field_header = field.children("div.field_name");
     /*if (field_header.length == 0) {
 	field_header = $('<div class="field_name"></div>');
@@ -33,7 +37,7 @@ function name_field(event) {
     var field_id = field.id8Up();
     
     text_area.focus();
-    text_area.select();
+    //    text_area.select();
     var target_url = "/fields/" + field_id + ".json";
     
     text_area.bind('blur', function(e){
