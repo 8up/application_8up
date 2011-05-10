@@ -22,6 +22,7 @@ textarea.field_name {
 .field_name {
     font-size: 36px;
     font-weight: bold;
+    line-height: 30px;
     pointer-events: none;
     position: absolute;
     color: #AAA;
@@ -32,6 +33,7 @@ textarea.field_name {
     text-align: center;
     background-color: transparent;
     padding-top: 13px;
+    resize: none;
 }
 
 
