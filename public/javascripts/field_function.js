@@ -27,9 +27,9 @@ function update_single_field(data) {
     window.console.log(data);
     var field_id = data.field.id;
     var field = $("#field_" + field_id);
-    var field_header = field.children("h1");
+    var field_header = field.children(".field_name");
     if (field_header.length == 0) {
-	field_header = $('<h1 class="field_name"></h1>');
+	field_header = $('<div class="field_name"></div>');
 	field.append(field_header);
     }
     field_header.text(data.field.name);

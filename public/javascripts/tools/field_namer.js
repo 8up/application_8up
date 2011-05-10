@@ -1,18 +1,20 @@
 function activate_field_namer(event) {
     $('.field').bind("click", name_field);
+    $('div.field_name').addClass("activated");
 }
 
 function deactivate_field_namer(event) {
     $('.field').unbind("click", name_field);
+    $('div.field_name').removeClass("activated");
 }
 
 function name_field(event) {
     var field = $(this);
-    var field_header = field.children("h1");
-    if (field_header.length == 0) {
-	field_header = $('<h1 class="field_name"></h1>');
+    var field_header = field.children("div.field_name");
+    /*if (field_header.length == 0) {
+	field_header = $('<div class="field_name"></div>');
 	field.append(field_header);
-    }
+    }*/
     var text_area = $("<textarea id='' class='field_name'></textarea>");
     text_area.text(field_header.text());
           
@@ -35,12 +37,14 @@ function name_field(event) {
     var target_url = "/fields/" + field_id + ".json";
     
     text_area.bind('blur', function(e){
-	    field_header.text(text_area.val());
+	    field_header.text(text_area.val().trim());
 	    text_area.replaceWith(field_header);
+	    $('div.field_name').removeClass("activated");
+
 	    $.ajax({url: target_url, 
 			type: "PUT", 
 			data: {'id': field_id, 
-			    'field' : {'name' : text_area.val()}
+			    'field' : {'name' : text_area.val().trim()}
 		}, 
         success: function(data) {
 		    /*text_area.replaceWith(header);
