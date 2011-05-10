@@ -21,10 +21,10 @@ $(document).ready(
 		    
 		    var panel_arrow=$("#panel_arrow");
 		    
-		    if (panel_arrow.attr("src")== "/images/panel_button_right.png") {
-			panel_arrow.attr("src", "/images/panel_button_left.png");
-		    } else {
+		    if (panel_arrow.attr("src")== "/images/panel_button_left.png") {
 			panel_arrow.attr("src", "/images/panel_button_right.png");
+		    } else {
+			panel_arrow.attr("src", "/images/panel_button_left.png");
 		    }
 		});
 	}
