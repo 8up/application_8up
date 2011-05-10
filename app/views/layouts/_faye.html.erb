@@ -1,10 +1,9 @@
-<%= javascript_include_tag "http://localhost:9292/faye.js" %>
+<%= javascript_include_tag "http://#{@faye_adress}:#{@faye_port}/faye.js" %>
 
 <script type="text/javascript">
   window.current_user_name = "<%= current_user().name %>";
 
-  
-  window.faye = new Faye.Client("http://localhost:9292/faye");
+  window.faye = new Faye.Client("<%="http://#{@faye_adress}:#{@faye_port}/faye"%>");
   
   <% if @board %>
   /*window.channel = window.faye.subscribe('<%= "/board/#{@board.id}" %>', 
