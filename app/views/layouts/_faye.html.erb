@@ -7,11 +7,11 @@
   window.faye = new Faye.Client("http://localhost:9292/faye");
   
   <% if @board %>
-  window.channel = window.faye.subscribe('<%= "/board/#{@board.id}" %>', 
+  /*window.channel = window.faye.subscribe('<%= "/board/#{@board.id}" %>', 
   function(data) { 
   
   faye_callback(data);
-  });
+  });*/
     window.current_user = <%= current_user.id %>;
     window.current_board = <%= @board.id %>; 
   <% else %>
