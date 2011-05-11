@@ -12,7 +12,7 @@ $(document).ready(function(){
                   '/images/postit_orange.png',
                   '/images/postit_orange_select.png');
 });
-
+/*
 function set_page_context() {
   var pathname = window.location.pathname;
   var array = pathname.split("/");
@@ -31,8 +31,9 @@ function set_page_context() {
   }
 
 };
+*/
 //Vi behöver inte köra den här funktionen på readyeventet då den inte anväder DOM.
-set_page_context();
+//set_page_context();
 
 (function($){
   jQuery.fn.id8Up = function(){

@@ -25,7 +25,7 @@ config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_dispatch.best_standards_support = :builtin
 #  config.log_level=:fatal
 
-  config.middleware.use Faye::RackAdapter, :mount => '/faye',
-                       :timeout    => 45
+  #config.middleware.use Faye::RackAdapter, :mount => '/faye',
+  #                     :timeout    => 45
 end
 

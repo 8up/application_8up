@@ -1,20 +1,7 @@
-/*window.channel.bind('note-created', function(data) {
-  create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
-});
-window.channel.bind('note-destroyed', function(data){
-  delete_note(data.note.id);
-});
-window.channel.bind('note-updated', function(data){
-  update_note(data);
-});
-window.channel.bind('resize-field', function(data){
-  update_fields(data);
-});
-window.channel.bind('merge-field', merge_field_callback);*/
-
 $( function(){ 
 	window.fayeHandler.bind("field-split",split_field_callback);
 	window.fayeHandler.bind("field-resize", update_fields);
+	window.fayeHandler.bind("field-updated", update_single_field);
 	window.fayeHandler.bind('note-created', function(data) {
 		create_note_at_dom(data.note, $('#field_' + data.note.note.field_id), window.current_user == data.user);
 	    });

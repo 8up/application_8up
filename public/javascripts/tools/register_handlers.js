@@ -3,6 +3,13 @@ $(document).ready(function(){
   $('.board_container table').live('click', function(event){
     window.location.href = $(this).find('a').attr('href')
   })
+      
+      $('#field_namer').addClass('tool');
+  $('#field_namer').data('tool_type', 'activated');
+	$('#field_namer').data('tool_state', 'inactive');	
+	$('#field_namer').bind('activate', activate_field_namer);
+	$('#field_namer').bind('deactivate', deactivate_field_namer);
+
 
 	$('#merge_button').addClass('tool');
 	$('#merge_button').data('tool_type', 'activated');

@@ -59,7 +59,7 @@ class NotesController < ApplicationController
         format.json { render :json =>  @note }
         format.html { redirect_to(@note, :notice => 'Note was successfully created.') }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
-        publish_to_faye("/board/#{@board.id}", {:note => @note, :user => current_user.id}, "note-created")
+        publish_to_faye("/board/#{board.id}", {:note => @note, :user => current_user.id}, "note-created")
         #Pusher["board-#{board.id}"].trigger!('note-created', {:note => @note, :user => current_user.id} )
       else
         format.html { render :action => "new" }
@@ -89,13 +89,13 @@ class NotesController < ApplicationController
       :avatar_action => params[:avatar_action] }
     end    
    
-    @board = @note.field.board
+   
     
 
 
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        publish_to_faye("/board/#{@board.id}",@note, "note-update")
+        publish_to_faye("/board/#{@note.board.id}",@note, "note-update")
         #Pusher["board-#{@note.board.id}"].trigger!('note-updated', @note.to_json({:include => :placed_avatars}) )
         format.html { redirect_to(@note, :notice => 'Note was successfully updated.') }
         format.json { render :json => @note }
@@ -120,10 +120,11 @@ class NotesController < ApplicationController
     
     @note = Note.find(params[:id])
     @note.move_to_trash
+    
     if @note.save
       respond_to do |format|
         format.json { render :json => { :status => 'ok'} }
-        publish_to_faye("/board/#{@board.id}", @note, "note-destroyed")
+        publish_to_faye("/board/#{@note.board.id}", @note, "note-destroyed")
         #Pusher["board-#{@note.board.id}"].trigger!('note-destroyed', @note)
       end
     end

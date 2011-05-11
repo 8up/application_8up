@@ -1,3 +1,10 @@
+div.tool {
+    font:13px Segoe UI;
+    color:#a74d0c;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
 .split_button {
   float:left;
   width: 40px;

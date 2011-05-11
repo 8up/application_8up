@@ -2,21 +2,14 @@
 
 <script type="text/javascript">
   window.current_user_name = "<%= current_user().name %>";
+  window.current_user = <%= current_user.id %>;
 
   window.faye = new Faye.Client("<%="http://#{@faye_adress}:#{@faye_port}/faye"%>");
-  
   <% if @board %>
-  /*window.channel = window.faye.subscribe('<%= "/board/#{@board.id}" %>', 
-  function(data) { 
-  
-  faye_callback(data);
-  });*/
-    window.current_user = <%= current_user.id %>;
-    window.current_board = <%= @board.id %>; 
+  window.page_context = "whiteboard";
+  window.current_board = <%= @board.id %>; 
   <% else %>
-  window.channel = pusher.subscribe('<%= "overview" %>');
-  
-  
+  window.page_context = "start_page";
   <% end %>
   
 </script>

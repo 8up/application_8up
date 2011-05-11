@@ -129,7 +129,12 @@ function merge_field_callback(data) {
     var removed_field = $("#field_" + removed_id);
 
     if (removed_field.length !=0) {
-	removed_field.find(".note").appendTo(remaining_field);
+	_.each(removed_field.find(".note"), function(note) {
+		note = $(note);
+		var offset = note.offset();
+		note.appendTo(remaining_field);
+		note.offset(offset);
+	    });
 	removed_field.remove();
     }
     update_fields(data);

@@ -1,8 +1,11 @@
-
-
 $(document).ready(function () {
 	$(".field").each(function(index, field) {
 		attach_field_handlers($(field)) });
+
+	$("div.field_name").live("dblclick", 
+				 function(event) { 
+				     name_field($(event.target).parent()); 
+				 });
 });
 
 function get_neighbours(field, direction) {
@@ -23,7 +26,17 @@ function update_fields(data) {
                         });
 	});
 };
-
+function update_single_field(data) {
+    window.console.log(data);
+    var field_id = data.field.id;
+    var field = $("#field_" + field_id);
+    var field_header = field.children(".field_name");
+    if (field_header.length == 0) {
+	field_header = $('<div class="field_name"></div>');
+	field.append(field_header);
+    }
+    field_header.text(data.field.name);
+}
 // Nya fields kommer köra denna funktion för att attach:a 
 //hanterare till events, lägg till dem här
 function attach_field_handlers(field) {

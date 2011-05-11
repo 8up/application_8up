@@ -65,8 +65,10 @@ class FieldsController < ApplicationController
 
     respond_to do |format|
       if @field.update_attributes(params[:field])
+        publish_to_faye("/board/#{@field.board.id}", @field, "field-updated")
         format.html { redirect_to(@field, :notice => 'Field was successfully updated.') }
         format.xml  { head :ok }
+        format.json { render :json => @field }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @field.errors, :status => :unprocessable_entity }

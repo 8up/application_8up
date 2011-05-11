@@ -4,7 +4,7 @@
 <div id="board_<%= @board.id %>" class="board_div">
   <% @board.fields.each do |field|%>
   <div id="field_<%= field.id %>" class="field ui-widget-content" style=" top:<%= field.position_y %>px; left:<%= field.position_x %>px; width:<%= field.width %>px; height:<%= field. height %>px;" data-neighbours="<%= @board.get_neighbours(field.id).to_json%>">
-
+    <div class="field_name"><%= if field.name != nil then field.name end%></div>
     <% field.notes.each do |note|%>
     <div id="note_<%= note.id %>" class="note ui-widget-content color-<%= note.color %>" style="position:absolute; top:<%= note.position_y %>px; left:<%= note.position_x %>px;"; data-board_id="board_<%= @board.id %>">
       <div  class="avatar_holder"  >
