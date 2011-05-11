@@ -21,7 +21,7 @@ div.board_container.selected table {
     opacity: 1;
 }
 
-div.board_container table tbody tr td h1{
+div.board_container table tbody tr td a{
     color:black;
     font-family:'Swanky and Moo Moo';
     background:transparent;

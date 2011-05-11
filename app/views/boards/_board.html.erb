@@ -17,17 +17,16 @@
 		  </table>
 		  
 		  <% else %>
-		  <%=link_to(nil, :class => "board_link") do%>
+		  
 
 		  <table width="300px" height="200px" border="0" cellspacing="0" cellpadding="0">
 		    <tr>
 		      <td valign="middle" align="center">
-			<h1 class="board_name">New board</h1>
-			
+							<%=link_to("New board", "#", :class => "board_link board_name")%>
 		      </td>
 		    </tr>
 		  </table>
-		  <% end %>
+
 		 
 
 		  <% end %>
