@@ -17,7 +17,7 @@ function split_field_callback(data){
 		    $field.empty();
 		    $('.board_div').append($field);
 		    new_fields.push($field);
-		    
+		    $field.prepend($('<div class="field_name"/>'));
 		    // Flytta de notes som skall till det nya fältet
 		    for (var i=0; i < data.notes.length; i++) {
 			var $note = $("#note_" + data.notes[i].note.id);

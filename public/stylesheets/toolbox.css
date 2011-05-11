@@ -3,6 +3,15 @@ div.tool {
     color:#a74d0c;
     margin-right: 10px;
     margin-left: 10px;
+    cursor: pointer;
+}
+
+.tool:hover{
+cursor:pointer;
+color:#ff7817;
+  -webkit-text-stroke-width: 0.3px;
+   -webkit-text-stroke-color: #F8C996;
+
 }
 
 .split_button {
