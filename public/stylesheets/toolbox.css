@@ -1,9 +1,11 @@
 div.tool {
     font:13px Segoe UI;
     color:#a74d0c;
-    margin-right: 10px;
+    margin-right: 15px;
     margin-left: 10px;
     cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .tool:hover{
@@ -12,6 +14,13 @@ color:#ff7817;
   -webkit-text-stroke-width: 0.3px;
    -webkit-text-stroke-color: #F8C996;
 
+}
+
+.tool img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align:bottom;
 }
 
 .split_button {
@@ -41,6 +50,7 @@ color:#ff7817;
     color:#ff7817;
     cursor:pointer;
 }
+
 #merge_button {
     clear: both;
     margin-top:8px;
