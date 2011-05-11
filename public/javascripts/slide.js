@@ -32,7 +32,7 @@ $(document).ready(
 			} else {
 			panel_arrow.attr("src", "/images/panel_button_left.png");
 		    }
-		});
+		}).bind('selectstart', function(e){e.preventDefault()});
 	}
 	
 );
