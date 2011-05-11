@@ -12,12 +12,14 @@ function split_field_callback(data){
 		    } 
 		    else {  
 			$field = $('.field').first().clone();
+			    $field.empty();
+			    $field.prepend($('<div class="field_name"/>'));
 		    } 		    
 		    $field.attr('id', 'field_' + field.id);
-		    $field.empty();
+		
 		    $('.board_div').append($field);
 		    new_fields.push($field);
-		    $field.prepend($('<div class="field_name"/>'));
+
 		    // Flytta de notes som skall till det nya fältet
 		    for (var i=0; i < data.notes.length; i++) {
 			var $note = $("#note_" + data.notes[i].note.id);
@@ -50,6 +52,7 @@ function do_split(e) {
     new_field.attr("id", "tmp_field");
     var split_position = 0;
     field.after(new_field); //lägger till det nya fältet i html-koden efter det ursprungliga   
+    new_field.prepend($('<div class="field_name"/>'));
     if (direction == "vertical") {
 	split_position = Math.round(e.pageX - field.offset().left);
 	var new_width = split_position;
