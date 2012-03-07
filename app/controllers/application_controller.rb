@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   layout(:get_layout_name)
    
   def set_faye_params
-    @faye_adress = "46.51.179.63"
+    @faye_adress = "109.74.7.174"
     # @faye_adress = "localhost"
     @faye_port = "9292"
   end
